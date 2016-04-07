@@ -1,0 +1,19 @@
+body
+{
+  background:#FA7514;
+}
+
+.col-without-padding
+{
+  padding-right:0px;
+  padding-left:0px;
+}
+
+.col-without-shadow
+{
+  box-shadow: none;
+}
+.col-without-radius
+{
+  border-radius: 0px;
+}
