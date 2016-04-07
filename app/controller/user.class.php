@@ -30,15 +30,16 @@ Class user extends all_query
 	}
 	public function connect_form()
 	{
-		$form='
-		<div class="col-lg-12">		
+		?>
+		<div class="col-lg-12" style="padding-top:50px;">		
 			<form action="#" method="post" class="col-lg-4 col-lg-offset-4">
 
-				<div class="form-group">
-					<input name="pseudo" type="text" class="form-control" required placeholder="Pseudo">
+				<div class="form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
+					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
+					<input name="pseudo" type="text" class="form-control " required placeholder="Pseudo">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
 					<input name="password" type="password" class="form-control" required placeholder="Mot de passe">
 				</div>
 
@@ -51,23 +52,15 @@ Class user extends all_query
 				<button type="submit" class="btn btn-default">Submit</button>
 
 			</form>
-			</div>';
+			</div>
 		
-		return $form;
+		<?php
 	}
 
 
 
 	public function connect_verif($post_form = array())
 	{
-
-		if(isset($_SESSION['error']))
-		{
-			if($_SESSION['error'] != '')
-			{
-				paragraphe_style($_SESSION['error']);
-			}
-		}
 		if(isset($_POST['return_form_complet']) && $_POST['return_form_complet'] == 1)
 		{
 		    if(isset($_POST["pseudo"]))
@@ -83,17 +76,12 @@ Class user extends all_query
 		           $res_fx = $res_fx[0];
 		            if(empty($res_fx))
 		            {
-		                $_SESSION['error'] = 'Login incorrect';
+		                $_SESSION['error'] = 'Login ou mot de passe incorrect !';
 		                return 0;
 		            }
 		            else if($res_fx->password == $_POST['password'])
 		            {
 		            	unset($_SESSION['error']);
-
-		                $level_user = $res_fx->level;
-		                $user_connected = $res_fx->login;
-		                $formulaire = false;
-
 		                $_SESSION['pseudo'] = $res_fx->login;
 		                $_SESSION['level'] = $res_fx->level;
 		                $_SESSION['last_connect'] = $res_fx->last_connect;
@@ -104,7 +92,6 @@ Class user extends all_query
 		    else
 		    {
 		        $_SESSION['error'] = 'Formulaire mal rempli';
-		        echo 'here 1';
 		        return 0;
 		    }
 		}
