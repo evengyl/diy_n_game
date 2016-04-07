@@ -1,6 +1,6 @@
 body
 {
-  background:#FA7514;
+  background:#FF772F;
 }
 
 .col-without-padding
@@ -16,4 +16,12 @@ body
 .col-without-radius
 {
   border-radius: 0px;
+}
+
+
+.header
+{
+  height:150px;
+  background:#232D3B;
+  border-bottom:5px solid #EF4224;
 }
