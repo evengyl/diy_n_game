@@ -15,6 +15,7 @@ require_once $path_file.'/controller/all_query.class.php';
 require_once $path_file.'/controller/user.class.php';
 require_once $path_file.'/controller/security.class.php';
 require_once $path_file.'/controller/instancieur.php';
+require_once $path_file.'/controller/parse.php';
 
 
 ?>

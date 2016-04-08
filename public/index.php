@@ -6,6 +6,7 @@ require_once("../app/controller/load_class.php");
 
 $user = new user();
 session_start();
+ob_start();
 require_once('../app/controller/control_session.php');
 
 ?>
@@ -17,6 +18,7 @@ require_once('../app/controller/control_session.php');
 <body>
 
 	<div class="header">
+		__TPL_header__
 		<a href="/diy_n_game/public/index.php">acceuil</a>
 	</div>
 	<div class="content"></div>
@@ -58,3 +60,7 @@ require_once('../app/controller/control_session.php');
 
 </html>
 
+<?php $page = ob_get_clean();
+$page = parser_main($page);
+
+echo $page; // affiche toute la page web générée
