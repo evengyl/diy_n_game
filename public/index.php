@@ -11,12 +11,7 @@ require_once('../app/controller/control_session.php');
 ?>
 <html lang="Fr">
 <head>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="all"/>
-	<script type='text/javascript' src='js/bootstrap.min.js'></script>
-	<script type='text/javascript' src='js/jquery-2.1.3.min.js'></script>
-
-	<?php //require_once('../vues/template_default/top_head_files.php'); ?>
+	<?php require_once('../vues/template_default/top_head_files.php'); ?>
 </head>
 
 <body>
@@ -58,7 +53,7 @@ require_once('../app/controller/control_session.php');
 	
 	?>	
 	</div>
-	<?php //require_once('../vues/template_default/bottom_head_files.php'); ?>
+	<?php require_once('../vues/template_default/bottom_head_files.php'); ?>
 </body>
 
 </html>
