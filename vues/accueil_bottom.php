@@ -3,14 +3,14 @@
 		<div class="col-lg-3">
 			<img src="../public/images/culture.jpg" width="250" height="250" alt="..." class="img-circle">
 			<br>
-			<h3>Développer et Cultiver vos ressources de bases, VG, PG, Arômes Naturel !</h3>
+			<h3>Developper et Cultiver vos ressources de bases, VG, PG, Aromes Naturel !</h3>
 		</div>
 	</center>
 	<center>
 		<div class="col-lg-3">
 			<img src="../public/images/fiole.jpg" width="250" height="250" alt="..." class="img-circle">
 			<br>
-			<h3>Acheter des labos pour transformer vos ressources en bases à vaper !</h3>
+			<h3>Acheter des labos pour transformer vos ressources en bases a vaper !</h3>
 		</div>
 	</center>
 	<center>

@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <?php
+
+
 $path_file = "../app";
+
 global $base_path;
 $base_path = "/diy_n_game/";
-global $error;
 
+global $error;
 $error = "";
+
+if(!isset($_GET['page']))
+	$_GET['page'] = 'home';
 require_once("../app/controller/load_class.php");
 
 $user = new user();
 session_start();
-ob_start();
-require_once('../app/controller/control_session.php');
 
-?>
+
+
+
+
+
+
+
+
+ob_start();?>
 <html lang="Fr">
 <head>
 	__TPL_top_head__
 </head>
 
 <body>
-
-	
 	__TPL_header__
-
-
-	
-
 	<div class="connect_div"><?php
-	
+
+		$route->router($_GET);
+
+
 		if(isset($_POST['return_form_complet']))
 		{
 			if($_POST['return_form_complet'] == 1)
@@ -51,10 +60,7 @@ require_once('../app/controller/control_session.php');
 
 		if($affiche_form_connect)
 		{
-			?>
-			__TPL_accueil__
-			__TPL_form_connect__
-			__TPL_accueil_bottom__<?
+			
 		}
 			
 		if(isset($is_connect))
@@ -74,3 +80,6 @@ require_once('../app/controller/control_session.php');
 $page = $parser->parser_main($page);
 
 echo $page; // affiche toute la page web générée
+
+
+
