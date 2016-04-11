@@ -13,7 +13,12 @@ function is_post_not_ok($key){
 
 function affiche_pre($var_a_print)
 {
-    ?><pre><?php print_r($var_a_print); ?></pre><?php
+    $trace = debug_backtrace();
+    ?><pre><?
+        echo $trace[0]['file'] . ' @line ' .$trace[0]['line']."\n";
+
+        print_r($var_a_print);
+    ?></pre><?
 }
 
 function info_php()

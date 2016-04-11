@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <?php
 $path_file = "../app";
+global $base_path;
 $base_path = "/diy_n_game/";
+global $error;
+
+$error = "";
 require_once("../app/controller/load_class.php");
 
 $user = new user();
@@ -12,16 +16,16 @@ require_once('../app/controller/control_session.php');
 ?>
 <html lang="Fr">
 <head>
-	<?php require_once('../vues/template_default/top_head_files.php'); ?>
+	__TPL_top_head__
 </head>
 
 <body>
 
-	<div class="header">
-		__TPL_header__
-		<a href="/diy_n_game/public/index.php">acceuil</a>
-	</div>
-	<div class="content"></div>
+	
+	__TPL_header__
+
+
+	
 
 	<div class="connect_div"><?php
 	
@@ -32,9 +36,7 @@ require_once('../app/controller/control_session.php');
 				$affiche_form_connect = 0;
 				$retour = $user->connect_verif($_POST, $all_query);
 				if($retour)
-				{
-					require_once('../vues/client_game.php');
-				}
+					$is_connect = 1;
 				else
 					$affiche_form_connect = 1;
 			}
@@ -42,25 +44,33 @@ require_once('../app/controller/control_session.php');
 		else if(isset($_SESSION['pseudo']))
 		{
 			$affiche_form_connect = 0;
-			require_once('../vues/client_game.php');
+			$is_connect = 1;			
 		}
 		else
-		{
-			$affiche_form_connect = 1;
-		}
-			
+			$affiche_form_connect = 1;			
 
 		if($affiche_form_connect)
-			echo $user->connect_form();
-	
-	?>	
+		{
+			?>
+			__TPL_accueil__
+			__TPL_form_connect__
+			__TPL_accueil_bottom__<?
+		}
+			
+		if(isset($is_connect))
+		{
+			if($is_connect)
+				require_once('../vues/client_game.php');
+		}?>
+			
 	</div>
-	<?php require_once('../vues/template_default/bottom_head_files.php'); ?>
+	__TPL_footer__
+	__TPL_bottom_head__
+	
 </body>
-
 </html>
+<? $page = ob_get_clean();
 
-<?php $page = ob_get_clean();
-$page = parser_main($page);
+$page = $parser->parser_main($page);
 
 echo $page; // affiche toute la page web générée
