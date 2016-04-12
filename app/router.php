@@ -10,6 +10,7 @@ Class router
 
 	public function router($get = array())
 	{
+		global $error;
 		if(!empty($get))
 		{
 			if(isset($get['page']))
@@ -17,7 +18,7 @@ Class router
 				switch($get['page'])
 				{
 					case 'home':
-						$this->call_tpl_router('home');
+						$this->call_controller_tpl_router('home');
 						break;
 					case 'sign_up':
 						$this->call_controller_tpl_router('sign_up');
@@ -25,7 +26,11 @@ Class router
 					case 'login':
 						$this->call_controller_tpl_router('login');
 						break;
+					case 'game_home':
+						$this->call_controller_tpl_router('game_home');
+						break;
 					default:
+						$error[] = "Le call _GET au routeur n'existe pas:  controller = Router";
 						break;
 
 				}
@@ -46,6 +51,8 @@ Class router
 		//appel le controller et ensuite le tpl
 		$format_for_parser_mod = '__MOD_'.$var_in_get.'__';
 		echo $this->parser->parser_main($format_for_parser_mod);
+		//ici, si une erreur survient , le template ne sera pas généré du coup on recois le $error 
+
 	}
 
 

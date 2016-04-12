@@ -19,7 +19,7 @@ class parser
 
 		}
 		else
-			echo  $error = "Il y a un problème dans le parser Parser_main() la page n'est pas arrivée au parseur";
+			$error[] = "Il y a un problème dans le parser Parser_main() la page n'est pas arrivée au parseur";
 
 		return $page;
 		
@@ -38,9 +38,17 @@ class parser
 					$matching_temp = str_replace(array("__TPL_","__"), "", $matching);
 					$path_template = '../vues/'.$matching_temp.'.php';
 
-					ob_start();
-						require_once($path_template);
-					$matching_content = ob_get_clean();
+					if(file_exists($path_template))
+					{
+						ob_start();
+							require_once($path_template);
+						$matching_content = ob_get_clean();
+					}
+					else
+					{
+						$error[] = "Le Template : '".$path_template. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+						return '';
+					}
 
 
 					if(preg_match_all('/__TPL_[a-z_]+__/', $matching_content, $match))
@@ -57,7 +65,7 @@ class parser
 		}
 		else
 		{
-			echo $error = "Une erreur est survenue lors du traitement des templates dans le parser parse_template()";
+			$error[] = "Une erreur est survenue lors du traitement des templates dans le parser parse_template()";
 		}
 	}
 
@@ -81,8 +89,18 @@ class parser
 					$matching_temporaire = str_replace(array("__MOD_","__"), "", $matching);
 					$path_module = '../app/controller/'.$matching_temporaire.'.php';
 					$matching_tpl = str_replace(array("__MOD_","__"), array("__TPL_","__"), $matching);
+
+					if(file_exists($path_module))
+					{
+						require_once($path_module);	
+					}
+					else
+					{
+						$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+						return '';
+					}
 					
-					require_once($path_module);
+					
 
 					if(preg_match_all('/__MOD_[a-z_]+__/', $return_controller->page_tpl, $match))
 					{
@@ -98,7 +116,7 @@ class parser
 		}
 		else
 		{
-			echo $error = "Une erreur est survenue lors du traitement des templates dans le parser parse_module()";
+			$error[] = "Une erreur est survenue lors du traitement des templates dans le parser parse_module()";
 		}
 	}
 }

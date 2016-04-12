@@ -1,5 +1,5 @@
 <?php 
-class login extends base_module
+class home extends base_module
 {
 	public $name_tpl;
 	public $page_tpl;
@@ -8,7 +8,7 @@ class login extends base_module
 	{		
 		$this->page_tpl = $this->render_tpl($name_tpl);
 
-		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", "Page de connexion" => "?page=login"));
+		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home"));
 
 		$this->page_tpl = $breadcrumb."".$this->page_tpl;
 	}
@@ -19,4 +19,4 @@ class login extends base_module
 }
 
 global $matching_tpl;
-$return_controller = new login($matching_tpl);
+$return_controller = new home($matching_tpl);

@@ -31,52 +31,6 @@ Class user extends all_query
 
 
 
-
-	public function connect_verif($post_form = array())
-	{
-		if(isset($_POST['return_form_complet']) && $_POST['return_form_complet'] == 1)
-		{
-		    if(isset($_POST["pseudo"]))
-		    {
-		        if(is_post_not_ok('pseudo') || is_post_not_ok('password'))
-		        {
-        			$_SESSION['error'] = 'Eléments manquant ou incorrecte';
-		            return 0;
-		        }
-		        else
-		        {
-		           $res_fx = parent::other_query('SELECT * FROM login WHERE login = "'.$_POST["pseudo"].'"');
-		           $res_fx = $res_fx[0];
-		            if(empty($res_fx))
-		            {
-		                $_SESSION['error'] = 'Login ou mot de passe incorrect !';
-		                return 0;
-		            }
-		            else if($res_fx->password == $_POST['password'])
-		            {
-		            	unset($_SESSION['error']);
-		                $_SESSION['pseudo'] = $res_fx->login;
-		                $_SESSION['level'] = $res_fx->level;
-		                $_SESSION['last_connect'] = $res_fx->last_connect;
-		                return 1;
-		            }
-		        }
-		    }
-		    else
-		    {
-		        $_SESSION['error'] = 'Formulaire mal rempli';
-		        return 0;
-		    }
-		}
-		else
-		{
-			$_SESSION['error'] = 'Erreur de Login ou de mot de passe';
-		    return 0;
-		}
-
-
-	}
-
 	public function render()
 	{
 		// retoune le template avec tout les element

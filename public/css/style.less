@@ -11,7 +11,7 @@
 
 body
 {
-  background:#FF772F;
+  background-image:url('../images/bg-body.jpg');
 }
 
 hr
@@ -36,6 +36,7 @@ hr
 
 .bottom-accueil
 {
+	margin-bottom: 50px;
 	padding-top:25px;
 	.col-lg-3
 	{
@@ -57,15 +58,15 @@ hr
 .header
 {
 	
-  height:150px;
+  height:120px;
   background:#232D3B;
   border-bottom:5px solid #EF4224;
 }
 .header .logo
 {
 	height:125px;
-	padding-left:25px;
-	margin-top:25px;
+	padding-left:20px;
+	margin-top:15px;
 }
 
 .header .logo a
@@ -75,6 +76,14 @@ hr
 	color:white;
 	padding-left:25px;
 	text-decoration: none;
+	@media screen and(max-width: 520px)
+	{
+		font-size: 45px;
+	}
+	@media screen and(max-width: 420px)
+	{
+		font-size: 35px;
+	}
 }
 
 
@@ -109,7 +118,7 @@ hr
 
 .col-lg-12 .nav_primal
 {
-	margin-top:93px;
+	margin-top:50px;
 	margin-bottom:0px;
 }
 
@@ -140,4 +149,35 @@ hr
 .nav-pills > li > span:focus
 {
 	color:#232D3B;
+}
+
+
+.bg-success
+{
+	padding-top:10px;
+	padding-bottom:10px;
+	color:#232D3B;
+	font-size: 16px;
+	text-align: center;
+}
+
+.title
+{
+	font-family:'milk';
+	font-size: 30px;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top: 5px;
+	padding-bottom:5px;
+	color:white;
+	background:#232D3B;
+	a
+	{
+		text-decoration: none;
+		color:#E6E6E6;
+	}
+	a:hover
+	{
+		color:#E36928;
+	}
 }

@@ -8,22 +8,24 @@ global $base_path;
 $base_path = "/diy_n_game/";
 
 global $error;
-$error = "";
+$error = array();
 
 if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
+
+
+
 require_once("../app/controller/load_class.php");
 
-$user = new user();
+
+
 session_start();
+//ou il va recevoir 0 ou 1 cela dépend de la secu
+$is_connect = $security->check_session($_POST);
 
-
-
-
-
-
-
-
+if($is_connect)
+		$_GET['page'] = 'game_home';
+		//si le joueur est connecter on arrive sur la page de jeu
 
 ob_start();?>
 <html lang="Fr">
@@ -33,53 +35,27 @@ ob_start();?>
 
 <body>
 	__TPL_header__
-	<div class="connect_div"><?php
-
-		$route->router($_GET);
-
-
-		if(isset($_POST['return_form_complet']))
-		{
-			if($_POST['return_form_complet'] == 1)
-			{
-				$affiche_form_connect = 0;
-				$retour = $user->connect_verif($_POST, $all_query);
-				if($retour)
-					$is_connect = 1;
-				else
-					$affiche_form_connect = 1;
-			}
-		}
-		else if(isset($_SESSION['pseudo']))
-		{
-			$affiche_form_connect = 0;
-			$is_connect = 1;			
-		}
-		else
-			$affiche_form_connect = 1;			
-
-		if($affiche_form_connect)
-		{
-			
-		}
-			
-		if(isset($is_connect))
-		{
-			if($is_connect)
-				require_once('../vues/client_game.php');
-		}?>
-			
-	</div>
-	__TPL_footer__
+	<? $route->router($_GET); ?>
+	
+	<!--__TPL_footer__-->
 	__TPL_bottom_head__
 	
 </body>
 </html>
 <? $page = ob_get_clean();
-
+//appel le parseur qui rendra tout les modules et tout les vues
 $page = $parser->parser_main($page);
-
 echo $page; // affiche toute la page web générée
 
+//affiche les messages d'erreur du code
+if(!empty($error))
+{
+	affiche_pre($error);
+}
 
 
+
+
+
+
+affiche_pre($_SESSION);
