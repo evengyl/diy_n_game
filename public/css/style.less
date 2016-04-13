@@ -58,15 +58,15 @@ hr
 .header
 {
 	
-  height:120px;
+  height:auto;
   background:#232D3B;
   border-bottom:5px solid #EF4224;
 }
 .header .logo
 {
-	height:125px;
+	padding-top:15px;
+	height:120px;
 	padding-left:20px;
-	margin-top:15px;
 }
 
 .header .logo a
@@ -109,6 +109,7 @@ hr
 .content_game
 {
 	min-height: 850px;
+	margin-top:15px;
 }
 
 .connect_div
@@ -116,11 +117,6 @@ hr
 	min-height: 100%;
 }
 
-.col-lg-12 .nav_primal
-{
-	margin-top:50px;
-	margin-bottom:0px;
-}
 
 .nav-pills > li > a
 {
@@ -151,6 +147,10 @@ hr
 	color:#232D3B;
 }
 
+.nav_game
+{
+	background:#232D3B;	
+}
 
 .bg-success
 {
@@ -167,7 +167,7 @@ hr
 	font-size: 30px;
 	margin-top:0px;
 	margin-bottom:0px;
-	padding-top: 5px;
+	padding-top: 7px;
 	padding-bottom:5px;
 	color:white;
 	background:#232D3B;
@@ -180,4 +180,10 @@ hr
 	{
 		color:#E36928;
 	}
+}
+
+
+a[href^="#"]
+{
+	color:red !important;
 }

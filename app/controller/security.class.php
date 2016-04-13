@@ -25,19 +25,21 @@ Class security extends user
 			    	$pseudo = $this->check_post_login($_POST['pseudo']);
 			    	$password = $this->check_post_login($_POST['password']);
 
+
 			    	if($pseudo == '0'|| $password == '0')
 			    	{
 			    		$_SESSION['error'] = "!! Attention votre login ou votre mot de passe est trop court !!";
 			    		return 0;
 			    	}
 			    	else
-			    	{			    		
+			    	{	
+
 			           	$res_fx = $this->all_query->other_query('SELECT * FROM login WHERE login = "'.$pseudo.'"');
 			           	$res_fx = $res_fx[0];
 
 			            if(empty($res_fx))
 			            {
-			                $_SESSION['error'] = 'Login ou mot de passe incorrect !';
+			                $_SESSION['error'] = 'Login incorrect !';
 			                return 0;
 			            }
 			            else if($res_fx->password == $password)
@@ -48,6 +50,11 @@ Class security extends user
 			                $_SESSION['level'] = $res_fx->level;
 			                $_SESSION['last_connect'] = $res_fx->last_connect;
 			                return 1;
+			            }
+			            else
+			            {
+			            	$_SESSION['error'] = 'Mot de passe incorrect !';
+			            	return 0;
 			            }
 			    	}
 
@@ -67,11 +74,6 @@ Class security extends user
 				return 0;
 			}
 
-
-				if($retour)
-					return 1;
-				else
-					return 0;
 			
 		}
 		else if(isset($_SESSION['pseudo']))

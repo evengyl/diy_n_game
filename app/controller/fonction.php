@@ -14,7 +14,7 @@ function is_post_not_ok($key){
 function affiche_pre($var_a_print)
 {
     $trace = debug_backtrace();
-    ?><div class='col-lg-12'><pre><?
+    ?><div class='col-xs-12'><pre><?
         echo $trace[0]['file'] . ' @line ' .$trace[0]['line']."\n";
 
         print_r($var_a_print);

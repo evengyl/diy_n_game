@@ -28,6 +28,6 @@ Class base_module extends all_query
 				$title_page .= " > ";
 			$number_separate--;
 		}
-		return "<h1 class='col-lg-12 title'>".$title_page."</h1>";
+		return "<h1 class='col-xs-12 title'>".$title_page."</h1>";
 	}
 }
