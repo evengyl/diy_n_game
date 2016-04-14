@@ -10,6 +10,7 @@ Class router
 
 	public function router($get = array())
 	{
+		global $is_connect;
 		global $error;
 		if(!empty($get))
 		{
@@ -18,16 +19,27 @@ Class router
 				switch($get['page'])
 				{
 					case 'home':
-						$this->call_controller_tpl_router('home');
+						echo "__MOD_home__";
 						break;
 					case 'sign_up':
-						$this->call_controller_tpl_router('sign_up');
+						echo "__MOD_sign_up__";
 						break;
 					case 'login':
-						$this->call_controller_tpl_router('login');
+						echo "__MOD_login__";
 						break;
 					case 'game_home':
-						$this->call_controller_tpl_router('game_home');
+						if($is_connect == 1)
+						{
+							echo "__MOD_game_home__";
+						}							
+						else
+						{
+							$error[] = "Vous n'êtes pas connecter donc vous ne pouvez pas accèder au jeu.";
+							return 0;
+						}							
+						break;
+					case 'test':
+						echo "__TPL_test__";
 						break;
 					default:
 						$error[] = "Le call _GET au routeur n'existe pas:  controller = Router";
@@ -45,22 +57,5 @@ Class router
 
 	}
 
-
-	public function call_controller_tpl_router($var_in_get)
-	{
-		//appel le controller et ensuite le tpl
-		$format_for_parser_mod = '__MOD_'.$var_in_get.'__';
-		echo $this->parser->parser_main($format_for_parser_mod);
-		//ici, si une erreur survient , le template ne sera pas généré du coup on recois le $error 
-
-	}
-
-
-	public function call_tpl_router($var_in_get)
-	{
-		
-		$format_for_parser_tpl = '__TPL_'.$var_in_get.'__';
-		echo $this->parser->parser_main($format_for_parser_tpl);
-	}
 
 }

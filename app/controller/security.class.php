@@ -80,7 +80,7 @@ Class security extends user
 			return 1;
 		else
 		{
-			$error[] = "Attention, Vous n'êtes pas logger";
+			//$error[] = "Attention, Vous n'êtes pas logger";
 			return 0;
 		}
 			

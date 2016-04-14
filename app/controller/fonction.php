@@ -11,12 +11,19 @@ function is_post_not_ok($key){
     return !isset($_POST[$key]) || trim($key) == '' || strlen($key) <= 2;
 }
 
-function affiche_pre($var_a_print)
+function print_pre($var_a_print)
 {
     $trace = debug_backtrace();
     ?><div class='col-xs-12'><pre><?
         echo $trace[0]['file'] . ' @line ' .$trace[0]['line']."\n";
 
+        print_r($var_a_print);
+    ?></pre></div><?
+}
+
+function affiche_pre($var_a_print)
+{
+    ?><div class='col-xs-12'><pre><?
         print_r($var_a_print);
     ?></pre></div><?
 }

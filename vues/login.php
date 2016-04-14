@@ -1,9 +1,13 @@
 <?
 if(isset($_SESSION['pseudo'])) //donc il est connecté
 {?>
-	<div class="col-lg-12 col-without-padding connect-form">		
+	<div class="col-xs-12 connect-form" style="text-align:center; font-size:45px; font-family:milk;">
+		<a href="?page=game_home" style="text-decoration:none;">>>&nbsp;&nbsp;Entrer sur le jeu !&nbsp;&nbsp;<<</a>
+	</div>
+	<div class="col-xs-12 col-without-padding connect-form">		
 		<p class="bg-success">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
-	</div><?
+	</div>
+	<?
 }
 else
 {?>

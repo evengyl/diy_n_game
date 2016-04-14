@@ -4,17 +4,36 @@
 Class base_module extends all_query
 {
 	public $parser;
+	public $rendu;
+
+	public function __construct($name_module= "", $name_tpl ="")
+	{
+		if($name_module != "")
+		{
+			$this->rendu = $this->render_module($name_module, $name_tpl);	
+		}
+		
+	}
 
 	public function render_tpl($called_tpl)
 	{
+		
+		$test = "bonjour je suis un test a la con";
 		$this->parser = new parser();
-		return $this->parser->parser_main($called_tpl);
+			$tpl = $this->parser->parser_main($called_tpl);
+
+		affiche_pre(htmlentities($tpl));
+		//return $tpl;
 	}
 
-	public function get_title_page($title_page)
+	public function render_module($name_module, $name_tpl)
 	{
-		
+		require_once('../app/controller/'.$name_module.'.php');
+		$module = new $name_module($name_module, $name_tpl);
+		return $module;
 	}
+
+
 
 	public function generate_breadcrumb($referer = array())
 	{

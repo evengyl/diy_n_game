@@ -6,80 +6,66 @@ Class user extends all_query
 	//doit se 
 		//zone de test des ressources 
 		// tout ce passe en seconde c'est plus simple 
-	public $error = '';
-	public $time_unix = '';
-	public $ressource_avant = '';
-	public $prod_acutelle = '';
-	public $time_before = '';
+
+	public $user_infos;
+	public $vg;
+	public $pg;
+
+
 
 	public function __construct()
 	{
-		$ressource_avant = 15000;
+		$this->set_variable_user();
+	}
 
-		$prod_acutelle = 1.25; // par seconde 
-
-		$time_before = 1460030000; 
-		//on dis que c'est recup de la bsd
-
-
-		if($this->error != '')
+	private function set_variable_user()
+	{
+		global $error;
+		if(isset($_SESSION['pseudo']))
 		{
-			return $error;
-		}
 
-	}
-
-
-
-	public function render()
-	{
-		// retoune le template avec tout les element
-	}
-
-	public function calcul_time()
-	{
-		$secondes = date("U");
-
-		$minutes = $secondes/60;
-
-		$heures = $minutes/60;
-
-		$jours = $heures/24;
-
-		$annees = $jours/365;
-
-		affiche_pre("L'heure universelle UNIX à : ".$secondes. " Secondes !");
-
-
-
-
-
-		return get_new_ressource($time_before, $prod_acutelle ,$ressource_avant);
-
-
-	}
-
-
-	public function get_new_ressource($time_before, $value_prod, $ressource)
-	{
-		if(is_numeric($time_before))
-		{
-			if(is_numeric($value_prod))
+			if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
 			{
-				if(is_numeric($ressource))
+				$this->user_infos = new stdClass();
+				$req_sql = "SELECT * FROM login WHERE login ='".$_SESSION['pseudo']."'";
+				$res_fx = $this->other_query($req_sql);
+				foreach($res_fx[0] as $key => $values)
 				{
-					echo "it's ok";
+					$this->user_infos->$key = $values;					
 				}
+				unset($res_fx);
+
+
+				$this->vg = new stdClass();
+				$req_sql_vg = "SELECT * FROM culture_vg WHERE level = '".$this->user_infos->level_culture_vg."'";
+				$res_fx = $this->other_query($req_sql_vg);
+				foreach($res_fx[0] as $key => $values)
+				{
+					$this->vg->$key = $values;
+				}
+				unset($res_fx);
+
+
+
+				$this->pg = new stdClass();
+				$req_sql_pg = "SELECT * FROM usine_pg WHERE level = '".$this->user_infos->level_usine_pg."'";
+				$res_fx = $this->other_query($req_sql_pg);
+				foreach($res_fx[0] as $key => $values)
+				{
+					$this->pg->$key = $values;
+				}
+				unset($res_fx);
+
+			}
+			else
+			{
+				$error[] = "la mise a niveau des variable user a pausé un soucis, user.class.php -> set_variable_user";
 			}
 		}
-
-		if($time_before < date("U") || $time_before == date("U"))
+		else
 		{
-
-		}
-		else if($time_before > date("U"))
-		{
-			$this->error =  "Vous avez triché ou alors, si le bu persiste, prenez contact avec l'administrateur";
+			$error[] = "pas de variable is_connect dans le set_variable_user donc pas connecté";
 		}
 	}
+
 }
