@@ -6,9 +6,8 @@ Class login extends base_module
 	{		
 		parent::__construct($module_tpl_name);
 
-		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", "Page de connexion" => "?page=login"));
 
-		return $this->assign_var("title", $breadcrumb)->render();
+		return $this->render();
 	}
 
 }

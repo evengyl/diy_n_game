@@ -19,6 +19,7 @@ Class router
 						echo "__MOD_sign_up__";
 						break;
 					case 'login':
+						$bread = array("Page de connexion", $get['page']);					
 						echo "__MOD_login__";
 						break;
 					case 'game_home':
