@@ -1,20 +1,17 @@
 <?php 
-class game_home extends base_module
+
+Class game_home extends base_module
 {
-	public $name_tpl;
-	public $page_tpl;
+	public function __construct($module_tpl_name, $user = "", $is_connect= "")
+	{		
+		parent::__construct($module_tpl_name);
 
-	public function __construct($name_module, $name_tpl)
-	{	
-		$this->name_tpl = $name_tpl;	
-		$this->page_tpl = $this->render_tpl($name_tpl);
-
-		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=game_home", "Présentation générale" => "?page=game_home"));
-
-		return $this->page_tpl = $breadcrumb."".$this->page_tpl;
+		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=accueil", "Présentation générale" => "?page=game_home"));
+		
+		return $this->assign_var("user", $user)->assign_var("is_connect", $is_connect)->assign_var("title", $breadcrumb)->render();
 	}
 
-
-
-
 }
+
+
+

@@ -1,16 +1,14 @@
 <?php 
-class sign_up extends base_module
+
+Class sign_up extends base_module
 {
-	public $name_tpl;
-	public $page_tpl;
-
-	public function __construct($module_name, $name_tpl)
+	public function __construct($module_tpl_name)
 	{		
-		$this->name_tpl = $name_tpl;
-		$this->page_tpl = $this->render_tpl($name_tpl);
+		parent::__construct($module_tpl_name);
 
-		$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", "Page d'inscription" => "?page=sign_up"));
-
-		return $this->page_tpl = $breadcrumb."".$this->page_tpl;
+		return $this->render();
 	}
+
 }
+
+

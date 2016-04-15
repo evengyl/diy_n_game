@@ -1,17 +1,10 @@
 <?
 Class router
 {
-	private $parser;
-
-	public function __construct()
+	public function router($get = array(), $is_connect = 0)
 	{
-		$this->parser = new parser();
-	}
+		global $error, $bread;
 
-	public function router($get = array())
-	{
-		global $is_connect;
-		global $error;
 		if(!empty($get))
 		{
 			if(isset($get['page']))
@@ -22,6 +15,7 @@ Class router
 						echo "__MOD_home__";
 						break;
 					case 'sign_up':
+						$bread = array("Page d'inscription", $get['page']);
 						echo "__MOD_sign_up__";
 						break;
 					case 'login':

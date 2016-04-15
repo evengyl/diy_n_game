@@ -162,13 +162,14 @@ class all_query extends _db_connect
 
 	public function update($object) // en test et evolution
 	{
+
 		$set_all = "";
 
 
 		
 		if(is_object($object->ctx))
 		{	
-			$object->ctx->modified_on = date('Y-m-d H:i:s');
+			//$object->ctx->modified_on = date('Y-m-d H:i:s');
 
 			foreach($object->ctx as $key => $values)
 			{
@@ -188,7 +189,7 @@ class all_query extends _db_connect
 		}
 		else if(is_array($object->ctx))
 		{	
-			$object->ctx['modified_on'] = date('Y-m-d H:i:s');	
+			//$object->ctx['modified_on'] = date('Y-m-d H:i:s');	
 
 			foreach($object->ctx as $key => $values)
 			{

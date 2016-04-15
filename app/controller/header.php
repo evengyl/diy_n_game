@@ -1,18 +1,14 @@
 <?php 
-class header extends base_module
+Class header extends base_module
 {
-	public $name_tpl;
-	public $page_tpl;
 
-	public function __construct($name_module, $name_tpl)
+	public function __construct($module_tpl_name, $user = "", $is_connect= "")
 	{		
-		$this->name_tpl = $name_tpl;
-		$this->page_tpl = $this->render_tpl($name_tpl);
+		parent::__construct($module_tpl_name);
 
-		$breadcrumb = "";
-
-		return $this->page_tpl = $breadcrumb."".$this->page_tpl;
+		return $this->assign_var("user", $user)->assign_var("is_connect", $is_connect)->render();
 	}
+
 }
 
 

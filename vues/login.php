@@ -1,4 +1,8 @@
 <?
+
+if(isset($title))
+	echo $title;
+
 if(isset($_SESSION['pseudo'])) //donc il est connecté
 {?>
 	<div class="col-xs-12 connect-form" style="text-align:center; font-size:45px; font-family:milk;">
@@ -39,4 +43,4 @@ else
 }
 
 
-?>__TPL_accueil_bottom__
+?>

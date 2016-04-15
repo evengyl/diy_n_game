@@ -3,37 +3,77 @@
 
 Class base_module extends all_query
 {
-	public $parser;
 	public $rendu;
+	public $content;
+	public $var_to_extract;
+	public $template_name;
+	public $template_path;
 
-	public function __construct($name_module= "", $name_tpl ="")
+
+	public function __construct($module_tpl_name = "")
 	{
-		if($name_module != "")
+		if($module_tpl_name != "")
 		{
-			$this->rendu = $this->render_module($name_module, $name_tpl);	
+			$this->template_name = $module_tpl_name;
+			$this->set_template_path($this->template_name);					
 		}
 		
 	}
 
-	public function render_tpl($called_tpl)
+	public function set_template_path($name_template)
 	{
-		
-		$test = "bonjour je suis un test a la con";
-		$this->parser = new parser();
-			$tpl = $this->parser->parser_main($called_tpl);
+		$this->template_path = "../vues/".$name_template.".php";
 
-		affiche_pre(htmlentities($tpl));
-		//return $tpl;
 	}
 
-	public function render_module($name_module, $name_tpl)
+	public function get_template_path()
 	{
-		require_once('../app/controller/'.$name_module.'.php');
-		$module = new $name_module($name_module, $name_tpl);
-		return $module;
+		return $this->template_path;
+	}
+
+	public function assign_var($var_name , $value)
+	{
+
+        if(is_array($var_name))
+        {
+            $this->var_to_extract = array_merge($this->var_to_extract, $var_name);
+        }
+        else
+        {
+            $this->var_to_extract[$var_name] = $value;
+        }
+        return $this;
 	}
 
 
+	public function render()
+	{
+		ob_start();
+			if(!empty($this->var_to_extract))
+			{
+				extract($this->var_to_extract);
+			}			
+			require($this->get_template_path());
+		$rendu = ob_get_contents();
+		ob_end_clean();
+		$this->set_rendu($rendu);
+	}
+
+	public function set_rendu($rendu)
+	{
+		$this->rendu = $rendu;
+	}
+
+	public function get_rendu()
+	{
+		return $this->rendu;
+	}
+
+
+
+
+
+	
 
 	public function generate_breadcrumb($referer = array())
 	{

@@ -1,12 +1,12 @@
 <?
-
+echo 'tata';
 //pour la culture de vg
 $all_query = new all_query();
 class prod
 {
 	public $level ="";
-	public $multi_prod = 2.5;
-	public $multi_prix = 1.5;
+	public $multi_prod = 3;
+	public $multi_prix = 1.3;
 	public $production = 0;
 	public $prix = 100;
 
@@ -125,8 +125,8 @@ foreach($array_global as $array)
 foreach($array_global as $array)
 {
 	$req_sql_vg = ("INSERT INTO culture_vg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
-	$req_sql_pg = ("INSERT INTO usine_pg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
-	//$all_query->query_simple($req_sql_pg);
+	//$req_sql_pg = ("INSERT INTO usine_pg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
+	//$all_query->query_simple($req_sql_vg);
 }
 
 //affiche_pre($array_global);
