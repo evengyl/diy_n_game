@@ -14,9 +14,17 @@ Class user extends all_query
 
 	public function __construct()
 	{
-		$this->set_variable_user();
-		$this->maj_ressource($this->vg);
-		$this->maj_ressource($this->pg);
+		if(Config::$is_connect == 1)
+		{
+			$this->set_variable_user();
+			$this->maj_ressource($this->vg);
+			$this->maj_ressource($this->pg);
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
 	private function set_variable_user()
@@ -148,8 +156,8 @@ Class user extends all_query
 		else
 		{
 			$subject = "Attention le joueur : ".$this->user_infos->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
-			mail("dark.evengyl@gmail.com", "Message d'erreur du site Diy N Game.", $subject);
-			$_SESSION['error'] = "Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...";
+			mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
+			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...")</script><?
 			$this->maj_avertissement();
 			return 0;
 		}
@@ -170,4 +178,4 @@ Class user extends all_query
 		//met dans la base de donnée un petit +1 pour avertissement
 	}
 
-}
+} 

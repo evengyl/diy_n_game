@@ -12,7 +12,8 @@ class all_query extends _db_connect
 
 	public $ctx;
 	public $db_link;
-	
+
+
 	public function set_db_link()
 	{
 		$this->db_link = parent::get_db_link();

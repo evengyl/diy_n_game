@@ -27,7 +27,7 @@
 		          <ul class="dropdown-menu">
 		            <li><a href="#">Consulter la doc</a></li>
 		            <li><a href="#">Forum</a></li>
-		            <li><a href="#">Contacter moi</a></li>
+		            <li><a href="?page=contact">Contacter moi</a></li>
 		          </ul>
 		        </li>
 		      </ul>
