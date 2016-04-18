@@ -3,11 +3,13 @@
 
 Class base_module extends all_query
 {
+
 	public $rendu;
 	public $content;
 	public $var_to_extract;
 	public $template_name;
 	public $template_path;
+
 
 
 	public function __construct($module_tpl_name = "")

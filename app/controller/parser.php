@@ -105,7 +105,6 @@ class parser
 		global $user;
 
 
-
 		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);				
 
 		if($this->module_tpl_name != "")
@@ -135,8 +134,7 @@ class parser
 		{
 			return $page;
 			$error[] = "Une erreur est survenue lors du traitement des templates dans le parser parse_module()";
-		}
-				 				
+		}				 				
 	}
 }
 

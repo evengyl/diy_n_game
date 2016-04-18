@@ -1,6 +1,3 @@
-
-<? echo $title; ?>
-
 <div class="col-xs-8 col-lg-offset-2 col-without-padding col-without-radius content_game">
 	__TPL_nav__
 

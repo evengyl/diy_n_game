@@ -3,21 +3,21 @@
 Class breadcrumb extends base_module
 {
 
-	public function __construct($module_tpl_name, $user = "", $is_connect= "")
+	public function __construct($module_tpl_name)
 	{	
-		global $bread;	
+
 		parent::__construct($module_tpl_name);
-		if(isset($bread[0]))
+
+		if(isset($_GET['page']))
 		{
-			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", $bread[0] => "?page=".$bread[1]));
+			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", $_GET['page'] => "?page=".$_GET['page']));
 		}
 		else
 		{
-			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home"));
+			$breadcrumb = $this->generate_breadcrumb(array("Accueilf" => "?page=home"));
 		}
-
 		
-		return $this->assign_var("user", $user)->assign_var("is_connect", $is_connect)->assign_var("breadcrumb", $breadcrumb)->render();
+		return $this->assign_var("breadcrumb", $breadcrumb)->render();
 	}
 
 }
