@@ -65,13 +65,12 @@ Class router
 
 	private function assign_bread()
 	{
-			echo "__MOD_breadcrumb__";
 		return $this;
 	}
 
 	private function assign_mod()
 	{
-		echo " __MOD_".$this->route['page']."__";
+		echo "__MOD_breadcrumb(test)__    __MOD_".$this->route['page']."__";
 	}
 
 
