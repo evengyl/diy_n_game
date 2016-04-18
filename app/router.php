@@ -17,22 +17,22 @@ Class router
 		if(isset($this->route['page']))
 		{
 			if($this->route['page'] == 'home')
-				$this->get()->assign_mod();
+				$this->get()->assign_bread()->assign_mod();
 
 			else if($this->route['page'] == 'sign_up')
-				$this->get()->assign_mod();
+				$this->get()->assign_bread()->assign_mod();
 			
 			else if($this->route['page'] == 'login')
-		 		$this->get()->assign_mod();
+		 		$this->get()->assign_bread()->assign_mod();
 
 		 	else if($this->route['page'] == 'game_home')
-				$this->get()->is_connect()->assign_bread()->assign_mod();
+				$this->get()->assign_bread()->is_connect()->assign_mod();
 
 			else if($this->route['page'] == 'test')
-				$this->get()->assign_tpl();
+				$this->get()->assign_bread()->assign_tpl();
 
 			else if($this->route['page'] == 'contact')
-				$this->get()->assign_mod();
+				$this->get()->assign_bread()->assign_mod();
 			
 			else
 				$error[] = "Le call _GET au routeur n'existe pas:  controller = Router";
@@ -65,12 +65,13 @@ Class router
 
 	private function assign_bread()
 	{
+		echo "__MOD_breadcrumb(test)__";
 		return $this;
 	}
 
 	private function assign_mod()
 	{
-		echo "__MOD_breadcrumb(test)__    __MOD_".$this->route['page']."__";
+		echo "__MOD_".$this->route['page']."__";
 	}
 
 
