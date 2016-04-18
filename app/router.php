@@ -17,22 +17,22 @@ Class router
 		if(isset($this->route['page']))
 		{
 			if($this->route['page'] == 'home')
-				$this->get()->assign_bread()->assign_mod();
+				$this->get()->assign_bread($title_brd = "")->assign_mod();
 
 			else if($this->route['page'] == 'sign_up')
-				$this->get()->assign_bread()->assign_mod();
+				$this->get()->assign_bread($title_brd = "Page d'inscription")->assign_mod();
 			
 			else if($this->route['page'] == 'login')
-		 		$this->get()->assign_bread()->assign_mod();
+		 		$this->get()->assign_bread($title_brd = "Page de connexion")->assign_mod();
 
 		 	else if($this->route['page'] == 'game_home')
-				$this->get()->assign_bread()->is_connect()->assign_mod();
+				$this->get()->assign_bread($title_brd = "Présentation général de votre entreprise")->is_connect()->assign_mod();
 
 			else if($this->route['page'] == 'test')
-				$this->get()->assign_bread()->assign_tpl();
+				$this->get()->assign_bread($title_brd = "test")->assign_tpl();
 
 			else if($this->route['page'] == 'contact')
-				$this->get()->assign_bread()->assign_mod();
+				$this->get()->assign_bread($title_brd = "Page de contact")->assign_mod();
 			
 			else
 				$error[] = "Le call _GET au routeur n'existe pas:  controller = Router";
@@ -63,9 +63,9 @@ Class router
 		echo "__TPL_".$this->route['page']."__";
 	}
 
-	private function assign_bread()
+	private function assign_bread($title_brd)
 	{
-		echo "__MOD_breadcrumb(test)__";
+		echo "__MOD_breadcrumb(".$title_brd.")__";
 		return $this;
 	}
 
