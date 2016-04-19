@@ -1,4 +1,30 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?
+
+
+
+
+
 echo 'tata';
 //pour la culture de vg
 $all_query = new all_query();

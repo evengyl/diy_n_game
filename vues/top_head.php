@@ -11,6 +11,10 @@
 	<link rel="stylesheet/less" type="text/css" href="../public/css/style.less" />
 	<link rel="stylesheet" type="text/css" href="../public/css/lightbox.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="../public/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../public/js/animo/animo.js"></script>	
+	<link rel="stylesheet" type="text/css" href="../public/js/animo/animate-animo.css"/>
 
 
 
