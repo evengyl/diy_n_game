@@ -1,3 +1,28 @@
+<? 
+/*
+$time_base_first = 15;
+$time_base = array();
+$time_in_click = 1000;
+$time_finish = $time_in_click + $time_base_first;
+
+
+
+$i = 0;
+
+while($i <= 70)
+{
+	$time_base[$i] = (($time_base_first * ($i * 2)) * $i) * 2.5;
+	$i++;
+}
+
+$all_query = new all_query();
+
+foreach($time_base as $row => $values)
+{
+	$req_sql_time = ("UPDATE usine_pg SET time_construct = $values WHERE level = $row");	
+	affiche_pre($req_sql_time);
+	$all_query->query_simple($req_sql_time);
+}
 
 
 
@@ -15,17 +40,8 @@
 
 
 
+/*
 
-
-
-
-<?
-
-
-
-
-
-echo 'tata';
 //pour la culture de vg
 $all_query = new all_query();
 class prod
@@ -150,9 +166,13 @@ foreach($array_global as $array)
 
 foreach($array_global as $array)
 {
-	$req_sql_vg = ("INSERT INTO culture_vg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
+	//$req_sql_vg = ("INSERT INTO culture_vg (time_construct) VALUES ('$array->time_construct')");	
+	//$req_sql_vg = ("INSERT INTO culture_vg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
 	//$req_sql_pg = ("INSERT INTO usine_pg (level, multi_prod, multi_prix, production, prix) VALUES ('$array->level', '$array->multi_prod', '$array->multi_prix', '$array->production', '$array->prix')");
 	//$all_query->query_simple($req_sql_vg);
 }
 
-//affiche_pre($array_global);
+
+
+affiche_pre($array_global);
+*/

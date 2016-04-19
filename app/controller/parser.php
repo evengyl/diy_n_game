@@ -24,7 +24,7 @@ class parser
 			{
 				$page = $this->parse_module($match, $page);
 			}
-			else if(preg_match('/__MOD_[a-z_]+[(]?[a-zA-Z0-9_\' ]*[)]?__/', $page, $match))
+			else if(preg_match('/__MOD_[a-z_]+[(]?[a-zA-Z0-9éèçàê_\' ]*[)]?__/', $page, $match))
 			{
 				$page = $this->parse_module_var($match, $page);
 			}
@@ -122,7 +122,7 @@ class parser
 		$var_in_match = substr($var_in_match, 1);
 
 
-		$module_name = preg_replace("/[(][a-zA-Z0-9_ \']*[)]/", "", $match[0]);
+		$module_name = preg_replace("/[(][a-zA-Z0-9_éèçàê \']*[)]/", "", $match[0]);
 
 		$this->module_name = str_replace(array("__MOD_","__"), "", $module_name);				
 
