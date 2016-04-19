@@ -13,7 +13,8 @@ class parser
 
 		global $error;
 		$this->set_user($user);
-		//parser la page complète a la recherche des __TPL_bla__ et __MOD_bla__
+		//parser la page complète a la recherche des __TPL_bla__ et __MOD_bla__	
+		//__MOD_([a-z_]+)\(([^)]*)\)__
 		if(!empty($page))
 		{
 			if(preg_match('/__TPL_[a-z_]+__/', $page, $match))
@@ -24,7 +25,7 @@ class parser
 			{
 				$page = $this->parse_module($match, $page);
 			}
-			else if(preg_match('/__MOD_[a-z_]+[(]?[a-zA-Z0-9éèçàê_\' ]*[)]?__/', $page, $match))
+			else if(preg_match('/__MOD_[a-z_]+\([a-zA-Z0-9éèçàê_\' ]*\)__/', $page, $match))
 			{
 				$page = $this->parse_module_var($match, $page);
 			}
