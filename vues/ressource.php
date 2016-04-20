@@ -1,46 +1,7 @@
 <?		
 if(Config::$is_connect == 1)
 {?>
-	<div class="ressource_top col-xs-6">
-						
-		<div class="col-sm-6 col-md-2">
-			<div class="thumbnail col-xs-12" style="margin-bottom:5px; margin-top:15px;">
-				<div class=" col-xs-12 col-without-padding">
-					<h5 style="margin-top:0px;" class="col-xs-12">Littres de glycérine</h5>
-					<center><img src="../public/images/vg.png" alt="Littres de glycérine" class="img-circle img-responsive" style="max-height:50px;"></center>
-					<center><p>12345</p></center>
-				</div>
-			</div>
-		</div>							
-						
-		<div class="col-sm-6 col-md-2">
-			<div class="thumbnail col-xs-12" style="margin-bottom:5px; margin-top:15px;">
-				<div class=" col-xs-12 col-without-padding">
-					<h5 style="margin-top:0px;" class="col-xs-12">Littres de propylène</h5>
-					<center><img src="../public/images/vg.png" alt="Littres de propylène" class="img-circle img-responsive" style="max-height:50px;"></center>
-					<center><p>12345</p></center>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-2">
-			<div class="thumbnail col-xs-12" style="margin-bottom:5px; margin-top:15px;">
-				<div class=" col-xs-12 col-without-padding">
-					<h5 style="margin-top:0px;" class="col-xs-12">Nombres de flacons</h5>
-					<center><img src="../public/images/e-liquides.png" alt="Nombres de flacons de e-liquides" class="img-circle img-responsive" style="max-height:50px;"></center>
-					<center><p>12345</p></center>
-				</div>
-			</div>
-		</div>							
-		<div class="col-sm-6 col-md-2">
-			<div class="thumbnail col-xs-12" style="margin-bottom:5px; margin-top:15px;">
-				<div class=" col-xs-12 col-without-padding">
-					<h5 style="margin-top:0px;" class="col-xs-12">Argents en coffres</h5>
-					<center><img src="../public/images/argent.png" alt="Argent" class="img-circle img-responsive" style="max-height:50px;"></center>
-					<center><p>12345 €</p></center>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<div class="col-xs-12 col-without-padding">
 	<div class="col-lg-12 col-without-padding">
@@ -63,13 +24,43 @@ if(Config::$is_connect == 1)
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
-		        		<span style="font-size:10px;">Littres de glycérine : <?= $user->user_infos->last_culture_vg ?></span>
+		        		<span style="font-size:10px;">Champs de glycérines : <?= $user->user_infos->last_culture_vg ?></span>
+		        	</a>
+		        </li>
+		        <li>
+		        	<a href="">
+		        		<img src="../public/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
+		        		<span style="font-size:10px;">Littres de Glycérines : 000 000 000</span>
 		        	</a>
 		        </li>
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
-		        		<span style="font-size:10px;">Usines de propylène : <?= $user->user_infos->last_usine_pg ?></span>
+		        		<span style="font-size:10px;">Usines à propylènes : <?= $user->user_infos->last_usine_pg ?></span>
+		        	</a>
+		        </li>
+		        <li>
+		        	<a href="">
+		        		<img src="../public/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
+		        		<span style="font-size:10px;">Littres de propylènes : 000 000 000</span>
+		        	</a>
+		        </li>
+		        <li>
+		        	<a href="">
+		        		<img src="../public/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
+		        		<span style="font-size:10px;">Littres de Bases 20PG/80VG : 000 | 50VG/50PG : 000 | 80VG/20PG : 000 | 100VG : 000</span>
+		        	</a>
+		        </li>
+		        <li>
+		        	<a href="">
+		        		<img src="../public/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
+		        		<span style="font-size:10px;">Nombres de flacons rempli : 000 000 000</span>
+		        	</a>
+		        </li>
+		        <li>
+		        	<a href="">
+		        		<img src="../public/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
+		        		<span style="font-size:10px;">Argent : 000 000 000 €</span>
 		        	</a>
 		        </li>
 		      </ul>

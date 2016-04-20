@@ -16,7 +16,7 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li class="presentation"><a href="?page=game_home"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Présentation générale de votre entreprise</a></li>
 					<hr>
-					<li class="presentation"><a href="#"><span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Cultures du VG</a></li>
+					<li class="presentation"><a href="?page=champ_glycerine"><span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Cultures du VG</a></li>
 					<hr>
 					<li class="presentation"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;Industries du PG</a></li>
 					<hr>

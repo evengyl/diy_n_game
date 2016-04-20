@@ -20,10 +20,10 @@
 						<div class="col-xs-12">
 							<h2 style="font-size:24px; margin-top:0px;" class="col-xs-12">Culture VG</h2>
 							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<p class="col-xs-12"><b>Level : </b> <?= $user->vg->level; ?></p>
-							<p class="col-xs-12"><b>Production /h : </b><?= $user->vg->production; ?></p>
-							<p class="col-xs-12"><b>Next level : </b><?= $user->vg->prix; ?></p>
-							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->vg->time_construct; ?></p>
+							<p class="col-xs-12"><b>Level : </b> <?= $user->culture_vg->level; ?></p>
+							<p class="col-xs-12"><b>Production /h : </b><?= $user->culture_vg->production; ?></p>
+							<p class="col-xs-12"><b>Next level : </b><?= $user->culture_vg->prix; ?></p>
+							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->culture_vg->time_construct; ?></p>
 						</div>
 					</div>
 				</div>
@@ -33,10 +33,10 @@
 						<div class="col-xs-12">
 							<h2 style="font-size:24px; margin-top:0px;" class="col-xs-12">Liquéfaction VG</h2>
 							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<p class="col-xs-12"><b>Level : </b> <?= $user->vg->level; ?></p>
-							<p class="col-xs-12"><b>Production /h : </b><?= $user->vg->production; ?></p>
-							<p class="col-xs-12"><b>Next level : </b><?= $user->vg->prix; ?></p>
-							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->vg->time_construct; ?></p>
+							<p class="col-xs-12"><b>Level : </b> <?= $user->culture_vg->level; ?></p>
+							<p class="col-xs-12"><b>Production /h : </b><?= $user->culture_vg->production; ?></p>
+							<p class="col-xs-12"><b>Next level : </b><?= $user->culture_vg->prix; ?></p>
+							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->culture_vg->time_construct; ?></p>
 						</div>
 					</div>
 				</div>
@@ -46,10 +46,10 @@
 						<div class="col-xs-12">
 							<h2 style="font-size:24px; margin-top:0px;" class="col-xs-12">Culture VG</h2>
 							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<p class="col-xs-12"><b>Level : </b> <?= $user->vg->level; ?></p>
-							<p class="col-xs-12"><b>Production /h : </b><?= $user->vg->production; ?></p>
-							<p class="col-xs-12"><b>Next level : </b><?= $user->vg->prix; ?></p>
-							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->vg->time_construct; ?></p>
+							<p class="col-xs-12"><b>Level : </b> <?= $user->culture_vg->level; ?></p>
+							<p class="col-xs-12"><b>Production /h : </b><?= $user->culture_vg->production; ?></p>
+							<p class="col-xs-12"><b>Next level : </b><?= $user->culture_vg->prix; ?></p>
+							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->culture_vg->time_construct; ?></p>
 						</div>
 					</div>
 				</div>
@@ -59,10 +59,10 @@
 						<div class="col-xs-12">
 							<h2 style="font-size:24px; margin-top:0px;" class="col-xs-12">Culture VG</h2>
 							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<p class="col-xs-12"><b>Level : </b> <?= $user->vg->level; ?></p>
-							<p class="col-xs-12"><b>Production /h : </b><?= $user->vg->production; ?></p>
-							<p class="col-xs-12"><b>Next level : </b><?= $user->vg->prix; ?></p>
-							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->vg->time_construct; ?></p>
+							<p class="col-xs-12"><b>Level : </b> <?= $user->culture_vg->level; ?></p>
+							<p class="col-xs-12"><b>Production /h : </b><?= $user->culture_vg->production; ?></p>
+							<p class="col-xs-12"><b>Next level : </b><?= $user->culture_vg->prix; ?></p>
+							<p class="col-xs-12"><b>Temps de construction : </b><?= $user->culture_vg->time_construct; ?></p>
 						</div>
 					</div>
 				</div>

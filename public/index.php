@@ -49,8 +49,10 @@ echo $page;
 //affiche les messages d'erreur du code
 if(!empty($error))
 {
-	affiche_pre($error);
+	//affiche_pre($error);
 	
 }
 
 //affiche_pre($_SESSION);
+
+

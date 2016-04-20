@@ -8,8 +8,8 @@ Class user extends all_query
 		// tout ce passe en seconde c'est plus simple 
 
 	public $user_infos;
-	public $vg;
-	public $pg;
+	public $culture_vg;
+	public $usine_pg;
 
 
 	public function __construct()
@@ -17,8 +17,9 @@ Class user extends all_query
 		if(Config::$is_connect == 1)
 		{
 			$this->set_variable_user();
-			$this->maj_ressource($this->vg);
-			$this->maj_ressource($this->pg);
+			$this->maj_battiment();
+			$this->maj_ressource($this->culture_vg);
+			$this->maj_ressource($this->usine_pg);
 		}
 		else
 		{
@@ -46,23 +47,36 @@ Class user extends all_query
 				unset($res_fx);
 
 
-				$this->vg = new stdClass();
+				$this->culture_vg = new stdClass();
 				$req_sql_vg = "SELECT * FROM culture_vg WHERE level = '".$this->user_infos->level_culture_vg."'";
 				$res_fx = $this->other_query($req_sql_vg);
 				foreach($res_fx[0] as $key => $values)
 				{
-					$this->vg->$key = $values;
+					$this->culture_vg->$key = $values;
 				}
 				unset($res_fx);
 
 
 
-				$this->pg = new stdClass();
+				$this->usine_pg = new stdClass();
 				$req_sql_pg = "SELECT * FROM usine_pg WHERE level = '".$this->user_infos->level_usine_pg."'";
 				$res_fx = $this->other_query($req_sql_pg);
 				foreach($res_fx[0] as $key => $values)
 				{
-					$this->pg->$key = $values;
+					$this->usine_pg->$key = $values;
+				}
+				unset($res_fx);
+
+
+				$this->construction = new stdClass();
+				$req_sql_construction = "SELECT * FROM construction_en_cours";
+				$res_fx = $this->other_query($req_sql_construction);
+				if(!empty($res_fx))
+				{
+					foreach($res_fx as $key => $values)
+					{
+						$this->construction->$key = $values;
+					}
 				}
 				unset($res_fx);
 
@@ -84,16 +98,16 @@ Class user extends all_query
 
 
 		//determine combien de ressource le joueur gagne en une seconde car dans la bsd c'est en heure
-		$this->calc_ressource_per_sec_vg($this->vg->production);
-		$this->calc_ressource_per_sec_pg($this->pg->production);
+		$this->calc_ressource_per_sec_vg($this->culture_vg->production);
+		$this->calc_ressource_per_sec_pg($this->usine_pg->production);
 
 
 		//reset les ressources gangée à zero pour éviter les accumulation
 		$this->user_infos->ressource_win_culture_vg = 0;
 		$this->user_infos->ressource_win_usine_pg = 0;
 
-		$this->user_infos->ressource_win_culture_vg = round($this->user_infos->time_diff * $this->vg->production_sec, 2);
-		$this->user_infos->ressource_win_usine_pg = round($this->user_infos->time_diff * $this->pg->production_sec, 2);
+		$this->user_infos->ressource_win_culture_vg = round($this->user_infos->time_diff * $this->culture_vg->production_sec, 2);
+		$this->user_infos->ressource_win_usine_pg = round($this->user_infos->time_diff * $this->usine_pg->production_sec, 2);
 
 		$this->maj_time_last_connect_in_db();
 
@@ -133,12 +147,12 @@ Class user extends all_query
 
 	private function calc_ressource_per_sec_vg($ressource_per_hour)
 	{
-		$this->vg->production_sec = round((($this->vg->production /60)/60),2);
+		$this->culture_vg->production_sec = round((($this->culture_vg->production /60)/60),2);
 	}
 
 	private function calc_ressource_per_sec_pg($ressource_per_hour)
 	{
-		$this->pg->production_sec = round((($this->pg->production /60)/60),2);
+		$this->usine_pg->production_sec = round((($this->usine_pg->production /60)/60),2);
 	}
 
 	private function calc_diff_time($last_time_user)
@@ -178,4 +192,11 @@ Class user extends all_query
 		//met dans la base de donnée un petit +1 pour avertissement
 	}
 
+	private function maj_battiment()
+	{
+		//recupere les données dans la base
+		$this->construct = new stdClass;
+		$this->construct->construc_finish = "";
+		$this->construct->construc_en_cours = "";
+	}
 } 

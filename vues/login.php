@@ -25,7 +25,7 @@ else
 
 			<div style="float:left;" class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
 				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
-				<input name="pseudo" type="text" class="form-control " required placeholder="Pseudo">
+				<input name="pseudo" type="text" class="form-control " required autofocus placeholder="Pseudo">
 			</div>
 
 			<div style="float:left;" class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
