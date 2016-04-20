@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 19 Avril 2016 à 16:21
--- Version du serveur :  5.6.20
--- Version de PHP :  5.5.15
+-- Généré le :  Mer 20 Avril 2016 à 21:34
+-- Version du serveur :  10.1.9-MariaDB
+-- Version de PHP :  5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `diy_n_game`
@@ -23,18 +23,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `construction_en_cours`
+--
+
+CREATE TABLE `construction_en_cours` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `name_batiment` varchar(20) NOT NULL,
+  `time_finish` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `construction_en_cours`
+--
+
+INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`) VALUES
+(2, 1, 'pg', 1212121),
+(3, 1, 'vg', 1461187712);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `culture_vg`
 --
 
-CREATE TABLE IF NOT EXISTS `culture_vg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `culture_vg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(11) NOT NULL,
   `time_construct` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=143 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `culture_vg`
@@ -190,8 +211,8 @@ INSERT INTO `culture_vg` (`id`, `level`, `multi_prod`, `multi_prix`, `production
 -- Structure de la table `login`
 --
 
-CREATE TABLE IF NOT EXISTS `login` (
-`id` int(11) NOT NULL,
+CREATE TABLE `login` (
+  `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `last_connect` varchar(50) NOT NULL,
@@ -201,14 +222,14 @@ CREATE TABLE IF NOT EXISTS `login` (
   `level_usine_pg` int(11) NOT NULL,
   `last_culture_vg` double NOT NULL,
   `last_usine_pg` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `login`
 --
 
 INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `last_culture_vg`, `last_usine_pg`) VALUES
-(1, 'evengyl', 'legends', '1461070994', 0, 3, 10, 5, 107939.52, 20891.52),
+(1, 'evengyl', 'legends', '1461180767', 0, 3, 10, 5, 141969.15, 27477.9),
 (2, 'tara', '5515', '1460634590', 0, 3, 12, 15, 1510320, 51513218);
 
 -- --------------------------------------------------------
@@ -217,15 +238,15 @@ INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`,
 -- Structure de la table `usine_pg`
 --
 
-CREATE TABLE IF NOT EXISTS `usine_pg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `usine_pg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(20) NOT NULL,
   `time_construct` bigint(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `usine_pg`
@@ -309,42 +330,53 @@ INSERT INTO `usine_pg` (`id`, `level`, `multi_prod`, `multi_prix`, `production`,
 --
 
 --
+-- Index pour la table `construction_en_cours`
+--
+ALTER TABLE `construction_en_cours`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `login`
 --
 ALTER TABLE `login`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
+-- AUTO_INCREMENT pour la table `construction_en_cours`
+--
+ALTER TABLE `construction_en_cours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
