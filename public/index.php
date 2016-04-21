@@ -53,6 +53,6 @@ if(!empty($error))
 	
 }
 
-//affiche_pre($_SESSION);
+affiche_pre($user);
 
 
