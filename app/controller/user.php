@@ -19,6 +19,7 @@ Class user extends all_query
 			$this->set_time_now();
 			$this->set_variable_user();
 			$this->validate_construct();
+			//$this->validate_set_time_to_finish();
 			$this->maj_ressource($this->culture_vg);
 			$this->maj_ressource($this->usine_pg);
 		}
@@ -34,7 +35,7 @@ Class user extends all_query
 		$this->time_now = date("U");
 	}
 
-	private function set_variable_user()
+	public function set_variable_user()
 	{
 		global $error;
 
@@ -196,9 +197,8 @@ Class user extends all_query
 		unset($req_sql);
 		//met dans la base de donnée un petit +1 pour avertissement
 	}
-
-
-	private function validate_construct()
+/*
+	public function validate_set_time_to_finish()
 	{
 		$req_sql = "SELECT * FROM construction_en_cours WHERE id_user= '".$this->user_infos->id."'";
 		$res_sql = $this->other_query($req_sql);
@@ -206,22 +206,35 @@ Class user extends all_query
 		{
 			foreach($res_sql as $row_construct)
 			{
+				$time_restant = $row_construct->time_finish - $this->time_now;
+				$row_construct->time_to_finish = $time_restant;
+				$req_sql = "UPDATE construction_en_cours SET time_to_finish = '".$time_restant."' WHERE id = '".$row_construct->id."' AND id_user = '".$row_construct->id_user."'";
+				$this->query_simple($req_sql);
+			}
+		}
 				
+	}*/
+
+
+	public function validate_construct()
+	{
+		$req_sql = "SELECT * FROM construction_en_cours WHERE id_user= '".$this->user_infos->id."'";
+
+		$res_sql = $this->other_query($req_sql);
+		if(!empty($res_sql))
+		{
+			foreach($res_sql as $row_construct)
+			{
 				if($row_construct->time_finish <= $this->time_now)
 				{
-						//on indique dans la base que le level est changer 
+					//on indique dans la base que le level est changer 
 					$set_level_up = $this->user_infos->{$row_construct->name_batiment}+1;
 					$req_sql = "UPDATE login SET ".$row_construct->name_batiment." = '".$set_level_up."' WHERE id = '".$row_construct->id_user."'";
 					$this->query_simple($req_sql);
+					//et on delete la ligne qui est finie;
 					$this->delete_row($table = "construction_en_cours", $where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'");
 				}
-				else
-				{
-					$time_restant = $row_construct->time_finish - $this->time_now;
-					$row_construct->time_to_finish = $time_restant;
-					$req_sql = "UPDATE construction_en_cours SET time_to_finish = '".$time_restant."' WHERE id = '".$row_construct->id."' AND id_user = '".$row_construct->id_user."'";
-					$this->query_simple($req_sql);
-				}
+
 			}
 		}
 

@@ -4,7 +4,6 @@
 
 		<div class="col-lg-12" style="background:#232D3B; min-height:600px;">
 			<div class="col-lg-4">
-				image
 				<img class="img-responsive" src="../public/images/plantes.png">
 			</div>
 
@@ -37,11 +36,24 @@
 					<tr class="success" style="color:black;">
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->culture_vg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
-					<tr class="success" style="color:black;">
-						<? echo(isset($infos_vg->time_to_finish))? '<th>Votre construction sera terminée le/dans : </th>' : '' ; ?>
-						<? echo(isset($infos_vg->time_to_finish))? "<td><b>".date('d/m/Y', $infos_vg->time_to_finish)." &agrave; ".date('H:i:s', $infos_vg->time_to_finish)."</b></td>" : "" ; ?>
-					</tr>
+					<tr class="success" style="color:black;"><?
 
+					 		
+				 			if($in_make == 1)
+				 			{
+								if(isset($time_finish))
+							 	{
+							 		echo "<th>Votre construction sera terminée le/dans : </th>";
+							 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
+							 	}
+				 			}
+				 			else
+				 			{
+				 				echo "<th><td><a class='btn btn-primary' href='?page=champ_glycerine&construct=level_culture_vg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";
+				 			}
+				 			
+				 		?>
+					</tr>
 				</table>
 			</div>
 
