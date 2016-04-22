@@ -18,7 +18,7 @@
 					<hr>
 					<li class="presentation"><a href="?page=champ_glycerine"><span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Cultures du VG</a></li>
 					<hr>
-					<li class="presentation"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;Industries du PG</a></li>
+					<li class="presentation"><a href="?page=usine_propylene"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;Industries du PG</a></li>
 					<hr>
 					<li class="presentation"><a href="#"><span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Labos VG&PG</a></li>
 					<hr>

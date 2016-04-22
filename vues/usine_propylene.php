@@ -9,11 +9,11 @@
 
 			<div class="col-lg-8 hitsoire">
 				<h3 class="title">Petite histoire : </h3>
-				<span>Le glycérol est formé durant la fermentation alcoolique du moût de raisin lors de la production du vin.
-				Les huiles de noix de coco et de palmiste qui contiennent un pourcentage élevé (70-80 %) d'acides 
-				gras en C6 à C14 libèrent de plus grandes quantités de glycérol que les gras et huiles qui contiennent 
-				majoritairement des acides gras en C16 et C18, comme les graisses animales, les huiles de graines de coton, 
-				graines de soja, olives et palme.</span>
+				<span>Le propylène glycol (PG) ou propane-1,2-diol appelé aussi dihydroxypropane, 
+					méthyl glycol est un diol utilisé dans de nombreux usages industriels
+					 et pharmaceutiques ou agropharmaceutiques (solvant de pesticides), à faible dose comme
+					  additif alimentaire et depuis peu dans les cigarettes électroniques (liquide à vapoter).
+					   Il est issu à faible coût de la carbochimie, et généralement de la pétrochimie.</span>
 			</div>
 			<div class="col-lg-8 explication pull-right">
 				<h3 class="title">Explication : </h3>
@@ -25,16 +25,16 @@
 			</div>
 
 			<div class="col-lg-8 pull-right ressource_now">
-				<h3 class="title">Actuellement vos champs vous rapporte :</h3>
+				<h3 class="title">Actuellement vos usines vous rapporte :</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
 					<tr class="success" style="color:black;">
-						<th>Nombres des champs :</th><td><b><? echo $user->user_infos->level_culture_vg; ?></b> Champs améliores votre qunatité de glycérole</td>
+						<th>Nombres d'usines :</th><td><b><? echo $user->user_infos->level_usine_pg; ?></b> Usines améliores votre qunatité de Propylène</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Production :</th><td><b><? echo $user->culture_vg->production; ?></b> / Plantes de Glycérole / heure</td>
+						<th>Production :</th><td><b><? echo $user->usine_pg->production; ?></b> / Littres de Propylène brut / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->culture_vg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
+						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_pg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;"><?
 			 			if($in_make == 1)
@@ -48,7 +48,7 @@
 			 			else if($in_make == 2)
 			 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
 			 			else
-			 				echo "<th><td><a class='btn btn-primary' href='?page=champ_glycerine&construct=level_culture_vg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
+			 				echo "<th><td><a class='btn btn-primary' href='?page=usine_propylene&construct=level_usine_pg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
 			 					
 					</tr>
 				</table>

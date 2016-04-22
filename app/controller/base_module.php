@@ -9,6 +9,7 @@ Class base_module extends all_query
 	public $var_to_extract;
 	public $template_name;
 	public $template_path;
+	public $time_finish;
 
 
 
@@ -20,6 +21,25 @@ Class base_module extends all_query
 			$this->set_template_path($this->template_name);					
 		}
 		
+	}
+
+	public function set_time_finish($user, $name_batiment)
+	{
+		foreach($user->construction as $row_construct)
+		{
+			if($row_construct->name_batiment == $name_batiment)
+			{
+				$this->time_finish = $row_construct->time_finish;
+			}
+		}
+	}
+
+
+	public function time_finish_construct($time_construct)
+	{
+		$this->time_finish = "";
+		$time_now = date("U");
+		$this->time_finish = $time_now + $time_construct;
 	}
 
 	public function set_template_path($name_template)

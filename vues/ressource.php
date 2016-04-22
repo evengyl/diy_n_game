@@ -30,7 +30,7 @@ if(Config::$is_connect == 1)
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
-		        		<span style="font-size:10px;">Littres de Glycérines : 000 000 000</span>
+		        		<span style="font-size:10px;">Littres de Glycérines : 000</span>
 		        	</a>
 		        </li>
 		        <li>
@@ -42,7 +42,7 @@ if(Config::$is_connect == 1)
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
-		        		<span style="font-size:10px;">Littres de propylènes : 000 000 000</span>
+		        		<span style="font-size:10px;">Littres de propylènes : 000</span>
 		        	</a>
 		        </li>
 		        <li>
@@ -54,13 +54,13 @@ if(Config::$is_connect == 1)
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-		        		<span style="font-size:10px;">Nombres de flacons rempli : 000 000 000</span>
+		        		<span style="font-size:10px;">Nombres de flacons rempli : 000</span>
 		        	</a>
 		        </li>
 		        <li>
 		        	<a href="">
 		        		<img src="../public/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
-		        		<span style="font-size:10px;">Argent : 000 000 000 €</span>
+		        		<span style="font-size:10px;">Argent : 000 €</span>
 		        	</a>
 		        </li>
 		      </ul>
