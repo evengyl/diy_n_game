@@ -6,6 +6,12 @@
 	<div class="col-xs-12 col-md-10 col-lg-8">
 		<div class="col-xs-12">
 			<h3 class='col-xs-12 title' style="font-size:20px; border-bottom:1px solid #EF4224; ">
+				Vos ressource sont mise à jours toutes les cinq min, pour ne pas surcharger le serveurs de demande.
+				Vos batiments eux, le sont en permanence.
+			</h3>
+		</div>
+			<div class="col-xs-12">
+			<h3 class='col-xs-12 title' style="font-size:20px; border-bottom:1px solid #EF4224; ">
 				Cette page vous permet d'avoir une vue d'ensemble sur vos ressources et comment ce gere votre affaire.
 			</h3>
 		</div>

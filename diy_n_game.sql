@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 20 Avril 2016 à 21:34
+-- Généré le :  Dim 24 Avril 2016 à 22:38
 -- Version du serveur :  10.1.9-MariaDB
 -- Version de PHP :  5.6.15
 
@@ -30,16 +30,19 @@ CREATE TABLE `construction_en_cours` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(20) NOT NULL,
-  `time_finish` bigint(20) NOT NULL
+  `time_finish` bigint(20) NOT NULL,
+  `time_to_finish` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `construction_en_cours`
 --
 
-INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`) VALUES
-(2, 1, 'pg', 1212121),
-(3, 1, 'vg', 1461187712);
+INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`, `time_to_finish`) VALUES
+(21, 1, 'level_culture_vg', 1461509273, 0),
+(22, 1, 'level_usine_pg', 1461509273, 0),
+(23, 2, 'level_culture_vg', 1461509273, 0),
+(24, 2, 'level_usine_pg', 1461509273, 0);
 
 -- --------------------------------------------------------
 
@@ -221,16 +224,47 @@ CREATE TABLE `login` (
   `level_culture_vg` int(11) NOT NULL,
   `level_usine_pg` int(11) NOT NULL,
   `last_culture_vg` double NOT NULL,
-  `last_usine_pg` double NOT NULL
+  `last_usine_pg` double NOT NULL,
+  `argent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `login`
 --
 
-INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `last_culture_vg`, `last_usine_pg`) VALUES
-(1, 'evengyl', 'legends', '1461180767', 0, 3, 10, 5, 141969.15, 27477.9),
-(2, 'tara', '5515', '1460634590', 0, 3, 12, 15, 1510320, 51513218);
+INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `last_culture_vg`, `last_usine_pg`, `argent`) VALUES
+(1, 'evengyl', 'legends', '1461504762', 0, 3, 12, 5, 41293.74, 5386.14, 0),
+(2, 'tara', '5515', '1461504762', 0, 3, 12, 15, 41293.74, 46679.88, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `titre` text NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `date_now` varchar(50) NOT NULL,
+  `visible` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `news`
+--
+
+INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
+(1, 'test', '', '', 0),
+(2, 'test', '', '', 0),
+(3, 'test', '', '', 0),
+(4, 'test', '', '', 0),
+(5, 'test', '', '', 0),
+(6, 'test', '', '', 0),
+(7, 'test', '', '', 0),
+(8, 'test', '', '', 0),
+(9, 'test', '', '', 0),
+(10, 'test', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -348,6 +382,12 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
@@ -361,7 +401,7 @@ ALTER TABLE `usine_pg`
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
@@ -372,6 +412,11 @@ ALTER TABLE `culture_vg`
 --
 ALTER TABLE `login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --

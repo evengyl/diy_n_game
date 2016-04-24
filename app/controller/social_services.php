@@ -9,11 +9,14 @@ Class social_services extends base_module
 		parent::__construct($module_tpl_name);
 
 		$res_news = $this->other_query("SELECT * FROM news WHERE visible=1");
-
-		foreach($res_news as $row_news)
+		if(!empty($res_news))
 		{
-			$this->news[] = $row_news;
-		}	
+			foreach($res_news as $row_news)
+			{
+				$this->news[] = $row_news;
+			}
+		}
+	
 
 		return $this->assign_var("news", $this->news)->render();
 	}

@@ -16,12 +16,7 @@ Class user extends all_query
 	{
 		if(Config::$is_connect == 1)
 		{
-			$this->set_time_now();
 			$this->set_variable_user();
-			$this->validate_construct();
-			//$this->validate_set_time_to_finish();
-			$this->maj_ressource($this->culture_vg);
-			$this->maj_ressource($this->usine_pg);
 		}
 		else
 		{
@@ -30,11 +25,7 @@ Class user extends all_query
 
 	}
 
-	private function set_time_now()
-	{
-		$this->time_now = date("U");
-	}
-
+	
 	public function set_variable_user()
 	{
 		global $error;
@@ -99,122 +90,6 @@ Class user extends all_query
 		}
 	}
 
-	private function maj_ressource()
-	{
-		$this->user_infos->time_diff = $this->calc_diff_time($this->user_infos->last_connect);
-
-
-		//determine combien de ressource le joueur gagne en une seconde car dans la bsd c'est en heure
-		$this->calc_ressource_per_sec_vg($this->culture_vg->production);
-		$this->calc_ressource_per_sec_pg($this->usine_pg->production);
-
-
-		//reset les ressources gangée à zero pour éviter les accumulation
-		$this->user_infos->ressource_win_culture_vg = 0;
-		$this->user_infos->ressource_win_usine_pg = 0;
-
-		$this->user_infos->ressource_win_culture_vg = round($this->user_infos->time_diff * $this->culture_vg->production_sec, 2);
-		$this->user_infos->ressource_win_usine_pg = round($this->user_infos->time_diff * $this->usine_pg->production_sec, 2);
-
-		$this->maj_time_last_connect_in_db();
-
-		$this->maj_ressource_in_db();
-	}
-
-	private function maj_ressource_in_db()
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = array();
-
-		$this->user_infos->new_numb_ressource_culture_vg = $this->user_infos->last_culture_vg + $this->user_infos->ressource_win_culture_vg;
-		$this->user_infos->new_numb_ressource_usine_pg = $this->user_infos->last_usine_pg + $this->user_infos->ressource_win_usine_pg;
-
-		$req_sql->ctx["last_culture_vg"] = $this->user_infos->new_numb_ressource_culture_vg;
-		$req_sql->ctx["last_usine_pg"] = $this->user_infos->new_numb_ressource_usine_pg;
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$this->user_infos->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
-
-
-	private function maj_time_last_connect_in_db()
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = array();
-		$req_sql->ctx["last_connect"] = date("U");
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$this->user_infos->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
-
-
-
-
-	private function calc_ressource_per_sec_vg($ressource_per_hour)
-	{
-		$this->culture_vg->production_sec = round((($this->culture_vg->production /60)/60),2);
-	}
-
-	private function calc_ressource_per_sec_pg($ressource_per_hour)
-	{
-		$this->usine_pg->production_sec = round((($this->usine_pg->production /60)/60),2);
-	}
-
-	private function calc_diff_time($last_time_user)
-	{
-
-		if($this->time_now > $last_time_user)
-		{
-			$diff_time = $this->time_now - $last_time_user;
-		}
-		else if($this->time_now == $last_time_user)
-		{
-			$diff_time = 0;
-		}
-		else
-		{
-			$subject = "Attention le joueur : ".$this->user_infos->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
-			mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
-			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...")</script><?
-			$this->maj_avertissement();
-			return 0;
-		}
-
-		return $diff_time;
-	}
-
-	private function maj_avertissement()
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = array();
-		$old_values_avertissement = $this->user_infos->avertissement;
-		$req_sql->ctx["avertissement"] = $old_values_avertissement+1;
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$this->user_infos->id;
-		$this->update($req_sql);
-		unset($req_sql);
-		//met dans la base de donnée un petit +1 pour avertissement
-	}
-/*
-	public function validate_set_time_to_finish()
-	{
-		$req_sql = "SELECT * FROM construction_en_cours WHERE id_user= '".$this->user_infos->id."'";
-		$res_sql = $this->other_query($req_sql);
-		if(!empty($res_sql))
-		{
-			foreach($res_sql as $row_construct)
-			{
-				$time_restant = $row_construct->time_finish - $this->time_now;
-				$row_construct->time_to_finish = $time_restant;
-				$req_sql = "UPDATE construction_en_cours SET time_to_finish = '".$time_restant."' WHERE id = '".$row_construct->id."' AND id_user = '".$row_construct->id_user."'";
-				$this->query_simple($req_sql);
-			}
-		}
-				
-	}*/
-
 
 	public function validate_construct()
 	{
@@ -234,11 +109,7 @@ Class user extends all_query
 					//et on delete la ligne qui est finie;
 					$this->delete_row($table = "construction_en_cours", $where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'");
 				}
-
 			}
-		}
-
-
-		
+		}		
 	}
 } 

@@ -1,4 +1,5 @@
 <? 
+affiche_pre($user);
 /*
 $time_base_first = 15;
 $time_base = array();
