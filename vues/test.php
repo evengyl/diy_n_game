@@ -1,6 +1,9 @@
 <? 
-affiche_pre($user);
+
+
 /*
+
+
 $time_base_first = 15;
 $time_base = array();
 $time_in_click = 1000;
@@ -12,20 +15,35 @@ $i = 0;
 
 while($i <= 70)
 {
-	$time_base[$i] = (($time_base_first * ($i * 2)) * $i) * 2.5;
+	$time_base[$i] = (($time_base_first * ($i * 2)) * $i) * 2.8;
+
 	$i++;
 }
 
+
+
+$pourcent = 0;
+$pourcent_array = array();
+$j = 0;
+while($j <= 70)
+{
+	$pourcent_array[$j] = ((((($pourcent + 1) *1.5) + $j) * 1.2)*151)*$j;
+	$j++;	
+}
+
+affiche_pre($pourcent_array);
+
+
 $all_query = new all_query();
 
-foreach($time_base as $row => $values)
+foreach($pourcent_array as $row => $values)
 {
-	$req_sql_time = ("UPDATE usine_pg SET time_construct = $values WHERE level = $row");	
+	$req_sql_time = ("UPDATE labos_bases SET prix = $values WHERE id = $row");	
 	affiche_pre($req_sql_time);
 	$all_query->query_simple($req_sql_time);
 }
 
-
+*/
 
 
 

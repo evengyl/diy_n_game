@@ -33,7 +33,7 @@ Class router
 					$this->get()->assign_bread($title_brd = "Présentation général de votre entreprise")->is_connect()->assign_mod();
 
 				else if($this->route['page'] == 'test')
-					$this->get()->assign_bread($title_brd = "test")->assign_tpl();
+					$this->get()->assign_bread($title_brd = "test")->assign_mod();
 
 				else if($this->route['page'] == 'contact')
 					$this->get()->assign_bread($title_brd = "Page de contact")->assign_mod();
@@ -42,6 +42,8 @@ Class router
 					$this->get()->assign_bread($title_brd = "Culture des champs de Glycérine")->assign_mod_var($this->route['construct']);
 				else if($this->route['page'] == 'usine_propylene')
 					$this->get()->assign_bread($title_brd = "Installation industrielle de propylène")->assign_mod_var($this->route['construct']);
+				else if($this->route['page'] == 'labos_bases')
+					$this->get()->assign_bread($title_brd = "Laboratoire pharmaceutique de mélanges")->assign_mod_var($this->route['construct']);
 							
 				else
 					unset($this->route['page']);

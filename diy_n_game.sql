@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 24 Avril 2016 à 22:38
--- Version du serveur :  10.1.9-MariaDB
--- Version de PHP :  5.6.15
+-- Généré le :  Mar 26 Avril 2016 à 08:05
+-- Version du serveur :  5.6.20
+-- Version de PHP :  5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,11 +14,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `diy_n_game`
 --
+CREATE DATABASE IF NOT EXISTS `diy_n_game` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `diy_n_game`;
 
 -- --------------------------------------------------------
 
@@ -26,13 +28,14 @@ SET time_zone = "+00:00";
 -- Structure de la table `construction_en_cours`
 --
 
-CREATE TABLE `construction_en_cours` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `construction_en_cours`;
+CREATE TABLE IF NOT EXISTS `construction_en_cours` (
+`id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(20) NOT NULL,
   `time_finish` bigint(20) NOT NULL,
   `time_to_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Contenu de la table `construction_en_cours`
@@ -50,15 +53,16 @@ INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_fin
 -- Structure de la table `culture_vg`
 --
 
-CREATE TABLE `culture_vg` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `culture_vg`;
+CREATE TABLE IF NOT EXISTS `culture_vg` (
+`id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(11) NOT NULL,
   `time_construct` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Contenu de la table `culture_vg`
@@ -135,78 +139,98 @@ INSERT INTO `culture_vg` (`id`, `level`, `multi_prod`, `multi_prix`, `production
 (68, 67, 4.34, 1.3, 85815, 236733389, 336675),
 (69, 68, 4.36, 1.3, 89194, 307753406, 346800),
 (70, 69, 4.38, 1.3, 92661, 260051628, 357075),
-(71, 70, 4.4, 1.3, 96220, 338067117, 367500),
-(72, 0, 0, 0, 0, 0, 0),
-(73, 0, 0, 0, 0, 0, 0),
-(74, 0, 0, 0, 0, 0, 0),
-(75, 0, 0, 0, 0, 0, 0),
-(76, 0, 0, 0, 0, 0, 0),
-(77, 0, 0, 0, 0, 0, 0),
-(78, 0, 0, 0, 0, 0, 0),
-(79, 0, 0, 0, 0, 0, 0),
-(80, 0, 0, 0, 0, 0, 0),
-(81, 0, 0, 0, 0, 0, 0),
-(82, 0, 0, 0, 0, 0, 0),
-(83, 0, 0, 0, 0, 0, 0),
-(84, 0, 0, 0, 0, 0, 0),
-(85, 0, 0, 0, 0, 0, 0),
-(86, 0, 0, 0, 0, 0, 0),
-(87, 0, 0, 0, 0, 0, 0),
-(88, 0, 0, 0, 0, 0, 0),
-(89, 0, 0, 0, 0, 0, 0),
-(90, 0, 0, 0, 0, 0, 0),
-(91, 0, 0, 0, 0, 0, 0),
-(92, 0, 0, 0, 0, 0, 0),
-(93, 0, 0, 0, 0, 0, 0),
-(94, 0, 0, 0, 0, 0, 0),
-(95, 0, 0, 0, 0, 0, 0),
-(96, 0, 0, 0, 0, 0, 0),
-(97, 0, 0, 0, 0, 0, 0),
-(98, 0, 0, 0, 0, 0, 0),
-(99, 0, 0, 0, 0, 0, 0),
-(100, 0, 0, 0, 0, 0, 0),
-(101, 0, 0, 0, 0, 0, 0),
-(102, 0, 0, 0, 0, 0, 0),
-(103, 0, 0, 0, 0, 0, 0),
-(104, 0, 0, 0, 0, 0, 0),
-(105, 0, 0, 0, 0, 0, 0),
-(106, 0, 0, 0, 0, 0, 0),
-(107, 0, 0, 0, 0, 0, 0),
-(108, 0, 0, 0, 0, 0, 0),
-(109, 0, 0, 0, 0, 0, 0),
-(110, 0, 0, 0, 0, 0, 0),
-(111, 0, 0, 0, 0, 0, 0),
-(112, 0, 0, 0, 0, 0, 0),
-(113, 0, 0, 0, 0, 0, 0),
-(114, 0, 0, 0, 0, 0, 0),
-(115, 0, 0, 0, 0, 0, 0),
-(116, 0, 0, 0, 0, 0, 0),
-(117, 0, 0, 0, 0, 0, 0),
-(118, 0, 0, 0, 0, 0, 0),
-(119, 0, 0, 0, 0, 0, 0),
-(120, 0, 0, 0, 0, 0, 0),
-(121, 0, 0, 0, 0, 0, 0),
-(122, 0, 0, 0, 0, 0, 0),
-(123, 0, 0, 0, 0, 0, 0),
-(124, 0, 0, 0, 0, 0, 0),
-(125, 0, 0, 0, 0, 0, 0),
-(126, 0, 0, 0, 0, 0, 0),
-(127, 0, 0, 0, 0, 0, 0),
-(128, 0, 0, 0, 0, 0, 0),
-(129, 0, 0, 0, 0, 0, 0),
-(130, 0, 0, 0, 0, 0, 0),
-(131, 0, 0, 0, 0, 0, 0),
-(132, 0, 0, 0, 0, 0, 0),
-(133, 0, 0, 0, 0, 0, 0),
-(134, 0, 0, 0, 0, 0, 0),
-(135, 0, 0, 0, 0, 0, 0),
-(136, 0, 0, 0, 0, 0, 0),
-(137, 0, 0, 0, 0, 0, 0),
-(138, 0, 0, 0, 0, 0, 0),
-(139, 0, 0, 0, 0, 0, 0),
-(140, 0, 0, 0, 0, 0, 0),
-(141, 0, 0, 0, 0, 0, 0),
-(142, 0, 0, 0, 0, 0, 0);
+(71, 70, 4.4, 1.3, 96220, 338067117, 367500);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `labos_bases`
+--
+
+DROP TABLE IF EXISTS `labos_bases`;
+CREATE TABLE IF NOT EXISTS `labos_bases` (
+`id` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `pourcent_down` float NOT NULL,
+  `prix` int(11) NOT NULL,
+  `time_construct` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+
+--
+-- Contenu de la table `labos_bases`
+--
+
+INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_construct`) VALUES
+(1, 0, 3, 453, 0),
+(2, 1, 4.2, 1268, 84),
+(3, 2, 5.4, 2446, 336),
+(4, 3, 6.6, 3986, 756),
+(5, 4, 7.8, 5889, 1344),
+(6, 5, 9, 8154, 2100),
+(7, 6, 10.2, 10781, 3024),
+(8, 7, 11.4, 13771, 4116),
+(9, 8, 12.6, 17123, 5376),
+(10, 9, 13.8, 20838, 6804),
+(11, 10, 15, 24915, 8400),
+(12, 11, 16.2, 29354, 10164),
+(13, 12, 17.4, 34156, 12096),
+(14, 13, 18.6, 39320, 14196),
+(15, 14, 19.8, 44847, 16464),
+(16, 15, 21, 50736, 18900),
+(17, 16, 22.2, 56987, 21504),
+(18, 17, 23.4, 63601, 24276),
+(19, 18, 24.6, 70577, 27216),
+(20, 19, 25.8, 77916, 30324),
+(21, 20, 27, 85617, 33600),
+(22, 21, 28.2, 93680, 37044),
+(23, 22, 29.4, 102106, 40656),
+(24, 23, 30.6, 110894, 44436),
+(25, 24, 31.8, 120045, 48384),
+(26, 25, 33, 129558, 52500),
+(27, 26, 34.2, 139433, 56784),
+(28, 27, 35.4, 149671, 61236),
+(29, 28, 36.6, 160271, 65856),
+(30, 29, 37.8, 171234, 70644),
+(31, 30, 39, 182559, 75600),
+(32, 31, 40.2, 194246, 80724),
+(33, 32, 41.4, 206296, 86016),
+(34, 33, 42.6, 218708, 91476),
+(35, 34, 43.8, 231483, 97104),
+(36, 35, 45, 244620, 102900),
+(37, 36, 46.2, 258119, 108864),
+(38, 37, 47.4, 271981, 114996),
+(39, 38, 48.6, 286205, 121296),
+(40, 39, 49.8, 300792, 127764),
+(41, 40, 51, 315741, 134400),
+(42, 41, 52.2, 331052, 141204),
+(43, 42, 53.4, 346726, 148176),
+(44, 43, 54.6, 362762, 155316),
+(45, 44, 55.8, 379161, 162624),
+(46, 45, 57, 395922, 170100),
+(47, 46, 58.2, 413045, 177744),
+(48, 47, 59.4, 430531, 185556),
+(49, 48, 60.6, 448379, 193536),
+(50, 49, 61.8, 466590, 201684),
+(51, 50, 63, 485163, 210000),
+(52, 51, 64.2, 504098, 218484),
+(53, 52, 65.4, 523396, 227136),
+(54, 53, 66.6, 543056, 235956),
+(55, 54, 67.8, 563079, 244944),
+(56, 55, 69, 583464, 254100),
+(57, 56, 70.2, 604211, 263424),
+(58, 57, 71.4, 625321, 272916),
+(59, 58, 72.6, 646793, 282576),
+(60, 59, 73.8, 668628, 292404),
+(61, 60, 75, 690825, 302400),
+(62, 61, 76.2, 713384, 312564),
+(63, 62, 77.4, 736306, 322896),
+(64, 63, 78.6, 759590, 333396),
+(65, 64, 79.8, 783237, 344064),
+(66, 65, 81, 807246, 354900),
+(67, 66, 82.2, 831617, 365904),
+(68, 67, 83.4, 856351, 377076),
+(69, 68, 84.6, 881447, 388416),
+(70, 69, 85.8, 906906, 399924);
 
 -- --------------------------------------------------------
 
@@ -214,8 +238,9 @@ INSERT INTO `culture_vg` (`id`, `level`, `multi_prod`, `multi_prix`, `production
 -- Structure de la table `login`
 --
 
-CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE IF NOT EXISTS `login` (
+`id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `last_connect` varchar(50) NOT NULL,
@@ -226,7 +251,7 @@ CREATE TABLE `login` (
   `last_culture_vg` double NOT NULL,
   `last_usine_pg` double NOT NULL,
   `argent` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `login`
@@ -234,7 +259,8 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `last_culture_vg`, `last_usine_pg`, `argent`) VALUES
 (1, 'evengyl', 'legends', '1461504762', 0, 3, 12, 5, 41293.74, 5386.14, 0),
-(2, 'tara', '5515', '1461504762', 0, 3, 12, 15, 41293.74, 46679.88, 0);
+(2, 'tara', '5515', '1461504762', 0, 3, 12, 15, 41293.74, 46679.88, 0),
+(3, 'taratata', '55157141', '', 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -242,13 +268,14 @@ INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`,
 -- Structure de la table `news`
 --
 
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+`id` int(11) NOT NULL,
   `titre` text NOT NULL,
   `text` varchar(255) NOT NULL,
   `date_now` varchar(50) NOT NULL,
   `visible` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `news`
@@ -272,15 +299,16 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 -- Structure de la table `usine_pg`
 --
 
-CREATE TABLE `usine_pg` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `usine_pg`;
+CREATE TABLE IF NOT EXISTS `usine_pg` (
+`id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(20) NOT NULL,
   `time_construct` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Contenu de la table `usine_pg`
@@ -367,31 +395,37 @@ INSERT INTO `usine_pg` (`id`, `level`, `multi_prod`, `multi_prix`, `production`,
 -- Index pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `labos_bases`
+--
+ALTER TABLE `labos_bases`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -401,27 +435,32 @@ ALTER TABLE `usine_pg`
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+--
+-- AUTO_INCREMENT pour la table `labos_bases`
+--
+ALTER TABLE `labos_bases`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

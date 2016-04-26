@@ -7,14 +7,7 @@
 				<img class="img-responsive" src="../public/images/plantes.png">
 			</div>
 
-			<div class="col-lg-8 hitsoire">
-				<h3 class="title">Petite histoire : </h3>
-				<span>Le propylène glycol (PG) ou propane-1,2-diol appelé aussi dihydroxypropane, 
-					méthyl glycol est un diol utilisé dans de nombreux usages industriels
-					 et pharmaceutiques ou agropharmaceutiques (solvant de pesticides), à faible dose comme
-					  additif alimentaire et depuis peu dans les cigarettes électroniques (liquide à vapoter).
-					   Il est issu à faible coût de la carbochimie, et généralement de la pétrochimie.</span>
-			</div>
+
 			<div class="col-lg-8 explication pull-right">
 				<h3 class="title">Explication : </h3>
 				<span>Dans Diy_n_game, les ressources principales nécessaires pour votre développement est les champs et glycérole et les usines qui vont manufacturer 
@@ -25,16 +18,16 @@
 			</div>
 
 			<div class="col-lg-8 pull-right ressource_now">
-				<h3 class="title">Actuellement vos usines vous rapporte :</h3>
+				<h3 class="title">Actuellement vos Labos diminue vos prix de fabrication de :</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
 					<tr class="success" style="color:black;">
-						<th>Nombres d'usines :</th><td><b><? echo $user->user_infos->level_usine_pg; ?></b> Usines améliores votre qunatité de Propylène</td>
+						<th>Nombres des champs :</th><td><b><? echo $user->user_infos->level_culture_vg; ?></b> Champs améliores votre qunatité de glycérole</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Production :</th><td><b><? echo $user->usine_pg->production; ?></b> / Littres de Propylène brut / heure</td>
+						<th>Production :</th><td><b><? echo $user->culture_vg->production; ?></b> / Plantes de Glycérole / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_pg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
+						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->culture_vg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;"><?
 			 			if($in_make == 1)
@@ -48,7 +41,7 @@
 			 			else if($in_make == 2)
 			 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
 			 			else
-			 				echo "<th><td><a class='btn btn-primary' href='?page=usine_propylene&construct=level_usine_pg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
+			 				echo "<th><td><a class='btn btn-primary' href='?page=champ_glycerine&construct=level_culture_vg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
 			 					
 					</tr>
 				</table>
