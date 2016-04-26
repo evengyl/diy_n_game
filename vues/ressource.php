@@ -21,7 +21,7 @@ if(Config::$is_connect == 1)
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    	<div class=" navbar-collapse collapse" id="nav_primal">
 		    		
-		    		<div class="col-lg-3">
+		    		<div class="col-lg-4">
 				      	<ul class="col-lg-12 nav navbar-nav">
 					        <li class="col-lg-6">
 					        	<a href="">
@@ -51,7 +51,7 @@ if(Config::$is_connect == 1)
 					    </ul>
 				    </div>
 
-				    <div class="col-lg-5">
+				    <div class="col-lg-4">
 					    <ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
