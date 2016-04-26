@@ -31,7 +31,7 @@ $route = new router();?>
 <body>
 
 	__MOD_header__
-	
+
 	<!--<div class='col-lg-2'>Nouveautés, mises a jour et réseaux sociaux</div>-->	
 	<? $route->router($_GET); ?>
 		

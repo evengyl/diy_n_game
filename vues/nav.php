@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-12 col-md-2 col-without-padding">
+<div class="col-xs-12 col-sm-12 col-md-2">
 	<div class="col-lg-12 col-without-padding">
 		<nav class="navbar">
 			<div class="container-fluid nav_game col-without-padding">
