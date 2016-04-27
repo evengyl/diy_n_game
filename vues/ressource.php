@@ -118,7 +118,7 @@ if(Config::$is_connect == 1)
 		</div>
 	</div>
 </div>
-<div class="logo_ressource col-lg-12">
+<div class="logo_ressource col-lg-6 col-lg-offset-3">
 	<a style="cursor:pointer;" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" data-target="#menu_ressource">
 		<span class="" style="position:absolute; left:45%;">Voir le détails de vos ressources</span>
 		<center><img style="display:inline-block;" src="images/bouton-collapse-ressource.png"></center>
