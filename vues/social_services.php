@@ -1,4 +1,4 @@
-<div class="col-lg-2">
+<div class="col-lg-12">
 	<div class="col-xs-12" style="background:#232D3B; color:white;">
 		ici on mettre les broles pour les médias, les news et les trip astuce et bonus	
 <?		

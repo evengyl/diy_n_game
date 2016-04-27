@@ -6,15 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="author" content="Baudoux Loïc" />
 	<script type="text/javascript" type="../public/js/less-1.7.4.min.js"></script>
+	<script type="text/javascript" src="../public/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../public/js/animo.js"></script>	
+	<script type="text/javascript" src="../public/js/modernizr.custom.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css"/>
-	<!--<link rel="stylesheet" type="text/css" href="../public/css/style.css"/>-->
 	<link rel="stylesheet/less" type="text/css" href="../public/css/style.less" />
 	<link rel="stylesheet" type="text/css" href="../public/css/lightbox.css"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="../public/js/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="../public/js/animo/animo.js"></script>	
-	<link rel="stylesheet" type="text/css" href="../public/js/animo/animate-animo.css"/>
+	<link rel="stylesheet" type="text/css" href="../public/css/animate-animo.css"/>
+	
 
 
 

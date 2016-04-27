@@ -3,6 +3,10 @@ if(Config::$is_connect == 1)
 {?>
 
 
+
+
+
+<div class="collapse col-lg-12" id="menu_ressource">
 	<div class="col-xs-12 col-without-padding">
 		<div class="col-lg-12 col-without-padding">
 			<nav class="navbar navbar-default nav_primal">
@@ -21,7 +25,7 @@ if(Config::$is_connect == 1)
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    	<div class=" navbar-collapse collapse" id="nav_primal">
 		    		
-		    		<div class="col-lg-4">
+		    		<div class="col-lg-4 col-without-padding">
 				      	<ul class="col-lg-12 nav navbar-nav">
 					        <li class="col-lg-6">
 					        	<a href="">
@@ -51,7 +55,7 @@ if(Config::$is_connect == 1)
 					    </ul>
 				    </div>
 
-				    <div class="col-lg-4">
+				    <div class="col-lg-4 col-without-padding">
 					    <ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
@@ -82,7 +86,7 @@ if(Config::$is_connect == 1)
 				        </ul>
 				    </div>
 
-			        <div class="col-lg-2">
+			        <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
@@ -99,7 +103,7 @@ if(Config::$is_connect == 1)
 					    </ul>
 					</div>
 
-				    <div class="col-lg-2">
+				    <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
@@ -109,13 +113,22 @@ if(Config::$is_connect == 1)
 					        </li>
 				      	</ul>
 			      	</div>
-
 	    		</div><!-- /.navbar-collapse -->
-  			</div><!-- /.container-fluid -->
-		</nav>
+			</nav>
+		</div>
 	</div>
 </div>
 
+
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-xs-12">
+						<div class="col-xs-12">
+							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#menu_ressource" aria-expanded="false" aria-controls="collapseExample">
+							  Voir le détails de vos ressources
+							</button>
+						</div>
+					</div>
+				</div>
 
 
 <?

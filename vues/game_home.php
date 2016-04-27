@@ -1,10 +1,11 @@
-<div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
+<div class="col-xs-12 col-without-padding col-without-radius content_game">
 	__TPL_nav__
 
 
 	
 
-	<div class="col-xs-12 col-md-10 col-lg-8">
+	<div class="col-xs-12 col-md-9">
+
 		<div class="collapse col-lg-12" id="culture_vg">
 			<div class="thumbnail col-xs-12" style="background:#232D3B; margin-top:10px;">
 				<h2 style="font-size:24px; margin-top:0px; color:white;" class="col-xs-12">Culture VG</h2>
@@ -86,59 +87,72 @@
 		</div>
 
 
+
 		<div class="col-lg-12" style="margin-bottom:15px;">
-			<div class="col-lg-12" style="background:#232D3B; box-shadow:4px 3px 15px #232D3B;">
-				<h1 class='col-xs-12 title' style="border-bottom:5px solid #EF4224; margin-bottom:15px; ">
-					Listes des batiments de production, pour une vues plus éclatées, passer par le menu de gauche
+			<div class="col-lg-12" style="background:#232D3B;">
+				<h1 class='col-xs-12 title' style="margin-bottom:15px; ">
+					Listes des batiments de production, pour une vues plus précises, passer par le menu de gauche
 				</h1>
 
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail col-xs-12">
-						<div class="col-xs-12">
-							<h2 style="font-size:18px; padding-right:0px; padding-left:0px; margin-top:0px;" class="col-xs-12">Culture VG</h2>
-							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#culture_vg" aria-expanded="false" aria-controls="collapseExample">
-							  Voir en détails
-							</button>
-						</div>
-					</div>
-				</div>
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<figcaption>
+								<h3>Culture VG</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br>425692</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br>1526301</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br>14h 15m</li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
 
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail col-xs-12">
-						<div class="col-xs-12">
-							<h2 style="font-size:18px; padding-right:0px; padding-left:0px; margin-top:0px;" class="col-xs-12">Usine PG</h2>
-							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#usines_pg" aria-expanded="false" aria-controls="collapseExample">
-							  Voir en détails
-							</button>
-						</div>
-					</div>
-				</div>
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<figcaption>
+								<h3>Settings</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br>425692</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br>1526301</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br>14h 15m</li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
 
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail col-xs-12">
-						<div class="col-xs-12">
-							<h2 style="font-size:18px; padding-right:0px; padding-left:0px; margin-top:0px;" class="col-xs-12">Labos des bases</h2>
-							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#labos_base" aria-expanded="false" aria-controls="collapseExample">
-							  Voir en détails
-							</button>
-						</div>
-					</div>
-				</div>
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<figcaption>
+								<h3>Settings</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br>425692</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br>1526301</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br>14h 15m</li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
 
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail col-xs-12">
-						<div class="col-xs-12">
-							<h2 style="font-size:18px; padding-right:0px; padding-left:0px; margin-top:0px;" class="col-xs-12">Mélangeur</h2>
-							<center><img style="max-height:150px;" src="../public/images/plantes.png" alt="..." class="img-circle img-responsive"></center>
-							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#melange_base" aria-expanded="false" aria-controls="collapseExample">
-							  Voir en détails
-							</button>
-						</div>
-					</div>
-				</div>
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<figcaption>
+								<h3>Settings</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br>425692</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br>1526301</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br>14h 15m</li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
 
 
 			</div>
@@ -157,11 +171,12 @@
 			</h3>
 		</div>
 
+
+
+
+
+
 	</div>
-
-	__MOD_social_services__
-
-
 </div>
 
 
