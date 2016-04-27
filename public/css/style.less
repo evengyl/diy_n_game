@@ -9,6 +9,12 @@
 	src:url('../fonts/cookies&milk-regular.ttf');
 }
 
+@font-face
+{
+	font-family:'secrcode';
+	src:url('../fonts/secrcode.ttf');
+}
+
 @orange: #FF7F00;
 @rouge: #CD4436;
 @bleu: #0E83CD;
@@ -178,8 +184,8 @@ hr
 
 .title
 {
-	font-family:'milk';
-	font-size: 30px;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 20px;
 	margin-top:0px;
 	margin-bottom:0px;
 	padding-top: 7px;
@@ -374,7 +380,7 @@ hr
 
 
 
-
+/* partie thumb nail page game home */
 .grid li {
 	display: inline-block;
 	margin: 0;
@@ -398,9 +404,9 @@ hr
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 20px;
+	padding: 10px;
 	background: #2c3f52;
-	color: #ed4e6e;
+	color: @orange;
 }
 
 .grid figcaption h3 {
@@ -503,6 +509,8 @@ hr
 		min-width: 300px;
 	}
 }
+
+
 
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
