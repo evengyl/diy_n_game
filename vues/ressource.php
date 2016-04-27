@@ -6,10 +6,10 @@ if(Config::$is_connect == 1)
 
 
 
-<div class="collapse col-lg-12" id="menu_ressource">
+<div class="collapse col-lg-12 col-without-padding" id="menu_ressource">
 	<div class="col-xs-12 col-without-padding">
 		<div class="col-lg-12 col-without-padding">
-			<nav class="navbar navbar-default nav_primal">
+			<nav class="navbar navbar-default nav_primal" style="border-top:0px; margin-bottom:0px; border-bottom:1px solid #FF7F00;">
 		  		<div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    		<div class="navbar-header">
@@ -118,18 +118,11 @@ if(Config::$is_connect == 1)
 		</div>
 	</div>
 </div>
-
-
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail col-xs-12">
-						<div class="col-xs-12">
-							<button class="col-xs-12 btn btn-primary" type="button" data-toggle="collapse" data-target="#menu_ressource" aria-expanded="false" aria-controls="collapseExample">
-							  Voir le détails de vos ressources
-							</button>
-						</div>
-					</div>
-				</div>
-
-
+<div class="logo_ressource col-lg-12">
+	<a style="cursor:pointer;" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" data-target="#menu_ressource">
+		<span class="" style="position:absolute; left:45%;">Voir le détails de vos ressources</span>
+		<center><img style="display:inline-block;" src="images/bouton-collapse-ressource.png"></center>
+	</a>
+</div>
 <?
 }?>

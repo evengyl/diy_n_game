@@ -1,6 +1,6 @@
 <div class="col-xs-12 col-without-padding">
 	<div class="col-lg-12 col-without-padding">
-		<nav style="<?php echo(Config::$is_connect == 1)?'margin-bottom:1px;' :''; ?>" class="navbar navbar-default nav_primal">
+		<nav style="margin-bottom:0px;" class="navbar navbar-default nav_primal">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">

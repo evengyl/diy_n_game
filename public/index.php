@@ -37,6 +37,8 @@ $route = new router();?>
 		
 	<!--<div class='col-lg-2'>Pub, ticket a gratter toute les heures, concours ext ext/div>-->	
 	__TPL_bottom_head__
+
+	__TPL_footer__
 	
 </body>
 </html>
