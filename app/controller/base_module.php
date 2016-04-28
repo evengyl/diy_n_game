@@ -99,7 +99,7 @@ Class base_module extends all_query
 
 	public function generate_breadcrumb($referer = array())
 	{
-		$title_page = "";
+		/*$title_page = "";
 		$number_separate =  count($referer)-1;
 
 		foreach($referer as $row => $values)
@@ -108,7 +108,7 @@ Class base_module extends all_query
 			if($number_separate > 0)
 				$title_page .= " > ";
 			$number_separate--;
-		}
-		return "<h1 class='col-xs-12 title'>".$title_page."</h1>";
+		}*/
+		return $referer;
 	}
 }
