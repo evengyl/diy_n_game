@@ -4,7 +4,7 @@
 
 		<div class="col-lg-12" style="background:#232D3B; min-height:600px;">
 			<div class="col-lg-4">
-				<img class="img-responsive" src="../public/images/plantes.png">
+				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/plantes.png">
 			</div>
 
 			<div class="col-lg-8 hitsoire">

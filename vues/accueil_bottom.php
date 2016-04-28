@@ -1,7 +1,7 @@
 <div class="col-lg-12 bottom-accueil">
 	<center>
 		<div class="col-lg-3">
-			<img src="../public/images/culture.jpg" width="250" height="250" alt="..." class="img-circle">
+			<img src="<?= Config::$path_public; ?>/images/culture.jpg" width="250" height="250" alt="image d'herbe" class="img-circle">
 			<br>
 			<h3>Developper et Cultiver vos ressources de bases, VG, PG, Aromes Naturel !</h3>
 			<h4>En augmentant les niveaux de vos champs et de vos entreprise vous developperer 
@@ -10,7 +10,7 @@
 	</center>
 	<center>
 		<div class="col-lg-3">
-			<img src="../public/images/fiole.jpg" width="250" height="250" alt="..." class="img-circle">
+			<img src="<?= Config::$path_public; ?>/images/fiole.jpg" width="250" height="250" alt="Fiole vide" class="img-circle">
 			<br>
 			<h3>Acheter des labos pour transformer vos ressources en bases a vaper !</h3>
 			<h4>Les laboratoires de transformations vous permettra de transformer vos
@@ -20,7 +20,7 @@
 	</center>
 	<center>
 		<div class="col-lg-3">
-			<img src="../public/images/bouteille-liquide.png" width="250" height="250" alt="..." class="img-circle">
+			<img src="<?= Config::$path_public; ?>/images/bouteille-liquide.png" width="250" height="250" alt="Bouteille avec liquide" class="img-circle">
 			<br>
 			<h3>Confectionner vos E-liquide et acheter des Shop pour les vendres !</h3>
 			<h4>Vous aurez a votre disposition une belle gamme de ressources a debloquer,
@@ -31,7 +31,7 @@
 	</center>
 	<center>
 		<div class="col-lg-3">
-			<img src="../public/images/shop.jpg" width="250" height="250" alt="..." class="img-circle">
+			<img src="<?= Config::$path_public; ?>/images/shop.jpg" width="250" height="250" alt="Images de shop" class="img-circle">
 			<br>
 			<h3>Devenez simplement le meilleur des shops !</h3>
 			<h4>Un classement general des shop sera mis a jour quotidiennement en fonction de vos monnaies investie et de votre rentabilite</h4>
@@ -40,7 +40,7 @@
 </div>
 
 <div class"col-lg-12">
-	<center><img src="../public/images/infographic01.png"></center>
+	<center><img src="<?= Config::$path_public; ?>/images/infographic01.png"></center>
 </div>
 <!--
 <div class="col-lg-8 col-lg-offset-2" style="margin-top:15px;">
@@ -49,7 +49,7 @@
 	    <div class="thumbnail" style="background:transparent; border:none;">
 	      <div class="">
 	        <center><h3>Sans frais sans prise de tête</h3></center>
-	        <center><img src="../public/images/tete.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
+	        <center><img src="<?= Config::$path_public; ?>/images/tete.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
 	        <p style="text-align:center;">Aucuns frais ne vous sera demandé de le jeu, rien ne sera payant, mes seuls avantages seront vos dons si vous le voulez.</p>
 	      </div>
 	    </div>
@@ -59,7 +59,7 @@
 	    <div class="thumbnail" style="background:transparent; border:none;">
 	      <div class="">
 	        <center><h3>Conçus par un vapoteur</h3></center>
-	        <center><img src="../public/images/ecig.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
+	        <center><img src="<?= Config::$path_public; ?>/images/ecig.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
 	        <p style="text-align:center;">Tout ce que je fais et ce que je ferai sera et restera pour les vapoteurs, une sorte de divertissement entre deux juices !</p>
 	      </div>
 	    </div>
@@ -69,7 +69,7 @@
 	    <div class="thumbnail" style="background:transparent; border:none;">
 	      <div class="">
 	        <center><h3>Sans but lucratif</h3></center>
-	        <center><img src="../public/images/lucratif.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
+	        <center><img src="<?= Config::$path_public; ?>/images/lucratif.png" alt="..." style="max-height:150px;" class="img-responsive"></center>
 	        <p style="text-align:center;">Jamais je ne vendrai ni n'essaierai de trouver quelques rentabilités dans le jeu.</p>
 	      </div>
 	    </div>

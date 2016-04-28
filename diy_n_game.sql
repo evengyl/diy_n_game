@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 26 Avril 2016 à 08:05
--- Version du serveur :  5.6.20
--- Version de PHP :  5.5.15
+-- Généré le :  Jeu 28 Avril 2016 à 21:26
+-- Version du serveur :  10.1.9-MariaDB
+-- Version de PHP :  5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `diy_n_game`
@@ -29,24 +29,19 @@ USE `diy_n_game`;
 --
 
 DROP TABLE IF EXISTS `construction_en_cours`;
-CREATE TABLE IF NOT EXISTS `construction_en_cours` (
-`id` int(11) NOT NULL,
+CREATE TABLE `construction_en_cours` (
+  `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(20) NOT NULL,
   `time_finish` bigint(20) NOT NULL,
   `time_to_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `construction_en_cours`
+-- Vider la table avant d'insérer `construction_en_cours`
 --
 
-INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`, `time_to_finish`) VALUES
-(21, 1, 'level_culture_vg', 1461509273, 0),
-(22, 1, 'level_usine_pg', 1461509273, 0),
-(23, 2, 'level_culture_vg', 1461509273, 0),
-(24, 2, 'level_usine_pg', 1461509273, 0);
-
+TRUNCATE TABLE `construction_en_cours`;
 -- --------------------------------------------------------
 
 --
@@ -54,16 +49,21 @@ INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_fin
 --
 
 DROP TABLE IF EXISTS `culture_vg`;
-CREATE TABLE IF NOT EXISTS `culture_vg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `culture_vg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(11) NOT NULL,
   `time_construct` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Vider la table avant d'insérer `culture_vg`
+--
+
+TRUNCATE TABLE `culture_vg`;
 --
 -- Contenu de la table `culture_vg`
 --
@@ -148,14 +148,19 @@ INSERT INTO `culture_vg` (`id`, `level`, `multi_prod`, `multi_prix`, `production
 --
 
 DROP TABLE IF EXISTS `labos_bases`;
-CREATE TABLE IF NOT EXISTS `labos_bases` (
-`id` int(11) NOT NULL,
+CREATE TABLE `labos_bases` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `pourcent_down` float NOT NULL,
   `prix` int(11) NOT NULL,
   `time_construct` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Vider la table avant d'insérer `labos_bases`
+--
+
+TRUNCATE TABLE `labos_bases`;
 --
 -- Contenu de la table `labos_bases`
 --
@@ -239,8 +244,8 @@ INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_constru
 --
 
 DROP TABLE IF EXISTS `login`;
-CREATE TABLE IF NOT EXISTS `login` (
-`id` int(11) NOT NULL,
+CREATE TABLE `login` (
+  `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `last_connect` varchar(50) NOT NULL,
@@ -248,19 +253,26 @@ CREATE TABLE IF NOT EXISTS `login` (
   `level` int(11) NOT NULL,
   `level_culture_vg` int(11) NOT NULL,
   `level_usine_pg` int(11) NOT NULL,
+  `level_labos_bases` int(11) NOT NULL,
   `last_culture_vg` double NOT NULL,
   `last_usine_pg` double NOT NULL,
+  `last_labos_bases` float NOT NULL,
   `argent` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Vider la table avant d'insérer `login`
+--
+
+TRUNCATE TABLE `login`;
 --
 -- Contenu de la table `login`
 --
 
-INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `last_culture_vg`, `last_usine_pg`, `argent`) VALUES
-(1, 'evengyl', 'legends', '1461504762', 0, 3, 12, 5, 41293.74, 5386.14, 0),
-(2, 'tara', '5515', '1461504762', 0, 3, 12, 15, 41293.74, 46679.88, 0),
-(3, 'taratata', '55157141', '', 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `last_labos_bases`, `argent`) VALUES
+(1, 'evengyl', 'legends', '1461867089', 0, 3, 13, 6, 12, 207964.16, 27125.76, 17.4, 0),
+(2, 'tara', '5515', '1461867089', 0, 3, 13, 16, 12, 207964.16, 235089.92, 17.4, 0),
+(3, 'taratata', '55157141', '1461867089', 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -269,14 +281,19 @@ INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`,
 --
 
 DROP TABLE IF EXISTS `news`;
-CREATE TABLE IF NOT EXISTS `news` (
-`id` int(11) NOT NULL,
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
   `titre` text NOT NULL,
   `text` varchar(255) NOT NULL,
   `date_now` varchar(50) NOT NULL,
   `visible` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Vider la table avant d'insérer `news`
+--
+
+TRUNCATE TABLE `news`;
 --
 -- Contenu de la table `news`
 --
@@ -300,16 +317,21 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 --
 
 DROP TABLE IF EXISTS `usine_pg`;
-CREATE TABLE IF NOT EXISTS `usine_pg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `usine_pg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `multi_prod` float NOT NULL,
   `multi_prix` float NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(20) NOT NULL,
   `time_construct` bigint(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Vider la table avant d'insérer `usine_pg`
+--
+
+TRUNCATE TABLE `usine_pg`;
 --
 -- Contenu de la table `usine_pg`
 --
@@ -395,37 +417,37 @@ INSERT INTO `usine_pg` (`id`, `level`, `multi_prod`, `multi_prix`, `production`,
 -- Index pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `login`
 --
 ALTER TABLE `login`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `news`
 --
 ALTER TABLE `news`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -435,32 +457,32 @@ ALTER TABLE `usine_pg`
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
 ALTER TABLE `news`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

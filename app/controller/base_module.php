@@ -92,7 +92,42 @@ Class base_module extends all_query
 	}
 
 
+	protected function check_construction_en_cours($user, $var_in_match, $name_batiment_from_controller = "")
+	{
+		$req_sql = ("SELECT * FROM construction_en_cours WHERE id_user = '".$user->user_infos->id."'");
+		$res_sql = $this->other_query($req_sql);
 
+		if(!empty($res_sql))
+		{	
+		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans		
+			foreach($res_sql as $row_construct)
+			{
+				if($row_construct->name_batiment == $var_in_match)
+				{
+					//on viens de lancer l'appel pour mettre en route une construction
+					$this->alert_construction_en_cours = 1;
+				}
+				else if($row_construct->name_batiment == $name_batiment_from_controller)
+				{
+					//la consctruction était déjà lancée quand le joueur c'est logger
+					$this->alert_construction_en_cours = 1;	
+				}
+			}			
+		}
+		else
+		{
+								//mais avant ça on va vérifié si il a l'argent nécessaire
+			if($user->user_infos->argent >= $user->culture_vg->prix)
+			{
+				$this->alert_construction_en_cours = 0;
+			}
+			else
+			{
+				//2 egale que on a pas l'argent
+				$this->alert_construction_en_cours = 2;	
+			}
+		}
+	}
 
 
 	

@@ -10,6 +10,7 @@ Class user extends all_query
 	public $user_infos;
 	public $culture_vg;
 	public $usine_pg;
+	public $labos_bases;
 	public $time_now;
 
 	public function __construct()
@@ -62,6 +63,15 @@ Class user extends all_query
 				foreach($res_fx[0] as $key => $values)
 				{
 					$this->usine_pg->$key = $values;
+				}
+				unset($res_fx);
+
+				$this->labos_bases = new stdClass();
+				$req_sql_labos_bases = "SELECT * FROM labos_bases WHERE level = '".$this->user_infos->level_labos_bases."'";
+				$res_fx = $this->other_query($req_sql_labos_bases);
+				foreach($res_fx[0] as $key => $values)
+				{
+					$this->labos_bases->$key = $values;
 				}
 				unset($res_fx);
 

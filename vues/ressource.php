@@ -29,26 +29,26 @@ if(Config::$is_connect == 1)
 				      	<ul class="col-lg-12 nav navbar-nav">
 					        <li class="col-lg-6">
 					        	<a href="">
-					        		<img src="../public/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
 					        		<span style="font-size:10px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
 					        	</a>
 					        </li>
 					        <li class="col-lg-6">
 					        	<a href="">
-					        		<img src="../public/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
 					        		<span style="font-size:10px;">Littres : 000</span>
 					        	</a>
 					        </li>
 
 					        <li class="col-lg-6">
 					        	<a href="">
-					        		<img src="../public/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
 					        	</a>
 					        </li>
 					        <li class="col-lg-6">
 					        	<a href="">
-					        		<img src="../public/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Littres : 000</span>
 					        	</a>
 					        </li>
@@ -59,13 +59,13 @@ if(Config::$is_connect == 1)
 					    <ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Bases 20VG/80PG : 000</span>
 					        	</a>
 					        </li>
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Bases 50VG/50PG : 000</span>
 					        	</a>
 					        </li>
@@ -73,13 +73,13 @@ if(Config::$is_connect == 1)
 			        	<ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Bases 80VG/20PG : 000</span>
 					        	</a>
 					        </li>
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
 					        		<span style="font-size:10px;">Bases 100VG : 000</span>
 					        	</a>
 					        </li>
@@ -90,13 +90,13 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
 					        		<span style="font-size:10px;">Nombres de flacons Vides : 000</span>
 					        	</a>
 					        </li>
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
 					        		<span style="font-size:10px;">Nombres de flacons rempli : 000</span>
 					        	</a>
 					        </li>
@@ -107,7 +107,7 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12">
 					        	<a href="">
-					        		<img src="../public/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
+					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
 					        		<span style="font-size:10px;">Argent : 000 €</span>
 					        	</a>
 					        </li>

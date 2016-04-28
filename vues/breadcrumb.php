@@ -1,3 +1,1 @@
-<?
-
-echo $breadcrumb;
+<? echo $breadcrumb;

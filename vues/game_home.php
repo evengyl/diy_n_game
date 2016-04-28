@@ -13,7 +13,7 @@
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
-							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:20px;">Culture VG</h3>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
@@ -28,7 +28,7 @@
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
-							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:20px;">Settings</h3>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
@@ -43,7 +43,7 @@
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
-							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:20px;">Settings</h3>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
@@ -58,7 +58,7 @@
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
-							<div><img src="images/plante_icon.png" alt="img04"></div>
+							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:20px;">Settings</h3>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
