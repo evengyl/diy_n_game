@@ -50,6 +50,7 @@ Class base_module extends all_query
 		$req_sql->ctx->argent = $argent_after;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
+		$this->user_obj->set_variable_user();
 	}
 
 
@@ -152,11 +153,23 @@ Class base_module extends all_query
 					//la consctruction était déjà lancée quand le joueur c'est logger
 					return 1;	
 				}
-			}			
+												//mais avant ça on va vérifié si il a l'argent nécessaire
+
+				else if($this->user_obj->user_infos->argent >= $prix_level_up)
+				{
+					return 0;
+				}
+				else
+				{
+					//2 egale que on a pas l'argent
+					return 2;	
+				}
+			}			 
 		}
 		else
 		{
 								//mais avant ça on va vérifié si il a l'argent nécessaire
+
 			if($this->user_obj->user_infos->argent >= $prix_level_up)
 			{
 				return 0;
