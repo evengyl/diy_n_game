@@ -2,7 +2,7 @@
 
 Class sign_up extends base_module
 {
-	public $test;
+	public $time_now;
 	public function __construct($module_tpl_name)
 	{		
 
@@ -16,17 +16,18 @@ Class sign_up extends base_module
 	}
 
 
-	public function doIt($post){
+	public function doIt($post)
+	{
 		if(isset($post['return_form_complet'])) //on s'assure qu'aucun erreur est générée si pas logged
 		{
 			if($post['return_form_complet'] == 14175155)
 			{
-			    if(isset($_POST["pseudo"]) && isset($_POST["password-1"]) && isset($_POST["password-2"]) && isset($_POST["email"]))
+			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = $this->check_post_sign_up($_POST['pseudo']);
-			    	$password = $this->check_post_sign_up($_POST['password-1']);
-			    	$password_verification = $this->check_post_sign_up($_POST['password-2']);
-			    	$email = $this->check_post_sign_up($_POST['email']);
+			    	$pseudo = $this->checkpost_sign_up($post['pseudo']);
+			    	$password = $this->checkpost_sign_up($post['password-1']);
+			    	$password_verification = $this->checkpost_sign_up($post['password-2']);
+			    	$email = $this->checkpost_sign_up($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -37,15 +38,16 @@ Class sign_up extends base_module
 			    	{
 			    		$_SESSION['error'] = "Les mots de passe ne correspondent pas.";
 			    		return 0;
-			    	}else
+			    	}
+			    	else
 			    	{	
-			    		$time_now = $this->set_time_now();
+			    		$this->time_now = $this->set_time_now();
 			    		$password = hash("sha256", $password);
 			    		$req_sql = new stdClass;
 						$req_sql->ctx = new stdClass;
 						$req_sql->ctx->login = $pseudo;
 						$req_sql->ctx->password = $password;
-						$req_sql->ctx->last_connect = $time_now;
+						$req_sql->ctx->last_connect = $this->time_now;
 						$req_sql->table = "login";
 
 						$this->insert_into($req_sql);
@@ -55,7 +57,7 @@ Class sign_up extends base_module
 		                $_SESSION['last_connect'] = $time_now;
 		                
 			    		unset($_SESSION['error']);
-			            unset($_POST);
+			            unset($post);
 
 			            return 1;
 			    	}	        
@@ -80,7 +82,7 @@ Class sign_up extends base_module
 			return 1;
 		else
 		{
-			//$error[] = "Attention, Vous n'êtes pas logger";
+			unset($_SESSION["error"]);
 			return 0;
 		}
 	}
@@ -101,7 +103,8 @@ Class sign_up extends base_module
 
 	}
 
-	public function set_time_now(){
+	public function set_time_now()
+	{
 		return date("U");
 	}
 

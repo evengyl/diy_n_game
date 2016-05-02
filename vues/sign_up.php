@@ -7,7 +7,6 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 }
 else
 {?>
-
 	<div class="col-lg-12 col-without-padding connect-form" style="margin-top:25px;">	
 		<div class="col-lg-12" style="padding:15px;">
 			Vous inscrire vous permettra d'accèder au jeu, 
@@ -25,17 +24,14 @@ else
 			</div>
 
 			<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 				<input name="password-1" type="password" class="form-control " required placeholder="Mot de passe">
 			</div>
 
 			<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 				<input name="password-2" type="password" class="form-control " required placeholder="Confirmer le mot de passe">
 			</div>
 
 			<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 				<input name="email" type="mail" class="form-control " required placeholder="Adresse Email (pas de pub)">
 			</div>
 			
@@ -44,6 +40,7 @@ else
 
 		</form>
 	</div><?
+	unset($_SESSION['error']); // permet de ne pas afficher les erreurs de connection si on reload la page
 }
 
 
