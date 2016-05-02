@@ -145,18 +145,8 @@ class all_query extends _db_connect
 
 		$key_all = substr($key_all,2);
 
-		if(isset($res_sql->date))
-		{
-			$key_all = $key_all.", date";
-			$value_all = $value_all.", '".$res_sql->date."'";
-			$value_all = substr($value_all,2);
-			$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
-		}
-		else
-		{
-			$value_all = substr($value_all,2);
-			$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
-		}
+		$value_all = substr($value_all,2);
+		$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
 
 		parent::query($req_sql);
 

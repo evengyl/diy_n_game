@@ -13,8 +13,8 @@ if(!isset($_GET['page']))
 
 
 //ou il va recevoir 0 ou 1 cela dépend de la secu
-$login = new login("");
-Config::$is_connect = $login->check_session($_POST);
+$login = new login("", "", $_POST);
+
 
 
 		//si le joueur est connecter on arrive sur la page de jeu

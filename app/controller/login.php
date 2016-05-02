@@ -2,11 +2,13 @@
 
 Class login extends base_module
 {
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, $t="",$post = array())
 	{		
 		if($module_tpl_name != "")
 			parent::__construct($module_tpl_name);
 
+		
+			config::$is_connect = $this->check_session($post);
 
 
 		if($module_tpl_name != "")
@@ -22,10 +24,10 @@ Class login extends base_module
 		{
 			if($post['return_form_complet'] == 55157141)
 			{
-			    if(isset($_POST["pseudo"]) && isset($_POST["password"]))
+			    if(isset($post["pseudo"]) && isset($post["password"]))
 			    {
-			    	$pseudo = $this->check_post_login($_POST['pseudo']);
-			    	$password = $this->check_post_login($_POST['password']);
+			    	$pseudo = $this->check_post_login($post['pseudo']);
+			    	$password = $this->check_post_login($post['password']);
 
 
 			    	if($pseudo == '0'|| $password == '0')
@@ -47,6 +49,7 @@ Class login extends base_module
 			            else if($res_fx->password == $password)
 			            {
 			            	unset($_SESSION['error']);
+			            	unset($post);
 			            	unset($_POST);
 			                $_SESSION['pseudo'] = $res_fx->login;
 			                $_SESSION['level'] = $res_fx->level;
@@ -83,6 +86,7 @@ Class login extends base_module
 		else
 		{
 			//$error[] = "Attention, Vous n'êtes pas logger";
+			$_SESSION['error'] = 'Formulaire mal rempli';
 			return 0;
 		}
 			
