@@ -46,7 +46,7 @@ Class login extends base_module
 			                $_SESSION['error'] = 'Login incorrect !';
 			                return 0;
 			            }
-			            else if($res_fx->password == $password)
+			            else if(password_verify($password,$res_fx->password))
 			            {
 			            	unset($_SESSION['error']);
 			            	unset($post);

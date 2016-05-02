@@ -2,7 +2,11 @@
 if(isset($_SESSION['pseudo'])) //donc il est connecté
 {?>
 	<div class="col-lg-12 col-without-padding connect-form">		
-		<p class="bg-success">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
+		<?php if(isset($_SESSION['success'])){
+			echo '<p class="bg-success">'.$_SESSION['success'].'</p>';
+			unset($_SESSION['success']);
+		} ?>
+		<p class="bg-info" style="text-align: center;font-size:20px;color:black">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
 	</div><?
 }
 else
@@ -12,7 +16,7 @@ else
 			Vous inscrire vous permettra d'accèder au jeu, 
 			pour rappel, ce petit jeu est entierement conçu à la main sans programmes ni personnes extérieur,</br>
 			pour plus de renseignement, veuiller lire la charte accessible à partir du menu, ou prendre contact avec Evengyl, par ici
-			<a href="?page=contact">Conacter-moi</a>.</br>
+			<a href="?page=contact">Contactez-moi</a>.</br>
 			Si vous avez déjà un compte c'est par ici : <a href="?page=login">Se connecter</a></br>
 			Attention, votre login et votre mot de passe doivent au minimum faire 6 caractères.
 		</div>
@@ -35,8 +39,8 @@ else
 				<input name="email" type="mail" class="form-control " required placeholder="Adresse Email (pas de pub)">
 			</div>
 			
-			<input type="hidden" name="return_form_complet" value="1">
-			<button type="submit" class="col-lg-4 btn btn-default">Connexion</button>
+			<input type="hidden" name="return_form_complet" value="14175155">
+			<button type="submit" class="col-lg-4 btn btn-block btn-default">S'inscrire</button>
 
 		</form>
 	</div><?
