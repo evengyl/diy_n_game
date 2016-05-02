@@ -12,6 +12,7 @@ Class router
 		$this->route = $get;
 		
 		if(!isset($this->route['construct'])) $this->route['construct'] = "";
+			
 		$this->is_connect = Config::$is_connect;
 
 		global $error;
@@ -30,7 +31,7 @@ Class router
 			 		$this->get()->assign_bread($title_brd = "Page de connexion")->assign_mod();
 
 			 	else if($this->route['page'] == 'game_home')
-					$this->get()->assign_bread($title_brd = "Présentation général de votre entreprise")->is_connect()->assign_mod();
+					$this->get()->is_connect()->assign_bread($title_brd = "Présentation général de votre entreprise")->assign_mod();
 
 				else if($this->route['page'] == 'test')
 					$this->get()->assign_bread($title_brd = "test")->assign_mod();
@@ -65,6 +66,7 @@ Class router
 		{
 			$this->route['page'] = 'login';
 			$this->router($this->route['page']);
+			return $this;
 		}
 			
 	}

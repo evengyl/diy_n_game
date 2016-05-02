@@ -1,2 +1,2 @@
-__TPL_login__
+__MOD_login__
 __TPL_accueil_bottom__

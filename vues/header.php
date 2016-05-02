@@ -6,7 +6,7 @@
 	<div class="logo col-xs-8">
 		<a href="<?= Config::$base_path; ?>/public/index.php">Vapes,&nbsp;&nbsp;&nbsp;Diy - Game</a>
 	</div>
-	<div class="col-xs-2" id="heure_header" style="color:white;">
+	<div class="col-xs-2" id="" style="color:white;">
 		<?php echo "Heure Serveur : ".date('d/m/Y H:i:s'); ?>
 	</div>
 
