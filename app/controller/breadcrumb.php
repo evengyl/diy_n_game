@@ -3,7 +3,7 @@
 Class breadcrumb extends base_module
 {
 
-	public function __construct($module_tpl_name, $user, $var_in_match)
+	public function __construct($module_tpl_name, $var_in_match)
 	{	
 
 		parent::__construct($module_tpl_name);

@@ -41,21 +41,7 @@ class cron extends all_query
 
 
 
-	private function maj_ressource_in_db($row_user)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = array();
 
-		$row_user->new_numb_ressource_culture_vg = $row_user->champ_vg + $row_user->ressource_win_culture_vg;
-		$row_user->new_numb_ressource_usine_pg = $row_user->usine_pg + $row_user->ressource_win_usine_pg;
-
-		$req_sql->ctx["last_culture_vg"] = $row_user->new_numb_ressource_culture_vg;
-		$req_sql->ctx["last_usine_pg"] = $row_user->new_numb_ressource_usine_pg;
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
 
 	public function set_infos_user()
 	{
@@ -68,13 +54,19 @@ class cron extends all_query
 		login.last_connect,
 		login.level_culture_vg, 
 		login.level_usine_pg,
+		login.level_labos_bases,
+		login.last_labos_bases,
 		login.last_culture_vg as champ_vg,
 		login.last_usine_pg as usine_pg,
 		culture_vg.production as production_vg,
-        usine_pg.production as production_pg
-        FROM login, culture_vg, usine_pg
+        usine_pg.production as production_pg,
+        labos_bases.pourcent_down as pourcent_down
+        
+        FROM login, culture_vg, usine_pg, labos_bases
 		WHERE culture_vg.level = login.level_culture_vg 
-		AND usine_pg.level = login.level_usine_pg");
+		AND usine_pg.level = login.level_usine_pg
+		AND labos_bases.level = login.level_labos_bases
+		");
 
 		foreach($res_fx as $key => $values)
 		{
@@ -84,6 +76,29 @@ class cron extends all_query
 
 	}
 
+	public function maj_pourcent_labos_base($row_user)
+	{
+
+	}
+
+	private function maj_ressource_in_db($row_user)
+	{
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+
+		$row_user->new_numb_ressource_culture_vg = $row_user->champ_vg + $row_user->ressource_win_culture_vg;
+		$row_user->new_numb_ressource_usine_pg = $row_user->usine_pg + $row_user->ressource_win_usine_pg;
+
+		$req_sql->ctx->last_culture_vg = $row_user->new_numb_ressource_culture_vg;
+		$req_sql->ctx->last_usine_pg = $row_user->new_numb_ressource_usine_pg;
+
+		$req_sql->ctx->last_labos_bases = $row_user->pourcent_down;
+
+		$req_sql->table = "login";
+		$req_sql->where = "id = ".$row_user->id;
+		$this->update($req_sql);
+		unset($req_sql);
+	}
 
 	private function calc_ressource_win($row_user)
 	{
@@ -95,8 +110,8 @@ class cron extends all_query
 		$row_user->ressource_win_culture_vg = 0;
 		$row_user->ressource_win_usine_pg = 0;
 
-		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 2);
-		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 2);
+		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 0);
+		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 0);
 
 		//on remet a 0 le temps de la derniere mise a jour
 		$row_user->diff_time = 0;
@@ -107,12 +122,12 @@ class cron extends all_query
 
 	private function calc_ressource_per_sec_vg($production_vg)
 	{
-		return round((($production_vg /60)/60),2);
+		return round((($production_vg /60)/60),0);
 	}
 
 	private function calc_ressource_per_sec_pg($production_pg)
 	{
-		return round((($production_pg /60)/60),2);
+		return round((($production_pg /60)/60),0);
 	}
 
 
@@ -126,10 +141,10 @@ class cron extends all_query
 	private function maj_avertissement($row_user)
 	{
 		$req_sql = new stdClass;
-		$req_sql->ctx = array();
+		$req_sql->ctx = new stdClass;
 		$old_values_avertissement = $row_user->avertissement;
-		$req_sql->ctx["avertissement"] = $old_values_avertissement+1;
-		$req_sql->ctx["last_connect"] = $this->time_now;
+		$req_sql->ctx->avertissement = $old_values_avertissement+1;
+		$req_sql->ctx->last_connect = $this->time_now;
 		$req_sql->table = "login";
 		$req_sql->where = "id = ".$row_user->id;
 		$this->update($req_sql);
@@ -168,8 +183,8 @@ class cron extends all_query
 
 		//sert a set au time now la base de donnée last connect
 		$req_sql = new stdClass;
-		$req_sql->ctx = array();
-		$req_sql->ctx["last_connect"] = date("U");
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->last_connect = date("U");
 		$req_sql->table = "login";
 		$req_sql->where = "id = ".$row_user->id;
 		$this->update($req_sql);

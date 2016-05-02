@@ -29,20 +29,20 @@ if(Config::$is_connect == 1)
 				      	<ul class="col-lg-12 nav navbar-nav">
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
-					        		<span style="font-size:11px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
+					        		<span style="font-size:13px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
 					        </li>
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
-					        		<span style="font-size:11px;">Littres : 000</span>
+					        		<span style="font-size:13px;">Littres : 000</span>
 					        </li>
 
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
+					        		<span style="font-size:13px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
 					        </li>
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Littres : 000</span>
+					        		<span style="font-size:13px;">Littres : 000</span>
 					        </li>
 					    </ul>
 				    </div>
@@ -51,21 +51,21 @@ if(Config::$is_connect == 1)
 					    <ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Bases 20VG/80PG : 000</span>
+					        		<span style="font-size:13px;">Bases 20VG/80PG : 000</span>
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Bases 50VG/50PG : 000</span>
+					        		<span style="font-size:13px;">Bases 50VG/50PG : 000</span>
 					        </li>
 				        </ul>
 			        	<ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Bases 80VG/20PG : 000</span>
+					        		<span style="font-size:13px;">Bases 80VG/20PG : 000</span>
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:11px;">Bases 100VG : 000</span>
+					        		<span style="font-size:13px;">Bases 100VG : 000</span>
 					        </li>
 				        </ul>
 				    </div>
@@ -74,11 +74,11 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:11px;">Nombres de flacons Vides : 000</span>
+					        		<span style="font-size:13px;">Nombres de flacons Vides : 000</span>
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:11px;">Nombres de flacons rempli : 000</span>
+					        		<span style="font-size:13px;">Nombres de flacons rempli : 000</span>
 					        </li>
 					    </ul>
 					</div>
@@ -87,7 +87,7 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
-					        		<span style="font-size:11px;">Argent : <?= $user->user_infos->argent ?> €</span>
+					        		<span style="font-size:13px;">Argent : <?= $user->user_infos->argent ?> €</span>
 					        </li>
 				      	</ul>
 			      	</div>

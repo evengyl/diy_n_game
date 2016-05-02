@@ -129,7 +129,7 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
+			$module = new $this->module_name($this->module_name, $var_in_module_name);
 			$this->rendu_module =  $module->get_rendu();
 		}
 		else

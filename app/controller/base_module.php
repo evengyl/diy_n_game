@@ -20,7 +20,9 @@ Class base_module extends all_query
 		{
 			$this->user_obj = new user();
 			$this->template_name = $module_tpl_name;
-			$this->set_template_path($this->template_name);					
+			$this->set_template_path($this->template_name);		
+			$this->convert_sec_in_time_real();	
+
 		}
 		
 	}
@@ -53,6 +55,7 @@ Class base_module extends all_query
 
 	public function time_finish_construct($time_construct)
 	{
+		affiche_pre($time_construct);
 		$this->time_finish = "";
 		$time_now = date("U");
 		$this->time_finish = $time_now + $time_construct;
@@ -67,6 +70,24 @@ Class base_module extends all_query
 	public function get_template_path()
 	{
 		return $this->template_path;
+	}
+
+	public function convert_sec_in_time_real()
+	{
+		foreach($this->user_obj as $row_user_obj)
+		{
+			if(isset($row_user_obj->time_construct))
+			{
+
+				$jours = floor($row_user_obj->time_construct/86400);
+				$reste = $row_user_obj->time_construct%86400;
+				$heures = floor($reste/3600);
+				$reste = $reste%3600;
+				$minutes = floor($reste/60);
+				$secondes = $reste%60;
+				$row_user_obj->time_real_construct = $jours." Jours ".$heures."h : ".$minutes."m : ".$secondes;
+			}
+		}
 	}
 
 	public function assign_var($var_name , $value)
