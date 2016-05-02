@@ -6,8 +6,11 @@
 	<div id="titre" class="logo col-xs-8">
 		<a href="<?= Config::$base_path; ?>/public/index.php">Vapes,&nbsp;&nbsp;&nbsp;Diy - Game</a>
 	</div>
-	<div class="col-xs-2" id="heure_header" style="color:white;">
-		<?php echo "Heure Serveur : ".date('d/m/Y H:i:s'); ?>
+	<div class="col-xs-2" id="heure_serveur" style="color:white;">
+		<?php echo "Heure Serveur : ".date('d/m/Y H:i:s');
+			//echo "<br>Connecté en tant que : <b>".$user->user_infos->login."</b>";
+
+		?>
 	</div>
 
 		__TPL_nav_primal__

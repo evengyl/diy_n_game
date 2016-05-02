@@ -31,10 +31,10 @@
 						<th>Nombres des champs :</th><td><b><? echo $user->user_infos->level_culture_vg; ?></b> Champs améliores votre qunatité de glycérole</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Production :</th><td><b><? echo $user->culture_vg->production; ?></b> / Plantes de Glycérole / heure</td>
+						<th>Production :</th><td><b><? echo $user->champ_glycerine->production; ?></b> / Plantes de Glycérole / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->culture_vg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
+						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->champ_glycerine->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;"><?
 			 			if($in_make == 1)

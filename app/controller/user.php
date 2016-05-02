@@ -8,16 +8,21 @@ Class user extends all_query
 		// tout ce passe en seconde c'est plus simple 
 
 	public $user_infos;
-	public $culture_vg;
-	public $usine_pg;
+	public $champ_glycerine;
+	public $usine_propylene;
 	public $labos_bases;
+	public $construction;
 	public $time_now;
 
 	public function __construct()
 	{
 		if(Config::$is_connect == 1)
 		{
+			$this->time_now = date("U");			
 			$this->set_variable_user();
+			$this->validate_construct();
+			$this->set_variable_user();
+			
 		}
 		else
 		{
@@ -37,8 +42,12 @@ Class user extends all_query
 			if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
 			{
 				$this->user_infos = new stdClass();
-				$req_sql = "SELECT * FROM login WHERE login ='".$_SESSION['pseudo']."'";
-				$res_fx = $this->other_query($req_sql);
+				$req_sql = new stdClass;
+				$req_sql->table = "login";
+				$req_sql->var = "*";
+				$req_sql->where = "login ='".$_SESSION['pseudo']."'";
+				$res_fx = $this->select($req_sql);
+
 				foreach($res_fx[0] as $key => $values)
 				{
 					$this->user_infos->$key = $values;					
@@ -46,29 +55,38 @@ Class user extends all_query
 				unset($res_fx);
 
 
-				$this->culture_vg = new stdClass();
-				$req_sql_vg = "SELECT * FROM culture_vg WHERE level = '".$this->user_infos->level_culture_vg."'";
-				$res_fx = $this->other_query($req_sql_vg);
+				$this->champ_glycerine = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "culture_vg";
+				$req_sql->var = "*";
+				$req_sql->where = "level = '".$this->user_infos->level_culture_vg."'";
+				$res_fx = $this->select($req_sql);
 				foreach($res_fx[0] as $key => $values)
 				{
-					$this->culture_vg->$key = $values;
+					$this->champ_glycerine->$key = $values;
 				}
 				unset($res_fx);
 
 
 
-				$this->usine_pg = new stdClass();
-				$req_sql_pg = "SELECT * FROM usine_pg WHERE level = '".$this->user_infos->level_usine_pg."'";
-				$res_fx = $this->other_query($req_sql_pg);
+				$this->usine_propylene = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "usine_pg";
+				$req_sql->var = "*";
+				$req_sql->where = "level = '".$this->user_infos->level_usine_pg."'";
+				$res_fx = $this->select($req_sql);
 				foreach($res_fx[0] as $key => $values)
 				{
-					$this->usine_pg->$key = $values;
+					$this->usine_propylene->$key = $values;
 				}
 				unset($res_fx);
 
 				$this->labos_bases = new stdClass();
-				$req_sql_labos_bases = "SELECT * FROM labos_bases WHERE level = '".$this->user_infos->level_labos_bases."'";
-				$res_fx = $this->other_query($req_sql_labos_bases);
+				$req_sql = new stdClass;
+				$req_sql->table = "labos_bases";
+				$req_sql->var = "*";
+				$req_sql->where = "level = '".$this->user_infos->level_labos_bases."'";
+				$res_fx = $this->select($req_sql);
 				foreach($res_fx[0] as $key => $values)
 				{
 					$this->labos_bases->$key = $values;
@@ -77,8 +95,11 @@ Class user extends all_query
 
 
 				$this->construction = new stdClass();
-				$req_sql_construction = "SELECT * FROM construction_en_cours";
-				$res_fx = $this->other_query($req_sql_construction);
+				$req_sql = new stdClass;
+				$req_sql->table = "construction_en_cours";
+				$req_sql->var = "*";
+				$req_sql->where = "";
+				$res_fx = $this->select($req_sql);
 				if(!empty($res_fx))
 				{
 					foreach($res_fx as $key => $values)
@@ -103,9 +124,14 @@ Class user extends all_query
 
 	public function validate_construct()
 	{
-		$req_sql = "SELECT * FROM construction_en_cours WHERE id_user= '".$this->user_infos->id."'";
 
-		$res_sql = $this->other_query($req_sql);
+		$req_sql = new stdClass;
+		$req_sql->table = "construction_en_cours";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user= '".$this->user_infos->id."'";
+		$res_sql = $this->select($req_sql);
+		unset($req_sql);
+
 		if(!empty($res_sql))
 		{
 			foreach($res_sql as $row_construct)
@@ -114,10 +140,18 @@ Class user extends all_query
 				{
 					//on indique dans la base que le level est changer 
 					$set_level_up = $this->user_infos->{$row_construct->name_batiment}+1;
-					$req_sql = "UPDATE login SET ".$row_construct->name_batiment." = '".$set_level_up."' WHERE id = '".$row_construct->id_user."'";
-					$this->query_simple($req_sql);
+					$req_sql = new stdClass;
+					$req_sql->table = "login";
+					$req_sql->where = "id = '".$row_construct->id_user."'";
+					$req_sql->ctx = new stdClass;
+					$req_sql->ctx->{$row_construct->name_batiment} = $set_level_up;
+					$this->update($req_sql);
+
 					//et on delete la ligne qui est finie;
-					$this->delete_row($table = "construction_en_cours", $where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'");
+					$del_sql = new stdClass;
+					$del_sql->table = "construction_en_cours";
+					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'";
+					$this->delete($del_sql);
 				}
 			}
 		}		

@@ -31,10 +31,10 @@
 						<th>Nombres d'usines :</th><td><b><? echo $user->user_infos->level_usine_pg; ?></b> Usines améliores votre qunatité de Propylène</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Production :</th><td><b><? echo $user->usine_pg->production; ?></b> / Littres de Propylène brut / heure</td>
+						<th>Production :</th><td><b><? echo $user->usine_propylene->production; ?></b> / Littres de Propylène brut / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
-						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_pg->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
+						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_propylene->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;"><?
 			 			if($in_make == 1)

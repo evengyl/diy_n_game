@@ -8,23 +8,47 @@
 
 	<div class="col-xs-12 col-md-9">
 		<div class="col-lg-12" style="margin-bottom:15px;">
+			<h2 class='col-xs-12 title' style="font-size:18px; padding-top:25px;">
+				Listes des batiments de production de ressources brut.
+			</h2>	
 			<div class="col-lg-12" style="background:#232D3B;">
-
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
 							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:20px;">Culture VG</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br>70</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br>425692</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br>1526301</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br>14h 15m</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->champ_glycerine->level; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->champ_glycerine->production; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br><?= $user->champ_glycerine->prix; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br><?= $user->champ_glycerine->time_construct; ?></li>
 							</figcaption>
 						</figure>
 					</li></center>
 				</ul>
 
+				<ul class="col-md-6 col-lg-4 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="<?= Config::$path_public; ?>/images/usine_pg.png" alt="img04"></div>
+							<figcaption>
+								<h3 style="font-size:20px;">Usines PG</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->usine_propylene->level; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->usine_propylene->production; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix next level : </b><br><?= $user->usine_propylene->prix; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b><br><?= $user->usine_propylene->time_construct; ?></li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-lg-12" style="margin-bottom:15px;">
+			<h2 class='col-xs-12 title' style="font-size:18px; padding-top:25px;">
+				Listes des batiments de production de ressources synthétisée.
+			</h2>				
+			<div class="col-lg-12" style="background:#232D3B;">
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
@@ -39,7 +63,15 @@
 						</figure>
 					</li></center>
 				</ul>
+			</div>
+		</div>
 
+
+		<div class="col-lg-12" style="margin-bottom:15px;">
+			<h2 class='col-xs-12 title' style="font-size:18px; padding-top:25px;">
+				Listes des batiments de production de ressources des arômes.
+			</h2>				
+			<div class="col-lg-12" style="background:#232D3B;">
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>
@@ -54,7 +86,14 @@
 						</figure>
 					</li></center>
 				</ul>
+			</div>
+		</div>
 
+		<div class="col-lg-12" style="margin-bottom:15px;">
+			<h2 class='col-xs-12 title' style="font-size:18px; padding-top:25px;">
+				Listes des arômes au top cette semaine.
+			</h2>				
+			<div class="col-lg-12" style="background:#232D3B;">
 				<ul class="col-md-6 col-lg-4 grid cs-style-4">
 					<center><li>
 						<figure>

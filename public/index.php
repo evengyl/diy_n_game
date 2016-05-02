@@ -28,7 +28,7 @@ $route = new router();?>
 	<head>
 		__TPL_top_head__
 	</head>
-<body>
+<body onload="timer()">
 
 	__MOD_header__
 

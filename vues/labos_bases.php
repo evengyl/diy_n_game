@@ -40,7 +40,7 @@
 			 			else if($in_make == 2)
 			 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
 			 			else
-			 				echo "<th><td><a class='btn btn-primary' href='?page=champ_glycerine&construct=level_labos_bases'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
+			 				echo "<th><td><a class='btn btn-primary' href='?page=labos_bases&construct=level_labos_bases'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
 			 					
 					</tr>
 				</table>

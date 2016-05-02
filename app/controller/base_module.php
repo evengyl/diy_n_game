@@ -10,6 +10,7 @@ Class base_module extends all_query
 	public $template_name;
 	public $template_path;
 	public $time_finish;
+	public $user_obj;
 
 
 
@@ -17,15 +18,16 @@ Class base_module extends all_query
 	{
 		if($module_tpl_name != "")
 		{
+			$this->user_obj = new user();
 			$this->template_name = $module_tpl_name;
 			$this->set_template_path($this->template_name);					
 		}
 		
 	}
 
-	public function set_time_finish($user, $name_batiment)
+	public function set_time_finish($name_batiment)
 	{
-		foreach($user->construction as $row_construct)
+		foreach($this->user_obj->construction as $row_construct)
 		{
 			if($row_construct->name_batiment == $name_batiment)
 			{
@@ -34,10 +36,17 @@ Class base_module extends all_query
 		}
 	}
 
-	public function set_argent_user($prix_a_deduire, $user)
+	public function set_argent_user($prix_a_deduire)
 	{
-		$req_sql = ("UPDATE login SET argent = argent-'". $prix_a_deduire ."' WHERE id = '".$user->user_infos->id."'");
-		$res_sql = $this->query_simple($req_sql);
+		$argent_before = $this->user_obj->user_infos->argent;
+		$argent_after = $argent_before - $prix_a_deduire;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->argent = $argent_after;
+		$res_sql = $this->update($req_sql);
 		unset($req_sql);
 	}
 
@@ -99,10 +108,14 @@ Class base_module extends all_query
 	}
 
 
-	protected function check_construction_en_cours($user, $var_in_match, $name_batiment_from_controller = "")
+	protected function check_construction_en_cours($var_in_match, $name_batiment_from_controller = "")
 	{
-		$req_sql = ("SELECT * FROM construction_en_cours WHERE id_user = '".$user->user_infos->id."'");
-		$res_sql = $this->other_query($req_sql);
+		$req_sql = new stdClass;
+		$req_sql->table = "construction_en_cours";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
+
+		$res_sql = $this->select($req_sql);
 
 		if(!empty($res_sql))
 		{	
@@ -112,44 +125,44 @@ Class base_module extends all_query
 				if($row_construct->name_batiment == $var_in_match)
 				{
 					//on viens de lancer l'appel pour mettre en route une construction
-					$this->alert_construction_en_cours = 1;
+					return 1;
 				}
 				else if($row_construct->name_batiment == $name_batiment_from_controller)
 				{
 					//la consctruction était déjà lancée quand le joueur c'est logger
-					$this->alert_construction_en_cours = 1;	
+					return 1;	
 				}
 			}			
 		}
 		else
 		{
 								//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($user->user_infos->argent >= $user->culture_vg->prix)
+			if($this->user_obj->user_infos->argent >= $this->user_obj->culture_vg->prix)
 			{
-				$this->alert_construction_en_cours = 0;
+				return 0;
 			}
 			else
 			{
 				//2 egale que on a pas l'argent
-				$this->alert_construction_en_cours = 2;	
+				return 2;	
 			}
 		}
 	}
 
 
-	public function insert_construction_en_cours($id_user, $name_batiment, $time_finish)
+	public function insert_construction_en_cours($name_batiment, $time_finish)
 	{
 		$req_sql = new stdClass;
-		$req_sql->ctx = array();
-		$req_sql->ctx['id_user'] = $id_user;
-		$req_sql->ctx['name_batiment'] = $name_batiment;
-		$req_sql->ctx['time_finish'] = $time_finish;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->id_user = $this->user_obj->user_infos->id;
+		$req_sql->ctx->name_batiment = $name_batiment;
+		$req_sql->ctx->time_finish = $time_finish;
 		$req_sql->table = "construction_en_cours";
 
 		$this->insert_into($req_sql);
 
 	}
-	
+
 
 
 	

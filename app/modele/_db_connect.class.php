@@ -51,6 +51,7 @@ class _db_connect extends Config
 			$this->last_res_sql = null;
 		}
 		
+		
 		return $res; // renvoi un tableau d'objet
 	}
 

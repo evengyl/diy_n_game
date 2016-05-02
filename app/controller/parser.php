@@ -118,9 +118,9 @@ class parser
 
 //		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);	
 //		affiche_pre($module_tpl_name);
-		$var_in_match = stristr($match[0], "(");
-		$var_in_match = stristr($var_in_match, ")", true);
-		$var_in_match = substr($var_in_match, 1);
+		$var_in_module_name = stristr($match[0], "(");
+		$var_in_module_name = stristr($var_in_module_name, ")", true);
+		$var_in_module_name = substr($var_in_module_name, 1);
 
 
 		$module_name = preg_replace("/[(][a-zA-Z0-9_éèçàê \']*[)]/", "", $match[0]);
@@ -129,7 +129,7 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $this->user, $var_in_match);
+			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
 			$this->rendu_module =  $module->get_rendu();
 		}
 		else

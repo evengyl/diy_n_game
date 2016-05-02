@@ -40,8 +40,10 @@ Class router
 
 				else if($this->route['page'] == 'champ_glycerine')
 					$this->get()->assign_bread($title_brd = "Culture des champs de Glycérine")->assign_mod_var($this->route['construct']);
+
 				else if($this->route['page'] == 'usine_propylene')
 					$this->get()->assign_bread($title_brd = "Installation industrielle de propylène")->assign_mod_var($this->route['construct']);
+				
 				else if($this->route['page'] == 'labos_bases')
 					$this->get()->assign_bread($title_brd = "Laboratoire pharmaceutique de mélanges")->assign_mod_var($this->route['construct']);
 							
