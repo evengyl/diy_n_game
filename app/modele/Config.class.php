@@ -4,7 +4,7 @@ class Config
 {
     public static $hote = "localhost";
     public static $user = "root";
-    public static $Mpass = "darkevengyl";
+    public static $Mpass = "";
     public static $base = 'diy_n_game';
 
     public static $path_app = "../app";

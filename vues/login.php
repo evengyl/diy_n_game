@@ -17,7 +17,7 @@ else
 			Vous connecter vous permettra d'accèder au jeu, 
 			pour rappel, ce petit jeu est entierement conçu à la main sans programmes ni personnes extérieur,</br>
 			pour plus de renseignement, veuiller lire la charte accessible à partir du menu, ou prendre contact avec Evengyl, par ici
-			<a href="?page=contact">Conacter-moi</a>.</br>
+			<a href="?page=contact">Contactez-moi</a>.</br>
 			pour créer un compte c'est par ici : <a href="?page=sign_up">Créer un compte</a>
 		</div>
 		<form action="#" method="post" class="col-lg-8 col-lg-offset-2">

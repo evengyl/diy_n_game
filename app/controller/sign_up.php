@@ -24,10 +24,10 @@ Class sign_up extends base_module
 			{
 			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = $this->checkpost_sign_up($post['pseudo']);
-			    	$password = $this->checkpost_sign_up($post['password-1']);
-			    	$password_verification = $this->checkpost_sign_up($post['password-2']);
-			    	$email = $this->checkpost_sign_up($post['email']);
+			    	$pseudo = $this->check_post_sign_up($post['pseudo']);
+			    	$password = $this->check_post_sign_up($post['password-1']);
+			    	$password_verification = $this->check_post_sign_up($post['password-2']);
+			    	$email = $this->check_post_sign_up($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -40,26 +40,40 @@ Class sign_up extends base_module
 			    		return 0;
 			    	}
 			    	else
-			    	{	
-			    		$this->time_now = $this->set_time_now();
-			    		$password = hash("sha256", $password);
+			    	{
+
 			    		$req_sql = new stdClass;
-						$req_sql->ctx = new stdClass;
-						$req_sql->ctx->login = $pseudo;
-						$req_sql->ctx->password = $password;
-						$req_sql->ctx->last_connect = $this->time_now;
 						$req_sql->table = "login";
+						$req_sql->var = "login";
+						$req_sql->where = "login = '".$pseudo."'";
 
-						$this->insert_into($req_sql);
+						$res_sql = $this->select($req_sql);
 
-						$_SESSION['pseudo'] = $pseudo;
-		                $_SESSION['level'] = $password;
-		                $_SESSION['last_connect'] = $time_now;
-		                
-			    		unset($_SESSION['error']);
-			            unset($post);
+		            	if(empty($res_sql))
+			            {
+			                $this->time_now = $this->set_time_now();
+				    		$password = hash("sha256", $password);
+				    		$req_sql = new stdClass;
+							$req_sql->ctx = new stdClass;
+							$req_sql->ctx->login = $pseudo;
+							$req_sql->ctx->password = $password;
+							$req_sql->ctx->last_connect = $this->time_now;
+							$req_sql->table = "login";
 
-			            return 1;
+							$this->insert_into($req_sql);
+
+							$_SESSION['pseudo'] = $pseudo;
+			                $_SESSION['level'] = $password;
+			                $_SESSION['last_connect'] = $this->time_now;
+			                $_SESSION['success'] = "Vous êtes désormais inscrit ! Merci !";
+				    		unset($_SESSION['error']);
+				            unset($post);
+				            return 1;
+				            
+			            }else{
+			            	$_SESSION['error'] = 'Ce pseudo est déjà utilisé.';
+			        		return 0;
+			            }
 			    	}	        
 			    }
 			    else
