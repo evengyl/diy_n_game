@@ -50,7 +50,6 @@ Class login extends base_module
 			            {
 			            	unset($_SESSION['error']);
 			            	unset($post);
-			            	unset($_POST);
 			                $_SESSION['pseudo'] = $res_fx->login;
 			                $_SESSION['level'] = $res_fx->level;
 			                $_SESSION['last_connect'] = $res_fx->last_connect;
@@ -86,7 +85,7 @@ Class login extends base_module
 		else
 		{
 			//$error[] = "Attention, Vous n'êtes pas logger";
-			$_SESSION['error'] = 'Formulaire mal rempli';
+			
 			return 0;
 		}
 			
