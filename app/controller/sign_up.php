@@ -52,7 +52,7 @@ Class sign_up extends base_module
 		            	if(empty($res_sql))
 			            {
 			                $this->time_now = $this->set_time_now();
-				    		$password = hash("sha256", $password);
+			                $password = password_hash($password, PASSWORD_DEFAULT);
 				    		$req_sql = new stdClass;
 							$req_sql->ctx = new stdClass;
 							$req_sql->ctx->login = $pseudo;
