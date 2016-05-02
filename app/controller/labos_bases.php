@@ -8,7 +8,7 @@ Class labos_bases extends base_module
 	{		
 		parent::__construct($module_tpl_name);
 		//on check si une cronstruction de type level_culture_vg est en cours, et on set la var alert a 0 si pas et a 1 si il y a une construction
-		$this->alert_construction_en_cours = $this->check_construction_en_cours($var_in_module_name, $this->name_batiment);
+		$this->alert_construction_en_cours = $this->check_construction_en_cours($var_in_module_name, $this->name_batiment, $this->user_obj->labos_bases->prix);
 		//on check si le bouton de construction a été validé, et on crée le champs de ctrt dans la base de données
 		if($var_in_module_name == $this->name_batiment)
 		{

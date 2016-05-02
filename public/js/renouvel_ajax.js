@@ -1,6 +1,6 @@
 function timer()
 {
-  comp = setTimeout("go()",500);
+  comp = setTimeout("go()",1000);
 }
 
 function getXhr()
@@ -39,5 +39,5 @@ function go()
   }
   xhr.open("GET","/diy_n_game/vues/appel_ajax/heure_header.php",true);
   xhr.send(null);
-  setTimeout('go()',500);
+  setTimeout('go()',1000);
 }

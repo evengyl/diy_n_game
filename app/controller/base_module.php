@@ -55,7 +55,6 @@ Class base_module extends all_query
 
 	public function time_finish_construct($time_construct)
 	{
-		affiche_pre($time_construct);
 		$this->time_finish = "";
 		$time_now = date("U");
 		$this->time_finish = $time_now + $time_construct;
@@ -129,7 +128,7 @@ Class base_module extends all_query
 	}
 
 
-	protected function check_construction_en_cours($var_in_match, $name_batiment_from_controller = "")
+	protected function check_construction_en_cours($var_in_match, $name_batiment_from_controller = "", $prix_level_up)
 	{
 		$req_sql = new stdClass;
 		$req_sql->table = "construction_en_cours";
@@ -158,7 +157,7 @@ Class base_module extends all_query
 		else
 		{
 								//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($this->user_obj->user_infos->argent >= $this->user_obj->culture_vg->prix)
+			if($this->user_obj->user_infos->argent >= $prix_level_up)
 			{
 				return 0;
 			}

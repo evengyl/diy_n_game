@@ -55,7 +55,6 @@ class cron extends all_query
 		login.level_culture_vg, 
 		login.level_usine_pg,
 		login.level_labos_bases,
-		login.last_labos_bases,
 		login.last_culture_vg as champ_vg,
 		login.last_usine_pg as usine_pg,
 		culture_vg.production as production_vg,
@@ -76,11 +75,6 @@ class cron extends all_query
 
 	}
 
-	public function maj_pourcent_labos_base($row_user)
-	{
-
-	}
-
 	private function maj_ressource_in_db($row_user)
 	{
 		$req_sql = new stdClass;
@@ -91,8 +85,6 @@ class cron extends all_query
 
 		$req_sql->ctx->last_culture_vg = $row_user->new_numb_ressource_culture_vg;
 		$req_sql->ctx->last_usine_pg = $row_user->new_numb_ressource_usine_pg;
-
-		$req_sql->ctx->last_labos_bases = $row_user->pourcent_down;
 
 		$req_sql->table = "login";
 		$req_sql->where = "id = ".$row_user->id;
@@ -203,12 +195,19 @@ class cron extends all_query
 			{
 				if($row_construct->time_finish <= $this->time_now)
 				{
-					//on indique dans la base que le level est changer 
-					$set_level_up = $row_user->{$row_construct->name_batiment}+1;
-					$req_sql = "UPDATE login SET ".$row_construct->name_batiment." = '".$set_level_up."' WHERE id = '".$row_construct->id_user."'";
-					$this->query_simple($req_sql);
+					$set_level_up = $this->user_infos->{$row_construct->name_batiment}+1;
+					$req_sql = new stdClass;
+					$req_sql->table = "login";
+					$req_sql->where = "id = '".$row_construct->id_user."'";
+					$req_sql->ctx = new stdClass;
+					$req_sql->ctx->{$row_construct->name_batiment} = $set_level_up;
+					$this->update($req_sql);
+
 					//et on delete la ligne qui est finie;
-					$this->delete_row($table = "construction_en_cours", $where = "id = '".$row_construct->id."' AND id_user = '".$row_user->id."'");
+					$del_sql = new stdClass;
+					$del_sql->table = "construction_en_cours";
+					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'";
+					$this->delete($del_sql);
 				}
 			}
 		}		

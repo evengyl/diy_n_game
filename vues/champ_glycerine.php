@@ -6,24 +6,7 @@
 			<div class="col-lg-4">
 				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/plantes.png">
 			</div>
-
-			<div class="col-lg-8 hitsoire">
-				<h3 class="title">Petite histoire : </h3>
-				<span>Le glycérol est formé durant la fermentation alcoolique du moût de raisin lors de la production du vin.
-				Les huiles de noix de coco et de palmiste qui contiennent un pourcentage élevé (70-80 %) d'acides 
-				gras en C6 à C14 libèrent de plus grandes quantités de glycérol que les gras et huiles qui contiennent 
-				majoritairement des acides gras en C16 et C18, comme les graisses animales, les huiles de graines de coton, 
-				graines de soja, olives et palme.</span>
-			</div>
-			<div class="col-lg-8 explication pull-right">
-				<h3 class="title">Explication : </h3>
-				<span>Dans Diy_n_game, les ressources principales nécessaires pour votre développement est les champs et glycérole et les usines qui vont manufacturer 
-					le propylène, les deux vont vous rapporter des marchandises de types brutes! elle ne peuvent être exploitée comme ça, 
-					vous devrez par la suite vous munir de laboratoire qui transformeront vos plantes et ressidu d'usine en VG et PG, 
-					dans une premier temps vous disposerez d'un niveau de laboratoires qui vous permettra de convertir vos ressources.
-					plus les niveaux seront élevé dans les labos, moins vous payerez vos bases chère.</span>
-			</div>
-
+			
 			<div class="col-lg-8 pull-right ressource_now">
 				<h3 class="title">Actuellement vos champs vous rapporte :</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
@@ -53,6 +36,25 @@
 					</tr>
 				</table>
 			</div>
+
+			<div class="col-lg-8 hitsoire">
+				<h3 class="title">Petite histoire : </h3>
+				<span>Le glycérol est formé durant la fermentation alcoolique du moût de raisin lors de la production du vin.
+				Les huiles de noix de coco et de palmiste qui contiennent un pourcentage élevé (70-80 %) d'acides 
+				gras en C6 à C14 libèrent de plus grandes quantités de glycérol que les gras et huiles qui contiennent 
+				majoritairement des acides gras en C16 et C18, comme les graisses animales, les huiles de graines de coton, 
+				graines de soja, olives et palme.</span>
+			</div>
+			<div class="col-lg-8 explication pull-right">
+				<h3 class="title">Explication : </h3>
+				<span>Dans Diy_n_game, les ressources principales nécessaires pour votre développement est les champs et glycérole et les usines qui vont manufacturer 
+					le propylène, les deux vont vous rapporter des marchandises de types brutes! elle ne peuvent être exploitée comme ça, 
+					vous devrez par la suite vous munir de laboratoire qui transformeront vos plantes et ressidu d'usine en VG et PG, 
+					dans une premier temps vous disposerez d'un niveau de laboratoires qui vous permettra de convertir vos ressources.
+					plus les niveaux seront élevé dans les labos, moins vous payerez vos bases chère.</span>
+			</div>
+
+
 		</div>		
 	</div>
 	__TPL_social_services__
