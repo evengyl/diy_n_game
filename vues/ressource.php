@@ -23,93 +23,71 @@ if(Config::$is_connect == 1)
 		    	</div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    	<div class=" navbar-collapse collapse" id="nav_primal">
+		    	<div style="padding-bottom:7px; padding-top:7px;" class=" navbar-collapse collapse" id="nav_primal">
 		    		
 		    		<div class="col-lg-4 col-without-padding">
 				      	<ul class="col-lg-12 nav navbar-nav">
-					        <li class="col-lg-6">
-					        	<a href="">
+					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
-					        		<span style="font-size:10px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
-					        	</a>
+					        		<span style="font-size:11px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
 					        </li>
-					        <li class="col-lg-6">
-					        	<a href="">
+					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg.png" alt="Littre de glycérine" style="max-height:25px;">
-					        		<span style="font-size:10px;">Littres : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Littres : 000</span>
 					        </li>
 
-					        <li class="col-lg-6">
-					        	<a href="">
+					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
-					        	</a>
+					        		<span style="font-size:11px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
 					        </li>
-					        <li class="col-lg-6">
-					        	<a href="">
+					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/pg.png" alt="Littres de propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Littres : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Littres : 000</span>
 					        </li>
 					    </ul>
 				    </div>
 
 				    <div class="col-lg-4 col-without-padding">
 					    <ul class="col-lg-6 nav navbar-nav">
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Bases 20VG/80PG : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Bases 20VG/80PG : 000</span>
 					        </li>
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Bases 50VG/50PG : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Bases 50VG/50PG : 000</span>
 					        </li>
 				        </ul>
 			        	<ul class="col-lg-6 nav navbar-nav">
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Bases 80VG/20PG : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Bases 80VG/20PG : 000</span>
 					        </li>
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:10px;">Bases 100VG : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Bases 100VG : 000</span>
 					        </li>
 				        </ul>
 				    </div>
 
 			        <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:10px;">Nombres de flacons Vides : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Nombres de flacons Vides : 000</span>
 					        </li>
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:10px;">Nombres de flacons rempli : 000</span>
-					        	</a>
+					        		<span style="font-size:11px;">Nombres de flacons rempli : 000</span>
 					        </li>
 					    </ul>
 					</div>
 
 				    <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
-					        <li class="col-lg-12">
-					        	<a href="">
+					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
-					        		<span style="font-size:10px;">Argent : 000 €</span>
-					        	</a>
+					        		<span style="font-size:11px;">Argent : 000 €</span>
 					        </li>
 				      	</ul>
 			      	</div>

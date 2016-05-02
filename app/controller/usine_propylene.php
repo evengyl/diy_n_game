@@ -20,8 +20,8 @@ Class usine_propylene extends base_module
 				// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
 				$this->time_finish_construct($user->culture_vg->time_construct);
 
-				$req_sql = "INSERT INTO construction_en_cours (id_user, name_batiment, time_finish, pseudo, date_now) 
-							VALUES ('".$user->user_infos->id."', '".$var_in_match."', '".$this->time_finish."', '".$user->user_infos->login."', '".date('d/m/Y H:i:s')."' )";
+				$req_sql = "INSERT INTO construction_en_cours (id_user, name_batiment, time_finish) 
+							VALUES ('".$user->user_infos->id."', '".$var_in_match."', '".$this->time_finish."')";
 				$this->query_simple($req_sql);
 				//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 				$user->set_variable_user();

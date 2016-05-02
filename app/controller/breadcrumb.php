@@ -28,7 +28,7 @@ Class breadcrumb extends base_module
 
 		foreach($breadcrumb as $title => $link)
 		{
-			$title_page .= "<div class='fleche_interne'></div><div class='level_bread'><a href='".$link."'>".$title."</a></div><div class='fleche_externe'></div>";
+			$title_page .= "<div class='fleche_interne'></div><div class='level_bread'><a style='color:#C0C0C0;' href='".$link."'>".$title."</a></div><div class='fleche_externe'></div>";
 		}
 		$title_page .= "<div class='fleche_remplie'></div><div class='fleche_remplie'></div><div class='fleche_remplie'></div></h1>";
 
