@@ -22,7 +22,7 @@ Class contact extends base_module
 				$content = "le joueur : ".$user->user_infos->login." avec l'adresse mail suivante : "
 				.$user->user_infos->mail." Vous à envoyé un message depuis le site <br> - '".
 				$user->user_infos->content."'";
-				//mail(parent::$mail, "Message de contact du site Diy N Game.", $content);
+				mail(parent::$mail, "Message de contact du site Diy N Game.", $content);
 				$_SESSION['error'] = "Votre message à bien été délivré";
 			}
 		}

@@ -40,3 +40,5 @@ else
 
 
 ?>
+
+__TPL_accueil_bottom__
