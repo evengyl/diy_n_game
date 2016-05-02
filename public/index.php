@@ -15,7 +15,10 @@ if(!isset($_GET['page']))
 //ou il va recevoir 0 ou 1 cela dépend de la secu
 $login = new login("", "", $_POST);
 
-
+$sign_up = new sign_up("");
+if(Config::$is_connect == 0){
+	$sign_up->doIt($_POST);
+}
 
 		//si le joueur est connecter on arrive sur la page de jeu
 
