@@ -118,8 +118,6 @@ class all_query extends _db_connect
 		$key_all = "";
 		$value_all = "";
 
-		$res_sql->ctx['created_on'] = date('Y-m-d H:i:s');
-        $res_sql->ctx['modified_on'] = date('Y-m-d H:i:s');
 		foreach($res_sql->ctx as $key => $values)
 		{			
 			$key_all = $key_all.", ".$key;

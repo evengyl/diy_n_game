@@ -34,6 +34,13 @@ Class base_module extends all_query
 		}
 	}
 
+	public function set_argent_user($prix_a_deduire, $user)
+	{
+		$req_sql = ("UPDATE login SET argent = argent-'". $prix_a_deduire ."' WHERE id = '".$user->user_infos->id."'");
+		$res_sql = $this->query_simple($req_sql);
+		unset($req_sql);
+	}
+
 
 	public function time_finish_construct($time_construct)
 	{
@@ -128,6 +135,21 @@ Class base_module extends all_query
 			}
 		}
 	}
+
+
+	public function insert_construction_en_cours($id_user, $name_batiment, $time_finish)
+	{
+		$req_sql = new stdClass;
+		$req_sql->ctx = array();
+		$req_sql->ctx['id_user'] = $id_user;
+		$req_sql->ctx['name_batiment'] = $name_batiment;
+		$req_sql->ctx['time_finish'] = $time_finish;
+		$req_sql->table = "construction_en_cours";
+
+		$this->insert_into($req_sql);
+
+	}
+	
 
 
 	

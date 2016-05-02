@@ -6,7 +6,7 @@ if(Config::$is_connect == 1)
 
 
 
-<div class="collapse col-lg-12 col-without-padding" id="menu_ressource">
+
 	<div class="col-xs-12 col-without-padding">
 		<div class="col-lg-12 col-without-padding">
 			<nav class="navbar navbar-default nav_primal" style="border-top:0px; margin-bottom:0px; border-bottom:1px solid #FF7F00;">
@@ -87,7 +87,7 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
-					        		<span style="font-size:11px;">Argent : 000 €</span>
+					        		<span style="font-size:11px;">Argent : <?= $user->user_infos->argent ?> €</span>
 					        </li>
 				      	</ul>
 			      	</div>
@@ -95,11 +95,11 @@ if(Config::$is_connect == 1)
 			</nav>
 		</div>
 	</div>
-</div>
-<div class="logo_ressource col-lg-6 col-lg-offset-3">
-	<a style="cursor:pointer;" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" data-target="#menu_ressource">
-		<center><img style="display:inline-block;" src="images/bouton-collapse-ressource.png"></center>
-	</a>
-</div>
+
+	<div class="logo_ressource col-lg-6 col-lg-offset-3">	
+		<center>
+			<img style="display:inline-block;" src="images/bouton-collapse-ressource.png">
+		</center>	
+	</div>
 <?
 }?>

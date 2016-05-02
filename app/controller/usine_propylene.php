@@ -20,16 +20,17 @@ Class usine_propylene extends base_module
 				// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
 				$this->time_finish_construct($user->culture_vg->time_construct);
 
-				$req_sql = "INSERT INTO construction_en_cours (id_user, name_batiment, time_finish) 
-							VALUES ('".$user->user_infos->id."', '".$var_in_match."', '".$this->time_finish."')";
-				$this->query_simple($req_sql);
+				$this->insert_construction_en_cours($user->user_infos->id, $var_in_match, $this->time_finish);
 				//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
+
+				$this->set_argent_user($user->usine_pg->prix, $user);
 				$user->set_variable_user();
 				unset($_GET['construct']);
 				$this->alert_construction_en_cours = 1;
 			}
 		}
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur
+
 		$this->set_time_finish($user, $this->name_batiment);
 
 
