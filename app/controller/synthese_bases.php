@@ -18,7 +18,7 @@ Class synthese_bases extends base_module
 		//va renvoyer directement au template un Obj , contenant le nombre de bases uqe le joueur peux creer de chaque, définir les prix ici même dans ce controller pour changement facile 
 	}
 
-	public function recept_form_with_bases_to_create($_POST)
+	public function recept_form_with_bases_to_create($post)
 	{
 			//ici recevra le formulaire rempli avec les bases a crées, elle seront passiblement les meme que le mex aposible mais vérifier tout les cas on sais jamais
 		//va appeler la fonction de calcule de prix pour chaque champs et recevra en echange le prix total
