@@ -102,8 +102,8 @@ class cron extends all_query
 		$row_user->ressource_win_culture_vg = 0;
 		$row_user->ressource_win_usine_pg = 0;
 
-		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 0);
-		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 0);
+		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 4);
+		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 4);
 
 		//on remet a 0 le temps de la derniere mise a jour
 		$row_user->diff_time = 0;
@@ -114,12 +114,12 @@ class cron extends all_query
 
 	private function calc_ressource_per_sec_vg($production_vg)
 	{
-		return round((($production_vg /60)/60),0);
+		return round((($production_vg /60)/60),4);
 	}
 
 	private function calc_ressource_per_sec_pg($production_pg)
 	{
-		return round((($production_pg /60)/60),0);
+		return round((($production_pg /60)/60),4);
 	}
 
 

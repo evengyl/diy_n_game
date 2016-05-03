@@ -23,7 +23,7 @@ function print_pre($var_a_print)
 
 function affiche_pre($var_a_print)
 {
-    ?><div class='col-xs-12'><pre><?
+    ?><div class='col-xs-12' style='margin-bottom:50px;'><pre><?
         print_r($var_a_print);
     ?></pre></div><?
 }

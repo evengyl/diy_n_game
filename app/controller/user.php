@@ -11,6 +11,7 @@ Class user extends all_query
 	public $champ_glycerine;
 	public $usine_propylene;
 	public $labos_bases;
+	public $bases;
 	public $construction;
 	public $time_now;
 
@@ -90,6 +91,18 @@ Class user extends all_query
 				foreach($res_fx[0] as $key => $values)
 				{
 					$this->labos_bases->$key = $values;
+				}
+				unset($res_fx);
+
+				$this->bases = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "bases";
+				$req_sql->var = "*";
+				$req_sql->where = "id_user = '".$this->user_infos->id."'";
+				$res_fx = $this->select($req_sql);
+				foreach($res_fx[0] as $key => $values)
+				{
+					$this->bases->$key = $values;
 				}
 				unset($res_fx);
 

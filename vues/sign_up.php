@@ -6,7 +6,7 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 			echo '<p class="bg-success">'.$_SESSION['success'].'</p>';
 			unset($_SESSION['success']);
 		} ?>
-		<p class="bg-info" style="text-align: center;font-size:20px;color:black">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
+		<p class="bg-info" style="text-align: center; font-size:16px; color:black">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
 	</div><?
 }
 else
