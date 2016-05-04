@@ -38,10 +38,23 @@ Class base_module extends all_query
 		}
 	}
 
-	public function set_argent_user($prix_a_deduire)
+	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
 	{
 		$argent_before = $this->user_obj->user_infos->argent;
-		$argent_after = $argent_before - $prix_a_deduire;
+		
+		if($moins_plus == "-")
+		{
+			$argent_after = $argent_before - $prix_a_deduire;	
+		}
+		else if($moins_plus == "+")
+		{
+			$argent_after = $argent_before + $prix_a_deduire;
+		}
+		else
+		{
+			$argent_after = $argent_before - $prix_a_deduire;
+		}
+		
 
 		$req_sql = new stdClass;
 		$req_sql->table = "login";

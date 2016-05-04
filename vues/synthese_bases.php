@@ -6,7 +6,7 @@
 				Listes des batiments de production de ressources brut.
 			</h3>	
 			<div class="col-lg-12" style="background:#232D3B; margin-top:15px; margin-bottom:50px;">
-				<ul class="col-md-6 col-lg-4 grid cs-style-4">
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
 					<center><li>
 						<figure>
 							<div><img src="<?= Config::$path_public; ?>/images/bases.jpg" alt="img04"></div>
@@ -21,7 +21,7 @@
 					</li></center>
 				</ul>
 
-				<ul class="col-md-6 col-lg-4 grid cs-style-4">
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
 					<center><li>
 						<figure>
 							<div><img src="<?= Config::$path_public; ?>/images/bases.jpg" alt="img04"></div>
@@ -36,7 +36,7 @@
 					</li></center>
 				</ul>
 
-				<ul class="col-md-6 col-lg-4 grid cs-style-4">
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
 					<center><li>
 						<figure>
 							<div><img src="<?= Config::$path_public; ?>/images/bases.jpg" alt="img04"></div>
@@ -51,7 +51,7 @@
 					</li></center>
 				</ul>
 
-				<ul class="col-md-6 col-lg-4 grid cs-style-4">
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
 					<center><li>
 						<figure>
 							<div><img src="<?= Config::$path_public; ?>/images/bases.jpg" alt="img04"></div>

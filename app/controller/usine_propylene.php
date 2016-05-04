@@ -18,7 +18,7 @@ Class usine_propylene extends base_module
 				$this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
 				$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);
 				//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
-				$this->set_argent_user($this->user_obj->usine_propylene->prix);
+				$this->set_argent_user($this->user_obj->usine_propylene->prix, "-");
 				$this->user_obj->set_variable_user();
 				unset($_GET['construct']);
 				$this->alert_construction_en_cours = 1;
