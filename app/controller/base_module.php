@@ -66,6 +66,38 @@ Class base_module extends all_query
 		$this->user_obj->set_variable_user();
 	}
 
+	public function set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
+	{
+		$vg_before = $this->user_obj->user_infos->last_culture_vg;
+		$pg_before = $this->user_obj->user_infos->last_usine_pg;
+		
+		if($moins_plus == "-")
+		{
+			$pg_after = $pg_before - $pg_to_operate;
+			$vg_after = $vg_before - $vg_to_operate;
+		}
+		else if($moins_plus == "+")
+		{
+			$pg_after = $pg_before + $pg_to_operate;
+			$vg_after = $vg_before + $vg_to_operate;
+		}
+		else
+		{
+			$pg_after = $pg_before - $pg_to_operate;
+			$vg_after = $vg_before - $vg_to_operate;
+		}
+		
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->last_culture_vg = $vg_after;
+		$req_sql->ctx->last_usine_pg = $pg_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		$this->user_obj->set_variable_user();
+	}
 
 	public function time_finish_construct($time_construct)
 	{

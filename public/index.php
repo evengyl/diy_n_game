@@ -59,4 +59,4 @@ if(!empty($error))
 }
 
 
-//affiche_pre($user);
+affiche_pre($user);

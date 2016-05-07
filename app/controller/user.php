@@ -51,7 +51,7 @@ Class user extends all_query
 
 				foreach($res_fx[0] as $key => $values)
 				{
-					$this->user_infos->$key = $values;					
+					$this->user_infos->$key = $values;			
 				}
 				unset($res_fx);
 
