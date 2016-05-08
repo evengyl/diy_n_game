@@ -16,8 +16,13 @@ if(!isset($_GET['page']))
 $login = new login("", "", $_POST);
 
 $sign_up = new sign_up("");
+
+$my_account = new my_account("");
+
 if(Config::$is_connect == 0){
 	$sign_up->doIt($_POST);
+}else{
+	$my_account->change_infos($_POST);
 }
 
 		//si le joueur est connecter on arrive sur la page de jeu

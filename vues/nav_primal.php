@@ -21,14 +21,14 @@
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=game_home">Accès au Jeu</a>' : ''; ?></li>
 		        <li><a href="#">Classement</a></li>
 		        <li><a href="#">Nouveautés</a></li>
-		        <li><a href="#">Mon compte</a></li>
+		        <li><a href="?page=my_account">Mon compte</a></li>
 		        <li><a href="?page=test">Test</a></li>
 		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Un probleme ?&nbsp;<span class="caret"></span></a>
+		          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Un problème ?&nbsp;<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#">Consulter la doc</a></li>
+		            <li><a href="?page=documentation">Consulter la doc</a></li>
 		            <li><a href="#">Forum</a></li>
-		            <li><a href="?page=contact">Contacter moi</a></li>
+		            <li><a href="?page=contact">Contactez-moi</a></li>
 		          </ul>
 		        </li>
 		      </ul>

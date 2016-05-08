@@ -47,6 +47,12 @@ Class router
 				
 				else if($this->route['page'] == 'labos_bases')
 					$this->get()->is_connect()->assign_bread($title_brd = "Laboratoire pharmaceutique de mélanges")->assign_mod_var($this->route['construct']);
+				
+				else if($this->route['page'] == 'my_account')
+					$this->get()->is_connect()->assign_bread($title_brd = "Mon compte")->assign_mod();
+
+				else if($this->route['page'] == 'documentation')
+					$this->get()->is_connect()->assign_bread($title_brd = "Documentation")->assign_mod();
 							
 				else
 					unset($this->route['page']);
