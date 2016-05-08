@@ -2,7 +2,10 @@
 		<div class="col-lg-12" style="margin-bottom:15px;">
 			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Listes des batiments de production de ressources brut.
-			</h3>	
+			</h3>
+			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
+					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
+			</div>	
 			<form method="post" action="?page=labos_bases">
 				<div class="col-lg-12" style="background:#232D3B; margin-top:15px; margin-bottom:50px;">
 					<ul class="col-md-6 col-lg-6 grid cs-style-4">
@@ -14,7 +17,6 @@
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
-									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de synthèse : 2h00</b></br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </b><?= $nb_to_create[2080]; ?></li>
 									<select name="2080">
 										<?php
@@ -40,7 +42,6 @@
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
-									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de synthèse : 1h30</b></br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </b><?= $nb_to_create[5050]; ?></li>
 									<select name="5050">
 										<?php
@@ -66,7 +67,6 @@
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
-									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de synthèse : 2h00</b></br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nb de synthèse possible : </b><?= $nb_to_create[8020]; ?></li>
 									<select name="8020">
 										<?php
@@ -92,7 +92,6 @@
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
-									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de synthèse : 1h00</b></br></li>
 									<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </b><?= $nb_to_create[1000]; ?></li>
 									<select name="1000">
 										<?php
@@ -109,9 +108,6 @@
 							</figure>
 						</li></center>
 					</ul>
-				<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
-				</div>
 				<input type="submit" name="create_bases" value="Creer">	
 				</div>					
 			</form>

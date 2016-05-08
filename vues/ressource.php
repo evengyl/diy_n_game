@@ -51,21 +51,21 @@ if(Config::$is_connect == 1)
 					    <ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Bases 20VG/80PG : 000</span>
+					        		<span style="font-size:13px;">Bases 20VG/80PG : <?= $user->bases->bases_2080 ; ?></span>
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Bases 50VG/50PG : 000</span>
+					        		<span style="font-size:13px;">Bases 50VG/50PG : <?= $user->bases->bases_5050 ; ?></span>
 					        </li>
 				        </ul>
 			        	<ul class="col-lg-6 nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Bases 80VG/20PG : 000</span>
+					        		<span style="font-size:13px;">Bases 80VG/20PG : <?= $user->bases->bases_8020 ; ?></span>
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/vg-pg.png" alt="Bases en glycérine et propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Bases 100VG : 000</span>
+					        		<span style="font-size:13px;">Bases 100VG : <?= $user->bases->bases_1000 ; ?></span>
 					        </li>
 				        </ul>
 				    </div>

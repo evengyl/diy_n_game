@@ -103,7 +103,7 @@ class cron extends all_query
 		$row_user->ressource_win_usine_pg = 0;
 
 		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 3);
-		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 3;
+		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 3);
 
 		//on remet a 0 le temps de la derniere mise a jour
 		$row_user->diff_time = 0;

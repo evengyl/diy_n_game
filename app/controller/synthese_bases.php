@@ -73,9 +73,17 @@ Class synthese_bases extends base_module
 			unset($post['create_bases']);
 			foreach($post as $name_form_bases => $value_form_bases)
 			{
-				$this->calcul_price_total_cost_bases($name_form_bases, intval($value_form_bases));
-				$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
-				$this->user_obj->set_variable_user();
+				if($this->calcul_price_total_cost_bases($name_form_bases, intval($value_form_bases)))
+				{
+					$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
+					$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
+					$this->user_obj->set_variable_user();
+				}
+				else
+				{
+					return 0;
+				}
+				
 			}
 		}
 		//faudra appeler cette fct set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
@@ -92,24 +100,20 @@ Class synthese_bases extends base_module
 			$this->cout_total_vg += (($this->plantes_for_littre/100)*20) * $value_post;
 			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*80) * $value_post;
 		}
-		else if($row_post == 5050)
+
+		if($row_post == 5050)
 		{
 			$this->cout_total_vg += (($this->plantes_for_littre/100)*50) * $value_post;
 			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*50) * $value_post;
 		}
-		else if($row_post == 8020)
+		if($row_post == 8020)
 		{
 			$this->cout_total_vg += (($this->plantes_for_littre/100)*80) * $value_post;
 			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*20) * $value_post;
 		}
-		else if($row_post == 1000)
+		if($row_post == 1000)
 		{
 			$this->cout_total_vg += $this->plantes_for_littre * $value_post;
-		}
-		else
-		{
-			$this->cout_total_vg = 0;
-			$this->cout_total_pg = 0;
 		}
 	}
 
@@ -125,22 +129,26 @@ Class synthese_bases extends base_module
 			}
 			else
 			{
-				//déduction de l'argnet et des ressource				
+				//déduction de l'argnet et des ressource		
+				$total_price = 0;		
 				if($row_post == 2080)
-					$total_price = $this->prix_vingt_quatre_vingt * $value_post;
+					$total_price += $this->prix_vingt_quatre_vingt * $value_post;
 
 				else if($row_post == 5050)
-					$total_price = $this->prix_cinquante_cinquante * $value_post;
+					$total_price += $this->prix_cinquante_cinquante * $value_post;
 
 				else if($row_post == 8020)
-					$total_price = $this->prix_quatre_vingt_vingt * $value_post;
+					$total_price += $this->prix_quatre_vingt_vingt * $value_post;
 
 				else if($row_post == 1000)
-					$total_price = $this->prix_cent * $value_post;
+					$total_price += $this->prix_cent * $value_post;
 
 				//il faut vérifier si il a assez d'argnet également
 				if($this->user_obj->user_infos->argent >= $total_price)
+				{
 					$this->set_argent_user($total_price, "-");
+					return 1;
+				}					
 				else
 				{
 					$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
@@ -151,8 +159,32 @@ Class synthese_bases extends base_module
 		//calculera le prix que coutera la synthese des bases et renverra a la fct précédente
 	}
 
-	public function ajout_bases_in_bsd($array_bases_prix)
+	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
 	{
+		$stx_bases = "bases_".$row_post;
+		$bases_before = $this->user_obj->bases->$stx_bases;
+		
+		if($moins_plus == "-")
+		{
+			$bases_after = $bases_before - $value_post;	
+		}
+		else if($moins_plus == "+")
+		{
+			$bases_after = $bases_before + $value_post;
+		}
+		else
+		{
+			$bases_after = $bases_before - $value_post;
+		}
+
+		$req_sql = new stdClass;
+		$req_sql->table = "bases";
+		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$var_bsd = "bases_".$row_post;
+		$req_sql->ctx->$var_bsd = $bases_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
 		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
 	}
 
