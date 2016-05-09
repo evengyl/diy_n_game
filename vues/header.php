@@ -11,7 +11,7 @@
 	</div>
 
 		__TPL_nav_primal__
-		__MOD_ressource__
+		__MOD2_ressource__
 
 		
 </div>

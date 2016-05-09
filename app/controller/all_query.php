@@ -8,20 +8,7 @@
 
 class all_query extends _db_connect
 {
-	
-
-	public $ctx;
 	public $db_link;
-
-
-
-	public function __construct()
-	{
-		$this->ctx = (object)array();
-	}
-
-
-
 
 	public function select($req_sql)
 	{
@@ -175,13 +162,11 @@ class all_query extends _db_connect
 					$req_sql = 'UPDATE '.$object->table.' SET '.$set_all.' WHERE '.$object->where;	
 			}
 
-			affiche_pre($req_sql);
 			parent::query($req_sql);
 
 		}
 		else
 		{
-			affiche_pre($object);
 			echo "la requete n'est pas passée car on attendait un objet.";
 		}
         return $erreur = 'modification bien appliquée';

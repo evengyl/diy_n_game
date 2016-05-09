@@ -8,6 +8,8 @@ class _db_connect extends Config
 	private $is_connected = false;
 	private $last_res_sql = null;
 	private $last_req_sql = null;
+	
+
 
 	public function __construct()
 	{
@@ -32,6 +34,9 @@ class _db_connect extends Config
 	//elle recois la requete envoyer par l'appelant  
 	public function fetch_object($req_sql)  // elle recois la requ�te sql sous forme de string
 	{	
+
+		
+		parent::set_list_req_sql($req_sql);
 
 		if($this->is_connected == false) // v�rifie si la connection � la DB est �tablie si pas , elle le fait
 			$this->connect(); //appel la fonction
@@ -58,7 +63,7 @@ class _db_connect extends Config
 
 	public function fetch_array($req_sql)
 	{
-		
+		parent::set_list_req_sql($req_sql);
 		if($this->is_connected == false)
 			$this->connect();
 	
@@ -79,6 +84,7 @@ class _db_connect extends Config
 
 	public function fetch_assoc($req_sql)
 	{
+		parent::set_list_req_sql($req_sql);
 		if($this->is_connected == false)
 			$this->connect();
 	
@@ -99,6 +105,7 @@ class _db_connect extends Config
 
 	public function query($req_sql) //not for return somethings
 	{
+		parent::set_list_req_sql($req_sql);
 		$this->connect();
 		return mysqli_query($this->db_link, $req_sql)or die(mysqli_error($this->db_link));
 		

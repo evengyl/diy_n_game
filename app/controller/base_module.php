@@ -240,23 +240,4 @@ Class base_module extends all_query
 		$this->insert_into($req_sql);
 
 	}
-
-
-
-	
-
-	public function generate_breadcrumb($referer = array())
-	{
-		/*$title_page = "";
-		$number_separate =  count($referer)-1;
-
-		foreach($referer as $row => $values)
-		{
-			$title_page .= "<a href='".$values."' >".$row."</a>";
-			if($number_separate > 0)
-				$title_page .= " > ";
-			$number_separate--;
-		}*/
-		return $referer;
-	}
 }

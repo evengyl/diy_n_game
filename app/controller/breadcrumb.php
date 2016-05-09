@@ -11,16 +11,16 @@ Class breadcrumb extends base_module
 
 		if(!empty($var_in_match))
 		{
-			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", $var_in_match => "?page=".$_GET['page']));
+			$breadcrumb = array("Accueil" => "?page=home", $var_in_match => "?page=".$_GET['page']);
 		
 		}
 		else if(isset($_GET['page']))
 		{
-			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home", $_GET['page'] => "?page=".$_GET['page']));
+			$breadcrumb = array("Accueil" => "?page=home", $_GET['page'] => "?page=".$_GET['page']);
 		}
 		else
 		{
-			$breadcrumb = $this->generate_breadcrumb(array("Accueil" => "?page=home"));
+			$breadcrumb = array("Accueil" => "?page=home");
 		}
 
 		

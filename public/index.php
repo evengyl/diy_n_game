@@ -4,6 +4,10 @@ require "../app/controller/fonction.php";
 require '../app/controller/load_class.php'; 
 Autoloader::register(); 
 session_start();
+$db = new _db_connect();
+
+
+
 
 global $error;
 $error = array();
@@ -13,22 +17,25 @@ if(!isset($_GET['page']))
 
 
 //ou il va recevoir 0 ou 1 cela dépend de la secu
-$login = new login("", "", $_POST);
 
-$sign_up = new sign_up("");
 
-$my_account = new my_account("");
 
-if(Config::$is_connect == 0){
-	$sign_up->doIt($_POST);
-}else{
-	$my_account->change_infos($_POST);
-}
+
+//$sign_up = new sign_up("");
+
+//$my_account = new my_account("");
+
+//if(Config::$is_connect == 0){
+	//$sign_up->doIt($_POST);
+//}else{
+//	$my_account->change_infos($_POST);
+//}
 
 		//si le joueur est connecter on arrive sur la page de jeu
 
 ob_start();
 global $user;
+$login = new login("", $_POST);
 $user = new user();
 $route = new router();?>
 
@@ -38,15 +45,15 @@ $route = new router();?>
 	</head>
 <body onload="timer()">
 
-	__MOD_header__
+	__MOD2_header__
 
 	<!--<div class='col-lg-2'>Nouveautés, mises a jour et réseaux sociaux</div>-->	
 	<? $route->router($_GET); ?>
 		
 	<!--<div class='col-lg-2'>Pub, ticket a gratter toute les heures, concours ext ext/div>-->	
-	__TPL_bottom_head__
+	__TPL2_bottom_head__
 
-	__TPL_footer__
+	__TPL2_footer__
 	
 </body>
 </html>
@@ -64,4 +71,6 @@ if(!empty($error))
 }
 
 
-affiche_pre($user);
+affiche_pre(Config::$list_req_sql);
+
+

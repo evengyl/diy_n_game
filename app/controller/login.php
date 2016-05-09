@@ -2,7 +2,7 @@
 
 Class login extends base_module
 {
-	public function __construct($module_tpl_name, $t="",$post = array())
+	public function __construct($module_tpl_name, $post = array())
 	{		
 		if($module_tpl_name != "")
 			parent::__construct($module_tpl_name);

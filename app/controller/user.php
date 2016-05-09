@@ -19,11 +19,10 @@ Class user extends all_query
 	{
 		if(Config::$is_connect == 1)
 		{
+			$this->set_variable_user();
 			$this->time_now = date("U");			
-			$this->set_variable_user();
 			$this->validate_construct();
-			$this->set_variable_user();
-			
+			$this->set_variable_user();			
 		}
 		else
 		{
