@@ -5,10 +5,10 @@ Class synthese_bases extends base_module
 	public $plantes_for_littre = 3000;
 	public $propylene_brut_for_littre = 2100;
 
-	public $prix_vingt_quatre_vingt = 220;
-	public $prix_cinquante_cinquante = 200;
-	public $prix_quatre_vingt_vingt = 180;
-	public $prix_cent = 150;
+	public $prix_vingt_quatre_vingt = 450;
+	public $prix_cinquante_cinquante = 400;
+	public $prix_quatre_vingt_vingt = 370;
+	public $prix_cent = 350;
 
 	public $plante_stock;
 	public $propylene_stock;
