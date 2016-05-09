@@ -23,7 +23,7 @@ if(Config::$is_connect == 1)
 		    	</div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    	<div style="padding-bottom:7px; padding-top:7px;" class=" navbar-collapse collapse" id="nav_primal">
+		    	<div style="padding-bottom:7px; padding-top:7px; position: relative; z-index: 9999;" class=" navbar-collapse collapse" id="nav_primal">
 		    		
 		    		<div class="col-lg-4 col-without-padding">
 				      	<ul class="col-lg-12 nav navbar-nav">

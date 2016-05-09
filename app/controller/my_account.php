@@ -1,4 +1,5 @@
 <?
+
 Class my_account extends base_module
 {
 	public function __construct($module_tpl_name)

@@ -2,7 +2,7 @@
 $test_nb = 5000.5000;
 
 
-
+echo password_hash("legends", PASSWORD_DEFAULT);
 
 /*
 

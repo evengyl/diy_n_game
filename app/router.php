@@ -1,9 +1,9 @@
 <?
 Class router
 {
-	private $get = [];
+	private $get = array();
 	private $echo_get;
-	private $route;
+	private $route = array();
 
 	public function router($get = array())
 	{
@@ -11,7 +11,9 @@ Class router
 		
 		$this->route = $get;
 		
-		if(!isset($this->route['construct'])) $this->route['construct'] = "";
+		if(!isset($this->route['construct']))
+			$this->route['construct'] = "";
+
 			
 		$this->is_connect = Config::$is_connect;
 
