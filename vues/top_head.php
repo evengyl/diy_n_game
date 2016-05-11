@@ -1,5 +1,5 @@
 
-	<meta name='description' content="Weller designs fume extractor that allows to absorb the smoke produced by machine or soldering station, so these extractor protects the health of it's users" >	
+	<meta name='description' content="" >	
 	<meta name="robots" content="all, index, follow" />
 	<meta name="revisit-after" content="7 days" />
 	<meta http-equiv="content-type" content="text/html" charset="UTF-8">

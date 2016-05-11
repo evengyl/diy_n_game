@@ -8,7 +8,6 @@ $db = new _db_connect();
 
 
 
-
 global $error;
 $error = array();
 
@@ -44,6 +43,7 @@ $route = new router();?>
 		__TPL_top_head__
 	</head>
 <body onload="timer()">
+
 
 	__MOD2_header__
 
