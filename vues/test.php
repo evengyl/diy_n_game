@@ -1,8 +1,64 @@
 <? 
-$test_nb = 5000.5000;
 
+$string = "Amaretto
+Anise
+Barbe à papa
+Melon
+gateau à la crème
+Thé chai
+Coca cherry
+Coco Choco amande
+Gateau chocolat
+downut chocolat
+Framboise chocolat
+Menthol légere
+Cranberry
+Yaourt crème
+Concombre
+Tasse de café
+Fruit du dragon
+Double pomme
+Energy drink
+Vanilla french
+Gingerbread
+Donuts
+crackers
+anana
+Pamplemousse
+grenadine
+Fruit rouge
+Irish cream
+Fraise kiwi
+Jelly candy
+jus d'orange
+jus de peche
+pancake
+meringue citron
+fruit de la passion
+peche cream
+beurre de cacahuete
+poire
+pina colada
+popcorn
+creme pralinée
+cookie
+vanille custard
+lychee
+mangue
+orange
+amande grillée
+cupcake vanille
+creme fouetée vanille
+crème de beurre";
 
-echo password_hash("legends", PASSWORD_DEFAULT);
+$test = explode(PHP_EOL, $string);
+affiche_pre($test);
+foreach($test as $row)
+{
+	$test[] = ucfirst($row);
+}
+
+affiche_pre($test);
 
 /*
 

@@ -47,8 +47,8 @@
 					
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Recherches et productions des arômes
+						<a style="color:white;" href="?page=arome_list">
+							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Recherches en parfumerie des arômes
 						</a>
 					</li>
 
