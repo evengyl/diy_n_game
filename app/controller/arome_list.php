@@ -23,9 +23,9 @@ $test = array();
 
 		
 
-		affiche_pre($test);
 
-		return $this->render();
+
+		return $this->assign_var("test", $test)->assign_var("user", $this->user_obj)->render();
 	}
 
 
