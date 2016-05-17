@@ -71,6 +71,6 @@ if(!empty($error))
 }
 
 
-affiche_pre(Config::$list_req);
+affiche_pre(Config::$list_req_sql);
 
 

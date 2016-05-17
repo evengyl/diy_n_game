@@ -7,7 +7,7 @@ Class test extends base_module
 		parent::__construct($module_tpl_name);
 
 
-		return $this->assign_var("user", $user_obj)->render();
+		return $this->assign_var("user", $this->user_obj)->render();
 	}
 
 }

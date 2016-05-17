@@ -1,5 +1,42 @@
 <? 
 
+$all_query = new all_query();
+$req_sql = new stdClass();
+$req_sql->table = "aromes";
+$req_sql->var = "*";
+$req_sql->where = "marque = 'Cappela Flavor'";
+$test = $all_query->select($req_sql);
+
+//affiche_pre($test);
+$nb_fichier = 0;
+if($dossier = opendir("./images/aromes/Cappela Flavor"))
+{
+	affiche_pre($dossier);
+	while(false !== ($fichier = readdir($dossier)))
+	{
+		if($fichier != '.' && $fichier != '..' && $fichier != 'index.php')
+		{
+			$nb_fichier++; // On incrémente le compteur de 1
+			echo '<li><a href="./mondossier/' . $fichier . '">' . $fichier . '</a></li>';
+			$new_name = str_replace("capella", "cappela", $fichier);
+			rename("./images/aromes/Cappela Flavor/".$fichier."","./images/aromes/Cappela Flavor/".$new_name."");
+		}
+	}
+}
+
+
+
+echo $test_name;
+foreach($test  as $row)
+{
+	echo "<img src='".$row->img."'>";
+}
+
+
+
+
+
+/*
 $string = "Amaretto
 Anise
 Barbe à papa
@@ -51,15 +88,30 @@ cupcake vanille
 creme fouetée vanille
 crème de beurre";
 
+
+$all_query = new all_query();
 $test = explode(PHP_EOL, $string);
-affiche_pre($test);
+$i = 0;
 foreach($test as $row)
 {
-	$test[] = ucfirst($row);
+	$aka[$i]["nom"] = ucfirst($row);
+	$aka[$i]["marque"] = 'capella';
+	$aka[$i]["quality"] = '3';
+	$aka[$i]["commentaire"] = "";
+	$aka[$i]["img"] = '0';
+	$i++;
 }
 
-affiche_pre($test);
 
+foreach($aka as $row)
+{
+			$req_sql_aromes_capella = new stdClass();
+		$req_sql_aromes_capella->table = "aromes";
+		$req_sql_aromes_capella->ctx = new stdClass();
+		$req_sql_aromes_capella->ctx = $row;
+
+		$all_query->insert_into($req_sql_aromes_capella);
+}
 /*
 
 

@@ -36,7 +36,7 @@ class _db_connect extends Config
 	{	
 
 		
-		parent::set_list_req_sql($req_sql);
+		
 
 		if($this->is_connected == false) // v�rifie si la connection � la DB est �tablie si pas , elle le fait
 			$this->connect(); //appel la fonction
@@ -44,6 +44,7 @@ class _db_connect extends Config
 		if(is_null($this->last_req_sql) || is_null($this->last_res_sql) || $req_sql != $this->last_req_sql)
 		{
 			$this->last_req_sql = $req_sql; // enregistre une copie temporaire de la requete
+			parent::set_list_req_sql($req_sql);
 			$this->last_res_sql = mysqli_query($this->db_link, $req_sql)or die('Probleme de requete = '. $req_sql);// enregistre une copie temporaire de la reponse requete
 		}// si les valeurs sont null ou diff�rente , enregistre les variable correctement
 
@@ -70,6 +71,7 @@ class _db_connect extends Config
 		if(is_null($this->last_req_sql) || is_null($this->last_res_sql) || $req_sql != $this->last_req_sql)
 		{
 			$this->last_req_sql = $req_sql;
+			parent::set_list_req_sql($req_sql);
 			$this->last_res_sql = mysqli_query($this->db_link, $req_sql);
 		}
 		$res = mysqli_fetch_array($this->last_res_sql);
@@ -91,6 +93,7 @@ class _db_connect extends Config
 		if(is_null($this->last_req_sql) || is_null($this->last_res_sql) || $req_sql != $this->last_req_sql)
 		{
 			$this->last_req_sql = $req_sql;
+			parent::set_list_req_sql($req_sql);
 			$this->last_res_sql = mysqli_query($this->db_link, $req_sql);
 		}
 		$res = mysqli_fetch_assoc($this->last_res_sql);

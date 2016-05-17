@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 13 Mai 2016 à 06:58
--- Version du serveur :  10.1.9-MariaDB
--- Version de PHP :  5.6.15
+-- Généré le :  Mar 17 Mai 2016 à 16:15
+-- Version du serveur :  5.6.20
+-- Version de PHP :  5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `diy_n_game`
@@ -29,15 +29,15 @@ USE `diy_n_game`;
 --
 
 DROP TABLE IF EXISTS `aromes`;
-CREATE TABLE `aromes` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `aromes` (
+`id` int(11) NOT NULL,
   `marque` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `commentaire` text NOT NULL,
   `img` varchar(255) NOT NULL,
   `quality` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=819 ;
 
 --
 -- Vider la table avant d'insérer `aromes`
@@ -667,7 +667,37 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `commentaire`, `img`, `qual
 (785, 'Vaperite', 'Gourmand', 'Gauffre', '', '0', 0),
 (786, 'Vaperite', 'Gourmand', 'Noisette', '', '0', 0),
 (787, 'Vaperite', 'Gourmand', 'Praline Noisette', '', '0', 0),
-(788, 'Vaperite', 'Gourmand', 'Sirop d''érable', '', '0', 0);
+(788, 'Vaperite', 'Gourmand', 'Sirop d''érable', '', '0', 0),
+(789, 'Cappela Flavor', '', 'Amaretto', '', '0', 3),
+(790, 'Cappela Flavor', '', 'Anise', '', '0', 3),
+(791, 'Cappela Flavor', '', 'Barbe à papa', '', '0', 3),
+(792, 'Cappela Flavor', '', 'Melon', '', '0', 3),
+(793, 'Cappela Flavor', '', 'Gateau à la crème', '', '0', 3),
+(794, 'Cappela Flavor', '', 'Thé chai', '', '0', 3),
+(795, 'Cappela Flavor', '', 'Coca cherry', '', '0', 3),
+(796, 'Cappela Flavor', '', 'Coco Choco amande', '', '0', 3),
+(797, 'Cappela Flavor', '', 'Gateau chocolat', '', '0', 3),
+(798, 'Cappela Flavor', '', 'Downut chocolat', '', '0', 3),
+(799, 'Cappela Flavor', '', 'Framboise chocolat', '', '0', 3),
+(800, 'Cappela Flavor', '', 'Menthol légere', '', '0', 3),
+(801, 'Cappela Flavor', '', 'Cranberry', '', '0', 3),
+(802, 'Cappela Flavor', '', 'Yaourt crème', '', '0', 3),
+(803, 'Cappela Flavor', '', 'Concombre', '', '0', 3),
+(804, 'Cappela Flavor', '', 'Tasse de café', '', '0', 3),
+(805, 'Cappela Flavor', '', 'Fruit du dragon', '', '0', 3),
+(806, 'Cappela Flavor', '', 'Double pomme', '', '0', 3),
+(807, 'Cappela Flavor', '', 'Energy drink', '', '0', 3),
+(808, 'Cappela Flavor', '', 'Vanilla french', '', '0', 3),
+(809, 'Cappela Flavor', '', 'Gingerbread', '', '0', 3),
+(810, 'Cappela Flavor', '', 'Donuts', '', '0', 3),
+(811, 'Cappela Flavor', '', 'Crackers', '', '0', 3),
+(812, 'Cappela Flavor', '', 'Anana', '', '0', 3),
+(813, 'Cappela Flavor', '', 'Pamplemousse', '', '0', 3),
+(814, 'Cappela Flavor', '', 'Grenadine', '', '0', 3),
+(815, 'Cappela Flavor', '', 'Fruit rouge', '', '0', 3),
+(816, 'Cappela Flavor', '', 'Irish cream', '', '0', 3),
+(817, 'Cappela Flavor', '', 'Fraise kiwi', '', '0', 3),
+(818, 'Cappela Flavor', '', 'Jelly candy', '', '0', 3);
 
 -- --------------------------------------------------------
 
@@ -676,14 +706,14 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `commentaire`, `img`, `qual
 --
 
 DROP TABLE IF EXISTS `bases`;
-CREATE TABLE `bases` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `bases` (
+`id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `bases_2080` varchar(200) NOT NULL,
   `bases_5050` varchar(200) NOT NULL,
   `bases_8020` varchar(200) NOT NULL,
   `bases_1000` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Vider la table avant d'insérer `bases`
@@ -704,12 +734,12 @@ INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, 
 --
 
 DROP TABLE IF EXISTS `construction_en_cours`;
-CREATE TABLE `construction_en_cours` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `construction_en_cours` (
+`id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(20) NOT NULL,
   `time_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Vider la table avant d'insérer `construction_en_cours`
@@ -730,13 +760,13 @@ INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_fin
 --
 
 DROP TABLE IF EXISTS `culture_vg`;
-CREATE TABLE `culture_vg` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `culture_vg` (
+`id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(11) NOT NULL,
   `time_construct` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Vider la table avant d'insérer `culture_vg`
@@ -827,13 +857,13 @@ INSERT INTO `culture_vg` (`id`, `level`, `production`, `prix`, `time_construct`)
 --
 
 DROP TABLE IF EXISTS `labos_bases`;
-CREATE TABLE `labos_bases` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `labos_bases` (
+`id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `pourcent_down` float NOT NULL,
   `prix` int(11) NOT NULL,
   `time_construct` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Vider la table avant d'insérer `labos_bases`
@@ -924,8 +954,8 @@ INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_constru
 --
 
 DROP TABLE IF EXISTS `login`;
-CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `login` (
+`id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `last_connect` varchar(50) NOT NULL,
@@ -937,7 +967,7 @@ CREATE TABLE `login` (
   `last_culture_vg` double NOT NULL,
   `last_usine_pg` double NOT NULL,
   `argent` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Vider la table avant d'insérer `login`
@@ -960,13 +990,13 @@ INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`,
 --
 
 DROP TABLE IF EXISTS `news`;
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `news` (
+`id` int(11) NOT NULL,
   `titre` text NOT NULL,
   `text` varchar(255) NOT NULL,
   `date_now` varchar(50) NOT NULL,
   `visible` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Vider la table avant d'insérer `news`
@@ -996,13 +1026,13 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 --
 
 DROP TABLE IF EXISTS `usine_pg`;
-CREATE TABLE `usine_pg` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usine_pg` (
+`id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(20) NOT NULL,
   `time_construct` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Vider la table avant d'insérer `usine_pg`
@@ -1094,49 +1124,49 @@ INSERT INTO `usine_pg` (`id`, `level`, `production`, `prix`, `time_construct`) V
 -- Index pour la table `aromes`
 --
 ALTER TABLE `aromes`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `bases`
 --
 ALTER TABLE `bases`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -1146,42 +1176,42 @@ ALTER TABLE `usine_pg`
 -- AUTO_INCREMENT pour la table `aromes`
 --
 ALTER TABLE `aromes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=789;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=819;
 --
 -- AUTO_INCREMENT pour la table `bases`
 --
 ALTER TABLE `bases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
