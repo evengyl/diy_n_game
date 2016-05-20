@@ -16,7 +16,6 @@
 
 	<link rel="stylesheet" type="text/css" href="<?= Config::$path_public; ?>/css/bootstrap.css"/>
 	<link rel="stylesheet/less" type="text/css" href="<?= Config::$path_public; ?>/css/style.less" />
-	<link rel="stylesheet" type="text/css" href="<?= Config::$path_public; ?>/css/lightbox.css"/>
 	<link rel="stylesheet" type="text/css" href="<?= Config::$path_public; ?>/css/animate-animo.css"/>
 
 

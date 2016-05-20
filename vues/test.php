@@ -4,33 +4,30 @@ $all_query = new all_query();
 $req_sql = new stdClass();
 $req_sql->table = "aromes";
 $req_sql->var = "*";
-$req_sql->where = "marque = 'Cappela Flavor'";
 $test = $all_query->select($req_sql);
 
-//affiche_pre($test);
-$nb_fichier = 0;
-if($dossier = opendir("./images/aromes/Cappela Flavor"))
+foreach($test as $row)
 {
-	affiche_pre($dossier);
-	while(false !== ($fichier = readdir($dossier)))
+	$name_image = $row->marque;
+	$name_image .= "_".$row->nom.".jpg";
+	$name_image = str_replace(" ", "_", $name_image);
+	$name_image = strtolower($name_image);
+	$name_image = "/".$row->marque."/".$name_image;
+	$row->name_image = $name_image;
+}
+
+
+$dossier = opendir("./images/aromes/Cappela Flavor");
+
+while(false !== ($fichier = readdir($dossier)))
+{
+	if($fichier != '.' && $fichier != '..' && $fichier != 'index.php')
 	{
-		if($fichier != '.' && $fichier != '..' && $fichier != 'index.php')
-		{
-			$nb_fichier++; // On incrémente le compteur de 1
-			echo '<li><a href="./mondossier/' . $fichier . '">' . $fichier . '</a></li>';
-			$new_name = str_replace("capella", "cappela", $fichier);
-			rename("./images/aromes/Cappela Flavor/".$fichier."","./images/aromes/Cappela Flavor/".$new_name."");
-		}
+		echo '<img class="col-lg-2 img-responsive" src="/images/aromes/Cappela Flavor/' . utf8_encode($fichier) . '">';
 	}
 }
 
 
-
-echo $test_name;
-foreach($test  as $row)
-{
-	echo "<img src='".$row->img."'>";
-}
 
 
 
