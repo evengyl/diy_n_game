@@ -9,7 +9,7 @@
 
 
 			<div class="col-sm-6 col-md-4">
-				<div class="thumbnail" style="height:330px;">
+				<div class="thumbnail" style="height:390px;">
 					<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 					<div class="caption">
 						<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="col-sm-6 col-md-4">
-				<div class="thumbnail" style="height:330px;">
+				<div class="thumbnail" style="height:390px;">
 					<img src="<?= Config::$path_public."/images/quality_search_aromes_2.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 2">
 					<div class="caption">
 						<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
@@ -35,7 +35,7 @@
 			</div>
 
 			<div class="col-sm-6 col-md-4">
-				<div class="thumbnail" style="height:330px;">
+				<div class="thumbnail" style="height:390px;">
 					<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
 					<div class="caption">
 						<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
