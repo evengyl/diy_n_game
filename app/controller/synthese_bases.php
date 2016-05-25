@@ -28,7 +28,7 @@ Class synthese_bases extends base_module
 
 
 	public function __construct($module_tpl_name, &$user)
-	{		
+	{	
 	
 
 		parent::__construct($module_tpl_name, $user);
@@ -69,10 +69,8 @@ Class synthese_bases extends base_module
 
 	public function recept_form_with_bases_to_create($post)
 	{
-		affiche_pre($post);
 		if(isset($post['create_bases']))
 		{
-			
 			unset($post['create_bases']);
 			foreach($post as $name_form_bases => $value_form_bases)
 			{
@@ -80,6 +78,7 @@ Class synthese_bases extends base_module
 				{
 					$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
 					$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
+					unset($_POST);
 				}
 				else
 				{

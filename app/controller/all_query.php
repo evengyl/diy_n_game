@@ -81,7 +81,7 @@ class all_query extends _db_connect
 		$value_all = substr($value_all,2);
 		$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
 
-parent::query($req_sql);
+		parent::query($req_sql);
 		unset($_POST);
 		//echo '<p style="font-size:17px; padding:10px; text-align:center;" class="bg-success">Ligne Ajoutée !</p>';
 

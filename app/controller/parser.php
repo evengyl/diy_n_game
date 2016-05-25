@@ -44,6 +44,10 @@ class parser
 				{
 					$page = $this->parse_module_secondaire($match, $page);
 				}
+				else if(preg_match('/__MOD2_[a-z_]+\([a-zA-Z0-9éèçàê_\' ]*\)__/', $page, $match))
+				{
+					$page = $this->parse_module_secondaire_var($match, $page);
+				}
 				else
 				{
 					return $page;	
@@ -183,6 +187,37 @@ class parser
 		$module_name = preg_replace("/[(][a-zA-Z0-9_éèçàê \']*[)]/", "", $match[0]);
 
 		$this->module_name = str_replace(array("__MOD_","__"), "", $module_name);				
+
+		if($this->module_name != "")
+		{
+			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
+			$this->rendu_module =  $module->get_rendu();
+		}
+		else
+		{
+			$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			return '';
+		}
+
+		$page = str_replace($match[0], $this->rendu_module, $page);
+		return $this->parser_main($page);			
+				 				
+	}
+
+	private function parse_module_secondaire_var($match, $page)
+	{
+		global $error;
+
+//		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);	
+//		affiche_pre($module_tpl_name);
+		$var_in_module_name = stristr($match[0], "(");
+		$var_in_module_name = stristr($var_in_module_name, ")", true);
+		$var_in_module_name = substr($var_in_module_name, 1);
+
+
+		$module_name = preg_replace("/[(][a-zA-Z0-9_éèçàê \']*[)]/", "", $match[0]);
+
+		$this->module_name = str_replace(array("__MOD2_","__"), "", $module_name);				
 
 		if($this->module_name != "")
 		{

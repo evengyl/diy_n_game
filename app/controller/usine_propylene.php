@@ -4,24 +4,29 @@ Class usine_propylene extends base_module
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_usine_pg";
 
-	public function __construct($module_tpl_name, &$user, $var_in_module_name ="")
+	public function __construct($module_tpl_name, &$user)
 	{		
 		parent::__construct($module_tpl_name, $user);
-		//on check si une cronstruction de type level_culture_vg est en cours, et on set la var alert a 0 si pas et a 1 si il y a une construction
-		$this->alert_construction_en_cours = $this->check_construction_en_cours($var_in_module_name, $this->name_batiment, $this->user_obj->usine_propylene->prix);
-		//on check si le bouton de construction a été validé, et on crée le champs de ctrt dans la base de données
-		if($var_in_module_name == $this->name_batiment)
+
+		$this->alert_construction_en_cours = $this->check_construction_en_cours($this->name_batiment, $this->user_obj->usine_propylene->prix);	
+		
+		if(isset($_POST['construct']))
 		{
-			if($this->alert_construction_en_cours == 0)
+
+			if($_POST['construct'] == 'level_usine_pg')
 			{
-				// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
-				$this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
-				$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);
-				//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
-				$this->set_argent_user($this->user_obj->usine_propylene->prix, "-");
-				$this->user_obj->get_variable_user();
-				unset($_GET['construct']);
-				$this->alert_construction_en_cours = 1;
+				//on check si une cronstruction de type level_culture_vg est en cours, et on set la var alert a 0 si pas et a 1 si il y a une construction
+
+				if($this->alert_construction_en_cours == 0)
+				{
+					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
+					$this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
+					$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);
+					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
+					$this->set_argent_user($this->user_obj->usine_propylene->prix, "-");
+					$this->user_obj->get_variable_user();
+					$this->alert_construction_en_cours = 1;
+				}
 			}
 		}
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur

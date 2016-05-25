@@ -174,47 +174,35 @@ Class base_module extends all_query
 	}
 
 
-	protected function check_construction_en_cours($var_in_match, $name_batiment_from_controller = "", $prix_level_up)
+	protected function check_construction_en_cours($name_batiment_from_controller = "", $prix_level_up)
 	{
-		$req_sql = new stdClass;
-		$req_sql->table = "construction_en_cours";
-		$req_sql->var = "*";
-		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
-
-		$res_sql = $this->select($req_sql);
-
-		if(!empty($res_sql))
+		if(!empty($this->user_obj->construction))
 		{	
-		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans		
-			foreach($res_sql as $row_construct)
+		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans	
+			foreach($this->user_obj->construction as $row_construct)
 			{
-				if($row_construct->name_batiment == $var_in_match)
-				{
-					//on viens de lancer l'appel pour mettre en route une construction
-					return 1;
-				}
-				else if($row_construct->name_batiment == $name_batiment_from_controller)
+				if($row_construct->name_batiment == $name_batiment_from_controller)
 				{
 					//la consctruction était déjà lancée quand le joueur c'est logger
 					return 1;	
 				}
-												//mais avant ça on va vérifié si il a l'argent nécessaire
-
-				else if($this->user_obj->user_infos->argent >= $prix_level_up)
-				{
-					return 0;
-				}
-				else
-				{
-					//2 egale que on a pas l'argent
-					return 2;	
-				}
-			}			 
+			}
+			//si il sort de la boucle c'est qu'il n'a rien trouver dans la base
+			//mais avant ça on va vérifié si il a l'argent nécessaire
+			if($this->user_obj->user_infos->argent >= $prix_level_up)
+			{
+				//la tout est ok rien n'est lancé et il as assez d'argnet
+				return 0;
+			}
+			else
+			{
+				//2 egale que on a pas l'argent
+				return 2;	
+			}		 
 		}
 		else
 		{
-								//mais avant ça on va vérifié si il a l'argent nécessaire
-
+			//mais avant ça on va vérifié si il a l'argent nécessaire
 			if($this->user_obj->user_infos->argent >= $prix_level_up)
 			{
 				return 0;

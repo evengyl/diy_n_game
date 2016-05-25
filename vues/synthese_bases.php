@@ -6,7 +6,7 @@
 			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
 					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 			</div>	
-			<form method="post" action="?page=labos_bases">
+			<form method="post" action="#">
 				<div class="col-lg-12" style="background:#232D3B; margin-top:15px; margin-bottom:50px;">
 					<ul class="col-md-6 col-lg-6 grid cs-style-4">
 						<center><li>
@@ -114,3 +114,4 @@
 		</div>
 	</div>
 	<? unset($_SESSION['error']);
+	

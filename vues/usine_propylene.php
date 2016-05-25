@@ -19,20 +19,27 @@
 					<tr class="success" style="color:black;">
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_propylene->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
-					<tr class="success" style="color:black;"><?
-			 			if($in_make == 1)
-			 			{
-							if(isset($time_finish))
-						 	{
-						 		echo "<th>Votre construction sera terminée le/dans : </th>";
-						 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
-						 	}
-			 			}
-			 			else if($in_make == 2)
-			 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
-			 			else
-			 				echo "<th><td><a class='btn btn-primary' href='?page=usine_propylene&construct=level_usine_pg'>&nbsp;Construire le niveau suivant&nbsp;</a></td></th>";?>
-			 					
+					<tr class="success" style="color:black;">
+						<form method="post" action="#"><?
+				 			if($in_make == 1)
+				 			{
+								if(isset($time_finish))
+							 	{
+							 		echo "<th>Votre construction sera terminée le/dans : </th>";
+							 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
+							 	}
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
+				 			}
+				 			else
+				 			{
+				 				echo "<input type='hidden' name='construct' value='level_usine_pg'/></a>";
+				 				echo "<td><input type='submit' class='btn btn-primary' value='Construire le niveau suivant'/></td>";
+				 			}?>
+				 				
+			 			</form>	
 					</tr>
 				</table>
 			</div>

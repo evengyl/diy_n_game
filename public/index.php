@@ -78,3 +78,11 @@ affiche_pre($user);
 affiche_pre(Config::$list_req_sql);
 
 
+if(!empty($_POST))
+{
+	foreach($_POST as $key => $values)
+	{
+		unset($_POST[$key]);
+	}
+}
+
