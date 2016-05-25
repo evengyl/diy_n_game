@@ -63,61 +63,7 @@ class all_query extends _db_connect
 		}
 	}
 
-/*
-	public function select_simple($var, $from, $where='', $order='', $type_return='object', $limite ='')
-	{	
 
-		if($where != '')
-			$req_sql = "SELECT ".$var." FROM ".$from." WHERE ".$where."";		
-		else
-			$req_sql = "SELECT ".$var." FROM ".$from."";			
-
-
-		if($order != '')
-			$req_sql = $req_sql." ".$order;
-		if($limite != '')
-			$req_sql = $req_sql.' LIMIT '.$limite;
-
-		// $security = new security(); // instancie le fichier de securiter 
-		// $req_sql = $security->verif_req($req_sql); // return la requète sécurisée !		
-
-		if($type_return == 'object')
-		{
-			$i = 0;
-
-			while($row = parent::fetch_object($req_sql))
-			{
-				$res_fx[$i] = $row;
-				$i++;
-			}
-		}
-		else if($type_return == 'array')
-		{
-			$i = 0;
-			while($row = parent::fetch_array($req_sql))
-			{
-				$res_fx[$i] = $row;
-				$i++;
-			}
-		}
-		else if($type_return == 'assoc')
-		{	
-			$i = 0;
-			while($row = parent::fetch_assoc($req_sql))
-			{
-				$res_fx[$i] = $row;
-				$i++;
-			}
-		}
-		
-		unset($req_sql); //vide le buffer de memoire $req_sql pour liberer de la place 
-		if(!isset($res_fx))
-			return '';
-		else 
-			return $res_fx;		
-	}
-
-*/
 	public function insert_into($res_sql) // opérationnel et fonctionnel , reste à tester sur la validation
 	{
 
@@ -135,8 +81,7 @@ class all_query extends _db_connect
 		$value_all = substr($value_all,2);
 		$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
 
-affiche_pre($req_sql);
-
+parent::query($req_sql);
 		unset($_POST);
 		//echo '<p style="font-size:17px; padding:10px; text-align:center;" class="bg-success">Ligne Ajoutée !</p>';
 

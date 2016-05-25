@@ -2,11 +2,11 @@
 
 Class my_account extends base_module
 {
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, &$user)
 	{		
 
 		if($module_tpl_name != "")
-			parent::__construct($module_tpl_name);
+			parent::__construct($module_tpl_name, $user);
 
 
 

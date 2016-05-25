@@ -8,6 +8,12 @@ class parser
 	private $user;
 	private $is_connect;
 
+
+	public function __construct(&$user)
+	{
+		$this->user = &$user;
+	}
+
 	public function parser_main($page)
 	{
 
@@ -122,7 +128,7 @@ class parser
 
 		if($this->module_tpl_name != "")
 		{
-			$module = new $this->module_tpl_name($this->module_tpl_name);
+			$module = new $this->module_tpl_name($this->module_tpl_name, $this->user);
 			$this->rendu_module =  $module->get_rendu();
 		}
 		else
@@ -146,7 +152,7 @@ class parser
 
 		if($this->module_tpl_name != "")
 		{
-			$module = new $this->module_tpl_name($this->module_tpl_name);
+			$module = new $this->module_tpl_name($this->module_tpl_name, $this->user);
 			$this->rendu_module =  $module->get_rendu();
 		}
 		else
@@ -180,7 +186,7 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $var_in_module_name);
+			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
 			$this->rendu_module =  $module->get_rendu();
 		}
 		else

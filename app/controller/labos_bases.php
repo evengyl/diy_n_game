@@ -4,9 +4,9 @@ Class labos_bases extends base_module
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_labos_bases";
 
-	public function __construct($module_tpl_name, $var_in_module_name ="")
-	{		
-		parent::__construct($module_tpl_name);
+	public function __construct($module_tpl_name, &$user, $var_in_module_name ="")
+	{	
+		parent::__construct($module_tpl_name, $user);
 		//on check si une cronstruction de type level_culture_vg est en cours, et on set la var alert a 0 si pas et a 1 si il y a une construction
 		$this->alert_construction_en_cours = $this->check_construction_en_cours($var_in_module_name, $this->name_batiment, $this->user_obj->labos_bases->prix);
 		//on check si le bouton de construction a été validé, et on crée le champs de ctrt dans la base de données
@@ -19,7 +19,6 @@ Class labos_bases extends base_module
 				$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);
 				//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 				$this->set_argent_user($this->user_obj->labos_bases->prix, "-");
-				$this->user_obj->set_variable_user();
 				unset($_GET['construct']);
 				$this->alert_construction_en_cours = 1;
 			}

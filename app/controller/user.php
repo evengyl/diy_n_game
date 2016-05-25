@@ -19,10 +19,10 @@ Class user extends all_query
 	{
 		if(Config::$is_connect == 1)
 		{
-			$this->set_variable_user();
+			$this->get_variable_user();
 			$this->time_now = date("U");			
 			$this->validate_construct();
-			$this->set_variable_user();			
+			$this->get_variable_user();			
 		}
 		else
 		{
@@ -32,7 +32,7 @@ Class user extends all_query
 	}
 
 	
-	public function set_variable_user()
+	public function get_variable_user()
 	{
 		global $error;
 
@@ -41,6 +41,8 @@ Class user extends all_query
 
 			if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
 			{
+
+
 				$this->user_infos = new stdClass();
 				$req_sql = new stdClass;
 				$req_sql->table = "login";
@@ -55,31 +57,35 @@ Class user extends all_query
 				unset($res_fx);
 
 
-				$this->champ_glycerine = new stdClass();
+
+
+				$this->obj = new stdClass();
 				$req_sql = new stdClass;
-				$req_sql->table = "culture_vg";
+				$req_sql->table = "raccord";
 				$req_sql->var = "*";
-				$req_sql->where = "level = '".$this->user_infos->level_culture_vg."'";
 				$res_fx = $this->select($req_sql);
-				foreach($res_fx[0] as $key => $values)
+
+				foreach($res_fx as $row)
 				{
-					$this->champ_glycerine->$key = $values;
+					$this->{$row->name_objet} = new stdClass();
+					$req_sql = new stdClass;
+					$req_sql->table = $row->table_batiment;
+					$req_sql->var = "*";
+					$name_level = "level_".$row->table_batiment;
+					$req_sql->where = "level = '".$this->user_infos->$name_level."'";
+					$res_fx = $this->select($req_sql);
+					$this->{$row->name_objet} = $res_fx[0];
+
 				}
+
+
 				unset($res_fx);
 
 
 
-				$this->usine_propylene = new stdClass();
-				$req_sql = new stdClass;
-				$req_sql->table = "usine_pg";
-				$req_sql->var = "*";
-				$req_sql->where = "level = '".$this->user_infos->level_usine_pg."'";
-				$res_fx = $this->select($req_sql);
-				foreach($res_fx[0] as $key => $values)
-				{
-					$this->usine_propylene->$key = $values;
-				}
-				unset($res_fx);
+
+
+
 
 				$this->labos_bases = new stdClass();
 				$req_sql = new stdClass;

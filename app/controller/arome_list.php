@@ -2,15 +2,17 @@
 
 Class arome_list extends base_module
 {
+	public $search_1 = "1000";
+	public $search_2 = "2500";
+	public $search_3 = "5000";
 
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, &$user)
 	{		
-		parent::__construct($module_tpl_name);		
+		parent::__construct($module_tpl_name, $user);		
 
 		$arome_list = new stdClass();
 		$arome_list->table = "aromes";
 		$arome_list->var = "*";
-		$arome_list->where = "marque = 'Bickford Flavors' OR marque ='Cappela Flavor'";
 		$arome_list->order = "marque";
 		$res_sql = $this->select($arome_list);
 
@@ -43,7 +45,7 @@ Class arome_list extends base_module
 					$array_aromes_trier[$row->marque][$i] = new stdClass();
 					$array_aromes_trier[$row->marque][$i]->nom = $row->nom;
 					$array_aromes_trier[$row->marque][$i]->quality = $row->quality;
-					$array_aromes_trier[$row->marque][$i]->commentaire = $row->commentaire;
+					$array_aromes_trier[$row->marque][$i]->type = $row->type;
 					$array_aromes_trier[$row->marque][$i]->img = $name_image;
 				}
 				else
@@ -60,7 +62,25 @@ Class arome_list extends base_module
 			$i++;
 		}
 
+		if(isset($_POST['search_form_validate_1000']) || isset($_POST['search_form_validate_2500']) || isset($_POST['search_form_validate_5000']))
+			$this->recept_form_with_value_arome($_POST);
+
+
 		return $this->assign_var("array_aromes_trier", $array_aromes_trier)->assign_var("user", $this->user_obj)->render();
+	}
+
+	public function recept_form_with_value_arome($post)
+	{
+		foreach($post as $row_key => $row_value)
+		{
+			$value = $row_value;
+		}
+
+		$value = substr($value, -7);
+		$value = intval($value);
+		if($value != array($this->search_1, $this->search_2, $this->search_3))
+			echo "ok ok on est bon ";		
+		unset($_POST);
 	}
 
 

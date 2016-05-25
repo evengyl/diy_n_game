@@ -2,13 +2,13 @@
 
 Class login extends base_module
 {
-	public function __construct($module_tpl_name, $post = array())
+	public function __construct($module_tpl_name, &$user, $post = array())
 	{		
 		if($module_tpl_name != "")
-			parent::__construct($module_tpl_name);
+			parent::__construct($module_tpl_name, $user);
 
 		
-			config::$is_connect = $this->check_session($post);
+			config::$is_connect = $this->check_session($_POST);
 
 
 		if($module_tpl_name != "")

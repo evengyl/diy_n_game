@@ -14,11 +14,11 @@ Class base_module extends all_query
 
 
 
-	public function __construct($module_tpl_name = "")
+	public function __construct($module_tpl_name = "", &$user)
 	{
 		if($module_tpl_name != "")
 		{
-			$this->user_obj = new user();
+			$this->user_obj = &$user;
 			$this->template_name = $module_tpl_name;
 			$this->set_template_path($this->template_name);		
 			$this->convert_sec_in_time_real();	
@@ -63,7 +63,7 @@ Class base_module extends all_query
 		$req_sql->ctx->argent = $argent_after;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
-		$this->user_obj->set_variable_user();
+		$this->user_obj->get_variable_user();
 	}
 
 	public function set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
@@ -96,7 +96,7 @@ Class base_module extends all_query
 		$req_sql->ctx->last_usine_pg = $pg_after;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
-		$this->user_obj->set_variable_user();
+		$this->user_obj->get_variable_user();
 	}
 
 	public function time_finish_construct($time_construct)
@@ -236,7 +236,6 @@ Class base_module extends all_query
 		$req_sql->ctx->name_batiment = $name_batiment;
 		$req_sql->ctx->time_finish = $time_finish;
 		$req_sql->table = "construction_en_cours";
-
 		$this->insert_into($req_sql);
 
 	}

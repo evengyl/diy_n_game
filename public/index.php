@@ -34,7 +34,10 @@ if(!isset($_GET['page']))
 
 ob_start();
 global $user;
-$login = new login("", $_POST);
+
+$a = new stdClass();
+$post = $_POST;
+$login = new login("", $a, $post);
 $user = new user();
 $route = new router();?>
 
@@ -59,7 +62,7 @@ $route = new router();?>
 </html>
 <? $page = ob_get_clean();
 //appel le parseur qui rendra tout les modules et tout les vues
-$parser = new parser();
+$parser = new parser($user);
 $page = $parser->parser_main($page, $user);
 echo $page; 
 
@@ -71,6 +74,7 @@ if(!empty($error))
 }
 
 
+affiche_pre($user);
 affiche_pre(Config::$list_req_sql);
 
 

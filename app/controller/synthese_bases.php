@@ -27,15 +27,17 @@ Class synthese_bases extends base_module
 	public $nb_to_create = array();
 
 
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, &$user)
 	{		
-		parent::__construct($module_tpl_name);
+	
+
+		parent::__construct($module_tpl_name, $user);
 
 
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 		$this->calcul_nb_bases_to_create($this->user_obj);
-
-		$this->recept_form_with_bases_to_create($_POST);
+		if(isset($_POST))
+			$this->recept_form_with_bases_to_create($_POST);
 
 		if($this->cout_total_vg != 0 || $this->cout_total_pg != 0)
 			$this->set_ressource_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
@@ -67,6 +69,7 @@ Class synthese_bases extends base_module
 
 	public function recept_form_with_bases_to_create($post)
 	{
+		affiche_pre($post);
 		if(isset($post['create_bases']))
 		{
 			
@@ -77,7 +80,6 @@ Class synthese_bases extends base_module
 				{
 					$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
 					$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
-					$this->user_obj->set_variable_user();
 				}
 				else
 				{

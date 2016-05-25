@@ -3,11 +3,11 @@
 Class sign_up extends base_module
 {
 	public $time_now;
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, &$user)
 	{		
 
 		if($module_tpl_name != "")
-			parent::__construct($module_tpl_name);
+			parent::__construct($module_tpl_name, $user);
 
 
 

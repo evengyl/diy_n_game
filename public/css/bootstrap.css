@@ -109,6 +109,11 @@ samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
+input
+{
+  padding-top: 5px;
+padding-bottom: 5px;
+}
 button,
 input,
 optgroup,

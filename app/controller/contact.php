@@ -2,9 +2,9 @@
 
 Class contact extends base_module
 {
-	public function __construct($module_tpl_name)
+	public function __construct($module_tpl_name, &$user)
 	{		
-		parent::__construct($module_tpl_name);
+		parent::__construct($module_tpl_name, $user);
 
 		if(isset($_POST['return_post_contact']))
 		{
