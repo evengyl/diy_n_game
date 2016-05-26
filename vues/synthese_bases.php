@@ -3,8 +3,9 @@
 			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Listes des batiments de production de ressources brut.
 			</h3>
-			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
+			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']) OR isset($_SESSION['error_bases_down']))?'has-error':''; ?>">
 					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
+					<?php echo (isset($_SESSION['error_bases_down']))?'<label for="exampleInputPassword1">'.$_SESSION['error_bases_down'].'</label>':''; ?>
 			</div>	
 			<form method="post" action="#">
 				<div class="col-lg-12" style="background:#232D3B; margin-top:15px; margin-bottom:50px;">
@@ -114,4 +115,5 @@
 		</div>
 	</div>
 	<? unset($_SESSION['error']);
+	unset($_SESSION['error_bases_down']);
 	

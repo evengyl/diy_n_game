@@ -2,16 +2,13 @@
 
 Class synthese_bases extends base_module
 {
-	public $plantes_for_littre = 3000;
-	public $propylene_brut_for_littre = 2100;
+	public $nb_plantes_for_littre = 3000;
+	public $nb_propylene_for_littre = 2100;
 
 	public $prix_vingt_quatre_vingt = 450;
 	public $prix_cinquante_cinquante = 400;
 	public $prix_quatre_vingt_vingt = 370;
 	public $prix_cent = 350;
-
-	public $plante_stock;
-	public $propylene_stock;
 
 	public $littre_vg_possible = 0;
 	public $littre_pg_possible = 0;
@@ -35,7 +32,7 @@ Class synthese_bases extends base_module
 
 
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
-		$this->calcul_nb_bases_to_create($this->user_obj);
+		$this->calcul_nb_bases_to_create();
 		if(isset($_POST))
 			$this->recept_form_with_bases_to_create($_POST);
 
@@ -45,15 +42,23 @@ Class synthese_bases extends base_module
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->render();
 	}
 
-	public function calcul_nb_bases_to_create($user_obj)
+	public function calcul_nb_bases_to_create()
 	{
 		//il faut vérifier si il a assez d'argnet également
 
-		$this->plante_stock = $user_obj->user_infos->last_culture_vg;
-		$this->propylene_stock = $user_obj->user_infos->last_usine_pg;
+		//mise en tmp des ressources actuel pour éviter les erreurs
+		$plante_stock = $this->user_obj->user_infos->last_culture_vg;
+		$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
 
-		$this->littre_vg_possible = round($this->plante_stock / $this->plantes_for_littre, 2);
-		$this->littre_pg_possible = round($this->propylene_stock / $this->propylene_brut_for_littre, 2);
+
+		$this->littre_vg_possible = round($plante_stock / $this->nb_plantes_for_littre, 2);
+		$this->littre_pg_possible = round($propylene_stock / $this->nb_propylene_for_littre, 2);
+
+		if($this->littre_vg_possible <= 0 || $this->littre_pg_possible <= 0)
+		{
+			$_SESSION['error_bases_down'] = "Vous devrier construire plus de batiments de production";	
+		}
+		
 
 		$this->user_obj->littre_vg_possible = $this->littre_vg_possible;
 		$this->user_obj->littre_pg_possible = $this->littre_pg_possible;
@@ -98,23 +103,23 @@ Class synthese_bases extends base_module
 	{
 		if($row_post == 2080)
 		{
-			$this->cout_total_vg += (($this->plantes_for_littre/100)*20) * $value_post;
-			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*80) * $value_post;
+			$this->cout_total_vg += (($this->nb_plantes_for_littre/100)*20) * $value_post;
+			$this->cout_total_pg += (($this->nb_propylene_for_littre/100)*80) * $value_post;
 		}
 
 		if($row_post == 5050)
 		{
-			$this->cout_total_vg += (($this->plantes_for_littre/100)*50) * $value_post;
-			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*50) * $value_post;
+			$this->cout_total_vg += (($this->nb_plantes_for_littre/100)*50) * $value_post;
+			$this->cout_total_pg += (($this->nb_propylene_for_littre/100)*50) * $value_post;
 		}
 		if($row_post == 8020)
 		{
-			$this->cout_total_vg += (($this->plantes_for_littre/100)*80) * $value_post;
-			$this->cout_total_pg += (($this->propylene_brut_for_littre/100)*20) * $value_post;
+			$this->cout_total_vg += (($this->nb_plantes_for_littre/100)*80) * $value_post;
+			$this->cout_total_pg += (($this->nb_propylene_for_littre/100)*20) * $value_post;
 		}
 		if($row_post == 1000)
 		{
-			$this->cout_total_vg += $this->plantes_for_littre * $value_post;
+			$this->cout_total_vg += $this->nb_plantes_for_littre * $value_post;
 		}
 	}
 

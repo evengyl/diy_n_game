@@ -38,6 +38,8 @@ global $user;
 $a = new stdClass();
 $post = $_POST;
 $login = new login("", $a, $post);
+if(isset($user))
+	unset($user);
 $user = new user();
 $route = new router();?>
 

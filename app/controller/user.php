@@ -84,21 +84,6 @@ Class user extends all_query
 
 
 
-
-
-
-				$this->labos_bases = new stdClass();
-				$req_sql = new stdClass;
-				$req_sql->table = "labos_bases";
-				$req_sql->var = "*";
-				$req_sql->where = "level = '".$this->user_infos->level_labos_bases."'";
-				$res_fx = $this->select($req_sql);
-				foreach($res_fx[0] as $key => $values)
-				{
-					$this->labos_bases->$key = $values;
-				}
-				unset($res_fx);
-
 				$this->bases = new stdClass();
 				$req_sql = new stdClass;
 				$req_sql->table = "bases";
