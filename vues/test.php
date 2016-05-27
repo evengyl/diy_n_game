@@ -1,5 +1,9 @@
 <? 
 
+
+
+
+/*
 $all_query = new all_query();
 $req_sql = new stdClass();
 $req_sql->table = "aromes";

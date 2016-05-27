@@ -1,0 +1,30 @@
+# Cela représentera nos articles :
+Article:
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    content:
+      type: string
+      notnull: true
+    user_id:
+      type: integer
+  relations:
+    User:
+      class: User
+      local: user_id
+      foreign: id
+      alias: User # Inutile, puisque l'alias par défaut est le nom de la classe.
+      foreignAlias: Articles
+
+# Et là les utilisateurs :
+User:
+  tableName: member
+  columns:
+    login:
+      type: string(255)
+      unique: true
+      notnull: true
+    password:
+      type: string(255)
+      notnull: true
