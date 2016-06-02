@@ -33,13 +33,24 @@ Class synthese_bases extends base_module
 
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 		$this->calcul_nb_bases_to_create();
-		if(isset($_POST))
-			$this->recept_form_with_bases_to_create($_POST);
+		
+		$this->recept_form_with_bases_to_create($_POST);
 
 		if($this->cout_total_vg != 0 || $this->cout_total_pg != 0)
+		{
+			//il faut mtn appliquer la réduction de cout du labos
 			$this->set_ressource_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
+		}
+			
 
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->render();
+	}
+
+	public function set_reduction_coup_with_labos($total, $pourcent_down)
+	{
+		$pourcent_down_calculate = ($pourcent_down / 100)+1;
+		$total_cost = $total / $pourcent_down_calculate;
+		return intval($total_cost);
 	}
 
 	public function calcul_nb_bases_to_create()
@@ -50,6 +61,11 @@ Class synthese_bases extends base_module
 		$plante_stock = $this->user_obj->user_infos->last_culture_vg;
 		$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
 
+
+		$this->nb_plantes_for_littre = $this->set_reduction_coup_with_labos($this->nb_plantes_for_littre, $this->user_obj->labos_bases->pourcent_down);
+		$this->nb_propylene_for_littre = $this->set_reduction_coup_with_labos($this->nb_propylene_for_littre, $this->user_obj->labos_bases->pourcent_down);
+		
+		
 
 		$this->littre_vg_possible = round($plante_stock / $this->nb_plantes_for_littre, 2);
 		$this->littre_pg_possible = round($propylene_stock / $this->nb_propylene_for_littre, 2);
