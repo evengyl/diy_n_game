@@ -67,21 +67,16 @@ Class user extends all_query
 
 				foreach($res_fx as $row)
 				{
-					$this->{$row->name_objet} = new stdClass();
+					$this->{$row->name_controller} = new stdClass();
 					$req_sql = new stdClass;
 					$req_sql->table = $row->table_batiment;
 					$req_sql->var = "*";
 					$name_level = "level_".$row->table_batiment;
 					$req_sql->where = "level = '".$this->user_infos->$name_level."'";
 					$res_fx = $this->select($req_sql);
-					$this->{$row->name_objet} = $res_fx[0];
-
+					$this->{$row->name_controller} = $res_fx[0];
 				}
-
-
 				unset($res_fx);
-
-
 
 
 				$this->bases = new stdClass();

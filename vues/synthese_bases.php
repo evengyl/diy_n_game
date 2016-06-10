@@ -114,6 +114,7 @@
 			</form>
 		</div>
 	</div>
-	<? unset($_SESSION['error']);
+	<?
+	unset($_SESSION['error']);
 	unset($_SESSION['error_bases_down']);
 	
