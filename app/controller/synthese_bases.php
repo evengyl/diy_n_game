@@ -65,8 +65,7 @@ Class synthese_bases extends base_module
 
 	public function set_reduction_coup_with_labos($total, $pourcent_down)
 	{
-		affiche_pre($pourcent_down);
-		$total_reduc = $total / 100;
+		$total_reduc = ($total / 100)*$pourcent_down;
 		$total = $total - $total_reduc;
 
 		return intval($total);
