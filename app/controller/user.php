@@ -31,6 +31,21 @@ Class user extends all_query
 
 	}
 
+	public function reset_user_login_table()
+	{
+		$this->user_infos = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->var = "*";
+		$req_sql->where = "login ='".$_SESSION['pseudo']."'";
+		$res_fx = $this->select($req_sql);
+
+		foreach($res_fx[0] as $key => $values)
+		{
+			$this->user_infos->$key = $values;			
+		}
+		unset($res_fx);
+	}
 	
 	public function get_variable_user()
 	{

@@ -4,7 +4,7 @@ Class labos_bases extends base_module
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_labos_bases";
 
-	public function __construct($module_tpl_name, &$user, $var_in_module_name ="")
+	public function __construct($module_tpl_name, &$user)
 	{	
 		parent::__construct($module_tpl_name, $user);
 

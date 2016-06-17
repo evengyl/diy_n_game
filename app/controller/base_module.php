@@ -38,6 +38,30 @@ Class base_module extends all_query
 		}
 	}
 
+	public function set_litter_vg($littre_vg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_vg = $this->user_obj->user_infos->litter_vg + $littre_vg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		$this->user_obj->reset_user_login_table();
+	}
+
+	public function set_litter_pg($littre_pg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_pg = $this->user_obj->user_infos->litter_pg + $littre_pg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		$this->user_obj->reset_user_login_table();
+	}
+
 	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
 	{
 		$argent_before = $this->user_obj->user_infos->argent;
@@ -66,7 +90,7 @@ Class base_module extends all_query
 		$this->user_obj->get_variable_user();
 	}
 
-	public function set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
+	public function set_ressource_user($vg_to_operate = 0, $pg_to_operate = 0, $moins_plus = "-")
 	{
 		$vg_before = $this->user_obj->user_infos->last_culture_vg;
 		$pg_before = $this->user_obj->user_infos->last_usine_pg;

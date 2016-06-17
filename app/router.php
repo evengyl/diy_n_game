@@ -48,7 +48,7 @@ Class router
 					$this->get()->is_connect()->assign_bread($title_brd = "Installation industrielle de propylène")->assign_mod_var($this->route['construct']);
 				
 				else if($this->route['page'] == 'labos_bases')
-					$this->get()->is_connect()->assign_bread($title_brd = "Laboratoire pharmaceutique de mélanges")->assign_mod2_var($this->route['construct']);
+					$this->get()->is_connect()->assign_bread($title_brd = "Laboratoire pharmaceutique de mélanges")->assign_mod_var($this->route['construct']);
 
 				else if($this->route['page'] == 'arome_list')
 					$this->get()->is_connect()->assign_bread($title_brd = "Liste des aromes des laboratoires de recherche")->assign_mod();

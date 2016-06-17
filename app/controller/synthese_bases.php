@@ -38,19 +38,35 @@ Class synthese_bases extends base_module
 		$this->nb_plantes_for_littre = $this->set_reduction_coup_with_labos($this->nb_plantes_for_littre, $pourcent_down);
 		$this->nb_propylene_for_littre = $this->set_reduction_coup_with_labos($this->nb_propylene_for_littre, $pourcent_down);
 
-		
-		
-		if(isset($_POST)) 
+		//va seter dans $this->littre_vg_possible et $this->littre_pg_possible la quantité de matiere brut que le joueur peu avoir
+		//$this->calcul_nb_bases_in_litter_to_create();
+
+		if(isset($_POST['convert_in_littre']))
+		{
+			$this->convert_in_littre($_POST['to_convert']);
+		}
+
+		affiche_pre('Plante par littre avec reduc : '.$this->nb_plantes_for_littre.'      ----        porpy par littre avec reduc : '.$this->nb_propylene_for_littre);
+
+		affiche_pre('Nombre de vg possible : '.$this->littre_vg_possible.'        ----     Nombre de pg possible : '.$this->littre_pg_possible);
+
+		//on va passer par une étape de convertion instantanée par le joueur avec simplement deux petit bouton convertir en littre
+
+
+
+
+		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8);
+		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);
+		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2);
+		$this->nb_to_create[1000] = $this->nb_bases(1,1);	
+
+
+
+		if(isset($_POST['create_bases'])) 
+		{
 			$this->recept_form_with_bases_to_create($_POST);
+		}
 
-		//va seter dans $this->user_obj->littre_vg_possible et $this->user_obj->littre_pg_possible la quantité de matiere brut que le joueur peu avoir
-		$this->calcul_nb_bases_in_litter_to_create();
-
-
-		$this->nb_to_create[2080] = $this->nb_vingt_quatre_vingt();
-		$this->nb_to_create[5050] = $this->nb_cinquante_cinquante();
-		$this->nb_to_create[8020] = $this->nb_quatre_vingt_vingt();
-		$this->nb_to_create[1000] = $this->nb_bases_at_cent_vg();
 
 
 		if($this->cout_total_vg != 0 || $this->cout_total_pg != 0)
@@ -63,74 +79,129 @@ Class synthese_bases extends base_module
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->render();
 	}
 
-	public function set_reduction_coup_with_labos($total, $pourcent_down)
-	{
-		$total_reduc = ($total / 100)*$pourcent_down;
-		$total = $total - $total_reduc;
 
-		return intval($total);
+
+
+
+	public function set_reduction_coup_with_labos($nb_total_de_bases, $pourcent_down)
+	{
+		$reduction_calcul = (100 - (float)$pourcent_down)/100;
+		$nb_total_de_bases = $nb_total_de_bases * (float)$reduction_calcul;
+
+		return (float)$nb_total_de_bases;
 	}
 
-	public function calcul_nb_bases_in_litter_to_create()
+	
+	public function convert_in_littre($name_to_create)
 	{
-		//il faut vérifier si il a assez d'argnet également
-
-		//mise en tmp des ressources actuel pour éviter les erreurs
-		$plante_stock = $this->user_obj->user_infos->last_culture_vg;
-		$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
-		
-		affiche_pre($this->nb_plantes_for_littre);
-		affiche_pre($this->nb_propylene_for_littre);
-		$this->littre_vg_possible = floor(round($plante_stock / $this->nb_plantes_for_littre, 2));
-		$this->littre_pg_possible = floor(round($propylene_stock / $this->nb_propylene_for_littre, 2));
-
-		affiche_pre($this->littre_vg_possible);
-		affiche_pre($this->littre_pg_possible);
-
-
-		if($this->littre_vg_possible <= 0 || $this->littre_pg_possible <= 0)
+		if($name_to_create == 'vg')
 		{
-			$_SESSION['error_bases_down'] = "Infos : Vous devrier construire plus de batiments de production";	
+			$plante_stock = $this->user_obj->user_infos->last_culture_vg;
+			$littre_vg_possible = floor(round($plante_stock / $this->nb_plantes_for_littre, 2));
+
+			
+			if($this->littre_vg_possible <= 0)
+			{
+				$_SESSION['error_bases_down'] = "Infos : Vous devrier construire plus de batiments de production";	
+			}
+
+			$this->set_litter_vg($littre_vg_possible);
+
+			$cout_total_ressource = $littre_vg_possible * $this->nb_plantes_for_littre;
+			$this->set_ressource_user($cout_total_ressource, 0, $moins_plus = "-");
+
 		}
-		else if($this->littre_vg_possible <= 0 && $this->littre_pg_possible > 0)
+
+		else if($name_to_create == 'pg')
 		{
-			$_SESSION['error_bases_down'] = "Astuce : Vous devriez construire plus de champs à Glycérine";
+			$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
+			$littre_pg_possible = floor(round($propylene_stock / $this->nb_propylene_for_littre, 2));
+
+
+			if($this->littre_pg_possible <= 0)
+			{
+				$_SESSION['error_bases_down'] = "Infos : Vous devrier construire plus de batiments de production";	
+			}
+
+			$this->set_litter_pg($littre_pg_possible);
+
+			$cout_total_ressource = $littre_pg_possible * $this->nb_propylene_for_littre;
+			$this->set_ressource_user(0, $cout_total_ressource, $moins_plus = "-");
+
 		}
-		else if($this->littre_vg_possible > 0 && $this->littre_pg_possible <= 0)
-		{
-			$_SESSION['error_bases_down'] = "Astuce : Vous devriez construire plus d'usine à propylène";	
-		}
-		else
-		{
-			$this->user_obj->littre_vg_possible = $this->littre_vg_possible;
-			$this->user_obj->littre_pg_possible = $this->littre_pg_possible;
-		}
-		//va renvoyer directement au template un Obj , contenant le nombre de bases uqe le joueur peux creer de chaque, définir les prix ici même dans ce controller pour changement facile 
 	}
+
+
+
 
 	public function recept_form_with_bases_to_create($post)
 	{
-		if(isset($post['create_bases']))
+		unset($post['create_bases']);
+		unset($_POST['create_bases']);
+
+		foreach($post as $name_form_bases => $value_form_bases)
 		{
-			unset($post['create_bases']);
-			foreach($post as $name_form_bases => $value_form_bases)
+			if($this->calcul_price_total_cost_bases($name_form_bases, intval($value_form_bases)))
 			{
-				if($this->calcul_price_total_cost_bases($name_form_bases, intval($value_form_bases)))
-				{
-					$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
-					$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
-					unset($_POST);
-				}
-				else
-				{
-					return 0;
-				}
-				
+				$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
+				$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
+				unset($_POST);
 			}
+			else
+			{
+				return 0;
+			}
+			
 		}
 		//faudra appeler cette fct set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
 			//ici recevra le formulaire rempli avec les bases a crées, elle seront passiblement les meme que le mex aposible mais vérifier tout les cas on sais jamais
 		//va appeler la fonction de calcule de prix pour chaque champs et recevra en echange le prix total
+	}
+
+
+
+	public function calcul_price_total_cost_bases($name_form_bases, $value_form_bases)
+	{
+		if($value_form_bases >= 0)
+		{
+			affiche_pre($this->nb_to_create);
+			//operation
+			if($value_form_bases > $this->nb_to_create[$name_form_bases])
+			{
+				$_SESSION["error"] = "Erreur vous ne possédez pas assez de ressources pour tous créer";
+				return 0;
+			}
+			else
+			{
+				//déduction de l'argnet et des ressource		
+				$total_price = 0;		
+
+				if($name_form_bases == 2080)
+					$total_price += $this->prix_vingt_quatre_vingt * $value_form_bases;
+
+				else if($name_form_bases == 5050)
+					$total_price += $this->prix_cinquante_cinquante * $value_form_bases;
+
+				else if($name_form_bases == 8020)
+					$total_price += $this->prix_quatre_vingt_vingt * $value_form_bases;
+
+				else if($name_form_bases == 1000)
+					$total_price += $this->prix_cent * $value_form_bases;
+
+				//il faut vérifier si il a assez d'argnet également
+				if($this->user_obj->user_infos->argent >= $total_price)
+				{
+					$this->set_argent_user($total_price, "-");
+					return 1;
+				}					
+				else
+				{
+					$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
+					return 0;
+				}
+			}
+		}
+		//calculera le prix que coutera la synthese des bases et renverra a la fct précédente
 	}
 
 	public function calcul_cost_ressource($row_post, $value_post)
@@ -155,48 +226,6 @@ Class synthese_bases extends base_module
 		{
 			$this->cout_total_vg += $this->nb_plantes_for_littre * $value_post;
 		}
-	}
-
-	public function calcul_price_total_cost_bases($row_post, $value_post)
-	{
-		if($value_post >= 0)
-		{
-			//operation
-			if($value_post > $this->nb_to_create[$row_post])
-			{
-				$_SESSION["error"] = "Erreur vous ne possédez pas assez de ressources pour tous créer";
-				return 0;
-			}
-			else
-			{
-				//déduction de l'argnet et des ressource		
-				$total_price = 0;		
-				if($row_post == 2080)
-					$total_price += $this->prix_vingt_quatre_vingt * $value_post;
-
-				else if($row_post == 5050)
-					$total_price += $this->prix_cinquante_cinquante * $value_post;
-
-				else if($row_post == 8020)
-					$total_price += $this->prix_quatre_vingt_vingt * $value_post;
-
-				else if($row_post == 1000)
-					$total_price += $this->prix_cent * $value_post;
-
-				//il faut vérifier si il a assez d'argnet également
-				if($this->user_obj->user_infos->argent >= $total_price)
-				{
-					$this->set_argent_user($total_price, "-");
-					return 1;
-				}					
-				else
-				{
-					$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
-					return 0;
-				}
-			}
-		}
-		//calculera le prix que coutera la synthese des bases et renverra a la fct précédente
 	}
 
 	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
@@ -228,11 +257,14 @@ Class synthese_bases extends base_module
 		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
 	}
 
-	public function nb_vingt_quatre_vingt()
+
+
+
+	public function nb_bases($dosage_vg = 1, $dosage_pg = 1)
 	{
-		//calcule sur bases des littre de bases que le joueur possède , le nombre de bases en 20/80 qu'il peux faire
-		$nb_vg = floor($this->user_obj->littre_vg_possible /0.2);
-		$nb_pg = floor($this->user_obj->littre_pg_possible /0.8);
+		$nb_vg = floor($this->user_obj->user_infos->litter_vg / $dosage_vg);
+
+		$nb_pg = floor($this->user_obj->user_infos->litter_pg / $dosage_pg);
 
 		if($nb_vg > $nb_pg)
 			$nb_ok = $nb_pg;
@@ -243,107 +275,45 @@ Class synthese_bases extends base_module
 		else
 			$nb_ok = $nb_vg;
 
+
+
 		$argent_user = $this->user_obj->user_infos->argent;
-		$prix_total_estimation_de_prod = $this->prix_vingt_quatre_vingt * $nb_ok;
+
+		if($dosage_vg == 0.2 && $dosage_pg == 0.8)
+		{
+			$prix_total_estimation_de_prod = $this->prix_vingt_quatre_vingt * $nb_ok;
+			$list_price_user = $this->prix_vingt_quatre_vingt;
+		}
+		else if($dosage_vg == 0.5 && $dosage_pg == 0.5)
+		{
+			$prix_total_estimation_de_prod = $this->prix_cinquante_cinquante * $nb_ok;
+			$list_price_user = $this->prix_cinquante_cinquante;
+		}
+		else if($dosage_vg == 0.8 && $dosage_pg == 0.2)
+		{
+			$prix_total_estimation_de_prod = $this->prix_quatre_vingt_vingt * $nb_ok;
+			$list_price_user = $this->prix_quatre_vingt_vingt;
+		}
+		else if($dosage_vg == 1 && $dosage_pg == 1)
+		{
+			$prix_total_estimation_de_prod = $this->prix_cent * $nb_ok;
+			$list_price_user = $this->prix_cent;
+		}
 		//donne le prix total que couterais toute la création de base dans cette sorte ci
 		// il faut mtn déterminer si le joueur peux tout faire avec
 
-		if($prix_total_estimation_de_prod <= $argent_user || $prix_total_estimation_de_prod == $argent_user)
+
+		if($prix_total_estimation_de_prod <= $argent_user)
 		{
 			return $nb_ok; // il peux de toute facon tout créer
 		}
 		else
 		{
-			return $nb_ok_after_calcule_argent = floor($argent_user / $this->prix_vingt_quatre_vingt);
+			return $nb_ok_after_calcule_argent = floor($argent_user / $list_price_user);
 			//il faut déterminer cmb il peux en faire avec sont argent
-		}
-
-
-	}
-
-	public function nb_cinquante_cinquante()
-	{
-		//calcule sur bases des littre de bases que le joueur possède , le nombre de bases en 50/50 qu'il peux faire
-		$nb_vg = floor($this->user_obj->littre_vg_possible /0.5);
-		$nb_pg = floor($this->user_obj->littre_pg_possible /0.5);
-
-		if($nb_vg > $nb_pg)
-			$nb_ok = $nb_pg;
-
-		else if($nb_vg < $nb_pg)
-			$nb_ok = $nb_vg;
-
-		else
-			$nb_ok = $nb_vg;
-
-		$argent_user = $this->user_obj->user_infos->argent;
-		$prix_total_estimation_de_prod = $this->prix_cinquante_cinquante * $nb_ok;
-		//donne le prix total que couterais toute la création de base dans cette sorte ci
-		// il faut mtn déterminer si le joueur peux tout faire avec
-
-		if($prix_total_estimation_de_prod <= $argent_user || $prix_total_estimation_de_prod == $argent_user)
-		{
-			return $nb_ok; // il peux de toute facon tout créer
-		}
-		else
-		{
-			return $nb_ok_after_calcule_argent = floor($argent_user / $this->prix_cinquante_cinquante);
-			//il faut déterminer cmb il peux en faire avec sont argent
-		}
-
-	}
-
-	public function nb_quatre_vingt_vingt()
-	{
-		//calcule sur bases des littre de bases que le joueur possède , le nombre de bases en 80/20 qu'il peux faire
-		$nb_vg = floor($this->user_obj->littre_vg_possible /0.8);
-		$nb_pg = floor($this->user_obj->littre_pg_possible /0.2);
-
-		if($nb_vg > $nb_pg)
-			$nb_ok = $nb_pg;
-
-		else if($nb_vg < $nb_pg)
-			$nb_ok = $nb_vg;
-		
-		else
-			$nb_ok = $nb_vg;
-
-		$argent_user = $this->user_obj->user_infos->argent;
-		$prix_total_estimation_de_prod = $this->prix_quatre_vingt_vingt * $nb_ok;
-		//donne le prix total que couterais toute la création de base dans cette sorte ci
-		// il faut mtn déterminer si le joueur peux tout faire avec
-
-		if($prix_total_estimation_de_prod <= $argent_user || $prix_total_estimation_de_prod == $argent_user)
-		{
-			return $nb_ok; // il peux de toute facon tout créer
-		}
-		else
-		{
-			return $nb_ok_after_calcule_argent = floor($argent_user / $this->prix_quatre_vingt_vingt);
-			//il faut déterminer cmb il peux en faire avec sont argent
+			//appel une fct qui check si on a assez pour faire ça
 		}
 	}
 
-	public function nb_bases_at_cent_vg()
-	{
-		//calcule sur bases des littre de bases que le joueur possède , le nombre de bases en 100/0 qu'il peux faire
-		$nb_ok = floor($this->user_obj->littre_vg_possible);
-
-		$argent_user = $this->user_obj->user_infos->argent;
-		$prix_total_estimation_de_prod = $this->prix_cent * $nb_ok;
-		//donne le prix total que couterais toute la création de base dans cette sorte ci
-		// il faut mtn déterminer si le joueur peux tout faire avec
-
-		if($prix_total_estimation_de_prod <= $argent_user || $prix_total_estimation_de_prod == $argent_user)
-		{
-			return $nb_ok; // il peux de toute facon tout créer
-		}
-		else
-		{
-			return $nb_ok_after_calcule_argent = floor($argent_user / $this->prix_cent);
-			//il faut déterminer cmb il peux en faire avec sont argent
-		}
-
-	}
-
+	public function 
 }

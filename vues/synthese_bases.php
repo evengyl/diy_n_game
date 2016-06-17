@@ -6,7 +6,21 @@
 			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']) OR isset($_SESSION['error_bases_down']))?'has-error':''; ?>">
 					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 					<?php echo (isset($_SESSION['error_bases_down']))?'<label for="exampleInputPassword1">'.$_SESSION['error_bases_down'].'</label>':''; ?>
-			</div>	
+			</div>
+
+			<form method="post" action='#'>
+				<div class="col-lg-6">
+					<input type="hidden" name="to_convert" value="vg">
+					<input class="btn btn-primary col-lg-12" type="submit" name="convert_in_littre" value="Creer tout le VG possible (Gratuit)">
+				</div>
+			</form>
+			<form method="post" action='#'>
+				<div class="col-lg-6">
+					<input type="hidden" name="to_convert" value="pg">
+					<input class="btn btn-primary col-lg-12" type="submit" name="convert_in_littre" value="Creer tout le PG possible (Gratuit)">
+				</div>
+			</form>
+
 			<form method="post" action="#">
 				<div class="col-lg-12" style="background:#232D3B; margin-top:15px; margin-bottom:50px;">
 					<ul class="col-md-6 col-lg-6 grid cs-style-4">

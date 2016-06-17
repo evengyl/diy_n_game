@@ -32,10 +32,20 @@ if(Config::$is_connect == 1)
 					        		<span style="font-size:13px;">Champs : <?= $user->user_infos->last_culture_vg ?></span>
 					        </li>
 
-
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
 					        		<span style="font-size:13px;">Propylènes : <?= $user->user_infos->last_usine_pg ?></span>
+					        </li>
+
+					        <li class="col-lg-6" style="color:white;">
+					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
+					        		<span style="font-size:13px;">Littre VG : <?= $user->user_infos->litter_vg ?> Lts</span>
+					        </li>
+
+
+					        <li class="col-lg-6" style="color:white;">
+					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
+					        		<span style="font-size:13px;">Littre PG : <?= $user->user_infos->litter_pg ?> Lts</span>
 					        </li>
 
 					    </ul>
