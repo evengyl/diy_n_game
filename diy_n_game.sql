@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 25 Mai 2016 à 17:26
--- Version du serveur :  5.6.20
--- Version de PHP :  5.5.15
+-- Généré le :  Ven 17 Juin 2016 à 15:06
+-- Version du serveur :  10.1.13-MariaDB
+-- Version de PHP :  5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `diy_n_game`
@@ -29,13 +29,13 @@ USE `diy_n_game`;
 --
 
 DROP TABLE IF EXISTS `aromes`;
-CREATE TABLE IF NOT EXISTS `aromes` (
-`id` int(11) NOT NULL,
+CREATE TABLE `aromes` (
+  `id` int(11) NOT NULL,
   `marque` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `nom` varchar(255) CHARACTER SET utf8 NOT NULL,
   `quality` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=875 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `aromes`
@@ -425,14 +425,14 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `quality`) VALUES
 --
 
 DROP TABLE IF EXISTS `bases`;
-CREATE TABLE IF NOT EXISTS `bases` (
-`id` int(11) NOT NULL,
+CREATE TABLE `bases` (
+  `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `bases_2080` varchar(200) NOT NULL,
   `bases_5050` varchar(200) NOT NULL,
   `bases_8020` varchar(200) NOT NULL,
   `bases_1000` varchar(200) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `bases`
@@ -444,7 +444,7 @@ TRUNCATE TABLE `bases`;
 --
 
 INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, `bases_1000`) VALUES
-(1, 6, '1342', '1000', '1000', '1000');
+(1, 6, '1351', '1010', '1000', '1000');
 
 -- --------------------------------------------------------
 
@@ -453,25 +453,18 @@ INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, 
 --
 
 DROP TABLE IF EXISTS `construction_en_cours`;
-CREATE TABLE IF NOT EXISTS `construction_en_cours` (
-`id` int(11) NOT NULL,
+CREATE TABLE `construction_en_cours` (
+  `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(20) NOT NULL,
   `time_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `construction_en_cours`
 --
 
 TRUNCATE TABLE `construction_en_cours`;
---
--- Contenu de la table `construction_en_cours`
---
-
-INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`) VALUES
-(66, 6, 'level_labos_bases', 1464190582);
-
 -- --------------------------------------------------------
 
 --
@@ -479,13 +472,13 @@ INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_fin
 --
 
 DROP TABLE IF EXISTS `culture_vg`;
-CREATE TABLE IF NOT EXISTS `culture_vg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `culture_vg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(11) NOT NULL,
   `time_construct` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `culture_vg`
@@ -576,13 +569,13 @@ INSERT INTO `culture_vg` (`id`, `level`, `production`, `prix`, `time_construct`)
 --
 
 DROP TABLE IF EXISTS `labos_bases`;
-CREATE TABLE IF NOT EXISTS `labos_bases` (
-`id` int(11) NOT NULL,
+CREATE TABLE `labos_bases` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `pourcent_down` float NOT NULL,
   `prix` int(11) NOT NULL,
   `time_construct` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `labos_bases`
@@ -673,8 +666,8 @@ INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_constru
 --
 
 DROP TABLE IF EXISTS `login`;
-CREATE TABLE IF NOT EXISTS `login` (
-`id` int(11) NOT NULL,
+CREATE TABLE `login` (
+  `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `last_connect` varchar(50) NOT NULL,
@@ -685,8 +678,10 @@ CREATE TABLE IF NOT EXISTS `login` (
   `level_labos_bases` int(11) NOT NULL,
   `last_culture_vg` double NOT NULL,
   `last_usine_pg` double NOT NULL,
-  `argent` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `argent` bigint(20) NOT NULL,
+  `litter_vg` int(11) NOT NULL,
+  `litter_pg` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `login`
@@ -697,10 +692,8 @@ TRUNCATE TABLE `login`;
 -- Contenu de la table `login`
 --
 
-INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`) VALUES
-(5, 'taratata', '', '1464189465', 0, 0, 1, 1, 0, 9636.8634, 7476.0328, 0),
-(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', '1464189465', 0, 0, 5, 5, 3, 2638188.665, 1192464.82, 945636),
-(7, 'jasonbg', '', '1464189465', 0, 0, 0, 0, 0, 2046.6218, 1938.2117, 0);
+INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `litter_vg`, `litter_pg`) VALUES
+(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', '1464189465', 0, 0, 5, 6, 5, 424, 1253.8, 1004251, 100, 100);
 
 -- --------------------------------------------------------
 
@@ -709,13 +702,13 @@ INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`,
 --
 
 DROP TABLE IF EXISTS `news`;
-CREATE TABLE IF NOT EXISTS `news` (
-`id` int(11) NOT NULL,
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
   `titre` text NOT NULL,
   `text` varchar(255) NOT NULL,
   `date_now` varchar(50) NOT NULL,
   `visible` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `news`
@@ -745,12 +738,12 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 --
 
 DROP TABLE IF EXISTS `raccord`;
-CREATE TABLE IF NOT EXISTS `raccord` (
-`id` int(11) NOT NULL,
+CREATE TABLE `raccord` (
+  `id` int(11) NOT NULL,
   `id_batiment` int(11) NOT NULL,
   `table_batiment` varchar(255) NOT NULL,
-  `name_objet` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `name_controller` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `raccord`
@@ -761,9 +754,10 @@ TRUNCATE TABLE `raccord`;
 -- Contenu de la table `raccord`
 --
 
-INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_objet`) VALUES
+INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_controller`) VALUES
 (1, 1, 'culture_vg', 'champ_glycerine'),
-(2, 2, 'usine_pg', 'usine_propylene');
+(2, 2, 'usine_pg', 'usine_propylene'),
+(3, 3, 'labos_bases', 'labos_bases');
 
 -- --------------------------------------------------------
 
@@ -772,13 +766,13 @@ INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_objet`) VALU
 --
 
 DROP TABLE IF EXISTS `usine_pg`;
-CREATE TABLE IF NOT EXISTS `usine_pg` (
-`id` int(11) NOT NULL,
+CREATE TABLE `usine_pg` (
+  `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `production` int(11) NOT NULL,
   `prix` bigint(20) NOT NULL,
   `time_construct` bigint(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `usine_pg`
@@ -870,55 +864,55 @@ INSERT INTO `usine_pg` (`id`, `level`, `production`, `prix`, `time_construct`) V
 -- Index pour la table `aromes`
 --
 ALTER TABLE `aromes`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `bases`
 --
 ALTER TABLE `bases`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `login`
 --
 ALTER TABLE `login`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `news`
 --
 ALTER TABLE `news`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `raccord`
 --
 ALTER TABLE `raccord`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -928,47 +922,47 @@ ALTER TABLE `usine_pg`
 -- AUTO_INCREMENT pour la table `aromes`
 --
 ALTER TABLE `aromes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=875;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=875;
 --
 -- AUTO_INCREMENT pour la table `bases`
 --
 ALTER TABLE `bases`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
 ALTER TABLE `culture_vg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT pour la table `labos_bases`
 --
 ALTER TABLE `labos_bases`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
 ALTER TABLE `news`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `raccord`
 --
 ALTER TABLE `raccord`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
