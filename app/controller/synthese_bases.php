@@ -41,27 +41,21 @@ Class synthese_bases extends base_module
 		//va seter dans $this->littre_vg_possible et $this->littre_pg_possible la quantité de matiere brut que le joueur peu avoir
 		//$this->calcul_nb_bases_in_litter_to_create();
 
-		if(isset($_POST['convert_in_littre']))
-		{
-			$this->convert_in_littre($_POST['to_convert']);
-		}
-
-		affiche_pre('Plante par littre avec reduc : '.$this->nb_plantes_for_littre.'      ----        porpy par littre avec reduc : '.$this->nb_propylene_for_littre);
-
-		affiche_pre('Nombre de vg possible : '.$this->littre_vg_possible.'        ----     Nombre de pg possible : '.$this->littre_pg_possible);
-
-		//on va passer par une étape de convertion instantanée par le joueur avec simplement deux petit bouton convertir en littre
 
 
-
-
+		//va calculer cmb le joueur peux creer avec ses bases et sont argent
 		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8);
 		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);
 		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2);
 		$this->nb_to_create[1000] = $this->nb_bases(1,1);	
 
 
-
+		// envoi le formulaire contenant ce que le joueur veux creer
+		if(isset($_POST['convert_all_in_littre']))
+		{
+			$this->convert_all_ressource_in_littre($_POST['to_convert']);
+		}
+		
 		if(isset($_POST['create_bases'])) 
 		{
 			$this->recept_form_with_bases_to_create($_POST);
@@ -92,7 +86,7 @@ Class synthese_bases extends base_module
 	}
 
 	
-	public function convert_in_littre($name_to_create)
+	public function convert_all_ressource_in_littre($name_to_create)
 	{
 		if($name_to_create == 'vg')
 		{
@@ -136,22 +130,30 @@ Class synthese_bases extends base_module
 
 	public function recept_form_with_bases_to_create($post)
 	{
+		//nettoyage du post principale et secondaire tmp
 		unset($post['create_bases']);
 		unset($_POST['create_bases']);
+		affiche_pre($post);
 
-		foreach($post as $name_form_bases => $value_form_bases)
+		foreach($post as $name_form_bases => $nb_form_bases)
 		{
-			if($this->calcul_price_total_cost_bases($name_form_bases, intval($value_form_bases)))
+			if($nb_form_bases >= 0)
 			{
-				$this->calcul_cost_ressource($name_form_bases, intval($value_form_bases));
-				$this->ajout_bases_in_bsd($name_form_bases, intval($value_form_bases), "+");
-				unset($_POST);
+				if($this->calcul_price_total_cost_bases($name_form_bases, intval($nb_form_bases)))
+				{
+					$this->calcul_cost_ressource($name_form_bases, intval($nb_form_bases));
+					$this->ajout_bases_in_bsd($name_form_bases, intval($nb_form_bases), "+");
+					unset($_POST);
+				}
+				else
+				{
+					return 0;
+				}
 			}
 			else
 			{
 				return 0;
 			}
-			
 		}
 		//faudra appeler cette fct set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
 			//ici recevra le formulaire rempli avec les bases a crées, elle seront passiblement les meme que le mex aposible mais vérifier tout les cas on sais jamais
@@ -160,13 +162,12 @@ Class synthese_bases extends base_module
 
 
 
-	public function calcul_price_total_cost_bases($name_form_bases, $value_form_bases)
+	public function calcul_price_total_cost_bases($name_form_bases, $nb_form_bases)
 	{
-		if($value_form_bases >= 0)
-		{
+
 			affiche_pre($this->nb_to_create);
 			//operation
-			if($value_form_bases > $this->nb_to_create[$name_form_bases])
+			if($nb_form_bases > $this->nb_to_create[$name_form_bases])
 			{
 				$_SESSION["error"] = "Erreur vous ne possédez pas assez de ressources pour tous créer";
 				return 0;
@@ -177,16 +178,16 @@ Class synthese_bases extends base_module
 				$total_price = 0;		
 
 				if($name_form_bases == 2080)
-					$total_price += $this->prix_vingt_quatre_vingt * $value_form_bases;
+					$total_price += $this->prix_vingt_quatre_vingt * $nb_form_bases;
 
 				else if($name_form_bases == 5050)
-					$total_price += $this->prix_cinquante_cinquante * $value_form_bases;
+					$total_price += $this->prix_cinquante_cinquante * $nb_form_bases;
 
 				else if($name_form_bases == 8020)
-					$total_price += $this->prix_quatre_vingt_vingt * $value_form_bases;
+					$total_price += $this->prix_quatre_vingt_vingt * $nb_form_bases;
 
 				else if($name_form_bases == 1000)
-					$total_price += $this->prix_cent * $value_form_bases;
+					$total_price += $this->prix_cent * $nb_form_bases;
 
 				//il faut vérifier si il a assez d'argnet également
 				if($this->user_obj->user_infos->argent >= $total_price)
@@ -200,7 +201,7 @@ Class synthese_bases extends base_module
 					return 0;
 				}
 			}
-		}
+		
 		//calculera le prix que coutera la synthese des bases et renverra a la fct précédente
 	}
 
@@ -315,5 +316,12 @@ Class synthese_bases extends base_module
 		}
 	}
 
-	public function 
+	public function calcul_argent_to_nb_base_possible()
+	{
+		/*
+			comment faire la fct
+			j'ai l'argent de l'user et le cout 
+		*/
+	}
+
 }

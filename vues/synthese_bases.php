@@ -11,13 +11,13 @@
 			<form method="post" action='#'>
 				<div class="col-lg-6">
 					<input type="hidden" name="to_convert" value="vg">
-					<input class="btn btn-primary col-lg-12" type="submit" name="convert_in_littre" value="Creer tout le VG possible (Gratuit)">
+					<input class="btn btn-primary col-lg-12" type="submit" name="convert_all_in_littre" value="Creer tout le VG possible (Gratuit)">
 				</div>
 			</form>
 			<form method="post" action='#'>
 				<div class="col-lg-6">
 					<input type="hidden" name="to_convert" value="pg">
-					<input class="btn btn-primary col-lg-12" type="submit" name="convert_in_littre" value="Creer tout le PG possible (Gratuit)">
+					<input class="btn btn-primary col-lg-12" type="submit" name="convert_all_in_littre" value="Creer tout le PG possible (Gratuit)">
 				</div>
 			</form>
 
