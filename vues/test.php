@@ -1,6 +1,12 @@
 <? 
 
+$string = ",";
 
+if($string == ",")
+	$string = "";
+
+
+affiche_pre($string);
 
 
 /*

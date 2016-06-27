@@ -21,6 +21,13 @@ function print_pre($var_a_print)
     ?></pre></div><?
 }
 
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec);
+}
+
+
 function affiche_pre($var_a_print)
 {
     ?><div class='col-xs-12' style='margin-bottom:50px;'><pre><?

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require "../app/controller/fonction.php";
+$time_start = microtime_float();
 require '../app/controller/load_class.php'; 
 Autoloader::register(); 
 session_start();
@@ -71,14 +72,15 @@ echo $page;
 //affiche les messages d'erreur du code
 if(!empty($error))
 {
-	//affiche_pre($error);
-	
+	affiche_pre($error);
 }
 
 
 affiche_pre($user);
-affiche_pre(Config::$list_req_sql);
-
+// bug affiche_pre(Config::$list_req_sql);
+$time_stop = microtime_float();
+$time_laps = (float)$time_stop - $time_start;
+affiche_pre("Executer en ".(float)$time_laps);
 
 if(!empty($_POST))
 {
@@ -87,4 +89,7 @@ if(!empty($_POST))
 		unset($_POST[$key]);
 	}
 }
+
+
+
 

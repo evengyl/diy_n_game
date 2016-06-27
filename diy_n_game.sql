@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 17 Juin 2016 à 15:06
--- Version du serveur :  10.1.13-MariaDB
--- Version de PHP :  5.6.21
+-- Généré le :  Lun 27 Juin 2016 à 07:05
+-- Version du serveur :  10.1.9-MariaDB
+-- Version de PHP :  5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -444,7 +444,7 @@ TRUNCATE TABLE `bases`;
 --
 
 INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, `bases_1000`) VALUES
-(1, 6, '1351', '1010', '1000', '1000');
+(1, 6, '1351', '1010', '1000', '1010');
 
 -- --------------------------------------------------------
 
@@ -680,7 +680,8 @@ CREATE TABLE `login` (
   `last_usine_pg` double NOT NULL,
   `argent` bigint(20) NOT NULL,
   `litter_vg` int(11) NOT NULL,
-  `litter_pg` int(11) NOT NULL
+  `litter_pg` int(11) NOT NULL,
+  `list_arome_not_have` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -692,8 +693,8 @@ TRUNCATE TABLE `login`;
 -- Contenu de la table `login`
 --
 
-INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `litter_vg`, `litter_pg`) VALUES
-(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', '1464189465', 0, 0, 5, 6, 5, 424, 1253.8, 1004251, 100, 100);
+INSERT INTO `login` (`id`, `login`, `password`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `litter_vg`, `litter_pg`, `list_arome_not_have`) VALUES
+(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', '1464189465', 0, 0, 8, 7, 6, 10000, 10000, 969000, 100, 100, '');
 
 -- --------------------------------------------------------
 
@@ -758,6 +759,34 @@ INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_controller`)
 (1, 1, 'culture_vg', 'champ_glycerine'),
 (2, 2, 'usine_pg', 'usine_propylene'),
 (3, 3, 'labos_bases', 'labos_bases');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `search_arome`
+--
+
+DROP TABLE IF EXISTS `search_arome`;
+CREATE TABLE `search_arome` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `price_value_search` bigint(20) NOT NULL,
+  `pourcent_win` int(4) NOT NULL,
+  `time_finish` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Vider la table avant d'insérer `search_arome`
+--
+
+TRUNCATE TABLE `search_arome`;
+--
+-- Contenu de la table `search_arome`
+--
+
+INSERT INTO `search_arome` (`id`, `id_user`, `price_value_search`, `pourcent_win`, `time_finish`) VALUES
+(13, 6, 11000, 48, 1466899881),
+(14, 6, 11000, 53, 1466899994);
 
 -- --------------------------------------------------------
 
@@ -909,6 +938,12 @@ ALTER TABLE `raccord`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `search_arome`
+--
+ALTER TABLE `search_arome`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `usine_pg`
 --
 ALTER TABLE `usine_pg`
@@ -932,7 +967,7 @@ ALTER TABLE `bases`
 -- AUTO_INCREMENT pour la table `construction_en_cours`
 --
 ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `culture_vg`
 --
@@ -947,7 +982,7 @@ ALTER TABLE `labos_bases`
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
@@ -958,6 +993,11 @@ ALTER TABLE `news`
 --
 ALTER TABLE `raccord`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `search_arome`
+--
+ALTER TABLE `search_arome`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `usine_pg`
 --

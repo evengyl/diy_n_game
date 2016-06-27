@@ -110,8 +110,13 @@ class _db_connect extends Config
 	{
 		parent::set_list_req_sql($req_sql);
 		$this->connect();
-		return mysqli_query($this->db_link, $req_sql)or die(mysqli_error($this->db_link));
-		
+		$time_request_before = date("U");
+		$res_sql = mysqli_query($this->db_link, $req_sql)or die(mysqli_error($this->db_link));
+		$time_request_after = date("U");
+
+		$_SESSION["time_exec_sql"] = (double)$time_request_after - $time_request_before;
+
+		return $res_sql;
 	}
 
 
