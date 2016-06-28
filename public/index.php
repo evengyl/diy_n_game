@@ -16,22 +16,7 @@ if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
 
-//ou il va recevoir 0 ou 1 cela dépend de la secu
 
-
-
-
-//$sign_up = new sign_up("");
-
-//$my_account = new my_account("");
-
-//if(Config::$is_connect == 0){
-	//$sign_up->doIt($_POST);
-//}else{
-//	$my_account->change_infos($_POST);
-//}
-
-		//si le joueur est connecter on arrive sur la page de jeu
 
 ob_start();
 global $user;
@@ -39,9 +24,19 @@ global $user;
 $a = new stdClass();
 $post = $_POST;
 $login = new login("", $a, $post);
+
 if(isset($user))
 	unset($user);
-$user = new user();
+
+if(Config::$is_connect == 1)
+{
+	$user = new user();
+	new user_ressources($user);
+	new user_batiments($user);
+	$user->get_variable_user();
+}
+
+
 $route = new router();?>
 
 <html lang="Fr-be">

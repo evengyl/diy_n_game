@@ -329,4 +329,15 @@ Class base_module extends all_query
 			return 0;
 		}
 	}
+
+	public function return_id_array_table_arome(&$array_aromes_trier)
+	{
+		$array_id_aromes = array();
+		
+		foreach($array_aromes_trier as $key_aromes => $value_aromes)
+		{
+			$array_id_aromes[] = $value_aromes->id;
+		}
+		return $array_id_aromes;
+	}
 }

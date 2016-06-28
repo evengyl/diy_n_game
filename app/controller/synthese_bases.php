@@ -34,10 +34,12 @@ Class synthese_bases extends base_module
 		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);
 		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2);
 		$this->nb_to_create[1000] = $this->nb_bases(1,1);
+
+
 		foreach($this->nb_to_create as $key => $values)
 		{
 			if($values == 0)
-				$_SESSION["little_infos"] = "Vous ne possédez pas assez d'argent pour créer chaque sorte de bases";
+				$_SESSION["little_infos"] = "Vous ne possédez pas assez de ressource  pour créer chaque sorte de bases";
 		}
 
 		// envoi le formulaire contenant ce que le joueur veux creer
@@ -50,6 +52,8 @@ Class synthese_bases extends base_module
 		{
 			$this->recept_form_with_bases_to_create($_POST);
 		}
+
+
 
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->render();
 	}
@@ -135,18 +139,11 @@ Class synthese_bases extends base_module
 					unset($_POST);
 				}
 				else
-				{
 					return 0;
-				}
 			}
 			else
-			{
 				return 0;
-			}
 		}
-		//faudra appeler cette fct set_ressource_user($vg_to_operate, $pg_to_operate, $moins_plus = "-")
-			//ici recevra le formulaire rempli avec les bases a crées, elle seront passiblement les meme que le mex aposible mais vérifier tout les cas on sais jamais
-		//va appeler la fonction de calcule de prix pour chaque champs et recevra en echange le prix total
 	}
 
 
@@ -291,14 +288,8 @@ Class synthese_bases extends base_module
 		// il faut mtn déterminer si le joueur peux tout faire avec
 
 		if($prix_total_estimation_de_prod <= $argent_user)
-		{
 			return $nb_ok; // il peux de toute facon tout créer
-		}
 		else
-		{
 			return $nb_ok_after_calcule_argent = floor($argent_user / $list_price_user);
-		}
 	}
-
-
 }

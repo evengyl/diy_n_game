@@ -1,11 +1,6 @@
 <?
-require "../modele/Config.class.php";
-require "../modele/_db_connect.class.php";
-require "fonction.php";
-require "all_query.php";
-require "user.php";
 
-class cron extends all_query
+class maj_ressource_robot extends base_module
 {
 	private $user_infos;
 	private $time_now;
@@ -21,7 +16,6 @@ class cron extends all_query
 			$this->calc_diff_time($row_user);
 			$this->maj_time_last_connect_in_db($row_user);
 
-			
 			//calcule combien de ressource le joueur gagne en seconde;
 			$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($row_user->production_vg);
 			$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($row_user->production_pg);
@@ -29,19 +23,8 @@ class cron extends all_query
 			//calcule combien il en a gagner depuis la derniere mise a jours des ressources
 			$this->calc_ressource_win($row_user);
 			$this->maj_ressource_in_db($row_user);
-
-
-			$this->validate_construct($row_user);
-
-
-			affiche_pre($row_user);
 		}
 	}
-
-
-
-
-
 
 	public function set_infos_user()
 	{
@@ -166,8 +149,6 @@ class cron extends all_query
 
 		//quand on a set le temps de différence , on remet a jour le temps dans la base de données a date time stamp pour que le calcule 
 		//de la différence de temps soit correct
-		
-
 	}
 
 	private function maj_time_last_connect_in_db($row_user)
@@ -182,36 +163,5 @@ class cron extends all_query
 		$this->update($req_sql);
 		unset($req_sql);
 	}
-
-
-	public function validate_construct($row_user)
-	{
-		$req_sql = "SELECT * FROM construction_en_cours WHERE id_user= '".$row_user->id."'";
-
-		$res_sql = $this->other_query($req_sql);
-		if(!empty($res_sql))
-		{
-			foreach($res_sql as $row_construct)
-			{
-				if($row_construct->time_finish <= $this->time_now)
-				{
-					$set_level_up = $this->user_infos->{$row_construct->name_batiment}+1;
-					$req_sql = new stdClass;
-					$req_sql->table = "login";
-					$req_sql->where = "id = '".$row_construct->id_user."'";
-					$req_sql->ctx = new stdClass;
-					$req_sql->ctx->{$row_construct->name_batiment} = $set_level_up;
-					$this->update($req_sql);
-
-					//et on delete la ligne qui est finie;
-					$del_sql = new stdClass;
-					$del_sql->table = "construction_en_cours";
-					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'";
-					$this->delete($del_sql);
-				}
-			}
-		}		
-	}
 	
 }
-$test = new cron();

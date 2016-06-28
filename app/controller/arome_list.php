@@ -2,9 +2,9 @@
 
 Class arome_list extends base_module
 {
-	private $search_1 = 1000;
-	private $search_2 = 2500;
-	private $search_3 = 5000;
+	private $price_search_1 = 1000;
+	private $price_search_2 = 2500;
+	private $price_search_3 = 5000;
 
 	public $chance_to_win_1 = 10;
 	public $chance_to_win_2 = 25;
@@ -18,7 +18,8 @@ Class arome_list extends base_module
 
 	public $time_search_for_one_k_argent_depenser = 3600;
 
-	public $array_aromes_trier = array();
+	public $tab_final_arome_acquis = array();
+	public $tab_final_arome_acquis_traiter = array();
 
 
 
@@ -27,8 +28,8 @@ Class arome_list extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);		
 
-		//va s'occuper d'aller chercher apres tout les aromes en bases et les traiter pour avoir un belle objet avec marque et aromes correctement
-		$this->get_and_traitement_aromes();
+		
+		
 
 		if(isset($_POST['search_form_validate_1000']) || isset($_POST['search_form_validate_2500']) || isset($_POST['search_form_validate_5000']))
 		{
@@ -51,17 +52,20 @@ Class arome_list extends base_module
 				$this->user_obj->get_variable_user();//ok
 			}
 		}
+
+
+		//return tab_final_arome_acquis, contient le tableau avec tout les aromes uniquement connu
+		$this->set_arome_acquis_for_tpl();
 		
-/* en cours */ 
-		//va préparer le tableau avec les arome uniquement connu sur
-		$this->set_arome_acquis_for_tpl($this->user_obj->user_infos->litter_vg);
-/* en cours */ 
+		//return tab_final_arome_acquis_traiter, contient le tab avec la mise en forme pour l'affichage dans le tpl
+		$this->traitement_array_final_aromes();
 
 		//recupere les recherche en cours pour les envoyer au tpl elle sont dans le user
 		$array_search_en_cours = $this->get_search_en_cours();
 
 		unset($_POST);
-		return $this->assign_var("array_aromes_trier", $this->array_aromes_trier)->assign_var("array_search_en_cours",$array_search_en_cours)->assign_var("user", $this->user_obj)->render();
+
+		return $this->assign_var("array_aromes_trier", $this->tab_final_arome_acquis_traiter)->assign_var("array_search_en_cours",$array_search_en_cours)->assign_var("user", $this->user_obj)->render();
 	}
 
 	private function get_search_en_cours()
@@ -76,22 +80,22 @@ Class arome_list extends base_module
 	}
 
 
-	private function get_and_traitement_aromes()
+	private function traitement_array_final_aromes()
 	{
-		$arome_list = new stdClass();
-		$arome_list->table = "aromes";
-		$arome_list->var = "id, marque, nom";
-		$arome_list->order = "marque";
-		$res_sql = $this->select($arome_list);
-
 		//astuce pour ne pas avoir un element en moins dans le tableau lors de la premire passe pour inscrire le nom de la marque dans le tab
 
 		$i=0;
-		foreach($res_sql as $row)
+		foreach($this->tab_final_arome_acquis as $row_first_marque)
 		{
-			if(isset($this->array_aromes_trier[$row->marque]))
+			$this->tab_final_arome_acquis_traiter[$row_first_marque->marque] = array();
+			break;
+		}
+
+		foreach($this->tab_final_arome_acquis as $row)
+		{
+			if(isset($this->tab_final_arome_acquis_traiter[$row->marque]))
 			{
-				if(key($this->array_aromes_trier) == $row->marque)
+				if(key($this->tab_final_arome_acquis_traiter) == $row->marque)
 				{
 					$name_image = $row->marque;
 					$name_image .= "_".trim($row->nom).".jpg";
@@ -99,26 +103,26 @@ Class arome_list extends base_module
 					$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
 					$name_image = "/images/aromes/".$row->marque."/".$name_image;
 
-					$this->array_aromes_trier[$row->marque][$i] = new stdClass();
-					$this->array_aromes_trier[$row->marque][$i]->nom = $row->nom;
-					$this->array_aromes_trier[$row->marque][$i]->id = $row->id;
-					$this->array_aromes_trier[$row->marque][$i]->img = $name_image;
+					$this->tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+					$this->tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+					$this->tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+					$this->tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+					$this->tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
 
 				}
 				else
 				{
-					$this->array_aromes_trier[$row->marque] = array();
-					end($this->array_aromes_trier);
+					$this->tab_final_arome_acquis_traiter[$row->marque] = array();
+					end($this->tab_final_arome_acquis_traiter);
 				}
 			}
 			else
 			{
-				$this->array_aromes_trier[$row->marque] = array();
-				end($this->array_aromes_trier);
+				$this->tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($this->tab_final_arome_acquis_traiter);
 			}
 			$i++;
 		}
-		affiche_pre($this->array_aromes_trier);
 	}
 
 	public function recept_form_with_value_arome($post)
@@ -139,7 +143,7 @@ Class arome_list extends base_module
 
 		$value = intval($value);
 
-		if($value == $this->search_1 || $value == $this->search_2 || $value == $this->search_3)
+		if($value == $this->price_search_1 || $value == $this->price_search_2 || $value == $this->price_search_3)
 			$this->value_to_search = $value;
 		else
 			$_SESSION['error'] = "Attention la valeur que vous avez entrée n'est pas bonne, vous essayer de corrompre le jeu... +1 avertissement";
@@ -159,17 +163,17 @@ Class arome_list extends base_module
 
 	private function convert_price_search_to_percent_win()
 	{
-		if((int)$this->value_to_search == 1000)
+		if((int)$this->value_to_search == (int)$this->price_search_1)
 			return $this->chance_to_win_1;
 
-		else if((int)$this->value_to_search == 2500)
+		else if((int)$this->value_to_search == (int)$this->price_search_2)
 			return $this->chance_to_win_2;
 
-		else if((int)$this->value_to_search == 5000)
+		else if((int)$this->value_to_search == (int)$this->price_search_3)
 			return $this->chance_to_win_3;
 
-		else if((int)$this->value_to_search > 5000)
-			return ((((int)$this->value_to_search - 5000) / 5000)* $this->chance_to_win_1) + $this->chance_to_win_3;
+		else if((int)$this->value_to_search > (int)$this->price_search_3)
+			return ((((int)$this->value_to_search - (int)$this->price_search_3) / (int)$this->price_search_3)* $this->chance_to_win_1) + $this->chance_to_win_3;
 
 		else
 			return 0;
@@ -183,10 +187,30 @@ Class arome_list extends base_module
 		return $time_finish;
 	}
 
-	private function set_arome_acquis_for_tpl($table_arome)
+	private function set_arome_acquis_for_tpl()
 	{
+		$arome_list = new stdClass();
+		$arome_list->table = "aromes";
+		$arome_list->var = "id, marque, nom";
+		$arome_list->order = "marque";
+		$res_sql_arome_list = $this->select($arome_list);
 
+		//recupere un tableau avec les ids des aromes non posseder par le joueur
+		$array_not_have = user_batiments::traitement_arome_chain_bsd($this->user_obj->user_infos->list_arome_not_have);
+
+		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
+		$array_total_aromes = $this->return_id_array_table_arome($res_sql_arome_list);
+
+		//calcule la différence entre les deux et en ressort un tableau avec tout les id des aromes acquis
+		$array_id_arome_acquis  = array_diff($array_total_aromes, $array_not_have);
+
+		foreach($res_sql_arome_list as $key_aromes => $value_arome)
+		{
+			foreach($array_id_arome_acquis as $row_acquis)
+			{
+				if((string)$row_acquis == (string)$value_arome->id)
+					$this->tab_final_arome_acquis[] = $value_arome;
+			}
+		}
 	}
-
-
 }
