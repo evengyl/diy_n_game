@@ -20,7 +20,7 @@
 	</center>
 	<center>
 		<div class="col-lg-3">
-			<img src="<?= Config::$path_public; ?>/images/bouteille-liquide.png" width="250" height="250" alt="Bouteille avec liquide" class="img-circle">
+			<img src="<?= Config::$path_public; ?>/images/e-liquides.png" width="250" height="250" alt="Bouteille avec liquide" class="img-circle">
 			<br>
 			<h3>Confectionner vos E-liquide et acheter des Shop pour les vendres !</h3>
 			<h4>Vous aurez a votre disposition une belle gamme de ressources a debloquer,
