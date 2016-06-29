@@ -3,21 +3,25 @@
 
 Class user_batiments extends user
 {
+	public $time_now = 0;
+
 	public function __construct($user)
 	{
+		$this->time_now = date("U");
+		$user->user_infos->id_arome_win = "";
 		$this->validate_construct($user);
 		$this->validate_search_arome($user);
 	}
 
 	public function validate_construct($user)
 	{
-
 		$req_sql = new stdClass;
 		$req_sql->table = "construction_en_cours";
 		$req_sql->var = "*";
 		$req_sql->where = "id_user= '".$user->user_infos->id."'";
-		$res_sql = $this->select($req_sql);
+		$res_sql = all_query::select($req_sql);
 		unset($req_sql);
+
 
 		if(!empty($res_sql))
 		{
@@ -32,13 +36,13 @@ Class user_batiments extends user
 					$req_sql->where = "id = '".$row_construct->id_user."'";
 					$req_sql->ctx = new stdClass;
 					$req_sql->ctx->{$row_construct->name_batiment} = $set_level_up;
-					$this->update($req_sql);
+					all_query::update($req_sql);
 
 					//et on delete la ligne qui est finie;
 					$del_sql = new stdClass;
 					$del_sql->table = "construction_en_cours";
 					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$user->user_infos->id."'";
-					$this->delete($del_sql);
+					all_query::delete($del_sql);
 				}
 			}
 		}		
@@ -50,7 +54,7 @@ Class user_batiments extends user
 		$req_sql->table = "search_arome";
 		$req_sql->var = "*";
 		$req_sql->where = "id_user= '".$user->user_infos->id."'";
-		$res_sql = $this->select($req_sql);
+		$res_sql = all_query::select($req_sql);
 		unset($req_sql);
 
 
@@ -67,7 +71,7 @@ Class user_batiments extends user
 					$req_sql->table = "login";
 					$req_sql->var = "list_arome_not_have";
 					$req_sql->where = "id = '".$user->user_infos->id."'";
-					$res_fx = $this->select($req_sql);
+					$res_fx = all_query::select($req_sql);
 
 					if(!empty($res_fx))
 					{
@@ -90,6 +94,9 @@ Class user_batiments extends user
 
 						if($id_ok_win != 0)
 						{
+							//on set l'arome gagné dans le user pour l'utiliser dans le tpl arome list
+							$user->user_infos->id_arome_win .= $id_ok_win.",";
+
 							foreach($array_id_arome_player_not_had as $key => $id_arome_not_have)
 							{
 								if($id_arome_not_have == $id_ok_win)
@@ -105,14 +112,14 @@ Class user_batiments extends user
 							$req_sql->where = "id = '".$row_search->id_user."'";
 							$req_sql->ctx = new stdClass;
 							$req_sql->ctx->list_arome_not_have = $string_for_bsd;
-							$this->update($req_sql);
+							all_query::update($req_sql);
 						}
 
 						//et on delete la ligne qui est finie;
 						$del_sql = new stdClass;
 						$del_sql->table = "search_arome";
 						$del_sql->where = "id = '".$row_search->id."' AND id_user = '".$user->user_infos->id."'";
-						$this->delete($del_sql);
+						all_query::delete($del_sql);
 					}
 					unset($res_fx);
 				}

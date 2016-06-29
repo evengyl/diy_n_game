@@ -36,7 +36,7 @@
 				 			else
 				 			{
 				 				echo "<input type='hidden' name='construct' value='level_labos_bases'/></a>";
-				 				echo "<td><input type='submit' class='btn btn-primary' value='Construire le niveau suivant'/></td>";
+				 				echo "<td colspan='2'><input type='submit' class='btn btn-primary' value='Construire le niveau suivant'/></td>";
 				 			}?>
 			 			</form>		
 					</tr>

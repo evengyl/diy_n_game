@@ -2,14 +2,6 @@
 
 Class synthese_bases extends base_module
 {
-	public $nb_plantes_for_littre = 3000;
-	public $nb_propylene_for_littre = 2100;
-
-	public $prix_vingt_quatre_vingt = 450;
-	public $prix_cinquante_cinquante = 400;
-	public $prix_quatre_vingt_vingt = 370;
-	public $prix_cent = 350;
-
 	public $littre_vg_possible = 0;
 	public $littre_pg_possible = 0;
 
@@ -26,15 +18,14 @@ Class synthese_bases extends base_module
 
 		//calcule du nombre de plante et de propy pour creer la base en fct du % de reduction du au labos set les nouvelle valeur dans l'objet
 		$pourcent_down = $this->user_obj->labos_bases->pourcent_down;
-		$this->nb_plantes_for_littre = $this->set_reduction_coup_with_labos($this->nb_plantes_for_littre, $pourcent_down);
-		$this->nb_propylene_for_littre = $this->set_reduction_coup_with_labos($this->nb_propylene_for_littre, $pourcent_down);
+		Config::$nb_plantes_for_littre = $this->set_reduction_coup_with_labos(Config::$nb_plantes_for_littre, $pourcent_down);
+		Config::$nb_propylene_for_littre = $this->set_reduction_coup_with_labos(Config::$nb_propylene_for_littre, $pourcent_down);
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
 		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8);
 		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);
 		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2);
 		$this->nb_to_create[1000] = $this->nb_bases(1,1);
-
 
 		foreach($this->nb_to_create as $key => $values)
 		{
@@ -52,8 +43,6 @@ Class synthese_bases extends base_module
 		{
 			$this->recept_form_with_bases_to_create($_POST);
 		}
-
-
 
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->render();
 	}
@@ -73,7 +62,7 @@ Class synthese_bases extends base_module
 		if($name_to_create == 'vg')
 		{
 			$plante_stock = $this->user_obj->user_infos->last_culture_vg;
-			$littre_vg_possible = floor(round($plante_stock / $this->nb_plantes_for_littre, 2));
+			$littre_vg_possible = floor(round($plante_stock / Config::$nb_plantes_for_littre, 2));
 
 			
 			if($this->littre_vg_possible <= 0)
@@ -83,7 +72,7 @@ Class synthese_bases extends base_module
 
 			$this->set_litter_vg($littre_vg_possible);
 
-			$cout_total_ressource = $littre_vg_possible * $this->nb_plantes_for_littre;
+			$cout_total_ressource = $littre_vg_possible * Config::$nb_plantes_for_littre;
 			$this->set_ressource_brut_user($cout_total_ressource, 0, $moins_plus = "-");
 			$_SESSION['error_bases_down'] = "Infos : Vos plantes on été convertie en littre de bases !";
 
@@ -92,7 +81,7 @@ Class synthese_bases extends base_module
 		else if($name_to_create == 'pg')
 		{
 			$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
-			$littre_pg_possible = floor(round($propylene_stock / $this->nb_propylene_for_littre, 2));
+			$littre_pg_possible = floor(round($propylene_stock / Config::$nb_propylene_for_littre, 2));
 
 
 			if($this->littre_pg_possible <= 0)
@@ -102,7 +91,7 @@ Class synthese_bases extends base_module
 
 			$this->set_litter_pg($littre_pg_possible);
 
-			$cout_total_ressource = $littre_pg_possible * $this->nb_propylene_for_littre;
+			$cout_total_ressource = $littre_pg_possible * Config::$nb_propylene_for_littre;
 			$this->set_ressource_brut_user(0, $cout_total_ressource, $moins_plus = "-");
 			$_SESSION['error_bases_down'] = "Infos : Votre propylène brut à été converti en littre de bases !";
 
@@ -163,16 +152,16 @@ Class synthese_bases extends base_module
 				$total_price = 0;		
 
 				if($name_form_bases == 2080)
-					$total_price += $this->prix_vingt_quatre_vingt * $nb_form_bases;
+					$total_price += Config::$prix_vingt_quatre_vingt * $nb_form_bases;
 
 				else if($name_form_bases == 5050)
-					$total_price += $this->prix_cinquante_cinquante * $nb_form_bases;
+					$total_price += Config::$prix_cinquante_cinquante * $nb_form_bases;
 
 				else if($name_form_bases == 8020)
-					$total_price += $this->prix_quatre_vingt_vingt * $nb_form_bases;
+					$total_price += Config::$prix_quatre_vingt_vingt * $nb_form_bases;
 
 				else if($name_form_bases == 1000)
-					$total_price += $this->prix_cent * $nb_form_bases;
+					$total_price += Config::$prix_cent * $nb_form_bases;
 
 				//il faut vérifier si il a assez d'argnet également
 				if($this->user_obj->user_infos->argent >= $total_price)
@@ -253,36 +242,38 @@ Class synthese_bases extends base_module
 
 		if($nb_vg > $nb_pg)
 			$nb_ok = $nb_pg;
-
 		else if($nb_vg < $nb_pg)
 			$nb_ok = $nb_vg;
 
 		else
 			$nb_ok = $nb_vg;
 
+		//contradictions du 100% vg qui ne demande pas de pg donc qui sort du lot
+		if($dosage_vg == 1) //donc 100%
+			$nb_ok = $nb_vg;
 
 
 		$argent_user = $this->user_obj->user_infos->argent;
 
 		if($dosage_vg == 0.2 && $dosage_pg == 0.8)
 		{
-			$prix_total_estimation_de_prod = $this->prix_vingt_quatre_vingt * $nb_ok;
-			$list_price_user = $this->prix_vingt_quatre_vingt;
+			$prix_total_estimation_de_prod = Config::$prix_vingt_quatre_vingt * $nb_ok;
+			$list_price_user = Config::$prix_vingt_quatre_vingt;
 		}
 		else if($dosage_vg == 0.5 && $dosage_pg == 0.5)
 		{
-			$prix_total_estimation_de_prod = $this->prix_cinquante_cinquante * $nb_ok;
-			$list_price_user = $this->prix_cinquante_cinquante;
+			$prix_total_estimation_de_prod = Config::$prix_cinquante_cinquante * $nb_ok;
+			$list_price_user = Config::$prix_cinquante_cinquante;
 		}
 		else if($dosage_vg == 0.8 && $dosage_pg == 0.2)
 		{
-			$prix_total_estimation_de_prod = $this->prix_quatre_vingt_vingt * $nb_ok;
-			$list_price_user = $this->prix_quatre_vingt_vingt;
+			$prix_total_estimation_de_prod = Config::$prix_quatre_vingt_vingt * $nb_ok;
+			$list_price_user = Config::$prix_quatre_vingt_vingt;
 		}
 		else if($dosage_vg == 1 && $dosage_pg == 1)
 		{
-			$prix_total_estimation_de_prod = $this->prix_cent * $nb_ok;
-			$list_price_user = $this->prix_cent;
+			$prix_total_estimation_de_prod = Config::$prix_cent * $nb_ok;
+			$list_price_user = Config::$prix_cent;
 		}
 		//donne le prix total que couterais toute la création de base dans cette sorte ci
 		// il faut mtn déterminer si le joueur peux tout faire avec

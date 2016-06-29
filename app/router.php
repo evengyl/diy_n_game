@@ -3,7 +3,7 @@ Class router
 {
 	private $get = array();
 	private $echo_get;
-	private $route = array();
+	public $route = array();
 
 	public function router($get = array())
 	{
@@ -14,7 +14,7 @@ Class router
 		if(!isset($this->route['construct']))
 			$this->route['construct'] = "";
 
-			
+
 		$this->is_connect = Config::$is_connect;
 
 		global $error;
@@ -60,8 +60,11 @@ Class router
 					$this->get()->is_connect()->assign_bread($title_brd = "Documentation")->assign_mod();
 							
 				else
+				{
 					unset($this->route['page']);
 					$error[] = "Le call _GET au routeur n'existe pas:  controller = Router on passe au construct";
+				}
+
 			
 
 		}

@@ -7,38 +7,72 @@
 				<h3 class="title">Explication : </h3>
 				<span>Dans Diy_n_game, Les parfumeurs ne vous laisserons pas leurs recette aussi facilement, en plus de payer pour chaque recherche d'arômes vous aurez seulement un pourcentage
 					défini de change de trouver des aromes en fonction de l'argent que vous placerez dans les recherche.</span>
-			</div>
+			</div><?
+			
+			if($arome_win_for_tpl != "")
+			{?>
+				<h3 class='col-xs-12 title' style=" border-bottom:1px solid #FF7F00; font-size:18px; padding-top:15px;">
+					Arômes découvert grâce à la recherche
+				</h3>
+
+				<div class="col-lg-12" style="background:#232D3B;"><?
+					$tmp_marque = "";
+					foreach($arome_win_for_tpl as $key => $value)
+					{
+					 	?><h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; margin-bottom:15px; padding-top:10px;">Marques : <?= $key; ?></h3><?
+					 	foreach($value as $row_arome)
+					 	{?>
+							<div class="col-xs-6 col-md-2">
+								<a class="thumbnail">
+									<center>
+										<img style="height:100px;" class="img-responsive" src="<?= Config::$path_public.$row_arome->img ?>">
+										<h5 style="color:white;">Arôme n° <?= $row_arome->id; ?></h5>
+										<h5 style="color:white;"><?= $row_arome->nom; ?></h5>
+							        	<span style="color:green;" class="glyphicon glyphicon-ok"></span>
+							        	<span style="color:red;" class="glyphicon glyphicon-remove"></span>
+							        </center>
+							    </a>
+							</div><?
+					 	}
+					}?>
+
+				</div><?
+			}?>
+
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Recherche et listes des arômes disponible.
+			</h3>
+			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+				<?= $string_arome_string_nb ?>
 			</h3>
 			<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']) OR isset($_SESSION['error_bases_down']))?'has-error':''; ?>">
 					<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 			</div>
 
-				<div class="col-sm-6 col-md-12" >
-					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<div class="col-lg-12 pull-right ressource_now">
-							<h3 class="title">&nbsp;Recherches en cours :</h3>
-							<table class="table table-stripped table-hover" style="color:white;">
-								<tr class="success" style="color:black;">
-									<th>Valeur de la recherche : </th>
-									<th>Pourcentage de réussite : </th>
-									<th>temps restant : </th>
-								</tr><?
-								foreach($array_search_en_cours as $row_search)
-								{?>
+			<div class="col-sm-6 col-md-12" >
+				<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+					<div class="col-lg-12 pull-right ressource_now">
+						<h3 class="title">&nbsp;Recherches en cours :</h3>
+						<table class="table table-stripped table-hover" style="color:white;">
+							<tr class="success" style="color:black;">
+								<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+								<th>temps restant <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+							</tr><?
+							foreach($array_search_en_cours as $row_search)
+							{?>
 
-									<tr class="success" style="color:black;">
-										<td><b><?= $row_search->price_value_search; ?> &euro;</td>
-										<td><b><?= $row_search->pourcent_win; ?> %</td>
-										<td><b><?= $row_search->real_time_finish; ?></td>
-									</tr>
-										<?
-								}?>
-							</table>
-						</div>
+								<tr class="success" style="color:black;">
+									<td><b><?= $row_search->price_value_search; ?> &euro;</td>
+									<td><b><?= $row_search->pourcent_win; ?> %</td>
+									<td><b><?= $row_search->real_time_finish; ?></td>
+								</tr>
+									<?
+							}?>
+						</table>
 					</div>
 				</div>
+			</div>
 
 
 			<form method="post" action="?page=arome_list">
@@ -91,7 +125,7 @@
 								<h3 class="title">&nbsp;Explication : Recherche d'arômes personnalisée.</h3>
 								<span class="pull-left" style="font-size:14px; padding-left:15px;">-Lancer une recherche Personalisée vous permettre de dépenser autant d'argent que vous le souhaité dans la recherhce en parfumeries alimentaire.</span>
 								<span class="pull-left" style="font-size:14px; padding-left:15px;">-Le gros avantages de lancer ce genre de recherche est que vous pouvez considérablement augmenter le pourcentage de change de trouver un nouvelle arômes.</span>
-								<span class="pull-left" style="font-size:14px; padding-left:15px;">-Nous parlons ici d'une ordre de chance de 2000/1 Donc tout les 2000 euros à partir du palier de 5000 vous gagnerai 10 % de chances en plus de tomber sur un arômes non connu.</span>
+								<span class="pull-left" style="font-size:14px; padding-left:15px;">-Nous parlons ici d'une ordre de chance de 5000€/1 Donc tout les 5000€ euros à partir du palier de 5000€ vous gagnerai 10 % de chances en plus de tomber sur un arômes non connu.</span>
 							</div>						
 						</div>
 						<div class="col-lg-9 pull-right ressource_now">

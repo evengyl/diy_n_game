@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<?php
+<?
 require "../app/controller/fonction.php";
 $time_start = microtime_float();
 require '../app/controller/load_class.php'; 
+
 Autoloader::register(); 
+
 session_start();
 $db = new _db_connect();
-
-
 
 global $error;
 $error = array();
@@ -25,12 +25,15 @@ $a = new stdClass();
 $post = $_POST;
 $login = new login("", $a, $post);
 
+
 if(isset($user))
 	unset($user);
+else
+	$user = new user();
+
 
 if(Config::$is_connect == 1)
 {
-	$user = new user();
 	new user_ressources($user);
 	new user_batiments($user);
 	$user->get_variable_user();
@@ -48,10 +51,8 @@ $route = new router();?>
 
 	__MOD2_header__
 
-	<!--<div class='col-lg-2'>Nouveautés, mises a jour et réseaux sociaux</div>-->	
 	<? $route->router($_GET); ?>
 		
-	<!--<div class='col-lg-2'>Pub, ticket a gratter toute les heures, concours ext ext/div>-->	
 	__TPL2_bottom_head__
 
 	__TPL2_footer__
@@ -64,12 +65,21 @@ $parser = new parser($user);
 $page = $parser->parser_main($page, $user);
 echo $page; 
 
+
+
+
+
+
+
+
+
+
+
 //affiche les messages d'erreur du code
 if(!empty($error))
 {
 	affiche_pre($error);
 }
-
 
 affiche_pre($user);
 // bug affiche_pre(Config::$list_req_sql);

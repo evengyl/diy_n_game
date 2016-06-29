@@ -99,7 +99,7 @@ Class base_module extends all_query
 		$req_sql->ctx->litter_vg = $this->user_obj->user_infos->litter_vg + $littre_vg_possible;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
-		$this->user_obj->reset_user_login_table();
+		user::get_variable_user();
 	}
 
 	public function set_litter_pg($littre_pg_possible)
@@ -111,7 +111,7 @@ Class base_module extends all_query
 		$req_sql->ctx->litter_pg = $this->user_obj->user_infos->litter_pg + $littre_pg_possible;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
-		$this->user_obj->reset_user_login_table();
+		user::get_variable_user();
 	}
 
 	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
@@ -135,7 +135,7 @@ Class base_module extends all_query
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
 
-		$this->user_obj->get_variable_user();
+		user::get_variable_user();
 	}
 
 	public function set_ressource_brut_user($vg_to_operate = 0, $pg_to_operate = 0, $moins_plus = "-")
@@ -169,7 +169,7 @@ Class base_module extends all_query
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
 
-		$this->user_obj->get_variable_user();
+		user::get_variable_user();
 	}
 
 	public function set_ressource_litter_user($litter_vg_to_operate = 0, $litter_pg_to_operate = 0, $moins_plus = "-")
@@ -202,7 +202,7 @@ Class base_module extends all_query
 		$req_sql->ctx->litter_pg = $pg_after;
 		$res_sql = $this->update($req_sql);
 		unset($req_sql);
-		$this->user_obj->get_variable_user();
+		user::get_variable_user();
 	}
 
 	public function time_finish_construct($time_construct)
@@ -284,12 +284,6 @@ Class base_module extends all_query
 				return 2;	
 		}
 	}
-
-	protected function check_search_en_cours($name_batiment_from_controller = "", $prix_level_up)
-	{
-		
-	}
-
 
 	public function insert_construction_en_cours($name_batiment, $time_finish)
 	{

@@ -157,5 +157,20 @@ Class user_ressources extends user
 		$this->update($req_sql);
 		unset($req_sql);
 	}
+
+ 	public function get_string_all_id_aromes()
+ 	{
+ 		$string_id_arome = "";
+ 		$req_sql = new stdClass();
+		$req_sql->table = "aromes";
+		$req_sql->var = "id";
+		$array_id_arome = $this->select($req_sql);
+
+		foreach($array_id_arome as $row_id_aromes)
+		{
+			$string_id_arome .= $row_id_aromes->id.",";
+		}
+		return $string_id_arome;
+ 	}
 	
 }

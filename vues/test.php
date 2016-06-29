@@ -1,12 +1,8 @@
 <? 
 
-$string = ",";
+// créer une fct qui récup tout les ids des arome
+// la mettre dans user car utile pour la création de compte avec tout les arome adns la table arome
 
-if($string == ",")
-	$string = "";
-
-
-affiche_pre($string);
 
 
 /*

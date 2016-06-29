@@ -12,6 +12,7 @@ Class user extends all_query
 	public $construction;
 	public $search_arome;
 
+
 	public function __construct()
 	{
 		$this->time_now = date("U");
@@ -28,7 +29,8 @@ Class user extends all_query
 
 			if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
 			{
-				$this->user_infos = new stdClass();
+				if(!isset($this->user_infos))
+					$this->user_infos = new stdClass();	
 				$req_sql = new stdClass;
 				$req_sql->table = "login";
 				$req_sql->var = "*";
@@ -67,9 +69,12 @@ Class user extends all_query
 				$req_sql->var = "*";
 				$req_sql->where = "id_user = '".$this->user_infos->id."'";
 				$res_fx = $this->select($req_sql);
-				foreach($res_fx[0] as $key => $values)
+				if(!empty($res_fx))
 				{
-					$this->bases->$key = $values;
+					foreach($res_fx[0] as $key => $values)
+					{
+						$this->bases->$key = $values;
+					}
 				}
 				unset($res_fx);
 
@@ -115,4 +120,26 @@ Class user extends all_query
 			$error[] = "pas de variable is_connect dans le get_variable_user donc pas connecté";
 		}
 	}
+
+
+	public function reset_user_login_table()
+ 	{
+ 		$this->user_infos = new stdClass();
+ 		$req_sql = new stdClass;
+ 		$req_sql->table = "login";
+ 		$req_sql->var = "*";
+ 		$req_sql->where = "login ='".$_SESSION['pseudo']."'";
+ 		$res_fx = $this->select($req_sql);
+ 
+ 		foreach($res_fx[0] as $key => $values)
+ 		{
+ 			$this->user_infos->$key = $values;			
+ 		}
+ 		unset($res_fx);
+ 	}
+
+
+
+
+
 } 

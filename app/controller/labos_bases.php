@@ -10,6 +10,7 @@ Class labos_bases extends base_module
 
 		$this->alert_construction_en_cours = $this->check_construction_en_cours($this->name_batiment, $this->user_obj->labos_bases->prix);	
 
+
 		if(isset($_POST['construct']))
 		{
 
