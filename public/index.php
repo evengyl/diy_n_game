@@ -9,6 +9,7 @@ Autoloader::register();
 session_start();
 $db = new _db_connect();
 
+
 global $error;
 $error = array();
 
@@ -19,7 +20,9 @@ if(!isset($_GET['page']))
 
 
 ob_start();
-global $user;
+
+?>__MOD0_set_update_var_global__<?
+
 
 $a = new stdClass();
 $post = $_POST;

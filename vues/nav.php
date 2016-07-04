@@ -48,19 +48,32 @@
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="?page=arome_list">
-							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Parfumerie des arômes
+							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Recherche des arômes
 						</a>
 					</li>
 
 					
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Labos de conceptions des arômes
+						<a style="color:white;" href="?page=update_tools">
+							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'amélioration
 						</a>
 					</li>
 
-					
+
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="#">
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Centrale d'achat pour la conception
+						</a>
+					</li>
+
+
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="#">
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Marchés
+						</a>
+					</li>
+
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#">

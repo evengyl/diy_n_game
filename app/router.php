@@ -53,6 +53,9 @@ Class router
 				else if($this->route['page'] == 'arome_list')
 					$this->get()->is_connect()->assign_bread($title_brd = "Liste des aromes des laboratoires de recherche")->assign_mod();
 				
+				else if($this->route['page'] == 'update_tools')
+					$this->get()->is_connect()->assign_bread($title_brd = "Laboratoires de recherche et d'amélioration")->assign_mod();
+
 				else if($this->route['page'] == 'my_account')
 					$this->get()->is_connect()->assign_bread($title_brd = "Mon compte")->assign_mod();
 
