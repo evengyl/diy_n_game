@@ -180,6 +180,7 @@ Class sign_up extends base_module
 			$req_sql->ctx->argent = Config::$argent;
 			$req_sql->ctx->litter_vg = Config::$litter_vg;
 			$req_sql->ctx->litter_pg = Config::$litter_pg;
+			$req_sql->ctx->point = 0;
 			$req_sql->where = "id = '".$id_user."'";
 			$req_sql->table = "login";
 

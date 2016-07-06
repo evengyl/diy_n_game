@@ -116,6 +116,8 @@ Class base_module extends all_query
 
 	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
 	{
+		$this->set_point_user($prix_a_deduire);
+
 		$argent_before = $this->user_obj->user_infos->argent;
 		
 		if($moins_plus == "-")
@@ -136,6 +138,22 @@ Class base_module extends all_query
 		unset($req_sql);
 
 		user::get_variable_user();
+	}
+
+	public function set_point_user($argent_depenser)
+	{
+		$point_before = $this->user_obj->user_infos->point;
+		$point_gagner = $argent_depenser/1000;
+		$point_after = $point_before + $point_gagner;
+
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_obj->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->point = $point_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
 	}
 
 	public function set_ressource_brut_user($vg_to_operate = 0, $pg_to_operate = 0, $moins_plus = "-")

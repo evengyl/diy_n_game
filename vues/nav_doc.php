@@ -16,19 +16,19 @@
 				<ul class="nav  nav-stacked ">
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#titre1">
-							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Titre 1
+							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Présentation générale de votre entreprise
 						</a>
 					</li>
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#titre2">
-							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Titre 2
+							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Cultures du VG
 						</a>
 					</li>
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#titre3">
-							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Titre 3
+							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Industries du PG
 						</a>
 					</li>
 

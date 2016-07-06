@@ -63,7 +63,7 @@ Class router
 					$this->get()->is_connect()->assign_bread($title_brd = "Mon compte")->assign_mod();
 
 				else if($this->route['page'] == 'documentation')
-					$this->get()->is_connect()->assign_bread($title_brd = "Documentation")->assign_mod();
+					$this->get()->assign_bread($title_brd = "Documentation")->assign_mod();
 							
 				else
 				{
