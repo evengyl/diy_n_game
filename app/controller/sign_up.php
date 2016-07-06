@@ -153,6 +153,25 @@ Class sign_up extends base_module
 			$this->insert_into($req_sql);
 			unset($req_sql);
 
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->id_user = $id_user;
+            $req_sql->ctx->price_search_1 = 0;
+            $req_sql->ctx->price_search_2 = 0;
+            $req_sql->ctx->price_search_3 = 0;
+            $req_sql->ctx->chance_to_win_1 = 0;
+            $req_sql->ctx->chance_to_win_2 = 0;
+            $req_sql->ctx->chance_to_win_3 = 0;
+            $req_sql->ctx->time_search_for_one_k_argent_depenser = 0;
+            $req_sql->ctx->prix_vingt_quatre_vingt = 0;
+            $req_sql->ctx->prix_cinquante_cinquante = 0;
+            $req_sql->ctx->prix_quatre_vingt_vingt = 0;
+            $req_sql->ctx->prix_cent = 0;
+            $req_sql->table = "amelioration_var_config";
+
+			$this->insert_into($req_sql);
+			unset($req_sql);
+
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;

@@ -51,8 +51,6 @@
 					bases plus des petit ennuis pourrait survenir :).</span>
 			</div>
 		</div>	
-
-		__MOD_synthese_bases__
 	</div>
 	__TPL_social_services__
 </div>

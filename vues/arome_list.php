@@ -39,9 +39,7 @@
 				</div><?
 			}?>
 
-			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-				Recherche et listes des arômes disponible.
-			</h3>
+
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				<?= $string_arome_string_nb ?>
 			</h3>
@@ -74,15 +72,17 @@
 				</div>
 			</div>
 
-
+			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+				Recherche et listes des arômes disponible.
+			</h3>
 			<form method="post" action="?page=arome_list">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="search_form_validate_1000" value="Lancer une recherche à 1000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
+							<input name="search_form_validate_1000" value="Lancer une recherche à <?= Config::$price_search_1 ?>€" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="value" value="<?= Config::$price_search_1 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -94,8 +94,8 @@
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_2.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 2">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="search_form_validate_2500" value="Lancer une recherche à 2500€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="2500" class="col-lg-12 btn btn-primary" type="hidden">
+							<input name="search_form_validate_2500" value="Lancer une recherche à <?= Config::$price_search_2 ?>€" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="value" value="<?= Config::$price_search_2 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -107,8 +107,8 @@
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="search_form_validate_5000" value="Lancer une recherche à 5000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="5000" class="col-lg-12 btn btn-primary" type="hidden">
+							<input name="search_form_validate_5000" value="Lancer une recherche à <?= Config::$price_search_3 ?>€" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="value" value="<?= Config::$price_search_3 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -132,16 +132,16 @@
 							<h3 class="title">&nbsp;Exemple :</h3>
 							<table class="table table-stripped table-hover" style="color:white;">
 								<tr class="success" style="color:black;">
-									<th>Recherche n°1 à 1000€ :</th><td><b>10% de chances de tomber sur un arôme</td>
+									<th>Recherche n°1 à <?= Config::$price_search_1 ?>€ :</th><td><b><?= Config::$chance_to_win_1 ?>% de chances de tomber sur un arôme</td>
 								</tr>
 								<tr class="success" style="color:black;">
-									<th>Recherche n°2 à 2500€ :</th><td><b>25% de chances de tomber sur un arôme</td>
+									<th>Recherche n°2 à <?= Config::$price_search_2 ?>€ :</th><td><b><?= Config::$chance_to_win_2 ?>% de chances de tomber sur un arôme</td>
 								</tr>
 								<tr class="success" style="color:black;">
-									<th>Recherche n°3 à 5000€ :</th><td><b>50% de chances de tomber sur un arôme</td>
+									<th>Recherche n°3 à <?= Config::$price_search_3 ?>€ :</th><td><b><?= Config::$chance_to_win_3 ?>% de chances de tomber sur un arôme</td>
 								</tr>
 								<tr class="success" style="color:black;">
-						 			<th>Recherche perso àpd 5000 + 5000 par 10% : ex 10000€</th><td><b>50% + 10% extra de chances de tomber sur un arôme</td>					 					
+						 			<th>Recherche perso àpd <?= Config::$price_search_3 ?> + <?= Config::$price_search_3 ?> par <?= Config::$chance_to_win_1 ?>% : ex <?= Config::$price_search_3*2 ?>€</th><td><b><?= Config::$chance_to_win_3 ?>% + <?= Config::$chance_to_win_1 ?>% extra de chances de tomber sur un arôme</td>					 					
 								</tr>
 							</table>
 						</div>

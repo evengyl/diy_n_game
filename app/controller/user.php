@@ -10,6 +10,8 @@ Class user extends all_query
 	public $labos_bases;
 	public $bases;
 	public $construction;
+	public $update;
+	public $amelioration_var_config;
 	public $search_arome;
 
 
@@ -78,6 +80,21 @@ Class user extends all_query
 				}
 				unset($res_fx);
 
+				$this->amelioration_var_config = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "amelioration_var_config";
+				$req_sql->var = "*";
+				$req_sql->where = "id_user = '".$this->user_infos->id."'";
+				$res_fx = $this->select($req_sql);
+				if(!empty($res_fx))
+				{
+					foreach($res_fx[0] as $key => $values)
+					{
+						$this->amelioration_var_config->$key = $values;
+					}
+				}
+				unset($res_fx);
+
 
 				$this->construction = new stdClass();
 				$req_sql = new stdClass;
@@ -90,6 +107,21 @@ Class user extends all_query
 					foreach($res_fx as $key => $values)
 					{
 						$this->construction->$key = $values;
+					}
+				}
+				unset($res_fx);
+
+				$this->update = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "update_en_cours";
+				$req_sql->var = "*";
+				$req_sql->where = "";
+				$res_fx = $this->select($req_sql);
+				if(!empty($res_fx))
+				{
+					foreach($res_fx as $key => $values)
+					{
+						$this->update->$key = $values;
 					}
 				}
 				unset($res_fx);

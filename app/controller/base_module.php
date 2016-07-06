@@ -285,6 +285,42 @@ Class base_module extends all_query
 		}
 	}
 
+	protected function check_update_en_cours($name_batiment_from_controller = "", $prix_level_up)
+	{
+		if(!empty($this->user_obj->update))
+		{	
+		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans	
+			foreach($this->user_obj->update as $row_update)
+			{
+				if($row_update->name_batiment == $name_batiment_from_controller)
+				{
+					//la consctruction était déjà lancée quand le joueur c'est logger
+					return 1;	
+				}
+			}
+			//si il sort de la boucle c'est qu'il n'a rien trouver dans la base
+			//mais avant ça on va vérifié si il a l'argent nécessaire
+			if($this->user_obj->user_infos->argent >= $prix_level_up)
+			{
+				//la tout est ok rien n'est lancé et il as assez d'argnet
+				return 0;
+			}
+			else
+			{
+				//2 egale que on a pas l'argent
+				return 2;	
+			}		 
+		}
+		else
+		{
+			//mais avant ça on va vérifié si il a l'argent nécessaire
+			if($this->user_obj->user_infos->argent >= $prix_level_up)
+				return 0;
+			else
+				return 2;	
+		}
+	}
+
 	public function insert_construction_en_cours($name_batiment, $time_finish)
 	{
 		$req_sql = new stdClass;
@@ -293,6 +329,19 @@ Class base_module extends all_query
 		$req_sql->ctx->name_batiment = $name_batiment;
 		$req_sql->ctx->time_finish = $time_finish;
 		$req_sql->table = "construction_en_cours";
+		$this->insert_into($req_sql);
+
+	}
+
+	public function insert_search_update_en_cours($name_batiment, $time_finish, $real_name_search)
+	{
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->id_user = $this->user_obj->user_infos->id;
+		$req_sql->ctx->name_batiment = $name_batiment;
+		$req_sql->ctx->time_finish = $time_finish;
+		$req_sql->ctx->real_name_search = $real_name_search;
+		$req_sql->table = "update_en_cours";
 		$this->insert_into($req_sql);
 
 	}

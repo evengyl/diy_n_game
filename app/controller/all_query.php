@@ -72,8 +72,8 @@ class all_query extends _db_connect
 
 		foreach($res_sql->ctx as $key => $values)
 		{			
-			$key_all = $key_all.", ".$key;
-			$value_all = $value_all.", '".$values."'";			
+			$key_all = $key_all.', '.$key;
+			$value_all = $value_all.', "'.$values.'"';			
 		}
 
 		$key_all = substr($key_all,2);

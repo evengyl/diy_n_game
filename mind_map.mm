@@ -1,6 +1,6 @@
 <map version="1.0.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node CREATED="1467096789704" ID="ID_51230023" MODIFIED="1467114544207" TEXT="Diy N Game to do list">
+<node CREATED="1467096789704" ID="ID_51230023" MODIFIED="1467816388863" TEXT="Diy N Game to do list">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="flag"/>
@@ -14,31 +14,10 @@
 <node CREATED="1467097203568" HGAP="51" ID="ID_1459742802" MODIFIED="1467186889591" POSITION="left" TEXT="Aromes list" VSHIFT="-68">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 <icon BUILTIN="yes"/>
-<node CREATED="1467097220239" ID="ID_1891194643" MODIFIED="1467207383277" TEXT="quand aucune recherhce n&apos;est en cours, afficher un message le sp&#xe9;ciciant">
-<edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
-<icon BUILTIN="stop"/>
-</node>
-<node CREATED="1467097252959" ID="ID_1846472655" MODIFIED="1467207291506" TEXT="dans le controller calculer les aromes connu et non connu pour le set dans le config directement pour un acc&#xe8;s partout ou dans le user trouver le mieux">
-<edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
-<icon BUILTIN="button_ok"/>
-</node>
-<node CREATED="1467097337998" ID="ID_494309791" MODIFIED="1467207244915" TEXT="Pr&#xe9;voir de r&#xe9;cuperer un string de tout les id aromes pour mettre dans le config pour les nouveau client">
-<edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
-<icon BUILTIN="button_ok"/>
-</node>
 <node CREATED="1467098139393" ID="ID_1950838223" MODIFIED="1467098449321" TEXT="Terminer de r&#xe9;colter les images pour les aromes">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 </node>
-<node CREATED="1467138134677" ID="ID_404730691" MODIFIED="1467207235091" TEXT="des qu&apos;un aromes &#xe0; &#xe9;t&#xe9; trouver il faut l&apos;envoyer dans le templates, il ne s&apos;affichera qu&apos;une fois si dans le controller le if de validit&#xe9; de trouvaille d&apos;aromes est a un uniqueent quand il y a un aromes trouv&#xe9;, prendre en compte qu&apos;il peux y avoir plusieurs aromes trouver avec plusieurs recherche">
-<icon BUILTIN="button_ok"/>
-</node>
-<node CREATED="1467182759032" ID="ID_140084642" MODIFIED="1467186910490" TEXT="les recherche finie ne se retire pas des liste">
-<icon BUILTIN="button_ok"/>
-</node>
-</node>
-<node CREATED="1467097299119" ID="ID_955408938" MODIFIED="1467207252826" POSITION="right" TEXT="pr&#xe9;voir sur les nouveaux joueurs la liste des vairable a set dans la table, pr&#xe9;voir tout &#xe7;a dans le config " VSHIFT="-22">
-<edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
-<icon BUILTIN="button_ok"/>
+<node CREATED="1467638715619" ID="ID_1219328868" MODIFIED="1467638729503" TEXT="Attention dans aromes liste le total des arome trouver n&apos;est pas bon"/>
 </node>
 <node CREATED="1467098170734" HGAP="2" ID="ID_1497186222" MODIFIED="1467135610592" POSITION="left" TEXT="Etudes du march&#xe9; " VSHIFT="-44">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
@@ -86,12 +65,6 @@
 <node CREATED="1467114417400" ID="ID_163940729" MODIFIED="1467114456980" TEXT="l&apos;entrepot contiendra aussi un petit bouton pour &quot;voir stock jeter&quot;"/>
 <node CREATED="1467115580688" ID="ID_1448625927" MODIFIED="1467115602047" TEXT="Il Contiendra aussi le nombre de tout pipette, boutteil vide, caisse ext ext"/>
 </node>
-<node CREATED="1467114540303" HGAP="25" ID="ID_529920490" MODIFIED="1467207400150" POSITION="right" TEXT="PR&#xe9;voir une ligen les tab des batiment a construire avec le temps de construction des batiments" VSHIFT="-25">
-<icon BUILTIN="button_ok"/>
-</node>
-<node CREATED="1467114545022" HGAP="29" ID="ID_1614482776" MODIFIED="1467135589278" POSITION="right" TEXT="il faudrais voir si se serais mieu que le cron tourne en permanance sur les ressource ou alors on fait chaque joueur g&#xe8;rent sont propre total de ressource avec le USER" VSHIFT="-25">
-<icon BUILTIN="button_ok"/>
-</node>
 <node CREATED="1467114547286" ID="ID_320096125" MODIFIED="1467114724025" POSITION="left" TEXT="R&#xe9;cipient - outils">
 <node CREATED="1467114556911" ID="ID_538322285" MODIFIED="1467114592435" TEXT="La fonctionnalit&#xe9; de cette page permettra de cr&#xe9;e du mat&#xe9;riel de tout genre pour la confection des produit, a ce stade normalement le joueur a des aromes des bases pr&#xe8;te en littre"/>
 <node CREATED="1467114593310" ID="ID_1837788952" MODIFIED="1467115643016" TEXT="la table outils devra &#xea;tre cr&#xe9;e et contiendra id, id_user, caisse, boutteille vide, pipette, frigo"/>
@@ -102,22 +75,8 @@
 <node CREATED="1467114790933" ID="ID_1287907822" MODIFIED="1467114812425" TEXT="les pipette de dosage 1 euros les 10 pipette 1 pipette obligatoire par flacons de 10 ml"/>
 <node CREATED="1467115511371" ID="ID_1034785308" MODIFIED="1467115567220" TEXT="Les caisses elle seront 25 euros par packet de 100, 1 caisse pour 1000 flacons donc 25 / 10 /1000 = 0.0025 par flacons si on veux"/>
 </node>
-<node CREATED="1467120863772" HGAP="28" ID="ID_737631323" MODIFIED="1467209957167" POSITION="right" TEXT="Prioritaire, creer la division des trois class user, tout d&#xe9;pendante de USER en lui m&#xea;me" VSHIFT="-12">
-<icon BUILTIN="yes"/>
-<icon BUILTIN="yes"/>
-<icon BUILTIN="yes"/>
-<icon BUILTIN="yes"/>
-<icon BUILTIN="button_ok"/>
-</node>
 <node CREATED="1467124345941" HGAP="77" ID="ID_1386822338" MODIFIED="1467184566403" POSITION="left" TEXT="Dans le labas , pr&#xe9;voir le fait que les joueur peuvent recevoir des p&#xe9;nalit&#xe9; de qualit&#xe9;, pr&#xe9;voir que toute les semaines un jeu de d&#xe9;s est lanc&#xe9; , toujours en fct du % de labos, de le mettre a 0 pendant  2 jours il faudras pour &#xe7;a pr&#xe9;voir un controller tool qui int&#xe9;ragira avec les controller de base pour les changer ind&#xe9;pendamment de son propre fonctionnement" VSHIFT="23"/>
-<node CREATED="1467124347465" HGAP="68" ID="ID_1628907385" MODIFIED="1467184569378" POSITION="left" TEXT="Synthese des bases" VSHIFT="22">
-<node CREATED="1467182472480" ID="ID_1944541566" MODIFIED="1467182629809" TEXT="Dans la fct nb bases le systeme ne permet pas d&apos;avoir 0 de pg pour la cr&#xe9;ation de bases 100% vg a v&#xe9;rifier">
-<icon BUILTIN="button_ok"/>
-</node>
-<node CREATED="1467184522163" ID="ID_492679080" MODIFIED="1467185493413" TEXT="attention, les images des bidon de bases sont toute les m&#xea;me">
-<icon BUILTIN="button_ok"/>
-</node>
-</node>
+<node CREATED="1467124347465" HGAP="80" ID="ID_1628907385" MODIFIED="1467269315801" POSITION="left" TEXT="Synthese des bases" VSHIFT="24"/>
 <node CREATED="1467124352253" HGAP="25" ID="ID_1584817357" MODIFIED="1467135594122" POSITION="right" TEXT="attention la synthses des flacons ne se met pas a jour &#xe0; l&apos;envoi du formulaire,  la set varible user n&apos;est pas appeler entre temps regler &#xe7;a, de plus les calcule de quantit&#xe9; que l&apos;on peux faire ne sont pas bon, on a de la vg mais il affiche 0 pour la confectio nde celle ci" VSHIFT="-23">
 <icon BUILTIN="button_cancel"/>
 <icon BUILTIN="button_cancel"/>
@@ -138,5 +97,36 @@
 <node CREATED="1467184957179" ID="ID_420878748" MODIFIED="1467185002683" POSITION="right" TEXT="Attention que actuellement l&apos;agout d&apos;arome n&apos;est pas possible car la fct qui cr&#xe9; le tab des aromes est pr&#xe9;vue pour que les marque se suivent sans e m&#xe9;langer , a corriger">
 <icon BUILTIN="messagebox_warning"/>
 </node>
+<node CREATED="1467269319557" ID="ID_631958755" MODIFIED="1467269334095" POSITION="left" TEXT="Cr&#xe9;ation de produit sans Ar&#xf4;mes dedans">
+<node CREATED="1467269359460" ID="ID_807757189" MODIFIED="1467269377555" TEXT="Proposer au joueur 4 encadr&#xe9; contenant respectivement les 4 bases"/>
+<node CREATED="1467269378056" ID="ID_1479476364" MODIFIED="1467269419373" TEXT="Lui proposer de remplir ses bidon avec 4*3 bouton , 10 - 100 - 1000 ou multiple de 1000"/>
+<node CREATED="1467269421784" ID="ID_1789687868" MODIFIED="1467269440748" TEXT="les bases se remplisse a hauteur de 85%, donc 8.5 ml , car on travail avec que des flacons de 10 "/>
+<node CREATED="1467269662414" ID="ID_919781368" MODIFIED="1467269715479" TEXT="Les nouvvelles ressources seront stokee &#xe9;galement dans la table bases avec le m&#xea;me non que leur bases propre mais avec _10ml en plus"/>
+<node CREATED="1467269721495" ID="ID_1641577127" MODIFIED="1467269780055" TEXT="Le remplissage de base dans les flacons ne coute rien, ind&#xe9;pendament du fait qu&apos;il faut qu&apos;il y aie d ela place dans les frigos de stockage, et qu&apos;il y aie assez de pipette de remplissage"/>
+<node CREATED="1467269783550" ID="ID_1342010" MODIFIED="1467269791906" TEXT="1 littre de bases donnera 117 flacons"/>
+</node>
+<node CREATED="1467638393742" HGAP="26" ID="ID_1118032390" MODIFIED="1467638457862" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="17">
+<node CREATED="1467638433476" ID="ID_1572542091" MODIFIED="1467814726412" TEXT="Les am&#xe9;lioration permettre de set les var dans le global pour am&#xe9;liorer les statistique du jeu">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467639128240" ID="ID_1061005606" MODIFIED="1467814734706" TEXT="les recherche sont comme des batiments, pas de mise en double donc comme les batiments de production, m&#xea;me chose , construction en cours pareil">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467639104856" ID="ID_951102035" MODIFIED="1467814781535" TEXT="  Le prix des recherche se trovuera dans la base de donn&#xe9;es">
+<icon BUILTIN="stop-sign"/>
+<node CREATED="1467814747714" ID="ID_1959857645" MODIFIED="1467814786937" TEXT="Remplacer par des prix fix&#xe9; dans le mdoule en lui m&#xea;me">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1467638453645" ID="ID_1747388232" MODIFIED="1467814793490" TEXT="Pouvoir set le prix des trois recherches, diminution de 5% par level, level max 19 attention que 3 type de recherhe d&apos;aromes existe alors il y a 3 recherche diff&#xe9;rente ahah">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467639228063" ID="ID_1329762749" MODIFIED="1467816332075" TEXT="Une recherche qui augmente les % de r&#xe9;ussir une recherche egalement comme l&apos;autre , augmentation de 1%, 50level max">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467639566980" ID="ID_1480388114" MODIFIED="1467639589970" TEXT="Pouvoir diminuer le temps de recheche des aromes, par 1 minutes 60 level"/>
+<node CREATED="1467639626629" ID="ID_1959364971" MODIFIED="1467639674672" TEXT="Pouvoir diminuer le prix de confection des bases pure 3% par level, 30 level max"/>
+</node>
+<node CREATED="1467816389400" ID="ID_1994344273" MODIFIED="1467816425574" POSITION="right" TEXT="V&#xe9;rifier ce q&apos;uil se passe quand le level max des batiment de prod est atteint glycerine, propy, labos"/>
 </node>
 </map>

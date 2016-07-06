@@ -1,5 +1,6 @@
-<div class="col-xs-12 col-md-12">
-	<div class="col-lg-12" style="margin-bottom:15px;">
+<div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
+	__TPL_nav__
+	<div class="col-lg-8" style="margin-top:1px;">
 
 		<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:10px; margin-bottom:10px;">
 			Convertir toutes les ressources en base primaire!.
@@ -18,7 +19,7 @@
 		</form>
 
 		<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-			Listes des batiments de production de ressources brut.
+			Production et synthèse des bases dans différent pourcentage de contentration en VG et PG.
 		</h3>
 		<div style='font-size:18px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']) OR isset($_SESSION['error_bases_down']) OR isset($_SESSION['little_infos']))?'has-error':''; ?>">
 				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label><br>':''; ?>

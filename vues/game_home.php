@@ -99,7 +99,7 @@
 		<div class="col-sm-6 col-md-12" >
 			<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 				<div class="col-lg-12 pull-right ressource_now">
-					<h3 class="title">&nbsp;Recherches en cours :</h3>
+					<h3 class="title">&nbsp;Recherches d'arômes en cours :</h3>
 					<table class="table table-stripped table-hover" style="color:white;">
 						<tr class="success" style="color:black;">
 							<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
@@ -119,6 +119,27 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div class="col-sm-6 col-md-12" >
+			<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+				<div class="col-lg-12 pull-right ressource_now">
+					<h3 class="title">&nbsp;Recherches d'upgrade en cours :</h3>
+					<table class="table table-stripped table-hover" style="color:white;">
+						<tr class="success" style="color:black;">
+							<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+							<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+						</tr>
+						<tr class="success" style="color:black;">
+							<td style="background:#D0E9C6;"><b><?= (isset($user->update->{0}))? $user->update->{0}->real_name_search :''; ?></td>
+							<td style="background:#D0E9C6;"><b><?= (isset($user->update->{0}))? date('d/m/Y', $user->update->{0}->time_finish)." &agrave; ".date('H:i:s', $user->update->{0}->time_finish) :''; ?></b></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 </div>
 

@@ -10,6 +10,7 @@ Class user_batiments extends user
 		$this->time_now = date("U");
 		$user->user_infos->id_arome_win = "";
 		$this->validate_construct($user);
+		$this->validate_update($user);
 		$this->validate_search_arome($user);
 	}
 
@@ -42,6 +43,41 @@ Class user_batiments extends user
 					$del_sql = new stdClass;
 					$del_sql->table = "construction_en_cours";
 					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$user->user_infos->id."'";
+					all_query::delete($del_sql);
+				}
+			}
+		}		
+	}
+
+	public function validate_update($user)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "update_en_cours";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user= '".$user->user_infos->id."'";
+		$res_sql = all_query::select($req_sql);
+		unset($req_sql);
+
+
+		if(!empty($res_sql))
+		{
+			foreach($res_sql as $row_update)
+			{
+				if($row_update->time_finish <= $this->time_now)
+				{
+					//on indique dans la base que le level est changer 
+					$set_level_up = $user->amelioration_var_config->{$row_update->name_batiment}+1;
+					$req_sql = new stdClass;
+					$req_sql->table = "amelioration_var_config";
+					$req_sql->where = "id_user = '".$row_update->id_user."'";
+					$req_sql->ctx = new stdClass;
+					$req_sql->ctx->{$row_update->name_batiment} = $set_level_up;
+					all_query::update($req_sql);
+
+					//et on delete la ligne qui est finie;
+					$del_sql = new stdClass;
+					$del_sql->table = "update_en_cours";
+					$del_sql->where = "id = '".$row_update->id."' AND id_user = '".$user->user_infos->id."'";
 					all_query::delete($del_sql);
 				}
 			}

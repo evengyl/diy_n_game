@@ -44,7 +44,11 @@
 						</a>
 					</li>
 
-					
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="?page=synthese_bases">
+							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Synthétiseur de ressource en Bases
+						</a>
+					</li>
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="?page=arome_list">
@@ -55,7 +59,7 @@
 					
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="?page=update_tools">
+						<a style="color:white;" href="?page=labos_update_tools">
 							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'amélioration
 						</a>
 					</li>
@@ -87,3 +91,4 @@
 		</nav>
 	</div>
 </div>
+
