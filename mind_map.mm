@@ -128,5 +128,6 @@
 <node CREATED="1467639626629" ID="ID_1959364971" MODIFIED="1467639674672" TEXT="Pouvoir diminuer le prix de confection des bases pure 3% par level, 30 level max"/>
 </node>
 <node CREATED="1467816389400" ID="ID_1994344273" MODIFIED="1467816425574" POSITION="right" TEXT="V&#xe9;rifier ce q&apos;uil se passe quand le level max des batiment de prod est atteint glycerine, propy, labos"/>
+<node CREATED="1467817311805" ID="ID_1368231470" MODIFIED="1467817330927" POSITION="right" TEXT="V&#xe9;rifier que toute les var qui d&#xe9;pende du config soit bien utilis&#xe9;e avec le config::"/>
 </node>
 </map>
