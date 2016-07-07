@@ -21,9 +21,6 @@ if(!isset($_GET['page']))
 
 ob_start();
 
-?>__MOD0_set_update_var_global__<?
-
-
 $a = new stdClass();
 $post = $_POST;
 $login = new login("", $a, $post);
@@ -37,11 +34,13 @@ else
 
 if(Config::$is_connect == 1)
 {
+	
 	new user_ressources($user);
 	new user_batiments($user);
 	$user->get_variable_user();
-}
 
+	new set_update_var_global("",$user);
+}
 
 $route = new router();?>
 

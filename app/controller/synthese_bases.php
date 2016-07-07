@@ -37,6 +37,7 @@ Class synthese_bases extends base_module
 		if(isset($_POST['convert_all_in_littre']))
 		{
 			$this->convert_all_ressource_in_littre($_POST['to_convert']);
+			$user->get_variable_user();
 		}
 
 		if(isset($_POST['create_bases'])) 

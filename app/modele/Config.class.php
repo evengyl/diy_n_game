@@ -12,6 +12,24 @@ class Config
     public static $base_path = "/diy_n_game";
 
     public static $mail = "dark.evengyl@gmail.com";
+    public static $is_connect;
+
+
+
+    public static function set_name_base($base)
+    {
+        self::$base = $base;
+    }
+
+
+
+    public static $list_req_sql = array();
+
+    public static function set_list_req_sql($req_sql)
+    {
+        self::$list_req_sql[] = $req_sql;    
+    }
+
 
     /* variable de bases */
 
@@ -23,6 +41,12 @@ class Config
     public static $price_search_1_name = "Amélioration du prix de la recherche d'arômes de stade 1";
     public static $price_search_2_name = "Amélioration du prix de la recherche d'arômes de stade 2";
     public static $price_search_3_name = "Amélioration du prix de la recherche d'arômes de stade 3";
+
+    public static $chance_to_win_1_name = "Augmente les chances de trouver un arômes pour le stade de recherche 1";
+    public static $chance_to_win_2_name = "Augmente les chances de trouver un arômes pour le stade de recherche 2";
+    public static $chance_to_win_3_name = "Augmente les chances de trouver un arômes pour le stade de recherche 3";
+
+    public static $time_search_for_one_k_argent_depenser_name = "Diminue le temps de recherche des arômes de 60 secondes";
 
 
     public static $last_culture_vg = 1000;
@@ -41,46 +65,33 @@ class Config
     /*varible utilisée par les controller */
     //pour ajouter des recherche il faut ajouter ici, dans le tpl labos update, dans la base de données, et dans le module labos update
     //et faire les fonction de set dans le set update var global
-            public static $nb_plantes_for_littre = 3000;
-            public static $nb_propylene_for_littre = 2100;
+    public static $nb_plantes_for_littre = 3000;
+    public static $nb_propylene_for_littre = 2100;
 
 
-        //arome list
-            public static $price_search_1 = 1000;
-            public static $price_search_2 = 2500;
-            public static $price_search_3 = 5000;
+    //arome list
+    public static $price_search_1 = 1000;
+    public static $price_search_2 = 2500;
+    public static $price_search_3 = 5000;
 
-            public static $chance_to_win_1 = 10;
-            public static $chance_to_win_2 = 25;
-            public static $chance_to_win_3 = 50;
-            public static $time_search_for_one_k_argent_depenser = 3600;
-        //end
+    public static $chance_to_win_1 = 10;
+    public static $chance_to_win_2 = 25;
+    public static $chance_to_win_3 = 50;
+    public static $time_search_for_one_k_argent_depenser = 3600;
+    //end
 
-        //synthses des bases 
-            public static $prix_vingt_quatre_vingt = 450;
-            public static $prix_cinquante_cinquante = 400;
-            public static $prix_quatre_vingt_vingt = 370;
-            public static $prix_cent = 350;
-        //end
+    //synthses des bases 
+    public static $prix_vingt_quatre_vingt = 450;
+    public static $prix_cinquante_cinquante = 400;
+    public static $prix_quatre_vingt_vingt = 370;
+    public static $prix_cent = 350;
+    //end
 
 
     /* fin des var utilisée par les controller */
 
-    public static $is_connect;
+    
 
-    public static function set_name_base($base)
-    {
-        self::$base = $base;
-    }
-
-
-
-    public static $list_req_sql = array();
-
-    public static function set_list_req_sql($req_sql)
-    {
-        self::$list_req_sql[] = $req_sql;    
-    }
 
 
 

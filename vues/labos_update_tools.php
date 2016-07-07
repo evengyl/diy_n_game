@@ -224,24 +224,6 @@
 			</form>	
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Recherche pour diminuer le temps des différentes recherches d'arômes.
 			</h3>
@@ -251,13 +233,34 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
-							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="update_time_search_arome" value="Lancer une recherche à 1000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
+							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Diminution de temps de recherche d'arômes</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche actuel : <?= $user->amelioration_var_config->time_search_for_one_k_argent_depenser ?></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche MAX : 50</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Prix de la recherche : 50 000</h3><?
+				 			if($in_make == 1)
+				 			{
+				 				echo "<a class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Une recherhce est déjà en cours&nbsp;</a>";
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				if($user->amelioration_var_config->time_search_for_one_k_argent_depenser < 60)
+				 					echo "<a class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+				 			}
+				 			else
+				 			{
+				 				echo '<input name="update_price_search_arome_3" value="Lancer une amélioration de Temps" class="col-lg-12 btn btn-primary" type="submit">';
+				 			}?>
+							<input name="price" value="50000" type="hidden">
+							<input name="name_search" value="time_search_for_one_k_argent_depenser" type="hidden">
 						</div>
 					</div>
 				</div>
 			</form>
+
+
+
+
+
 
 
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">

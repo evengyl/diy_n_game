@@ -4,7 +4,7 @@
 
 		<div class="col-lg-12" style="background:#232D3B;">
 			<div class="col-lg-4">
-				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/plantes.png">
+				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/labos.png">
 			</div>
 			
 			<div class="col-lg-8 pull-right ressource_now">

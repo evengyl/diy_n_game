@@ -85,9 +85,9 @@
 						</tr><?
 						foreach($user->construction as $row_search)
 						{?>
-							<tr class="success" style="color:black;">
-								<td style="background:#D0E9C6;"><b><?= $row_search->real_name_batiments; ?></td>
-								<td style="background:#D0E9C6;"><b><?= $row_search->time_finish_real; ?></td>
+							<tr class="info" style="color:black;">
+								<td><?= $row_search->real_name_batiments; ?></td>
+								<td><?= $row_search->time_finish_real; ?></td>
 							</tr>
 								<?
 						}?>
@@ -104,15 +104,15 @@
 						<tr class="success" style="color:black;">
 							<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
-							<th>temps restant <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+							<th>Temps restant <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 						</tr><?
 						foreach($user->search_arome as $row_search)
 						{?>
 
-							<tr class="success" style="color:black;">
-								<td style="background:#D0E9C6;"><b><?= $row_search->price_value_search; ?> &euro;</td>
-								<td style="background:#D0E9C6;"><b><?= $row_search->pourcent_win; ?> %</td>
-								<td style="background:#D0E9C6;"><b><?= $row_search->real_time_finish; ?></td>
+							<tr class="info" style="color:black;">
+								<td><?= $row_search->price_value_search; ?> &euro;</td>
+								<td><?= $row_search->pourcent_win; ?> %</td>
+								<td><?= $row_search->real_time_finish; ?></td>
 							</tr><?
 						}?>
 					</table>
@@ -127,12 +127,12 @@
 					<h3 class="title">&nbsp;Recherches d'upgrade en cours :</h3>
 					<table class="table table-stripped table-hover" style="color:white;">
 						<tr class="success" style="color:black;">
-							<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
-							<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+							<th>Ce que vous cherchez<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+							<th>Temps restant<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 						</tr>
-						<tr class="success" style="color:black;">
-							<td style="background:#D0E9C6;"><b><?= (isset($user->update->{0}))? $user->update->{0}->real_name_search :''; ?></td>
-							<td style="background:#D0E9C6;"><b><?= (isset($user->update->{0}))? date('d/m/Y', $user->update->{0}->time_finish)." &agrave; ".date('H:i:s', $user->update->{0}->time_finish) :''; ?></b></td>
+						<tr class="info" style="color:black;">
+							<td><?= (isset($user->update->{0}))? $user->update->{0}->real_name_search :''; ?></td>
+							<td><?= (isset($user->update->{0}))? $user->update->{0}->time_finish_real :''; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -143,17 +143,4 @@
 	</div>
 </div>
 
-
-<div class="col-xs-12 col-without-padding">
-	<strong class='col-xs-12 title' style="text-align:center; font-size:16px; border-bottom:1px solid #EF4224; ">
-		Vos ressource sont mise à jours toutes les cinq min, pour ne pas surcharger le serveurs de demande.
-		Vos batiments eux, le sont en permanence.
-	</strong>
-</div>
-
-<div class="col-xs-12 col-without-padding" style="margin-bottom:49px;">
-	<strong class='col-xs-12 title' style="text-align:center; font-size:16px; border-bottom:1px solid #EF4224; ">
-		Cette page vous permet d'avoir une vue d'ensemble sur vos ressources et comment ce gere votre affaire.
-	</strong>
-</div>
 

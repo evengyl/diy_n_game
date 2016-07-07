@@ -76,13 +76,18 @@ if(Config::$is_connect == 1)
 
 			        <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
+				        						        <li class="col-lg-12" style="color:white;">
+					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
+					        		<span style="font-size:13px;">Nombres de produits remplis : 000 / 000</span>
+					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
 					        		<span style="font-size:13px;">Nombres de flacons Vides : 000</span>
 					        </li>
-					        <li class="col-lg-12" style="color:white;">
+
+					        					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:13px;">Nombres de flacons rempli : 000</span>
+					        		<span style="font-size:13px;">Pipettes de remplissages : 000</span>
 					        </li>
 					    </ul>
 					</div>
@@ -91,7 +96,11 @@ if(Config::$is_connect == 1)
 				        <ul class="nav navbar-nav">
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
-					        		<span style="font-size:13px;">Argent : <?= $user->user_infos->argent ?> €</span>
+					        		<span style="font-size:13px;">Argents : <?= $user->user_infos->argent ?> €</span>
+					        </li>
+					        <li class="col-lg-12" style="color:white;">
+					        		<img src="<?= Config::$path_public; ?>/images/point.png" alt="Argent en coffre" style="max-height:25px;">
+					        		<span style="font-size:13px;">Points : <?= $user->user_infos->point ?> Pts</span>
 					        </li>
 				      	</ul>
 			      	</div>

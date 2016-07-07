@@ -5,6 +5,19 @@
 		<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:10px; margin-bottom:10px;">
 			Convertir toutes les ressources en base primaire!.
 		</h3>
+
+		<div class="col-lg-12" style="margin-bottom:10px;">
+			<div class="col-lg-4">
+				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/syntheses.png">
+			</div>
+			<div class="col-lg-8 explication pull-right">
+
+				<h3 class="title">Explication : </h3>
+				<span>Dans Diy_n_game, les synthétiseur de bases vous permettrons en un clic de convertir tout les plantes ou propylène brut, en bases presque vapable, sous format de littre et 
+					en formas brut, elle vous permettrons juste en dessous de créer vos propre base vapable.</span>
+			</div>
+		</div>
+
 		<form method="post" action='#'>
 			<div class="col-lg-6">
 				<input type="hidden" name="to_convert" value="vg">
