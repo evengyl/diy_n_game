@@ -48,6 +48,11 @@ class Config
 
     public static $time_search_for_one_k_argent_depenser_name = "Diminue le temps de recherche des arômes de 60 secondes";
 
+    public static $prix_vingt_quatre_vingt_name = "Diminue le prix de production des bases mélangées brute  20%/80%";
+    public static $prix_cinquante_cinquante_name = "Diminue le prix de production des bases mélangées brute  50%/50%";
+    public static $prix_quatre_vingt_vingt_name = "Diminue le prix de production des bases mélangées brute  80%/20%";
+    public static $prix_cent_name = "Diminue le prix de production des bases mélangées brute 100% VG";
+
 
     public static $last_culture_vg = 1000;
     public static $last_usine_pg = 1000;

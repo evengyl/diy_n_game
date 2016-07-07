@@ -21,7 +21,7 @@
 							<table class="table table-stripped table-hover" style="color:white;">
 								<tr class="success" style="color:black;">
 									<th>Nom de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
-									<th>temps restant <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
+									<th>Heure de fin<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 								</tr>
 								<tr class="success" style="color:black;">
 									<td style="background:#D0E9C6;"><b><?= (isset($user->update->{0}))? $user->update->{0}->real_name_search :''; ?></td>
@@ -228,7 +228,7 @@
 				Recherche pour diminuer le temps des différentes recherches d'arômes.
 			</h3>
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=labos_update_tools">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
@@ -267,53 +267,117 @@
 				Recherche pour Diminuer le prix de la création des bases pures.
 			</h3>
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=labos_update_tools">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
-							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="update_price_concept_2080" value="Lancer une recherche à 1000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
+							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Diminution du prix de conception des bases pure 20/80</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche actuel : <?= $user->amelioration_var_config->prix_vingt_quatre_vingt ?></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche MAX : 30</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Prix de la recherche : 15 000</h3><?
+				 			if($in_make == 1)
+				 			{
+				 				echo "<a class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Une recherhce est déjà en cours&nbsp;</a>";
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				if($user->amelioration_var_config->prix_vingt_quatre_vingt < 30)
+				 					echo "<a class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+				 			}
+				 			else
+				 			{
+				 				echo '<input name="update_price_search_arome_3" value="Lancer une amélioration de prix" class="col-lg-12 btn btn-primary" type="submit">';
+				 			}?>
+							<input name="price" value="15000" type="hidden">
+							<input name="name_search" value="prix_vingt_quatre_vingt" type="hidden">
 						</div>
 					</div>
 				</div>
-			</form>
+			</form>			
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=labos_update_tools">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/quality_search_aromes_2.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 2">
+						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
-							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="update_price_concept_5050" value="Lancer une recherche à 2500€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="2500" class="col-lg-12 btn btn-primary" type="hidden">
+							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Diminution du prix de conception des bases pure 50/50</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche actuel : <?= $user->amelioration_var_config->prix_cinquante_cinquante ?></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche MAX : 30</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Prix de la recherche : 15 000</h3><?
+				 			if($in_make == 1)
+				 			{
+				 				echo "<a class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Une recherhce est déjà en cours&nbsp;</a>";
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				if($user->amelioration_var_config->prix_cinquante_cinquante < 30)
+				 					echo "<a class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+				 			}
+				 			else
+				 			{
+				 				echo '<input name="update_price_search_arome_3" value="Lancer une amélioration de prix" class="col-lg-12 btn btn-primary" type="submit">';
+				 			}?>
+							<input name="price" value="15000" type="hidden">
+							<input name="name_search" value="prix_cinquante_cinquante" type="hidden">
 						</div>
 					</div>
 				</div>
-			</form>
+			</form>			
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=labos_update_tools">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
+						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
-							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="update_price_concept_8020" value="Lancer une recherche à 5000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="5000" class="col-lg-12 btn btn-primary" type="hidden">
+							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Diminution du prix de conception des bases pure 80/20</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche actuel : <?= $user->amelioration_var_config->prix_quatre_vingt_vingt ?></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche MAX : 30</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Prix de la recherche : 15 000</h3><?
+				 			if($in_make == 1)
+				 			{
+				 				echo "<a class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Une recherhce est déjà en cours&nbsp;</a>";
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				if($user->amelioration_var_config->prix_quatre_vingt_vingt < 30)
+				 					echo "<a class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+				 			}
+				 			else
+				 			{
+				 				echo '<input name="update_price_search_arome_3" value="Lancer une amélioration de prix" class="col-lg-12 btn btn-primary" type="submit">';
+				 			}?>
+							<input name="price" value="15000" type="hidden">
+							<input name="name_search" value="prix_quatre_vingt_vingt" type="hidden">
 						</div>
 					</div>
 				</div>
 			</form>	
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=labos_update_tools">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
+						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
-							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
-							<input name="update_price_concept_1000" value="Lancer une recherche à 5000€" class="col-lg-12 btn btn-primary" type="submit">
-							<input name="value" value="5000" class="col-lg-12 btn btn-primary" type="hidden">
+							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Diminution du prix de conception des bases pure 100</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche actuel : <?= $user->amelioration_var_config->prix_cent ?></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Niveaux de recherche MAX : 30</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Prix de la recherche : 15 000</h3><?
+				 			if($in_make == 1)
+				 			{
+				 				echo "<a class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Une recherhce est déjà en cours&nbsp;</a>";
+				 			}
+				 			else if($in_make == 2)
+				 			{
+				 				if($user->amelioration_var_config->prix_cent < 30)
+				 					echo "<a class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+				 			}
+				 			else
+				 			{
+				 				echo '<input name="update_price_search_arome_3" value="Lancer une amélioration de prix" class="col-lg-12 btn btn-primary" type="submit">';
+				 			}?>
+							<input name="price" value="15000" type="hidden">
+							<input name="name_search" value="prix_cent" type="hidden">
 						</div>
 					</div>
 				</div>

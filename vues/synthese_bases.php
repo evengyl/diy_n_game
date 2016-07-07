@@ -47,9 +47,9 @@
 							<div><img src="<?= Config::$path_public; ?>/images/bases2080.jpg" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:14px;">Bases :<br> 20% / 80%</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <?= $user->bases->bases_2080 ?> </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : 450</b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : <?= Config::$prix_vingt_quatre_vingt ?></b><br></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[2080]; ?></p></b></li>
 								<select name="2080">
 									<?php
@@ -72,9 +72,9 @@
 							<div><img src="<?= Config::$path_public; ?>/images/bases5050.jpg" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:14px;">Bases :<br> 50% / 50%</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <?= $user->bases->bases_5050 ?> </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : 400</b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : <?= Config::$prix_cinquante_cinquante ?></b><br></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[5050]; ?></p></b></li>
 								<select name="5050">
 									<?php
@@ -97,9 +97,9 @@
 							<div><img src="<?= Config::$path_public; ?>/images/bases8020.jpg" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:14px;">Bases :<br> 80% / 20%</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <?= $user->bases->bases_8020 ?> </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : 370</b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : <?= Config::$prix_quatre_vingt_vingt ?></b><br></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nb de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[8020]; ?></p></b></li>
 								<select name="8020">
 									<?php
@@ -122,9 +122,9 @@
 							<div><img src="<?= Config::$path_public; ?>/images/bases1000.jpg" alt="img04"></div>
 							<figcaption>
 								<h3 style="font-size:14px;">Bases :<br> 100% / 0%</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : </b><br></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <?= $user->bases->bases_1000 ?> </b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : 350</b><br></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au labos : <?= Config::$prix_cent ?></b><br></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[1000]; ?></p></b></li>
 								<select name="1000">
 									<?php

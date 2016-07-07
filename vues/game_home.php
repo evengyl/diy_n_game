@@ -112,7 +112,7 @@
 							<tr class="info" style="color:black;">
 								<td><?= $row_search->price_value_search; ?> &euro;</td>
 								<td><?= $row_search->pourcent_win; ?> %</td>
-								<td><?= $row_search->real_time_finish; ?></td>
+								<td><?= $row_search->time_finish_real; ?></td>
 							</tr><?
 						}?>
 					</table>

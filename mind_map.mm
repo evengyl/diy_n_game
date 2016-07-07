@@ -105,7 +105,7 @@
 <node CREATED="1467269721495" ID="ID_1641577127" MODIFIED="1467269780055" TEXT="Le remplissage de base dans les flacons ne coute rien, ind&#xe9;pendament du fait qu&apos;il faut qu&apos;il y aie d ela place dans les frigos de stockage, et qu&apos;il y aie assez de pipette de remplissage"/>
 <node CREATED="1467269783550" ID="ID_1342010" MODIFIED="1467269791906" TEXT="1 littre de bases donnera 117 flacons"/>
 </node>
-<node CREATED="1467638393742" HGAP="26" ID="ID_1118032390" MODIFIED="1467638457862" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="17">
+<node CREATED="1467638393742" HGAP="-13" ID="ID_1118032390" MODIFIED="1467902804340" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="-63">
 <node CREATED="1467638433476" ID="ID_1572542091" MODIFIED="1467814726412" TEXT="Les am&#xe9;lioration permettre de set les var dans le global pour am&#xe9;liorer les statistique du jeu">
 <icon BUILTIN="button_ok"/>
 </node>
@@ -124,10 +124,15 @@
 <node CREATED="1467639228063" ID="ID_1329762749" MODIFIED="1467816332075" TEXT="Une recherche qui augmente les % de r&#xe9;ussir une recherche egalement comme l&apos;autre , augmentation de 1%, 50level max">
 <icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1467639566980" ID="ID_1480388114" MODIFIED="1467639589970" TEXT="Pouvoir diminuer le temps de recheche des aromes, par 1 minutes 60 level"/>
-<node CREATED="1467639626629" ID="ID_1959364971" MODIFIED="1467639674672" TEXT="Pouvoir diminuer le prix de confection des bases pure 3% par level, 30 level max"/>
+<node CREATED="1467639566980" ID="ID_1480388114" MODIFIED="1467902813663" TEXT="Pouvoir diminuer le temps de recheche des aromes, par 1 minutes 60 level">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467639626629" ID="ID_1959364971" MODIFIED="1467903937996" TEXT="Pouvoir diminuer le prix de confection des bases pure 3% par level, 30 level max">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1467816389400" ID="ID_1994344273" MODIFIED="1467816425574" POSITION="right" TEXT="V&#xe9;rifier ce q&apos;uil se passe quand le level max des batiment de prod est atteint glycerine, propy, labos"/>
 <node CREATED="1467817311805" ID="ID_1368231470" MODIFIED="1467817330927" POSITION="right" TEXT="V&#xe9;rifier que toute les var qui d&#xe9;pende du config soit bien utilis&#xe9;e avec le config::"/>
+<node CREATED="1467902756321" HGAP="8" ID="ID_1031803239" MODIFIED="1467902799260" POSITION="left" TEXT="Voir les fct du game home et essayer de tout mettre dans a base directement a la racine des controller qui vont gerer &#xe7;a eux m&#xea;me pour ne pas avoir ce genre de fct toute malade dans le tas" VSHIFT="-9"/>
 </node>
 </map>

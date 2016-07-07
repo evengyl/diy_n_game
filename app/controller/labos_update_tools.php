@@ -12,10 +12,10 @@ Class labos_update_tools extends base_module
            "chance_to_win_2" => 30000,
            "chance_to_win_3" => 40000,
            "time_search_for_one_k_argent_depenser" => 50000,
-           "prix_vingt_quatre_vingt" => 5000,
-           "prix_cinquante_cinquante" => 5000,
-           "prix_quatre_vingt_vingt" => 5000,
-           "prix_cent" => 5000);
+           "prix_vingt_quatre_vingt" => 15000,
+           "prix_cinquante_cinquante" => 15000,
+           "prix_quatre_vingt_vingt" => 15000,
+           "prix_cent" => 15000);
 
 	public function __construct($module_tpl_name, &$user)
 	{		

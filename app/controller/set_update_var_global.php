@@ -14,6 +14,10 @@ Class set_update_var_global extends base_module
         $this->set_global__chance_to_win_2($user);
         $this->set_global__chance_to_win_3($user);
         $this->set_global__time_search_for_one_k_argent_depenser($user);
+        $this->set_global__prix_vingt_quatre_vingt($user);
+        $this->set_global__prix_cinquante_cinquante($user);
+        $this->set_global__prix_quatre_vingt_vingt($user);
+        $this->set_global__prix_cent($user);
 
         
 		//ce module va gerer les amélioration créee dans la bases de données concernant les recherhce pour améliorer les var du global
@@ -95,21 +99,41 @@ Class set_update_var_global extends base_module
 
 
 
-    
-    public function set_global__prix_vingt_quatre_vingt()
-    {
 
+    public function set_global__prix_vingt_quatre_vingt($user)
+    {
+        //en %
+        $gain_per_level = 3;
+        //gain total
+        $gain_per_level = $gain_per_level * $user->amelioration_var_config->prix_vingt_quatre_vingt;
+
+        Config::$prix_vingt_quatre_vingt = Config::$prix_vingt_quatre_vingt - ((Config::$prix_vingt_quatre_vingt / 100)*$gain_per_level);
     }
-    public function set_global__prix_cinquante_cinquante()
+    public function set_global__prix_cinquante_cinquante($user)
     {
+        //en %
+        $gain_per_level = 3;
+        //gain total
+        $gain_per_level = $gain_per_level * $user->amelioration_var_config->prix_cinquante_cinquante;
 
+        Config::$prix_cinquante_cinquante = Config::$prix_cinquante_cinquante - ((Config::$prix_cinquante_cinquante / 100)*$gain_per_level);
     }
-    public function set_global__prix_quatre_vingt_vingt()
+    public function set_global__prix_quatre_vingt_vingt($user)
     {
+        //en %
+        $gain_per_level = 3;
+        //gain total
+        $gain_per_level = $gain_per_level * $user->amelioration_var_config->prix_quatre_vingt_vingt;
 
+        Config::$prix_quatre_vingt_vingt = Config::$prix_quatre_vingt_vingt - ((Config::$prix_quatre_vingt_vingt / 100)*$gain_per_level);
     }
-    public function set_global__prix_cent()
+    public function set_global__prix_cent($user)
     {
+        //en %
+        $gain_per_level = 3;
+        //gain total
+        $gain_per_level = $gain_per_level * $user->amelioration_var_config->prix_cent;
 
+        Config::$prix_cent = Config::$prix_cent - ((Config::$prix_cent / 100)*$gain_per_level);
     }
 }
