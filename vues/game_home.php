@@ -2,7 +2,7 @@
 	Listes des batiments de production, pour une vues plus précises, passer par le menu de gauche
 </h2>
 <div class="col-xs-12 col-without-padding col-without-radius content_game">
-	__TPL_nav__
+	__TPL_nav_game__
 
 	<div class="col-xs-12 col-md-9">
 		<div class="col-lg-12" style="margin-bottom:15px;">

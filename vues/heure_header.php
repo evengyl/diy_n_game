@@ -13,7 +13,7 @@
 		?>
 	</div>
 
-		__TPL_nav_primal__
+		__TPL_nav_top__
 		__MOD_ressource__
 
 		

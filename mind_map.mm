@@ -133,6 +133,8 @@
 </node>
 <node CREATED="1467816389400" ID="ID_1994344273" MODIFIED="1467816425574" POSITION="right" TEXT="V&#xe9;rifier ce q&apos;uil se passe quand le level max des batiment de prod est atteint glycerine, propy, labos"/>
 <node CREATED="1467817311805" ID="ID_1368231470" MODIFIED="1467817330927" POSITION="right" TEXT="V&#xe9;rifier que toute les var qui d&#xe9;pende du config soit bien utilis&#xe9;e avec le config::"/>
+<node CREATED="1467968644323" ID="ID_273306017" MODIFIED="1467968661004" POSITION="right" TEXT="V&#xe9;rifier et refaire le controller du my account pour changer de mot de passe, ne fonctionne pas du tout tout refaore"/>
+<node CREATED="1467969750588" ID="ID_709907972" MODIFIED="1467969763866" POSITION="right" TEXT="Trouver un nouveau systeme de tableau plus beau que ceux utilis&#xe9; sur le game home"/>
 <node CREATED="1467902756321" HGAP="8" ID="ID_1031803239" MODIFIED="1467902799260" POSITION="left" TEXT="Voir les fct du game home et essayer de tout mettre dans a base directement a la racine des controller qui vont gerer &#xe7;a eux m&#xea;me pour ne pas avoir ce genre de fct toute malade dans le tas" VSHIFT="-9"/>
 </node>
 </map>

@@ -10,8 +10,8 @@
 		<?php echo "Heure Serveur : ".date('d/m/Y H:i:s'); ?>
 	</div>
 
-		__TPL_nav_primal__
-		__MOD2_ressource__
-
-		
+		__TPL_nav_top__
+		 
+		<?if(Config::$is_connect == 1)
+			echo "__MOD2_ressource__";?>
 </div>

@@ -21,7 +21,7 @@
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=game_home">Accès au Jeu</a>' : ''; ?></li>
 		        <li><a href="#">Classement</a></li>
 		        <li><a href="#">Nouveautés</a></li>
-		        <li><a href="?page=my_account">Mon compte</a></li>
+		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=my_account">Mon compte</a>' : ''; ?></li>
 		        <li><a href="?page=test">Test</a></li>
 		        <li class="dropdown">
 		          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Un problème ?&nbsp;<span class="caret"></span></a>

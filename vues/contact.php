@@ -1,5 +1,3 @@
-
-
 	<div class="col-lg-12 col-without-padding connect-form" style="margin-top:25px;">	
 		<div class="col-lg-12" style="padding:15px;">
 			Par le biai de cette page, vous pouvez me soumettre des requètes et me posez vos questions,

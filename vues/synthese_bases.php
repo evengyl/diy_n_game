@@ -1,5 +1,5 @@
 <div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
-	__TPL_nav__
+	__TPL_nav_game__
 	<div class="col-lg-8" style="margin-top:1px;">
 
 		<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:10px; margin-bottom:10px;">

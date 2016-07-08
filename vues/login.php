@@ -15,7 +15,7 @@ else
 	<div class="col-lg-12 col-without-padding connect-form" style="margin-top:25px;">	
 		<div class="col-lg-12" style="padding:15px;">
 			Vous connecter vous permettra d'accèder au jeu, 
-			pour rappel, ce petit jeu est entierement conçu à la main sans programmes ni personnes extérieur,</br>
+			pour rappel, ce petit jeu est entièrement conçu à la main sans programmes ni personnes extérieur,</br>
 			pour plus de renseignement, veuiller lire la charte accessible à partir du menu, ou prendre contact avec Evengyl, par ici
 			<a href="?page=contact">Contactez-moi</a>.</br>
 			pour créer un compte c'est par ici : <a href="?page=sign_up">Créer un compte</a>

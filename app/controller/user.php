@@ -4,15 +4,15 @@
 Class user extends all_query
 {
 	public $user_infos; // ne surtout pas changer de place cette proprietes
-	public $time_now;
 	public $champ_glycerine;
 	public $usine_propylene;
 	public $labos_bases;
 	public $bases;
-	public $construction;
-	public $update;
 	public $amelioration_var_config;
 	public $search_arome;
+	public $construction;
+	public $update;
+	public $time_now;
 
 
 	public function __construct()

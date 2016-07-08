@@ -2,11 +2,6 @@
 if(Config::$is_connect == 1)
 {?>
 
-
-
-
-
-
 	<div class="col-xs-12 col-without-padding">
 		<div class="col-lg-12 col-without-padding">
 			<nav class="navbar navbar-default nav_primal" style="border-top:0px; margin-bottom:0px; border-bottom:1px solid #FF7F00;">

@@ -14,7 +14,8 @@ Class my_account extends base_module
 			return $this->assign_var("user", $this->user_obj)->render();
 	}
 
-	public function change_infos($post){
+	public function change_infos($post)
+	{
 		if(isset($post['return_form_complet'])) //on s'assure qu'aucun erreur est générée si pas logged
 		{
 			if($post['return_form_complet'] == 18041997)
