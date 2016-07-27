@@ -13,12 +13,17 @@ Class user extends all_query
 	public $construction;
 	public $update;
 	public $time_now;
+	public $hardware;
+	public $array_user_prod_vg;
+	public $array_user_prod_pg;
 
 
 	public function __construct()
 	{
 		$this->time_now = date("U");
 		$this->get_variable_user();
+		$this->set_tab_prod_vg($this->user_infos->level_culture_vg);
+		$this->set_tab_prod_pg($this->user_infos->level_usine_pg);
 	}
 
 
@@ -61,6 +66,21 @@ Class user extends all_query
 					$req_sql->where = "level = '".$this->user_infos->$name_level."'";
 					$res_fx = $this->select($req_sql);
 					$this->{$row->name_controller} = $res_fx[0];
+				}
+				unset($res_fx);
+
+				$this->hardware = new stdClass();
+				$req_sql = new stdClass;
+				$req_sql->table = "hardware";
+				$req_sql->var = "*";
+				$req_sql->where = "id_user = '".$this->user_infos->id."'";
+				$res_fx = $this->select($req_sql);
+				if(!empty($res_fx))
+				{
+					foreach($res_fx[0] as $key => $values)
+					{
+						$this->hardware->$key = $values;
+					}
 				}
 				unset($res_fx);
 
@@ -126,6 +146,7 @@ Class user extends all_query
 				}
 				unset($res_fx);
 
+
 				$this->search_arome = new stdClass();
 				$req_sql = new stdClass;
 				$req_sql->table = "search_arome";
@@ -168,6 +189,29 @@ Class user extends all_query
  			$this->user_infos->$key = $values;			
  		}
  		unset($res_fx);
+ 	}
+
+ 	public function set_tab_prod_vg($level_champ_glycerine)
+ 	{
+		$tmp_level = $level_champ_glycerine;
+		$obj_user_prod_vg = new stdClass();
+		$obj_user_prod_vg->level = $tmp_level;
+		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.6) * 42)) * Config::$rate_vg_prod);
+		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
+		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 2);
+		$this->champ_glycerine = $obj_user_prod_vg;
+ 	}
+
+
+ 	public function set_tab_prod_pg($level_usine_propylene)
+ 	{
+		$tmp_level = $level_usine_propylene;
+		$obj_user_prod_pg = new stdClass();
+		$obj_user_prod_pg->level = $tmp_level;
+		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.4) * 42)) * Config::$rate_pg_prod);
+		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
+		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2.1) * 42)) * 2);
+		$this->usine_propylene = $obj_user_prod_pg;
  	}
 
 

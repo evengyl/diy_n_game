@@ -20,6 +20,12 @@
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->labos_bases->prix; ?> &euro;</b> pour acheter un nouveaux laboratoire</td>
 					</tr>
 					<tr class="success" style="color:black;">
+						<th>Quantité de ressource pour un littre SANS améliorations :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
+					</tr>
+					<tr class="success" style="color:black;">
+						<th>Quantité de ressource pour un littre AVEC améliorations :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
+					</tr>
+					<tr class="success" style="color:black;">
 						<form method="post" action="#"><?
 				 			if($in_make == 1)
 				 			{

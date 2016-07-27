@@ -7,58 +7,31 @@ Class user_ressources extends user
 		if(Config::$is_connect == 1)
 		{
 			$this->time_now = date("U");
-			$this->get_infos_user();
 
 			//si je fait comme ça avec le user et le break je ne for que le user infos comme voulu !! <3
 			//car le user infos c'est le premier objet set dans le user
-			foreach($user as $row_user)
+			if(isset($user))
 			{
-				$this->calc_diff_time($row_user);
-				$this->maj_time_last_connect_in_db($row_user);
+				foreach($user as $row_user)
+				{
+					$this->calc_diff_time($row_user);
+					$this->maj_time_last_connect_in_db($row_user);
 
-				//calcule combien de ressource le joueur gagne en seconde;
-				$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($user->champ_glycerine->production);
-				$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($user->usine_propylene->production);
+					//calcule combien de ressource le joueur gagne en seconde;
+					$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($user->champ_glycerine->production);
+					$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($user->usine_propylene->production);
 
-				//calcule combien il en a gagner depuis la derniere mise a jours des ressources
-				$this->calc_ressource_win($row_user);
-				$this->maj_ressource_in_db($row_user);
-				break;
+					//calcule combien il en a gagner depuis la derniere mise a jours des ressources
+					$this->calc_ressource_win($row_user);
+					$this->maj_ressource_in_db($row_user);
+					break;
+				}
 			}
+	
 		}
 	}
 
-	public function get_infos_user()
-	{
-		$this->user_obj = new stdClass();
-		$res_fx = $this->other_query(
-		"SELECT login.id,
-		login.login,
-		login.avertissement,
-		login.last_connect,
-		login.level_culture_vg, 
-		login.level_usine_pg,
-		login.level_labos_bases,
-		login.last_culture_vg as champ_vg,
-		login.last_usine_pg as usine_pg,
-		culture_vg.production as production_vg,
-        usine_pg.production as production_pg,
-        labos_bases.pourcent_down as pourcent_down
-        
-        FROM login, culture_vg, usine_pg, labos_bases
-		WHERE culture_vg.level = login.level_culture_vg 
-		AND usine_pg.level = login.level_usine_pg
-		AND labos_bases.level = login.level_labos_bases
-		");
-
-		foreach($res_fx as $key => $values)
-		{
-			$this->user_obj->$key = $values;					
-		}
-
-		unset($res_fx);		
-
-	}
+	
 
 	private function maj_ressource_in_db($row_user)
 	{

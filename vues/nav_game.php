@@ -66,8 +66,8 @@
 
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Centrale d'achat pour la conception
+						<a style="color:white;" href="?page=buy_hardware">
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Centrale d'achat pour la conception de produits
 						</a>
 					</li>
 

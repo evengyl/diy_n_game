@@ -31,7 +31,7 @@ class Config
     }
 
 
-    /* variable de bases */
+    
 
 //name for présenation général de l'entreprise.
     public static $level_culture_vg = "Champs de Glycérine";
@@ -54,22 +54,33 @@ class Config
     public static $prix_cent_name = "Diminue le prix de production des bases mélangées brute 100% VG";
 
 
+    // valeur de ratio de production des ressources de bases
+    public static $rate_vg_prod = 1;
+    public static $rate_pg_prod = 1;
+    //end
+
+    //variable de bases
     public static $last_culture_vg = 1000;
     public static $last_usine_pg = 1000;
     public static $argent = 1500;
     public static $litter_vg = 10;
     public static $litter_pg = 10;
+    public static $frigo = 1;
+    public static $pipette = 10;
 
     public static $bases_2080 = 0;
     public static $bases_5050 = 0;
     public static $bases_8020 = 0;
     public static $bases_1000 = 0;
 
-    /* fin des vairiable de base */
+    //fin des vairiable de base
 
     /*varible utilisée par les controller */
     //pour ajouter des recherche il faut ajouter ici, dans le tpl labos update, dans la base de données, et dans le module labos update
     //et faire les fonction de set dans le set update var global
+    public static $nb_plantes_for_littre_at_start_game_labos_0 = 3000;
+    public static $nb_propylene_for_littre_at_start_game_labos_0 = 2100;
+
     public static $nb_plantes_for_littre = 3000;
     public static $nb_propylene_for_littre = 2100;
 
@@ -90,6 +101,19 @@ class Config
     public static $prix_cinquante_cinquante = 400;
     public static $prix_quatre_vingt_vingt = 370;
     public static $prix_cent = 350;
+    //end
+
+    //hardawre 
+    public static $price_frigo = 800;
+    public static $price_frigo_10 = 7000;
+    public static $nb_product_per_frigo = 1000;
+    public static $nb_product_per_frigo_10 = 10000;
+
+    public static $price_pipette = 0.5;
+    public static $price_pipette_10 = 4.5;
+    public static $price_pipette_100 = 40;
+    
+
     //end
 
 

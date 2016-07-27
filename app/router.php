@@ -59,11 +59,15 @@ Class router
 				else if($this->route['page'] == 'labos_update_tools')
 					$this->get()->is_connect()->assign_bread($title_brd = "Laboratoires de recherche et d'amélioration")->assign_mod();
 
+				else if($this->route['page'] == 'buy_hardware')
+					$this->get()->is_connect()->assign_bread($title_brd = "Central d'achat pour la conception de juice")->assign_mod();
+
 				else if($this->route['page'] == 'my_account')
 					$this->get()->is_connect()->assign_bread($title_brd = "Mon compte")->assign_mod();
 
 				else if($this->route['page'] == 'documentation')
 					$this->get()->assign_bread($title_brd = "Documentation")->assign_mod();
+
 							
 				else
 				{
