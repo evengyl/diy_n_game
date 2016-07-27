@@ -16,7 +16,7 @@
 				</h3>
 
 				<div class="col-lg-12" style="background:#232D3B;"><?
-					$tmp_marque = "";
+					
 					foreach($arome_win_for_tpl as $key => $value)
 					{
 					 	?><h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; margin-bottom:15px; padding-top:10px;">Marques : <?= $key; ?></h3><?
@@ -81,6 +81,7 @@
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Durée de la recherche : <?= convert_sec_in_time_real_fct(Config::$time_search_for_one_k_argent_depenser * (Config::$price_search_1 / 1000)); ?></h3>
 							<input name="search_form_validate_1000" value="Lancer une recherche à <?= Config::$price_search_1 ?>€" class="col-lg-12 btn btn-primary" type="submit">
 							<input name="value" value="<?= Config::$price_search_1 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
@@ -94,6 +95,7 @@
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_2.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 2">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Durée de la recherche : <?= convert_sec_in_time_real_fct(Config::$time_search_for_one_k_argent_depenser * (Config::$price_search_2 / 1000)); ?></h3>
 							<input name="search_form_validate_2500" value="Lancer une recherche à <?= Config::$price_search_2 ?>€" class="col-lg-12 btn btn-primary" type="submit">
 							<input name="value" value="<?= Config::$price_search_2 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
@@ -107,6 +109,7 @@
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
 						<div class="caption">
 							<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Recherche d'arômes</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Durée de la recherche : <?= convert_sec_in_time_real_fct(Config::$time_search_for_one_k_argent_depenser * (Config::$price_search_3 / 1000)); ?></h3>
 							<input name="search_form_validate_5000" value="Lancer une recherche à <?= Config::$price_search_3 ?>€" class="col-lg-12 btn btn-primary" type="submit">
 							<input name="value" value="<?= Config::$price_search_3 ?>" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
@@ -152,7 +155,7 @@
 			</form>
 
 			<div class="col-lg-12" style="background:#232D3B;"><?
-				$tmp_marque = "";
+				
 				foreach($array_aromes_trier as $key => $value)
 				{
 				 	?><h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; margin-bottom:15px; padding-top:25px;">Marques : <?= $key; ?></h3><?

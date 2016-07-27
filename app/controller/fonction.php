@@ -27,6 +27,16 @@ function microtime_float()
     return ((float)$usec);
 }
 
+function convert_sec_in_time_real_fct($sec)
+{
+    $jours = floor($sec / 86400);
+    $reste = $sec % 86400;
+    $heures = floor($reste/3600);
+    $reste = $reste%3600;
+    $minutes = floor($reste/60);
+    $secondes = $reste%60;
+    return $jours." Jours ".$heures."h : ".$minutes."m : ".$secondes."s";
+}
 
 function affiche_pre($var_a_print)
 {

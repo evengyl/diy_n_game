@@ -12,11 +12,11 @@
 		      </button>
 		      <a class="navbar-brand" href="?page=home">Diy N Game</a>
 		    </div>
-
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class=" navbar-collapse collapse" id="nav_primal">
 		      <ul class="nav navbar-nav">
-		        <li><?php echo (!isset($_SESSION['pseudo']))?'<a href="?page=sign_up">Créer un compte</a>' : ''; ?></li>		        
+		        <li><?php echo (!isset($_SESSION['pseudo']))?'<a href="?page=sign_up">Créer un compte</a>' : ''; ?></li>	
+	        	<li><?php echo (isset($_SESSION['level']) && $_SESSION['level'] == '3')?'<a href="?page=tools_admin">Admin</a>' : ''; ?></li>			        
 		        <li><?php echo (!isset($_SESSION['pseudo']))?'<a href="?page=login">Se connecter</a>' : ''; ?></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=game_home">Accès au Jeu</a>' : ''; ?></li>
 		        <li><a href="#">Classement</a></li>

@@ -48,7 +48,7 @@ Class arome_list extends base_module
 
 		//return tab_final_arome_acquis, contient le tableau avec tout les aromes uniquement connu
 		$this->set_arome_acquis_for_tpl($user);
-		
+
 		//return tab_final_arome_acquis_traiter, contient le tab avec la mise en forme pour l'affichage dans le tpl
 		$this->tab_final_arome_acquis_traiter = $this->traitement_array_final_aromes($this->tab_final_arome_acquis);
 
@@ -95,36 +95,28 @@ Class arome_list extends base_module
 		$tab_final_arome_acquis_traiter = array();
 		$i=0;
 
-		foreach($tab_final_arome_acquis as $row_first_marque)
-		{
-			$tab_final_arome_acquis_traiter[$row_first_marque->marque] = array();
-			break;
-		}
-
 		foreach($tab_final_arome_acquis as $row)
 		{
-			if(isset($tab_final_arome_acquis_traiter[$row->marque]))
+			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
 			{
-				if(key($tab_final_arome_acquis_traiter) == $row->marque)
-				{
-					$name_image = $row->marque;
-					$name_image .= "_".trim($row->nom).".jpg";
-					$name_image = str_replace(" ", "_", $name_image);
-					$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
-					$name_image = "/images/aromes/".$row->marque."/".$name_image;
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
 
-					$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
-					$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
-					$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
-					$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
-					$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+			if(key($tab_final_arome_acquis_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
 
-				}
-				else
-				{
-					$tab_final_arome_acquis_traiter[$row->marque] = array();
-					end($tab_final_arome_acquis_traiter);
-				}
+				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+
 			}
 			else
 			{
@@ -209,11 +201,13 @@ Class arome_list extends base_module
 		//recupere un tableau avec les ids des aromes non posseder par le joueur
 		$array_not_have = user_batiments::traitement_arome_chain_bsd($user->user_infos->list_arome_not_have);
 
+
 		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
 		$array_total_aromes = $this->return_id_array_table_arome($res_sql_arome_list);
 
 		//calcule la différence entre les deux et en ressort un tableau avec tout les id des aromes acquis
 		$array_id_arome_acquis  = array_diff($array_total_aromes, $array_not_have);
+
 
 		foreach($res_sql_arome_list as $key_aromes => $value_arome)
 		{

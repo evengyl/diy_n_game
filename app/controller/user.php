@@ -22,8 +22,12 @@ Class user extends all_query
 	{
 		$this->time_now = date("U");
 		$this->get_variable_user();
-		$this->set_tab_prod_vg($this->user_infos->level_culture_vg);
-		$this->set_tab_prod_pg($this->user_infos->level_usine_pg);
+		if(Config::$is_connect == 1)
+		{
+			$this->set_tab_prod_vg($this->user_infos->level_culture_vg);
+			$this->set_tab_prod_pg($this->user_infos->level_usine_pg);
+		}
+
 	}
 
 
@@ -165,12 +169,12 @@ Class user extends all_query
 			}
 			else
 			{
-				$error[] = "la mise a niveau des variable user a pausé un soucis, user.php -> get_variable_user";
+				$error[] = "Voir SESSION[] : la mise a niveau des variable user a pausé un soucis, user.php -> get_variable_user";
 			}
 		}
 		else
 		{
-			$error[] = "pas de variable is_connect dans le get_variable_user donc pas connecté";
+			$error[] = "Voir SESSION[] : pas de variable is_connect dans le get_variable_user donc pas connecté";
 		}
 	}
 

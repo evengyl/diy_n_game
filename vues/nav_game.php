@@ -56,18 +56,15 @@
 						</a>
 					</li>
 
-					
-
-					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="?page=labos_update_tools">
-							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'amélioration
-						</a>
-					</li>
-
-
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="?page=buy_hardware">
 							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Centrale d'achat pour la conception de produits
+						</a>
+					</li>
+					
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="?page=labos_update_tools">
+							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'amélioration
 						</a>
 					</li>
 

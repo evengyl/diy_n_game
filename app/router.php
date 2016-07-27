@@ -28,6 +28,9 @@ Class router
 
 				else if($this->route['page'] == 'sign_up')
 					$this->get()->assign_bread($title_brd = "Page d'inscription")->assign_mod();
+
+				else if($this->route['page'] == 'tools_admin')
+					$this->get()->is_connect()->assign_bread($title_brd = "Page d'administration diverse")->assign_mod();
 				
 				else if($this->route['page'] == 'login')
 			 		$this->get()->assign_bread($title_brd = "Page de connexion")->assign_mod();
