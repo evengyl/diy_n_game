@@ -7,6 +7,10 @@ Class set_update_var_global extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);
 
+
+        $user->gain_per_level_search_arome = 5;
+
+
 		$this->set_global__price_search_1($user);
 		$this->set_global__price_search_2($user);
 		$this->set_global__price_search_3($user);
@@ -26,30 +30,24 @@ Class set_update_var_global extends base_module
 
     public function set_global__price_search_1($user)
     {
-    	//en %
-    	$gain_per_level = 5;
     	//gain total
-    	$gain_per_level = $gain_per_level * $user->amelioration_var_config->price_search_1;
+    	$user->gain_per_level_search_arome = $user->gain_per_level_search_arome * $user->amelioration_var_config->price_search_1;
 
-    	Config::$price_search_1 = Config::$price_search_1 - ((Config::$price_search_1 / 100)*$gain_per_level);
+    	Config::$price_search_1 = Config::$price_search_1 - ((Config::$price_search_1 / 100)*$user->gain_per_level_search_arome);
     }
     public function set_global__price_search_2($user)
     {
-    	//en %
-    	$gain_per_level = 5;
     	//gain total
-    	$gain_per_level = $gain_per_level * $user->amelioration_var_config->price_search_2;
+    	$user->gain_per_level_search_arome = $user->gain_per_level_search_arome * $user->amelioration_var_config->price_search_2;
 
-    	Config::$price_search_2 = Config::$price_search_2 - ((Config::$price_search_2 / 100)*$gain_per_level);
+    	Config::$price_search_2 = Config::$price_search_2 - ((Config::$price_search_2 / 100)*$user->gain_per_level_search_arome);
     }
     public function set_global__price_search_3($user)
     {
-    	//en %
-    	$gain_per_level = 5;
     	//gain total
-    	$gain_per_level = $gain_per_level * $user->amelioration_var_config->price_search_3;
+    	$user->gain_per_level_search_arome = $user->gain_per_level_search_arome * $user->amelioration_var_config->price_search_3;
 
-    	Config::$price_search_3 = Config::$price_search_3 - ((Config::$price_search_3 / 100)*$gain_per_level);
+    	Config::$price_search_3 = Config::$price_search_3 - ((Config::$price_search_3 / 100)*$user->gain_per_level_search_arome);
     }
 
 

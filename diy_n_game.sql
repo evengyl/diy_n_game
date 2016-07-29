@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 27 Juillet 2016 à 16:57
--- Version du serveur :  10.1.13-MariaDB
--- Version de PHP :  5.6.21
+-- Généré le :  Ven 29 Juillet 2016 à 06:55
+-- Version du serveur :  10.1.9-MariaDB
+-- Version de PHP :  5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -22,29 +22,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `diy_n_game` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `diy_n_game`;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `amelioration_var_config`
---
-
-DROP TABLE IF EXISTS `amelioration_var_config`;
-CREATE TABLE `amelioration_var_config` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `price_search_1` int(11) NOT NULL,
-  `price_search_2` int(11) NOT NULL,
-  `price_search_3` int(11) NOT NULL,
-  `chance_to_win_1` int(11) NOT NULL,
-  `chance_to_win_2` int(11) NOT NULL,
-  `chance_to_win_3` int(11) NOT NULL,
-  `time_search_for_one_k_argent_depenser` int(11) NOT NULL,
-  `prix_vingt_quatre_vingt` int(11) NOT NULL,
-  `prix_cinquante_cinquante` int(11) NOT NULL,
-  `prix_quatre_vingt_vingt` int(11) NOT NULL,
-  `prix_cent` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `amelioration_var_config`
 --
@@ -55,22 +32,7 @@ TRUNCATE TABLE `amelioration_var_config`;
 --
 
 INSERT INTO `amelioration_var_config` (`id`, `id_user`, `price_search_1`, `price_search_2`, `price_search_3`, `chance_to_win_1`, `chance_to_win_2`, `chance_to_win_3`, `time_search_for_one_k_argent_depenser`, `prix_vingt_quatre_vingt`, `prix_cinquante_cinquante`, `prix_quatre_vingt_vingt`, `prix_cent`) VALUES
-(1, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `aromes`
---
-
-DROP TABLE IF EXISTS `aromes`;
-CREATE TABLE `aromes` (
-  `id` int(11) NOT NULL,
-  `marque` varchar(255) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `nom` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `quality` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(1, 6, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0);
 
 --
 -- Vider la table avant d'insérer `aromes`
@@ -453,22 +415,6 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `quality`) VALUES
 (369, 'T-juice', '', 'USA silver', 2),
 (370, 'T-juice', '', 'Eastern blend', 2);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `bases`
---
-
-DROP TABLE IF EXISTS `bases`;
-CREATE TABLE `bases` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `bases_2080` decimal(10,0) NOT NULL,
-  `bases_5050` decimal(10,0) NOT NULL,
-  `bases_8020` decimal(10,0) NOT NULL,
-  `bases_1000` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `bases`
 --
@@ -482,46 +428,11 @@ INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, 
 (1, 6, '1479', '1010', '1000', '1010'),
 (2, 11, '0', '0', '0', '0');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `construction_en_cours`
---
-
-DROP TABLE IF EXISTS `construction_en_cours`;
-CREATE TABLE `construction_en_cours` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `name_batiment` varchar(20) NOT NULL,
-  `time_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `construction_en_cours`
 --
 
 TRUNCATE TABLE `construction_en_cours`;
---
--- Contenu de la table `construction_en_cours`
---
-
-INSERT INTO `construction_en_cours` (`id`, `id_user`, `name_batiment`, `time_finish`) VALUES
-(4, 6, 'level_culture_vg', 1469638606);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `hardware`
---
-
-DROP TABLE IF EXISTS `hardware`;
-CREATE TABLE `hardware` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `frigo` int(11) NOT NULL,
-  `pipette` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `hardware`
 --
@@ -531,23 +442,8 @@ TRUNCATE TABLE `hardware`;
 -- Contenu de la table `hardware`
 --
 
-INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`) VALUES
-(1, 6, 2, 915);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `labos_bases`
---
-
-DROP TABLE IF EXISTS `labos_bases`;
-CREATE TABLE `labos_bases` (
-  `id` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
-  `pourcent_down` float NOT NULL,
-  `prix` int(11) NOT NULL,
-  `time_construct` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`, `flacon`) VALUES
+(1, 6, 2, 915, 3000);
 
 --
 -- Vider la table avant d'insérer `labos_bases`
@@ -631,32 +527,6 @@ INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_constru
 (70, 69, 85.8, 453453, 399924),
 (71, 70, 99.99, 1000000, 432000);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `login`
---
-
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
-  `login` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `point` float NOT NULL,
-  `last_connect` varchar(50) NOT NULL,
-  `avertissement` int(11) NOT NULL,
-  `level` int(11) NOT NULL,
-  `level_culture_vg` int(11) NOT NULL,
-  `level_usine_pg` int(11) NOT NULL,
-  `level_labos_bases` int(11) NOT NULL,
-  `last_culture_vg` double NOT NULL,
-  `last_usine_pg` double NOT NULL,
-  `argent` bigint(20) NOT NULL,
-  `litter_vg` int(11) NOT NULL,
-  `litter_pg` int(11) NOT NULL,
-  `list_arome_not_have` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `login`
 --
@@ -667,23 +537,8 @@ TRUNCATE TABLE `login`;
 --
 
 INSERT INTO `login` (`id`, `login`, `password`, `point`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `litter_vg`, `litter_pg`, `list_arome_not_have`) VALUES
-(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', 58.161, '1469631373', 7, 3, 12, 10, 12, 78657.395, 37757.974, 21286, 381, 198, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,'),
+(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', 55.647, '1469730099', 7, 0, 12, 10, 12, 140064.967, 66684.692, 23800, 381, 198, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,'),
 (11, 'lbaudoux', '$2y$10$jjJFYrMF.io1poEG5Z.SfOCrnQbDp9sKG72d5Xwh3rENlZ4r9Odse', 0, '1467202373', 0, 0, 0, 0, 0, 1001.484, 1001.484, 1500, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `news`
---
-
-DROP TABLE IF EXISTS `news`;
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `titre` text NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `date_now` varchar(50) NOT NULL,
-  `visible` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `news`
@@ -706,20 +561,6 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 (9, 'test', '', '', 0),
 (10, 'test', '', '', 0);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `raccord`
---
-
-DROP TABLE IF EXISTS `raccord`;
-CREATE TABLE `raccord` (
-  `id` int(11) NOT NULL,
-  `id_batiment` int(11) NOT NULL,
-  `table_batiment` varchar(255) NOT NULL,
-  `name_controller` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `raccord`
 --
@@ -732,175 +573,23 @@ TRUNCATE TABLE `raccord`;
 INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_controller`) VALUES
 (3, 3, 'labos_bases', 'labos_bases');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `search_arome`
---
-
-DROP TABLE IF EXISTS `search_arome`;
-CREATE TABLE `search_arome` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `price_value_search` bigint(20) NOT NULL,
-  `pourcent_win` int(4) NOT NULL,
-  `time_finish` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Vider la table avant d'insérer `search_arome`
 --
 
 TRUNCATE TABLE `search_arome`;
--- --------------------------------------------------------
-
 --
--- Structure de la table `update_en_cours`
+-- Contenu de la table `search_arome`
 --
 
-DROP TABLE IF EXISTS `update_en_cours`;
-CREATE TABLE `update_en_cours` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `name_batiment` varchar(50) NOT NULL,
-  `time_finish` bigint(20) NOT NULL,
-  `real_name_search` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `search_arome` (`id`, `id_user`, `price_value_search`, `pourcent_win`, `time_finish`) VALUES
+(1, 6, 5000, 50, 1469745255);
 
 --
 -- Vider la table avant d'insérer `update_en_cours`
 --
 
 TRUNCATE TABLE `update_en_cours`;
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `amelioration_var_config`
---
-ALTER TABLE `amelioration_var_config`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `aromes`
---
-ALTER TABLE `aromes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `bases`
---
-ALTER TABLE `bases`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `construction_en_cours`
---
-ALTER TABLE `construction_en_cours`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `hardware`
---
-ALTER TABLE `hardware`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `labos_bases`
---
-ALTER TABLE `labos_bases`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `raccord`
---
-ALTER TABLE `raccord`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `search_arome`
---
-ALTER TABLE `search_arome`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `update_en_cours`
---
-ALTER TABLE `update_en_cours`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `amelioration_var_config`
---
-ALTER TABLE `amelioration_var_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `aromes`
---
-ALTER TABLE `aromes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=371;
---
--- AUTO_INCREMENT pour la table `bases`
---
-ALTER TABLE `bases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `construction_en_cours`
---
-ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT pour la table `hardware`
---
-ALTER TABLE `hardware`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `labos_bases`
---
-ALTER TABLE `labos_bases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
---
--- AUTO_INCREMENT pour la table `login`
---
-ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT pour la table `news`
---
-ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT pour la table `raccord`
---
-ALTER TABLE `raccord`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `search_arome`
---
-ALTER TABLE `search_arome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `update_en_cours`
---
-ALTER TABLE `update_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
