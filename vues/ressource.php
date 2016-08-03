@@ -74,7 +74,7 @@ if(Config::$is_connect == 1)
 
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:13px;">Nombres de flacons Vides : 000</span>
+					        		<span style="font-size:13px;">Nombres de flacons Vides : <?= $user->hardware->flacon; ?></span>
 					        </li>
 
 					        <li class="col-lg-12" style="color:white;">

@@ -112,6 +112,11 @@ class Config
     public static $price_pipette = 0.5;
     public static $price_pipette_10 = 4.5;
     public static $price_pipette_100 = 40;
+
+
+    public static $price_flacon_10 = 1;
+    public static $price_flacon_100 = 9.5;
+    public static $price_flacon_1000 = 80;
     
 
     //end

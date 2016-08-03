@@ -65,6 +65,9 @@ Class router
 				else if($this->route['page'] == 'buy_hardware')
 					$this->get()->is_connect()->assign_bread($title_brd = "Central d'achat pour la conception de juice")->assign_mod();
 
+				else if($this->route['page'] == 'remplissage_produit')
+					$this->get()->is_connect()->assign_bread($title_brd = "Usine de remplassage des flacons en produits finis")->assign_mod();
+
 				else if($this->route['page'] == 'my_account')
 					$this->get()->is_connect()->assign_bread($title_brd = "Mon compte")->assign_mod();
 

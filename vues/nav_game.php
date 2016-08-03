@@ -64,14 +64,20 @@
 					
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="?page=labos_update_tools">
-							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'amélioration
+							<span class="glyphicon glyphicon-glass"></span>&nbsp;&nbsp;Laboratoire d'améliorations diverses
+						</a>
+					</li>
+
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="?page=remplissage_produit">
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Remplissage des produits
 						</a>
 					</li>
 
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Marchés
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Marchés d'offre
 						</a>
 					</li>
 

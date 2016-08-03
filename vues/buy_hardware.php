@@ -23,7 +23,7 @@
 				Les frigos servent à stocker les produits finis, <?= Config::$nb_product_per_frigo; ?> produits par frigo, Si vous ne possédez pas assez de frigo, vous ne pourrez plus produire de produits
 			</h3>
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-				Nb de frigos actif  : <?= $user->hardware->frigo; ?>
+				Nb de frigos actif  : <strong style="color:#31DE44;"><?= $user->hardware->frigo; ?></strong>
 			</h3>
 
 			<form method="post" action="?page=buy_hardware">
@@ -31,7 +31,7 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="Frigo">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'un frigo <?= Config::$price_frigo; ?>€</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'un frigo <strong style="color:#31DE44;"><?= Config::$price_frigo; ?>€</strong></h3>
 							<input name="buy_frigo_1" value="Acheter un Frigo" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="Frigo">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 frigo <?= Config::$price_frigo_10; ?>€</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 frigo <strong style="color:#31DE44;"><?= Config::$price_frigo_10; ?>€</strong></h3>
 							<input name="buy_frigo_10" value="Acheter 10 Frigos" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -59,8 +59,8 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'une pipette <?= Config::$price_pipette; ?>€</h3>
-							<input name="buy_pipette_1" value="Acheter un pipette" class="col-lg-12 btn btn-primary" type="submit">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'une pipette <strong style="color:#31DE44;"><?= Config::$price_pipette; ?>€</strong></h3>
+							<input name="buy_pipette_1" value="Acheter une pipette" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 pipettes <?= Config::$price_pipette_10; ?>€</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 pipettes <strong style="color:#31DE44;"><?= Config::$price_pipette_10; ?>€</strong></h3>
 							<input name="buy_pipette_10" value="Acheter 10 pipettes" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -83,8 +83,49 @@
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 pipettes <?= Config::$price_pipette_100; ?>€</h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 pipettes <strong style="color:#31DE44;"><?= Config::$price_pipette_100; ?>€</strong></h3>
 							<input name="buy_pipette_100" value="Acheter 100 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+
+			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+				Les flacons vides doivent être acheté avant le lancement du remplissage des produits, stockage illimité.
+			</h3>
+
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_10; ?>€</strong></h3>
+							<input name="buy_flacon_10" value="Acheter 10 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_100; ?>€</strong></h3>
+							<input name="buy_flacon_100" value="Acheter 100 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_1000; ?>€</strong></h3>
+							<input name="buy_flacon_1000" value="Acheter 1000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
 				</div>
