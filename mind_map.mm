@@ -135,6 +135,7 @@
 <node CREATED="1467817311805" ID="ID_1368231470" MODIFIED="1467817330927" POSITION="right" TEXT="V&#xe9;rifier que toute les var qui d&#xe9;pende du config soit bien utilis&#xe9;e avec le config::"/>
 <node CREATED="1467968644323" ID="ID_273306017" MODIFIED="1467968661004" POSITION="right" TEXT="V&#xe9;rifier et refaire le controller du my account pour changer de mot de passe, ne fonctionne pas du tout tout refaore"/>
 <node CREATED="1467969750588" ID="ID_709907972" MODIFIED="1467969763866" POSITION="right" TEXT="Trouver un nouveau systeme de tableau plus beau que ceux utilis&#xe9; sur le game home"/>
+<node CREATED="1470204320284" ID="ID_622349479" MODIFIED="1470204329790" POSITION="right" TEXT="pr&#xe9;voir que les tools sont uniquement valable pour les admins"/>
 <node CREATED="1467902756321" HGAP="8" ID="ID_1031803239" MODIFIED="1467902799260" POSITION="left" TEXT="Voir les fct du game home et essayer de tout mettre dans a base directement a la racine des controller qui vont gerer &#xe7;a eux m&#xea;me pour ne pas avoir ce genre de fct toute malade dans le tas" VSHIFT="-9"/>
 </node>
 </map>
