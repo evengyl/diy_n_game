@@ -8,7 +8,7 @@ Class tools_admin extends base_module
 
 		//je veux que ce controller puisse recevoir un post
 
-		return $this->render();
+		return $this->assign_var("user",$user)->render();
 	}
 
 }

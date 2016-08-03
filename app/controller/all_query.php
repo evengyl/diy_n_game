@@ -187,6 +187,92 @@ class all_query extends _db_connect
 	}
 
 
+
+	public function generate_form_unpdate($table_needed, $id)
+	{
+		$req_simply = new stdClass();
+		$req_simply->table = $table_needed;
+		$req_simply->var = "*";
+		$req_simply->where = "id = '". $id ."'";
+		$req_simply = $this->select($req_simply);?>
+		
+	    <div class='contenu_compte'>
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <form class="form-inline" style="margin:auto;" role="form" action="" method="POST">
+	                    <br><?php
+	                    foreach($req_simply[0] as $key => $value)
+	                    {?>
+	                            <div class="form-group <?
+		                            if($key == 'id')
+		                                echo  'has-error';
+		                            else
+	    	                            echo 'has-success';
+        	                    ?>" style="margin-right:30px;">
+
+	                                <div class="input-group">
+	                                    <div style="width: 200px;" class="input-group-addon"><?php echo $key ?></div>
+	                                    <input style='width:450px;' type="text" <?php echo ($key == 'id')? 'disabled id="disabledInput"':'id="inputSuccess1"'; ?>
+                                            id="disabledInput" value="<?= $value ?>"
+	                                        class="form-control" name="<?php echo $key ?>">
+
+	                                </div>
+
+	                            </div>
+	                            <br><?
+	                    }?>
+	                    <input type="hidden" name="id" value="<?= $id ?>">
+	                    <button style="width: 650px; margin-top:15px;" type="submit" class="btn btn-default">Submit</button>
+	                </form>
+	            </div>
+	        </div>
+	    </div><?
+		
+	}
+
+
+
+	public function generate_form_insert_into($table_needed)
+	{
+		$req_simply = new stdClass();
+		$req_simply->table = $table_needed;
+		$req_simply->var = "*";
+		$req_simply = $this->select($req_simply);?>
+		
+	    <div class='contenu_compte'>
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <form class="form-inline" style="margin:auto;" role="form" action="" method="POST">
+	                    <br><?php
+	                    foreach($req_simply[0] as $key => $value)
+	                    {?>
+	                            <div class="form-group <?
+		                            if($key == 'id')
+		                                echo  'has-error';
+		                            else
+	    	                            echo 'has-success';
+        	                    ?>" style="margin-right:30px;">
+
+	                                <div class="input-group">
+	                                    <div style="width: 200px;" class="input-group-addon"><?php echo $key ?></div>
+	                                    <input style='width:450px;' type="text"
+	                                        <?php echo ($key == 'id')? 'disabled id="disabledInput"':'id="inputSuccess1"'; ?>
+	                                        <?php echo ($key == 'id_category')? 'disabled id="disabledInput" placeholder="'.$value_2.'"':'id="inputSuccess1"'; ?>
+	                                           class="form-control" name="<?php echo $key ?>">
+
+	                                </div>
+	                            </div>
+	                            <br><?
+	                    }?>
+	                    <button style="width: 650px; margin-top:15px;" type="submit" class="btn btn-default">Submit</button>
+	                </form>
+	            </div>
+	        </div>
+	    </div><?
+		
+	}
+
+
 }
 
 ?>

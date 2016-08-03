@@ -4,22 +4,133 @@
 
 		<div class="col-xs-12 col-md-12">
 			<ul class="nav nav-pills nav-stacked">
-				<li role="presentation" class="active"><a href='?page=tools_admin&action=maj_arome'>Mettre les arômes à jours de la table des user, avec la nouvelle liste des aromes</a></li>
-				<li role="presentation" class="active"><a href='?page=tools_admin&action=see_arome_list'>Voir la liste des aromes pour voir si toutes les images sont bonnes</a></li>
+				<li role="presentation" style="margin-bottom:15px;" class="active"><a href='?page=tools_admin&action=add_arome'>Ajouter un arômes, ne pas oublier l'image, l'arômes s'ajoute automatiquement au joueurs</a></li>
+				<li role="presentation" style="margin-bottom:15px;" class="active"><a href='?page=tools_admin&action=maj_arome'>Modifier un arômes</a></li>
+				<li role="presentation" style="margin-bottom:15px;" class="active"><a href='?page=tools_admin&action=see_arome_list'>Voir la liste des aromes pour voir si toutes les images sont bonnes (n'apparaissent que ceux qui n'ont pas d'image +-)</a></li>
 			</ul>
 		</div>
-	</div>
-</div>
+	
+
 <?
 unset($_SESSION['error']);
 
 
 if(isset($_GET['action']))
 {
-	if($_GET['action'] == "maj_arome")
+	if($_GET['action'] == "add_arome")
 	{
 
+		if(isset($_POST['marque']) && isset($_POST['type']) && isset($_POST['nom']) && isset($_POST['quality']))
+		{
+			$arome_list_player = new stdClass();
+			$arome_list_player->table = "login";
+			$arome_list_player->var = "list_arome_not_have, id";
+			$arome_list_player->order = "id";
+			$arome_list_player = $this->select($arome_list_player);
+
+
+			//ajout a la liste des aromes dans la table aromes
+			$post = $_POST;
+			$new_arome = new stdClass();
+			$new_arome->table = "aromes";
+			$new_arome->ctx = new stdClass();
+			$new_arome->ctx->marque = $post['marque'];
+			$new_arome->ctx->nom = $post['nom'];
+			$new_arome->ctx->type = $post['type'];
+			$new_arome->ctx->quality = $post['quality'];
+			$this->insert_into($new_arome);
+
+
+			//on dois aller recupérr l'id du new aromes
+			$last_add = new stdClass();
+			$last_add->table = "aromes";
+			$last_add->var = "id";
+			$id_last_arome = $this->select($last_add);
+			$id_last_arome = end($id_last_arome);
+			$id_last_arome = $id_last_arome->id;
+
+			//ajout dans toutes les tables des players
+			foreach($arome_list_player as $row_player)
+			{
+				$row_player->list_arome_not_have .= $id_last_arome.",";
+
+	 			$req_sql = new stdClass;
+				$req_sql->table = "login";
+				$req_sql->where = "id = '".$row_player->id."'";
+				$req_sql->ctx = new stdClass;
+				$req_sql->ctx->list_arome_not_have = $row_player->list_arome_not_have;
+				$res_sql = $this->update($req_sql);
+			}
+
+			paragraphe_style("L'insertion c'est bien déroulée");
+			unset($_POST);
+
+		}
+		else
+		{
+			$this->generate_form_insert_into("aromes");
+		}
+
 	}
+
+
+
+	if($_GET['action'] == "maj_arome")
+	{
+		if(isset($_POST['id_arome_selected']) || isset($_POST['marque']))
+		{
+			if(isset($_POST['id_arome_selected']))
+			{
+				$id_selected = (int)$_POST['id_arome_selected'];
+
+				if(is_int($id_selected))
+				{
+					$this->generate_form_unpdate("aromes", $id_selected);
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			else if(isset($_POST['marque']))
+			{
+				if(isset($_POST['marque']) && isset($_POST['type']) && isset($_POST['nom']) && isset($_POST['quality']))
+				{
+		 			$req_sql = new stdClass;
+					$req_sql->table = "aromes";
+					$req_sql->where = "id = '".$_POST['id']."'";
+					$req_sql->ctx = new stdClass;
+					$req_sql->ctx->marque = $_POST['marque'];
+					$req_sql->ctx->type = $_POST['type'];
+					$req_sql->ctx->nom = $_POST['nom'];
+					$req_sql->ctx->quality = $_POST['quality'];
+					$res_sql = $this->update($req_sql);
+
+					paragraphe_style("La modification c'est bien déroulée");
+					unset($_POST);
+				}
+			}
+		}
+		else
+		{?>
+		    <div class='contenu_compte'>
+		        <div class="row">
+		            <div class="col-lg-12">
+		                <form class="form-inline" style="margin:auto;" role="form" action="" method="POST">
+		                    <div class="input-group">
+		                        <div style="width: 200px;" class="input-group-addon">Id de l'arôme</div>
+		                        <input style='width:450px;' type="text" id="inputSuccess1" required name="id_arome_selected">
+		                    </div>
+		                    <button style="width: 650px; margin-top:15px;" type="submit" class="btn btn-default">Submit</button>
+		                </form>
+		            </div>
+		        </div>
+		    </div><?
+		}
+
+	}	
+
+
 	if($_GET['action'] == "see_arome_list")
 	{
 		$arome_list = new stdClass();
@@ -63,16 +174,7 @@ if(isset($_GET['action']))
 		</div><?
 	}
 }
-
-
-
-
-
-
-
-
-
-
+?></div></div><?
 
 
 
