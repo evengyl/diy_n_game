@@ -11,6 +11,8 @@ Class base_module extends all_query
 	public $template_path;
 	public $time_finish;
 	public $user_obj;
+	public $nb_arome_total;
+	public $nb_arome_total_acquis;
 
 
 
@@ -401,4 +403,5 @@ Class base_module extends all_query
 		}
 		return $array_id_aromes;
 	}
+
 }

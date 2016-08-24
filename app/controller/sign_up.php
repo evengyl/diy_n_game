@@ -186,10 +186,21 @@ Class sign_up extends base_module
 
 			$this->update($req_sql);
 			unset($req_sql);
+
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->id_user = $id_user;
+			$req_sql->ctx->frigo = Config::$frigo;
+			$req_sql->ctx->pipette = Config::$pipette;
+			$req_sql->ctx->flacon = Config::$flacon;
+			$req_sql->table = "hardware";
+
+			$this->update($req_sql);
+			unset($req_sql);
 		}
 
 	}
 
 }
-
 
