@@ -33,7 +33,7 @@ class Config
 
     
 
-//name for présenation général de l'entreprise.
+    //name for présenation général de l'entreprise.
     public static $level_culture_vg = "Champs de Glycérine";
     public static $level_usine_pg = "Usines de production de Propylène";
     public static $level_labos_bases = "Laboratoire d'amélioration des bases";
@@ -54,12 +54,13 @@ class Config
     public static $prix_cent_name = "Diminue le prix de production des bases mélangées brute 100% VG";
 
 
-    // valeur de ratio de production des ressources de bases
+    // valeur de ratio de production des ressources de bases du jeu (a changer si c'est trop ou trop peu)
     public static $rate_vg_prod = 1;
     public static $rate_pg_prod = 1;
+    public static $rate_labos_pourcent_down = 1.2;
     //end
 
-    //variable de bases
+    //variable de bases inscrite dans la base de données au démarrage d'un new joueur
     public static $last_culture_vg = 1000;
     public static $last_usine_pg = 1000;
     public static $argent = 1500;
@@ -67,13 +68,14 @@ class Config
     public static $litter_pg = 10;
     public static $frigo = 1;
     public static $pipette = 10;
+    public static $flacon = 100;
 
     public static $bases_2080 = 0;
     public static $bases_5050 = 0;
     public static $bases_8020 = 0;
     public static $bases_1000 = 0;
-
     //fin des vairiable de base
+
 
     /*varible utilisée par les controller */
     //pour ajouter des recherche il faut ajouter ici, dans le tpl labos update, dans la base de données, et dans le module labos update

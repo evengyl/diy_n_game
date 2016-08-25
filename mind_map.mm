@@ -17,7 +17,9 @@
 <node CREATED="1467098139393" ID="ID_1950838223" MODIFIED="1467098449321" TEXT="Terminer de r&#xe9;colter les images pour les aromes">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 </node>
-<node CREATED="1467638715619" ID="ID_1219328868" MODIFIED="1467638729503" TEXT="Attention dans aromes liste le total des arome trouver n&apos;est pas bon"/>
+<node CREATED="1467638715619" ID="ID_1219328868" MODIFIED="1470922464257" TEXT="Attention dans aromes liste le total des arome trouver n&apos;est pas bon">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1467098170734" HGAP="2" ID="ID_1497186222" MODIFIED="1467135610592" POSITION="left" TEXT="Etudes du march&#xe9; " VSHIFT="-44">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
@@ -65,18 +67,36 @@
 <node CREATED="1467114417400" ID="ID_163940729" MODIFIED="1467114456980" TEXT="l&apos;entrepot contiendra aussi un petit bouton pour &quot;voir stock jeter&quot;"/>
 <node CREATED="1467115580688" ID="ID_1448625927" MODIFIED="1467115602047" TEXT="Il Contiendra aussi le nombre de tout pipette, boutteil vide, caisse ext ext"/>
 </node>
-<node CREATED="1467114547286" ID="ID_320096125" MODIFIED="1467114724025" POSITION="left" TEXT="R&#xe9;cipient - outils">
-<node CREATED="1467114556911" ID="ID_538322285" MODIFIED="1467114592435" TEXT="La fonctionnalit&#xe9; de cette page permettra de cr&#xe9;e du mat&#xe9;riel de tout genre pour la confection des produit, a ce stade normalement le joueur a des aromes des bases pr&#xe8;te en littre"/>
-<node CREATED="1467114593310" ID="ID_1837788952" MODIFIED="1467115643016" TEXT="la table outils devra &#xea;tre cr&#xe9;e et contiendra id, id_user, caisse, boutteille vide, pipette, frigo"/>
-<node CREATED="1467114624886" ID="ID_556400542" MODIFIED="1467114696202" TEXT="on pourra fabriquer les flacons de 10 ml dans un premier temps par 100 , 1000 , 10000 ou nombre voulu mais par tranche de 10000"/>
-<node CREATED="1467114699310" ID="ID_1961982500" MODIFIED="1467114710235" TEXT="il faudras v&#xe9;rifier l&apos;argnet du joueur uniquement"/>
-<node CREATED="1467114711262" ID="ID_674940926" MODIFIED="1467114747282" TEXT="la partie outile sera des pipette de dosage, des caisse de conditionnement des frigos "/>
-<node CREATED="1467114747989" ID="ID_731948869" MODIFIED="1467114790385" TEXT="les frigos eux feront office de stockage style stockage des produit complet, plus le nombre de frigo^est grand plus on peux en sotcker je vois 1000 produit par frigo a raison de 800 patate le frigo"/>
-<node CREATED="1467114790933" ID="ID_1287907822" MODIFIED="1467114812425" TEXT="les pipette de dosage 1 euros les 10 pipette 1 pipette obligatoire par flacons de 10 ml"/>
-<node CREATED="1467115511371" ID="ID_1034785308" MODIFIED="1467115567220" TEXT="Les caisses elle seront 25 euros par packet de 100, 1 caisse pour 1000 flacons donc 25 / 10 /1000 = 0.0025 par flacons si on veux"/>
+<node CREATED="1467114547286" FOLDED="true" ID="ID_320096125" MODIFIED="1470922756423" POSITION="left" TEXT="R&#xe9;cipient - outils">
+<node CREATED="1467114556911" ID="ID_538322285" MODIFIED="1470922475897" TEXT="La fonctionnalit&#xe9; de cette page permettra de cr&#xe9;e du mat&#xe9;riel de tout genre pour la confection des produit, a ce stade normalement le joueur a des aromes des bases pr&#xe8;te en littre">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114593310" ID="ID_1837788952" MODIFIED="1470922483805" TEXT="la table outils devra &#xea;tre cr&#xe9;e et contiendra id, id_user, caisse, boutteille vide, pipette, frigo">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114624886" ID="ID_556400542" MODIFIED="1470922486007" TEXT="on pourra fabriquer les flacons de 10 ml dans un premier temps par 100 , 1000 , 10000 ou nombre voulu mais par tranche de 10000">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114699310" ID="ID_1961982500" MODIFIED="1470922489276" TEXT="il faudras v&#xe9;rifier l&apos;argnet du joueur uniquement">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114711262" ID="ID_674940926" MODIFIED="1470922495807" TEXT="la partie outile sera des pipette de dosage, des caisse de conditionnement des frigos ">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114747989" ID="ID_731948869" MODIFIED="1470922504303" TEXT="les frigos eux feront office de stockage style stockage des produit complet, plus le nombre de frigo^est grand plus on peux en sotcker je vois 1000 produit par frigo a raison de 800 patate le frigo">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467114790933" ID="ID_1287907822" MODIFIED="1470922508333" TEXT="les pipette de dosage 1 euros les 10 pipette 1 pipette obligatoire par flacons de 10 ml">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467115511371" ID="ID_1034785308" MODIFIED="1470922516185" TEXT="Les caisses elle seront 25 euros par packet de 100, 1 caisse pour 1000 flacons donc 25 / 10 /1000 = 0.0025 par flacons si on veux">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1467124345941" HGAP="77" ID="ID_1386822338" MODIFIED="1467184566403" POSITION="left" TEXT="Dans le labas , pr&#xe9;voir le fait que les joueur peuvent recevoir des p&#xe9;nalit&#xe9; de qualit&#xe9;, pr&#xe9;voir que toute les semaines un jeu de d&#xe9;s est lanc&#xe9; , toujours en fct du % de labos, de le mettre a 0 pendant  2 jours il faudras pour &#xe7;a pr&#xe9;voir un controller tool qui int&#xe9;ragira avec les controller de base pour les changer ind&#xe9;pendamment de son propre fonctionnement" VSHIFT="23"/>
-<node CREATED="1467124347465" HGAP="80" ID="ID_1628907385" MODIFIED="1467269315801" POSITION="left" TEXT="Synthese des bases" VSHIFT="24"/>
+<node CREATED="1467124347465" HGAP="80" ID="ID_1628907385" MODIFIED="1467269315801" POSITION="left" TEXT="Synthese des bases" VSHIFT="24">
+<node CREATED="1470922686877" ID="ID_1453600625" MODIFIED="1470922713744" TEXT="La page en elle m&#xea;me au niveau des quantit&#xe9; que l&apos;on peu cr&#xe9;e n&apos;est pas a jour quand la page se recharge mette la get user()"/>
+</node>
 <node CREATED="1467124352253" HGAP="25" ID="ID_1584817357" MODIFIED="1467135594122" POSITION="right" TEXT="attention la synthses des flacons ne se met pas a jour &#xe0; l&apos;envoi du formulaire,  la set varible user n&apos;est pas appeler entre temps regler &#xe7;a, de plus les calcule de quantit&#xe9; que l&apos;on peux faire ne sont pas bon, on a de la vg mais il affiche 0 pour la confectio nde celle ci" VSHIFT="-23">
 <icon BUILTIN="button_cancel"/>
 <icon BUILTIN="button_cancel"/>
@@ -105,7 +125,7 @@
 <node CREATED="1467269721495" ID="ID_1641577127" MODIFIED="1467269780055" TEXT="Le remplissage de base dans les flacons ne coute rien, ind&#xe9;pendament du fait qu&apos;il faut qu&apos;il y aie d ela place dans les frigos de stockage, et qu&apos;il y aie assez de pipette de remplissage"/>
 <node CREATED="1467269783550" ID="ID_1342010" MODIFIED="1467269791906" TEXT="1 littre de bases donnera 117 flacons"/>
 </node>
-<node CREATED="1467638393742" HGAP="-13" ID="ID_1118032390" MODIFIED="1467902804340" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="-63">
+<node CREATED="1467638393742" FOLDED="true" HGAP="-13" ID="ID_1118032390" MODIFIED="1470922765734" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="-63">
 <node CREATED="1467638433476" ID="ID_1572542091" MODIFIED="1467814726412" TEXT="Les am&#xe9;lioration permettre de set les var dans le global pour am&#xe9;liorer les statistique du jeu">
 <icon BUILTIN="button_ok"/>
 </node>
@@ -136,6 +156,13 @@
 <node CREATED="1467968644323" ID="ID_273306017" MODIFIED="1467968661004" POSITION="right" TEXT="V&#xe9;rifier et refaire le controller du my account pour changer de mot de passe, ne fonctionne pas du tout tout refaore"/>
 <node CREATED="1467969750588" ID="ID_709907972" MODIFIED="1467969763866" POSITION="right" TEXT="Trouver un nouveau systeme de tableau plus beau que ceux utilis&#xe9; sur le game home"/>
 <node CREATED="1470204320284" ID="ID_622349479" MODIFIED="1470204329790" POSITION="right" TEXT="pr&#xe9;voir que les tools sont uniquement valable pour les admins"/>
+<node CREATED="1470922085653" ID="ID_1886922511" MODIFIED="1470922107455" POSITION="right" TEXT="Dans les tools, pr&#xe9;voir l&apos;ajout des aromes , pour les mettre a jour ext"/>
+<node CREATED="1470922108139" ID="ID_146278502" MODIFIED="1470922129323" POSITION="right" TEXT="pr&#xe9;voir de voir la liste des joueur complete avec ressource level de batiment last connect et point"/>
+<node CREATED="1470922140663" ID="ID_728984513" MODIFIED="1470922146182" POSITION="right" TEXT="Pr&#xe9;voir la page de classement"/>
+<node CREATED="1470922146668" ID="ID_1486437478" MODIFIED="1470922156993" POSITION="right" TEXT="voir si les requete sont assez secure pour lanc&#xe9; le site"/>
+<node CREATED="1470922157479" ID="ID_3742338" MODIFIED="1470922239867" POSITION="right" TEXT="pr&#xe9;voir une page profil simple ou le joueur pourra acceder, changer son adresse mail, son pseudo, son mot de passe voir son classement (lien qui mene au classement egalement), envoyer une message a un joeueur (envoi possible depuis le classement avec un bouton) avoir une boite de r&#xe9;ception"/>
+<node CREATED="1470922190094" ID="ID_436729867" MODIFIED="1470923004956" POSITION="right" TEXT="Warning: Invalid argument supplied for foreach() in C:\xampp\htdocs\diy_n_game\app\controller\arome_list.php on line 98 &#xa;Quand je valide des recherche d&apos;arome termin&#xe9;e, du moin quand je charge la page juste qund c&apos;est fini"/>
+<node CREATED="1470922959692" ID="ID_708497088" MODIFIED="1470922959692" POSITION="right" TEXT=""/>
 <node CREATED="1467902756321" HGAP="8" ID="ID_1031803239" MODIFIED="1467902799260" POSITION="left" TEXT="Voir les fct du game home et essayer de tout mettre dans a base directement a la racine des controller qui vont gerer &#xe7;a eux m&#xea;me pour ne pas avoir ce genre de fct toute malade dans le tas" VSHIFT="-9"/>
 </node>
 </map>
