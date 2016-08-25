@@ -17,6 +17,9 @@
 						<th>Production :</th><td><b><? echo $user->usine_propylene->production; ?></b> / Littres de Propylène brut / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
+						<th>Production /Jour : </th><td><b><?= $user->usine_propylene->production*24; ?></b> / Littres de Propylène brut / jour</td>
+					</tr>
+					<tr class="success" style="color:black;">
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_propylene->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;">

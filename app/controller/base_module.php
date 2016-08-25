@@ -118,18 +118,17 @@ Class base_module extends all_query
 
 	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
 	{
-		$this->set_point_user($prix_a_deduire);
+		
 
 		$argent_before = $this->user_obj->user_infos->argent;
 		
 		if($moins_plus == "-")
-			$argent_after = $argent_before - $prix_a_deduire;	
-
+		{
+			$this->set_point_user($prix_a_deduire);
+			$argent_after = $argent_before - $prix_a_deduire;
+		}
 		else if($moins_plus == "+")
 			$argent_after = $argent_before + $prix_a_deduire;
-
-		else
-			$argent_after = $argent_before - $prix_a_deduire;
 
 		$req_sql = new stdClass;
 		$req_sql->table = "login";

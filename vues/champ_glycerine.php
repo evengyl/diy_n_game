@@ -17,6 +17,9 @@
 						<th>Production :</th><td><b><? echo $user->champ_glycerine->production; ?></b> / Plantes de Glycérole / heure</td>
 					</tr>
 					<tr class="success" style="color:black;">
+						<th>Production /Jour : </th><td><b><?= $user->champ_glycerine->production*24; ?></b> / Plantes de Glycérole / jour</td>
+					</tr>
+					<tr class="success" style="color:black;">
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->champ_glycerine->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;">
@@ -44,7 +47,7 @@
 				</table>
 			</div>
 
-			<div class="col-lg-8 hitsoire">
+			<div class="col-lg-8 hitsoire pull-right">
 				<h3 class="title">Petite histoire : </h3>
 				<span>Le glycérol est formé durant la fermentation alcoolique du moût de raisin lors de la production du vin.
 				Les huiles de noix de coco et de palmiste qui contiennent un pourcentage élevé (70-80 %) d'acides 

@@ -42,7 +42,9 @@ Class remplissage_produit extends base_module
 			}
 		}
 
-		return $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->assign_var("user", $user)->render();
+		return $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)
+					->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)
+					->assign_var("user", $user)->render();
 	}
 
 	private function nb_product_creable_bases($bases_user)

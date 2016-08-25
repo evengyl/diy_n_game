@@ -11,7 +11,7 @@
 				<h3 class="title">Actuellement vos Labos diminue vos prix de fabrication</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
 					<tr class="success" style="color:black;">
-						<th>Quantité de laboratoires :</th><td><b><? echo $user->user_infos->level_labos_bases; ?></b> Labos, Permettent une réductions du coût des bases</td>
+						<th>Quantité de laboratoires :</th><td><b><? echo $user->user_infos->level_labos_bases; ?></b> Labos, Permettent une réductions des quantités de ressource pour créer les bases</td>
 					</tr>
 					<tr class="success" style="color:black;">
 						<th>Réduction :</th><td><b><? echo $user->labos_bases->pourcent_down; ?></b> % du coût des bases</td>
