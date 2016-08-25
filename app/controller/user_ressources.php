@@ -145,5 +145,92 @@ Class user_ressources extends user
 		}
 		return $string_id_arome;
  	}
-	
+
+
+	public function set_arome_acquis_for_tpl($user)
+	{
+		$this->nb_arome_total = 0;
+		$this->nb_arome_total_acquis = 0;
+
+
+		$arome_list = new stdClass();
+		$arome_list->table = "aromes";
+		$arome_list->var = "id, marque, nom";
+		$arome_list->order = "marque";
+		$res_sql_arome_list = $this->select($arome_list);
+
+		//recupere un tableau avec les ids des aromes non posseder par le joueur
+		//contient tout les id des aromes non connu
+		$data_from_bsd = substr($user->user_infos->list_arome_not_have, 0,-1);
+		$array_not_have = explode(",", $data_from_bsd);
+		
+
+
+		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
+		$array_total_aromes = $this->return_id_array_table_arome($res_sql_arome_list);
+
+		//calcule la différence entre les deux et en ressort un tableau avec tout les id des aromes acquis
+		$array_id_arome_acquis  = array_diff($array_total_aromes, $array_not_have);
+
+
+		foreach($res_sql_arome_list as $key_aromes => $value_arome)
+		{
+			$this->nb_arome_total++;
+			foreach($array_id_arome_acquis as $row_acquis)
+			{
+				if((string)$row_acquis == (string)$value_arome->id)
+				{
+					$this->nb_arome_total_acquis++;
+					$tab_final_arome_acquis[] = $value_arome;
+				}
+			}
+		}
+		
+		$tab_final_arome_acquis_traiter = user_ressources::traitement_array_final_aromes($tab_final_arome_acquis);
+		return $tab_final_arome_acquis_traiter;
+	}
+
+
+	public function traitement_array_final_aromes($tab_final_arome_acquis)
+	{
+		//astuce pour ne pas avoir un element en moins dans le tableau lors de la premire passe pour inscrire le nom de la marque dans le tab
+
+		$tab_final_arome_acquis_traiter = array();
+		$i=0;
+
+
+		foreach($tab_final_arome_acquis as $row)
+		{
+			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+
+			if(key($tab_final_arome_acquis_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+
+			}
+			else
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+			$i++;
+		}
+		return $tab_final_arome_acquis_traiter;
+	}
+
+
 }

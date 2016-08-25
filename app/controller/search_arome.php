@@ -1,6 +1,6 @@
 <?php 
 
-Class arome_list extends base_module
+Class search_arome extends base_module
 {
 	private $value_to_search = 0;
 	private $percent_to_win = 0;
@@ -47,10 +47,9 @@ Class arome_list extends base_module
 
 
 		//return tab_final_arome_acquis, contient le tableau avec tout les aromes uniquement connu
-		$this->set_arome_acquis_for_tpl($user);
-
 		//return tab_final_arome_acquis_traiter, contient le tab avec la mise en forme pour l'affichage dans le tpl
-		$this->tab_final_arome_acquis_traiter = $this->traitement_array_final_aromes($this->tab_final_arome_acquis);
+		$this->tab_final_arome_acquis_traiter = user_ressources::set_arome_acquis_for_tpl($user);
+
 
 		//partie traitement de l'arome gagner pour l'envoi au tpl
 		if(isset($user->user_infos->id_arome_win) && $user->user_infos->id_arome_win != "")
@@ -58,7 +57,7 @@ Class arome_list extends base_module
 			//va cehrcher l'arome dans la base pour les infos
 			$arome_win_for_tpl = $this->get_arome_win_for_tpl($user);
 			//traite l'id pour ressortir avec image et tout
-			$arome_win_for_tpl = $this->traitement_array_final_aromes($arome_win_for_tpl);
+			$arome_win_for_tpl = user_ressources::traitement_array_final_aromes($arome_win_for_tpl);
 		}
 		else
 			$arome_win_for_tpl = "";
@@ -88,45 +87,7 @@ Class arome_list extends base_module
 	}
 
 
-	private function traitement_array_final_aromes(&$tab_final_arome_acquis)
-	{
-		//astuce pour ne pas avoir un element en moins dans le tableau lors de la premire passe pour inscrire le nom de la marque dans le tab
-
-		$tab_final_arome_acquis_traiter = array();
-		$i=0;
-
-		foreach($tab_final_arome_acquis as $row)
-		{
-			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
-			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
-
-			if(key($tab_final_arome_acquis_traiter) == $row->marque)
-			{
-				$name_image = $row->marque;
-				$name_image .= "_".trim($row->nom).".jpg";
-				$name_image = str_replace(" ", "_", $name_image);
-				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
-				$name_image = "/images/aromes/".$row->marque."/".$name_image;
-
-				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
-
-			}
-			else
-			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
-			$i++;
-		}
-		return $tab_final_arome_acquis_traiter;
-	}
+	
 
 	public function recept_form_with_value_arome($post)
 	{
@@ -188,39 +149,6 @@ Class arome_list extends base_module
 		$time_now = date("U");
 		$time_finish = $time_now + (($this->value_to_search/1000) * Config::$time_search_for_one_k_argent_depenser);
 		return $time_finish;
-	}
-
-	private function set_arome_acquis_for_tpl(&$user)
-	{
-		$arome_list = new stdClass();
-		$arome_list->table = "aromes";
-		$arome_list->var = "id, marque, nom";
-		$arome_list->order = "marque";
-		$res_sql_arome_list = $this->select($arome_list);
-
-		//recupere un tableau avec les ids des aromes non posseder par le joueur
-		$array_not_have = user_batiments::traitement_arome_chain_bsd($user->user_infos->list_arome_not_have);
-
-
-		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
-		$array_total_aromes = $this->return_id_array_table_arome($res_sql_arome_list);
-
-		//calcule la différence entre les deux et en ressort un tableau avec tout les id des aromes acquis
-		$array_id_arome_acquis  = array_diff($array_total_aromes, $array_not_have);
-
-
-		foreach($res_sql_arome_list as $key_aromes => $value_arome)
-		{
-			$this->nb_arome_total++;
-			foreach($array_id_arome_acquis as $row_acquis)
-			{
-				if((string)$row_acquis == (string)$value_arome->id)
-				{
-					$this->nb_arome_total_acquis++;
-					$this->tab_final_arome_acquis[] = $value_arome;
-				}
-			}
-		}
 	}
 
 	private function get_arome_win_for_tpl(&$user)

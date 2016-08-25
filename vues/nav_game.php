@@ -51,7 +51,7 @@
 					</li>
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="?page=arome_list">
+						<a style="color:white;" href="?page=search_arome">
 							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Recherche des arômes
 						</a>
 					</li>
