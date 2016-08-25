@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 24 Août 2016 à 21:02
--- Version du serveur :  10.1.9-MariaDB
--- Version de PHP :  5.6.15
+-- Généré le :  Jeu 25 Août 2016 à 14:25
+-- Version du serveur :  10.1.13-MariaDB
+-- Version de PHP :  5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,6 +28,7 @@ USE `diy_n_game`;
 -- Structure de la table `amelioration_var_config`
 --
 
+DROP TABLE IF EXISTS `amelioration_var_config`;
 CREATE TABLE `amelioration_var_config` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -54,7 +55,7 @@ TRUNCATE TABLE `amelioration_var_config`;
 --
 
 INSERT INTO `amelioration_var_config` (`id`, `id_user`, `price_search_1`, `price_search_2`, `price_search_3`, `chance_to_win_1`, `chance_to_win_2`, `chance_to_win_3`, `time_search_for_one_k_argent_depenser`, `prix_vingt_quatre_vingt`, `prix_cinquante_cinquante`, `prix_quatre_vingt_vingt`, `prix_cent`) VALUES
-(1, 6, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0);
+(1, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -62,6 +63,7 @@ INSERT INTO `amelioration_var_config` (`id`, `id_user`, `price_search_1`, `price
 -- Structure de la table `aromes`
 --
 
+DROP TABLE IF EXISTS `aromes`;
 CREATE TABLE `aromes` (
   `id` int(11) NOT NULL,
   `marque` varchar(255) NOT NULL,
@@ -315,7 +317,6 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `quality`) VALUES
 (233, 'The Perfumer''s Apprentice', 'Additif', 'Koolada', 3),
 (234, 'The Perfumer''s Apprentice', 'Additif', 'Sweetener', 3),
 (235, 'The Perfumer''s Apprentice', 'Boisson', 'Absinthe', 3),
-(236, 'The Perfumer''s Apprentice', 'Boisson', 'Biere', 3),
 (237, 'The Perfumer''s Apprentice', 'Boisson', 'Champagne', 3),
 (238, 'The Perfumer''s Apprentice', 'Boisson', 'Cola', 3),
 (239, 'The Perfumer''s Apprentice', 'Boisson', 'HPNO', 3),
@@ -364,7 +365,6 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `quality`) VALUES
 (282, 'The Perfumer''s Apprentice', 'Tabac', 'Ml Boro Premium', 3),
 (283, 'The Perfumer''s Apprentice', 'Tabac', 'Ry 4', 3),
 (284, 'The Perfumer''s Apprentice', 'Tabac', 'Ry 4 Double', 3),
-(285, 'The Perfumer''s Apprentice', 'Tabac', 'Tabac Absolu', 3),
 (286, 'The Perfumer''s Apprentice', '', 'Bittersweet ', 3),
 (287, 'Cappela Flavor', 'Gourmand', 'Amaretto', 3),
 (288, 'Cappela Flavor', 'Boisson', 'Anise', 3),
@@ -457,6 +457,7 @@ INSERT INTO `aromes` (`id`, `marque`, `type`, `nom`, `quality`) VALUES
 -- Structure de la table `bases`
 --
 
+DROP TABLE IF EXISTS `bases`;
 CREATE TABLE `bases` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -476,7 +477,7 @@ TRUNCATE TABLE `bases`;
 --
 
 INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, `bases_1000`) VALUES
-(1, 6, '1479', '1010', '1000', '1010'),
+(1, 6, '1516', '1010', '1000', '1010'),
 (2, 11, '0', '0', '0', '0');
 
 -- --------------------------------------------------------
@@ -485,6 +486,7 @@ INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, 
 -- Structure de la table `construction_en_cours`
 --
 
+DROP TABLE IF EXISTS `construction_en_cours`;
 CREATE TABLE `construction_en_cours` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -503,6 +505,7 @@ TRUNCATE TABLE `construction_en_cours`;
 -- Structure de la table `hardware`
 --
 
+DROP TABLE IF EXISTS `hardware`;
 CREATE TABLE `hardware` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -521,7 +524,7 @@ TRUNCATE TABLE `hardware`;
 --
 
 INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`, `flacon`) VALUES
-(1, 6, 2, 915, 3000);
+(1, 6, 2, 915, 1000);
 
 -- --------------------------------------------------------
 
@@ -529,6 +532,7 @@ INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`, `flacon`) VALUES
 -- Structure de la table `labos_bases`
 --
 
+DROP TABLE IF EXISTS `labos_bases`;
 CREATE TABLE `labos_bases` (
   `id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
@@ -625,6 +629,7 @@ INSERT INTO `labos_bases` (`id`, `level`, `pourcent_down`, `prix`, `time_constru
 -- Structure de la table `login`
 --
 
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
@@ -654,7 +659,7 @@ TRUNCATE TABLE `login`;
 --
 
 INSERT INTO `login` (`id`, `login`, `password`, `point`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `litter_vg`, `litter_pg`, `list_arome_not_have`) VALUES
-(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', 55.647, '1472056334', 7, 0, 12, 10, 12, 1586983.137, 748271.547, 23800, 381, 198, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,'),
+(6, 'evengyl', '$2y$10$esysZfksJpjyNODPTAXCkeCuhFaVUcDYimSyAWrC.HdB.4iYoy6ky', 104.891, '1472126268', 7, 3, 13, 10, 12, 1807399.555, 768762.209, 9969920, 374, 169, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,207,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,'),
 (11, 'lbaudoux', '$2y$10$jjJFYrMF.io1poEG5Z.SfOCrnQbDp9sKG72d5Xwh3rENlZ4r9Odse', 0, '1467202373', 0, 0, 0, 0, 0, 1001.484, 1001.484, 1500, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,');
 
 -- --------------------------------------------------------
@@ -663,6 +668,7 @@ INSERT INTO `login` (`id`, `login`, `password`, `point`, `last_connect`, `averti
 -- Structure de la table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` int(11) NOT NULL,
   `titre` text NOT NULL,
@@ -695,27 +701,27 @@ INSERT INTO `news` (`id`, `titre`, `text`, `date_now`, `visible`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `raccord`
+-- Structure de la table `product`
 --
 
-CREATE TABLE `raccord` (
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `id_batiment` int(11) NOT NULL,
-  `table_batiment` varchar(255) NOT NULL,
-  `name_controller` varchar(255) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `list_product` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Vider la table avant d'insérer `raccord`
+-- Vider la table avant d'insérer `product`
 --
 
-TRUNCATE TABLE `raccord`;
+TRUNCATE TABLE `product`;
 --
--- Contenu de la table `raccord`
+-- Contenu de la table `product`
 --
 
-INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_controller`) VALUES
-(3, 3, 'labos_bases', 'labos_bases');
+INSERT INTO `product` (`id`, `id_user`, `list_product`) VALUES
+(1, 6, '(36:150),(45:120),');
 
 -- --------------------------------------------------------
 
@@ -723,6 +729,7 @@ INSERT INTO `raccord` (`id`, `id_batiment`, `table_batiment`, `name_controller`)
 -- Structure de la table `search_arome`
 --
 
+DROP TABLE IF EXISTS `search_arome`;
 CREATE TABLE `search_arome` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -742,6 +749,7 @@ TRUNCATE TABLE `search_arome`;
 -- Structure de la table `update_en_cours`
 --
 
+DROP TABLE IF EXISTS `update_en_cours`;
 CREATE TABLE `update_en_cours` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -808,9 +816,9 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `raccord`
+-- Index pour la table `product`
 --
-ALTER TABLE `raccord`
+ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -870,10 +878,10 @@ ALTER TABLE `login`
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT pour la table `raccord`
+-- AUTO_INCREMENT pour la table `product`
 --
-ALTER TABLE `raccord`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `search_arome`
 --
