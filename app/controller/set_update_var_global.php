@@ -22,11 +22,30 @@ Class set_update_var_global extends base_module
         $this->set_global__prix_cinquante_cinquante($user);
         $this->set_global__prix_quatre_vingt_vingt($user);
         $this->set_global__prix_cent($user);
+        $this->set_global__nb_plantes_for_littre($user);
+        $this->set_global__nb_propylene_for_littre($user);
 
         
 		//ce module va gerer les amélioration créee dans la bases de données concernant les recherhce pour améliorer les var du global
 
     }	
+
+    public function set_global__nb_plantes_for_littre($user)
+    {
+        //gain total
+        $pourcent_down = $user->labos_bases->pourcent_down;
+
+        Config::$nb_plantes_for_littre = Config::$nb_plantes_for_littre_at_start_game_labos_0 - ((Config::$nb_plantes_for_littre_at_start_game_labos_0 / 100) * $pourcent_down);
+    }
+
+    public function set_global__nb_propylene_for_littre($user)
+    {
+        //gain total
+        $pourcent_down = $user->labos_bases->pourcent_down;
+
+        Config::$nb_propylene_for_littre = Config::$nb_propylene_for_littre_at_start_game_labos_0 - ((Config::$nb_propylene_for_littre_at_start_game_labos_0 / 100) * $pourcent_down);
+    }
+
 
     public function set_global__price_search_1($user)
     {

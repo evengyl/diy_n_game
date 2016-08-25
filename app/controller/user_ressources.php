@@ -238,8 +238,6 @@ Class user_ressources extends user
 	public function calcul_nb_product_total($user)
 	{
 
-		
-
 		if($user->product->list_product != "")
 		{
 			//mtn que l'on a la liste des product dispo de la table de l'user, on traie pour avoir un array propre id nb
@@ -253,10 +251,8 @@ Class user_ressources extends user
 			$total_nb_product = 0;
 			foreach($user->product->list_product[0] as $row_product)
 			{
-				preg_match('/\(([0-9]+):([0-9]+)\)/', $row_product, $match);
-				$array_final_id_nb[$match[1]] = $match[2];
-
-				$total_nb_product += $match[2];
+				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
+				$total_nb_product += $match[1];
 			}
 
 			return $total_nb_product;

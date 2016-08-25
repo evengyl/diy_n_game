@@ -51,8 +51,8 @@ Class remplissage_produit extends base_module
 		foreach($bases_user as $num_base => $nb_base)
 		{
 			$num_base = substr($num_base, 6);
-			//on fait *100 pour avoir la quantité de flacons de 10 ml on peu faire
-			$array_propre_base[$num_base] = $nb_base*100;
+			//on fait *85 car on travail sur des flacons de 10ml avec 15% d'arome pour avoir la quantité de flacons de 10 ml on peu faire
+			$array_propre_base[$num_base] = $nb_base*85;
 		}
 
 		//mtn on a un array avec le nombre de flacons créable a partir des bases

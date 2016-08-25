@@ -16,11 +16,6 @@ Class synthese_bases extends base_module
 		parent::__construct($module_tpl_name, $user);
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
-		//calcule du nombre de plante et de propy pour creer la base en fct du % de reduction du au labos set les nouvelle valeur dans l'objet
-		$pourcent_down = $this->user_obj->labos_bases->pourcent_down;
-		Config::$nb_plantes_for_littre = $this->set_reduction_coup_with_labos(Config::$nb_plantes_for_littre, $pourcent_down);
-		Config::$nb_propylene_for_littre = $this->set_reduction_coup_with_labos(Config::$nb_propylene_for_littre, $pourcent_down);
-
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
 		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8);
 		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);

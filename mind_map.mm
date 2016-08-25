@@ -67,7 +67,7 @@
 <node CREATED="1467114417400" ID="ID_163940729" MODIFIED="1467114456980" TEXT="l&apos;entrepot contiendra aussi un petit bouton pour &quot;voir stock jeter&quot;"/>
 <node CREATED="1467115580688" ID="ID_1448625927" MODIFIED="1467115602047" TEXT="Il Contiendra aussi le nombre de tout pipette, boutteil vide, caisse ext ext"/>
 </node>
-<node CREATED="1467114547286" FOLDED="true" ID="ID_320096125" MODIFIED="1470922756423" POSITION="left" TEXT="R&#xe9;cipient - outils">
+<node CREATED="1467114547286" FOLDED="true" ID="ID_320096125" MODIFIED="1472136345034" POSITION="left" TEXT="R&#xe9;cipient - outils">
 <node CREATED="1467114556911" ID="ID_538322285" MODIFIED="1470922475897" TEXT="La fonctionnalit&#xe9; de cette page permettra de cr&#xe9;e du mat&#xe9;riel de tout genre pour la confection des produit, a ce stade normalement le joueur a des aromes des bases pr&#xe8;te en littre">
 <icon BUILTIN="button_ok"/>
 </node>
@@ -117,15 +117,31 @@
 <node CREATED="1467184957179" ID="ID_420878748" MODIFIED="1467185002683" POSITION="right" TEXT="Attention que actuellement l&apos;agout d&apos;arome n&apos;est pas possible car la fct qui cr&#xe9; le tab des aromes est pr&#xe9;vue pour que les marque se suivent sans e m&#xe9;langer , a corriger">
 <icon BUILTIN="messagebox_warning"/>
 </node>
-<node CREATED="1467269319557" ID="ID_631958755" MODIFIED="1467269334095" POSITION="left" TEXT="Cr&#xe9;ation de produit sans Ar&#xf4;mes dedans">
-<node CREATED="1467269359460" ID="ID_807757189" MODIFIED="1467269377555" TEXT="Proposer au joueur 4 encadr&#xe9; contenant respectivement les 4 bases"/>
-<node CREATED="1467269378056" ID="ID_1479476364" MODIFIED="1467269419373" TEXT="Lui proposer de remplir ses bidon avec 4*3 bouton , 10 - 100 - 1000 ou multiple de 1000"/>
-<node CREATED="1467269421784" ID="ID_1789687868" MODIFIED="1467269440748" TEXT="les bases se remplisse a hauteur de 85%, donc 8.5 ml , car on travail avec que des flacons de 10 "/>
-<node CREATED="1467269662414" ID="ID_919781368" MODIFIED="1467269715479" TEXT="Les nouvvelles ressources seront stokee &#xe9;galement dans la table bases avec le m&#xea;me non que leur bases propre mais avec _10ml en plus"/>
-<node CREATED="1467269721495" ID="ID_1641577127" MODIFIED="1467269780055" TEXT="Le remplissage de base dans les flacons ne coute rien, ind&#xe9;pendament du fait qu&apos;il faut qu&apos;il y aie d ela place dans les frigos de stockage, et qu&apos;il y aie assez de pipette de remplissage"/>
-<node CREATED="1467269783550" ID="ID_1342010" MODIFIED="1467269791906" TEXT="1 littre de bases donnera 117 flacons"/>
+<node CREATED="1467269319557" ID="ID_631958755" MODIFIED="1472136383372" POSITION="left" TEXT="Cr&#xe9;ation de produit avec Ar&#xf4;mes dedans">
+<node CREATED="1467269359460" ID="ID_807757189" MODIFIED="1472136386626" TEXT="Proposer au joueur 4 encadr&#xe9; contenant respectivement les 4 bases">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1467638393742" FOLDED="true" HGAP="-13" ID="ID_1118032390" MODIFIED="1470922765734" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="-63">
+<node CREATED="1467269378056" ID="ID_1479476364" MODIFIED="1472136392580" TEXT="Lui proposer de remplir ses bidon avec 4*3 bouton , 10 - 100 - 1000 ou multiple de 1000">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467269421784" ID="ID_1789687868" MODIFIED="1472136500016" TEXT="les bases se remplisse a hauteur de 85%, donc 8.5 ml , car on travail avec que des flacons de 10 ">
+<icon BUILTIN="messagebox_warning"/>
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467269662414" ID="ID_919781368" MODIFIED="1467269715479" TEXT="Les nouvvelles ressources seront stokee &#xe9;galement dans la table bases avec le m&#xea;me non que leur bases propre mais avec _10ml en plus"/>
+<node CREATED="1467269721495" ID="ID_1641577127" MODIFIED="1472136602598" TEXT="Le remplissage de base dans les flacons ne coute rien, ind&#xe9;pendament du fait qu&apos;il faut qu&apos;il y aie d ela place dans les frigos de stockage, et qu&apos;il y aie assez de pipette de remplissage">
+<icon BUILTIN="stop-sign"/>
+</node>
+<node CREATED="1472136585992" ID="ID_992009634" MODIFIED="1472136600920" TEXT="Changement le prix est fixer au d&#xe9;but a 2 changeable dans la config">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1467269783550" ID="ID_1342010" MODIFIED="1472136579151" TEXT="1 littre de bases donnera 117 flacons">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1472136524185" ID="ID_1326963830" MODIFIED="1472136572991" TEXT="Pr&#xe9;voir de changer le systeme de stockage des promduits dans la bases car la c&apos;est (id:nb) mais il faut que ce soit (id:nb:bases)"/>
+</node>
+<node CREATED="1472136520878" ID="ID_1165309323" MODIFIED="1472136520878" POSITION="left" TEXT=""/>
+<node CREATED="1467638393742" FOLDED="true" HGAP="-13" ID="ID_1118032390" MODIFIED="1472136611459" POSITION="left" TEXT="Laboratoire de recherche d&apos;am&#xe9;lioratio" VSHIFT="-63">
 <node CREATED="1467638433476" ID="ID_1572542091" MODIFIED="1467814726412" TEXT="Les am&#xe9;lioration permettre de set les var dans le global pour am&#xe9;liorer les statistique du jeu">
 <icon BUILTIN="button_ok"/>
 </node>
