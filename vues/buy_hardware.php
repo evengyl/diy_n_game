@@ -29,9 +29,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="Frigo">
+						<img src="<?= Config::$path_public."/images/frigo.png" ?>" class="img-responsive" alt="Frigo">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'un frigo <strong style="color:#31DE44;"><?= Config::$price_frigo; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'un frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo; ?>€</strong></h3>
 							<input name="buy_frigo_1" value="Acheter un Frigo" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -41,9 +41,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="Frigo">
+						<img src="<?= Config::$path_public."/images/frigo_10.png" ?>" class="img-responsive" alt="Frigo">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 frigo <strong style="color:#31DE44;"><?= Config::$price_frigo_10; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_10; ?>€</strong></h3>
 							<input name="buy_frigo_10" value="Acheter 10 Frigos" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -57,9 +57,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/pipette.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'une pipette <strong style="color:#31DE44;"><?= Config::$price_pipette; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'une pipette : <strong style="color:#31DE44;"><?= Config::$price_pipette; ?>€</strong></h3>
 							<input name="buy_pipette_1" value="Acheter une pipette" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -69,9 +69,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/pipette_10.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 pipettes <strong style="color:#31DE44;"><?= Config::$price_pipette_10; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_10; ?>€</strong></h3>
 							<input name="buy_pipette_10" value="Acheter 10 pipettes" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -81,9 +81,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/pipette_100.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 pipettes <strong style="color:#31DE44;"><?= Config::$price_pipette_100; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_100; ?>€</strong></h3>
 							<input name="buy_pipette_100" value="Acheter 100 pipettes" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -98,9 +98,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/flacon_10.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_10; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_10; ?>€</strong></h3>
 							<input name="buy_flacon_10" value="Acheter 10 Flacons" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -110,9 +110,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/flacon_100.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_100; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_100; ?>€</strong></h3>
 							<input name="buy_flacon_100" value="Acheter 100 Flacons" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
@@ -122,9 +122,9 @@
 			<form method="post" action="?page=buy_hardware">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
-						<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" class="img-responsive" alt="pipette">
+						<img src="<?= Config::$path_public."/images/flacon_1000.png" ?>" class="img-responsive" alt="pipette">
 						<div class="caption">
-							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 Flacons <strong style="color:#31DE44;"><?= Config::$price_flacon_1000; ?>€</strong></h3>
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_1000; ?>€</strong></h3>
 							<input name="buy_flacon_1000" value="Acheter 1000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>

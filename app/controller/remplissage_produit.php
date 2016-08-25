@@ -25,6 +25,9 @@ Class remplissage_produit extends base_module
 		//mtn il ne nous reste plus qu'a voir avec le nombre de flacons vide
 		$this->array_nb_product_creable_a_partir_des_flacon = $this->nb_product_creable_flacon($this->array_nb_product_creable_a_partir_des_pipette, $user);
 
+		//mtn il ne nous reste plus qu'a voir avec l'argent disponible'
+		$this->array_nb_product_creable = $this->nb_product_creable_argent($this->array_nb_product_creable_a_partir_des_flacon, $user);
+
 		//nous récupérons donc un tableau contenant les 4 bases avec le nombre maxi que l'on peux creer de produits
 		
 		
@@ -39,7 +42,7 @@ Class remplissage_produit extends base_module
 			}
 		}
 
-		return $this->assign_var("array_nb_product_creable_a_partir_des_flacon", $this->array_nb_product_creable_a_partir_des_flacon)->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->assign_var("user", $user)->render();
+		return $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->assign_var("user", $user)->render();
 	}
 
 	private function nb_product_creable_bases($bases_user)
@@ -77,7 +80,7 @@ Class remplissage_produit extends base_module
 				$array_nb_product_creable[$key] = $max_product_restant_a_creer_frigo;
 
 			}	
-			else if($row_nb_product_possible_bases <= $max_product_restant_a_creer_frigo)
+			else if($row_nb_product_possible_bases < $max_product_restant_a_creer_frigo)
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_0'] = "Vous n'avez plus beaucoup de ressources par rapport à vos frigos";
@@ -107,7 +110,7 @@ Class remplissage_produit extends base_module
 				$array_nb_product_creable[$key] = $user->hardware->pipette;
 
 			}	
-			else if($row_nb_product_possible_frigo <= $user->hardware->pipette)
+			else if($row_nb_product_possible_frigo < $user->hardware->pipette)
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_1'] = "Vous n'avez plus beaucoup de ressources par rapport à vos pipettes";
@@ -135,7 +138,7 @@ Class remplissage_produit extends base_module
 				$array_nb_product_creable[$key] = $user->hardware->flacon;
 
 			}	
-			else if($row_nb_product_possible_pipette <= $user->hardware->flacon)
+			else if($row_nb_product_possible_pipette < $user->hardware->flacon)
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_2'] = "Vous n'avez plus beaucoup de ressources par rapport à vos flacons";
@@ -145,6 +148,37 @@ Class remplissage_produit extends base_module
 			{
 				//peux probable mais c'est que le nombre sont tout pile exacte on return le nb par frigo
 				$array_nb_product_creable[$key] = $user->hardware->flacon;
+			}
+		}
+		return $array_nb_product_creable;
+	}
+
+
+	private function nb_product_creable_argent($array_nb_product_creable_a_partir_des_flacon, $user)
+	{
+
+
+		foreach($array_nb_product_creable_a_partir_des_flacon as $key => $row_nb_product_possible_argent)
+		{
+			if($user->user_infos->argent > ($row_nb_product_possible_argent * Config::$price_for_un_product))
+			{
+				//on a pas assez de frigo, on return le nombre que le frigo peux contenir
+				$_SESSION['error_3'] = "Vous possédez beaucoup d'argent c'est très bon pour votre société";
+				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
+
+			}	
+			else if($user->user_infos->argent < ($row_nb_product_possible_argent * Config::$price_for_un_product))
+			{
+				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
+				$_SESSION['error_3'] = "Vous n'avez pas assez d'argent pour créer le maximum de produits possible";
+				//on doit alors calculer ce que l'on peux réellement creer avec notre argent
+				$total_possible = $user->user_infos->argent / Config::$price_for_un_product;
+				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
+			}
+			else
+			{
+				//peux probable mais c'est que le nombre sont tout pile exacte on return le nb par frigo
+				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
 			}
 		}
 		return $array_nb_product_creable;

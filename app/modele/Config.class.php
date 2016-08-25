@@ -125,7 +125,7 @@ class Config
 
 
     //creation de produit
-
+    public static $price_for_un_product = 2;
     //end
 
     /* fin des var utilisée par les controller */

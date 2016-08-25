@@ -75,7 +75,7 @@
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Recherche et listes des arômes disponible.
 			</h3>
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=search_arome">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_1.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
@@ -89,7 +89,7 @@
 				</div>
 			</form>
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=search_arome">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_2.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 2">
@@ -103,7 +103,7 @@
 				</div>
 			</form>
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=search_arome">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<img src="<?= Config::$path_public."/images/quality_search_aromes_3.jpg" ?>" class="img-responsive" alt="Qualité de la recherche d'aromes 3">
@@ -117,7 +117,7 @@
 				</div>
 			</form>			
 
-			<form method="post" action="?page=arome_list">
+			<form method="post" action="?page=search_arome">
 				<div class="col-sm-6 col-md-12" >
 					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 						<div class="col-lg-3">

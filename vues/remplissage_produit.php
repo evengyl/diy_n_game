@@ -17,8 +17,12 @@
 			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_2']))?'has-error':''; ?>">
 				<?php echo (isset($_SESSION['error_2']))?'<label for="exampleInputPassword1">'.$_SESSION['error_2'].'</label>':''; ?>
 			</div>
+			<div style='font-size:15px; color:green' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_3']))?'has-error':''; ?>">
+				<?php echo (isset($_SESSION['error_3']))?'<label for="exampleInputPassword1">'.$_SESSION['error_3'].'</label>':''; ?>
+			</div>
+
 			<div style='font-size:15px; color:green' class="col-lg-12 form-group">
-				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <?= min($array_nb_product_creable_a_partir_des_flacon); ?> Produits (tout dépends la bases utilisée)</label>
+				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <?= min($array_nb_product_creable); ?> Produits (tout dépends la bases utilisée)</label>
 			</div>
 
 
@@ -46,19 +50,19 @@
 
 											<div class="col-lg-6">
 												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG</button>
-												<input type="number" name="quantity_2080_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable_a_partir_des_flacon['2080']; ?>" min="0" value="0" class="col-lg-12">
+												<input type="number" name="quantity_2080_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['2080']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
 												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG</button>
-												<input type="number" name="quantity_5050_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable_a_partir_des_flacon['5050']; ?>" min="0" value="0" class="col-lg-12">
+												<input type="number" name="quantity_5050_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['5050']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
 												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG</button>
-												<input type="number" name="quantity_8020_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable_a_partir_des_flacon['8020']; ?>" min="0" value="0" class="col-lg-12">
+												<input type="number" name="quantity_8020_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['8020']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
 												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>100% VG</button>
-												<input type="number" name="quantity_1000_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable_a_partir_des_flacon['1000']; ?>" min="0" value="0" class="col-lg-12">
+												<input type="number" name="quantity_1000_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['1000']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 										</div>
 									</div>
