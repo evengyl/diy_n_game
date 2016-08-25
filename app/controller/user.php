@@ -4,6 +4,7 @@
 Class user extends all_query
 {
 	public $user_infos; // ne surtout pas changer de place cette proprietes
+	public $product;
 	public $champ_glycerine;
 	public $usine_propylene;
 	public $labos_bases;
@@ -80,6 +81,8 @@ Class user extends all_query
 			{
 				foreach($res_fx[0] as $key => $values)
 				{
+					if($key == 'id' || $key == 'id_user')
+						continue;
 					$this->bases->$key = $values;
 				}
 			}
@@ -146,6 +149,24 @@ Class user extends all_query
 				}
 			}
 			unset($res_fx);
+
+			$this->product = new stdClass();
+			$req_sql = new stdClass;
+			$req_sql->table = "product";
+			$req_sql->var = "*";
+			$req_sql->where = "id_user = '".$this->user_infos->id."'";
+			$res_fx = $this->select($req_sql);
+			if(!empty($res_fx))
+			{
+				foreach($res_fx[0] as $key => $values)
+				{
+					if($key == 'id' || $key == 'id_user')
+						continue;
+					$this->product->$key = $values;
+				}
+			}
+			unset($res_fx);
+
 
 		}
 		else

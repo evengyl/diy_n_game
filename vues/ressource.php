@@ -83,17 +83,14 @@ if(Config::$is_connect == 1)
 					        </li>
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Stockage" style="max-height:25px;">
-					        		<span style="font-size:13px;">Stockage : 0/<?= $user->hardware->frigo*Config::$nb_product_per_frigo; ?></span>
+					        		<span style="font-size:13px;">Stockage : <?= $user->user_infos->nb_product_total ."/".$user->hardware->frigo*Config::$nb_product_per_frigo; ?></span>
 					        </li>
 					    </ul>
 					</div>
 
 				    <div class="col-lg-2 col-without-padding">
 				        <ul class="nav navbar-nav">
-					        <li class="col-lg-12" style="color:white;">
-					        		<img src="<?= Config::$path_public; ?>/images/e-liquides.png" alt="Flacons e-liquide" style="max-height:25px;">
-					        		<span style="font-size:13px;">Nombres de produits remplis : 000 / 000</span>
-					        </li>
+
 					        <li class="col-lg-12" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/argent.png" alt="Argent en coffre" style="max-height:25px;">
 					        		<span style="font-size:13px;">Argents : <?= $user->user_infos->argent ?> €</span>

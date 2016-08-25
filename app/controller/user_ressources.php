@@ -26,6 +26,9 @@ Class user_ressources extends user
 					$this->maj_ressource_in_db($row_user);
 					break;
 				}
+
+				//calcule le nombre de produits que le user à au total
+				$user->user_infos->nb_product_total = $this->calcul_nb_product_total($user);
 			}
 	
 		}
@@ -231,6 +234,45 @@ Class user_ressources extends user
 		}
 		return $tab_final_arome_acquis_traiter;
 	}
+
+	public function calcul_nb_product_total($user)
+	{
+
+		
+
+		if($user->product->list_product != "")
+		{
+			//mtn que l'on a la liste des product dispo de la table de l'user, on traie pour avoir un array propre id nb
+			//on enleve la derniere virgule de la table
+			$user->product->list_product = substr($user->product->list_product, 0, -1);
+			$user->product->list_product = array(explode(",", $user->product->list_product));
+
+			//un petit foreach sur le preg match pour récuper un tab propre avec les id et les nb
+			//et calcule du nb total de product fini
+			$array_final_id_nb = array();
+			$total_nb_product = 0;
+			foreach($user->product->list_product[0] as $row_product)
+			{
+				preg_match('/\(([0-9]+):([0-9]+)\)/', $row_product, $match);
+				$array_final_id_nb[$match[1]] = $match[2];
+
+				$total_nb_product += $match[2];
+			}
+
+			return $total_nb_product;
+		}
+		else
+		{
+			//il n'y aucun produit en stock
+			return 0;
+		}
+	}
+
+	public function maj_product_list_nb($id, $nb, $ajout_or_delete = '-')
+	{
+
+	}
+
 
 
 }

@@ -124,6 +124,10 @@ class Config
     //end
 
 
+    //creation de produit
+
+    //end
+
     /* fin des var utilisée par les controller */
 
     
