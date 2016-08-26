@@ -37,7 +37,7 @@ Class remplissage_produit extends base_module
 		{
 			if($_POST['secure'] == "71414242")
 			{
-				$this->traitement_post($_POST);
+				$this->traitement_post($_POST, $user);
 				unset($_POST);
 			}
 		}
@@ -188,10 +188,10 @@ Class remplissage_produit extends base_module
 
 
 
-	private function traitement_post($post)
+	private function traitement_post($post, $user)
 	{
-		affiche_pre($post);
-
+		if(!user_ressources::maj_product_list_nb("45", "120", "2080", '+', $user))
+			return 0;
 
 	}
 }

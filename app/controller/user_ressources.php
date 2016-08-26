@@ -264,8 +264,90 @@ Class user_ressources extends user
 		}
 	}
 
-	public function maj_product_list_nb($id, $nb, $ajout_or_delete = '-')
+	public function maj_product_list_nb($id, $nb, $bases, $ajout_or_delete = '+', $user)
 	{
+		affiche_pre($ajout_or_delete);
+
+
+		$tab_product_recept = array();
+		
+		$tab_product_recept[0]["nb"] = $nb;
+		$tab_product_recept[0]["id"] = $id;
+		$tab_product_recept[0]["bases"] = $bases;
+
+		affiche_pre($tab_product_recept);
+
+		$tab_product_in_stock = array();
+
+		if($user->product->list_product != "")
+		{
+			$user->product->list_product = substr($user->product->list_product, 0, -1);
+			$user->product->list_product = array(explode(",", $user->product->list_product));
+
+			$i = 0;
+			foreach($user->product->list_product[0] as $row_product)
+			{
+				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
+				$tab_product_in_stock[$i]["nb"] = $match[1];
+				$tab_product_in_stock[$i]["id"] = $match[2];
+				$tab_product_in_stock[$i]["bases"] = $match[3];
+				$i++;
+			}
+		}
+
+
+		if($ajout_or_delete == '+')
+		{
+			if(isset($tab_product_in_stock[0]))
+			{
+				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
+				affiche_pre($tab_product_in_stock);
+				foreach($tab_product_in_stock as $key => $prod_in_stock)
+				{
+					if($prod_in_stock['id'] == $tab_product_recept[0]['id'])
+					{
+						//on le possède en stock donc on peux vérif si la bases est la meme
+						if($prod_in_stock['bases'] == $tab_product_recept[0]['bases'])
+						{
+							//on ajoute simplement a NB le nouveau nombre
+							$tab_product_in_stock[$key]['nb'] += $tab_product_recept[0]['nb'];
+							$ajout = 1;
+						}
+						else
+						{
+							$ajout = 0;
+							continue;
+						}
+					}
+					else
+					{
+						continue;
+					}
+				}
+
+				if($ajout == 0)
+				{
+					//ça veux dire que on a peux être le produits mais on l'as pas dans cette bases
+					//dnc on dois le rajouter a la fin du tab
+					array_push($tab_product_in_stock, $tab_product_recept[0]);
+				}
+			}
+			else
+			{
+				array_push($tab_product_in_stock, $tab_product_recept[0]);
+				//ici ça veux dire que l'on a rien comme produits, donc on peux ajouter direct;
+			}
+		}
+		else if($ajout_or_delete == "-")
+		{
+			
+			//ça veux dire que l'on veux delete du produits, attention que si l'on tombe à 0 il faut absolument supprimer la (50,50,50) de la bases
+		}
+
+
+affiche_pre($tab_product_in_stock);
+
+
 
 	}
 
