@@ -38,6 +38,7 @@ Class synthese_bases extends base_module
 		if(isset($_POST['create_bases'])) 
 		{
 			$this->recept_form_with_bases_to_create($_POST);
+			$user->get_variable_user();
 		}
 
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->assign_var("user", $user)->render();

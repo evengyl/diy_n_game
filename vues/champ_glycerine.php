@@ -34,7 +34,7 @@
 				 			}
 				 			else if($in_make == 2)
 				 			{
-				 				echo "<th><td><a class='btn btn-primary' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
+				 				echo "<th><td><a class='btn btn-primary' href='' disabled>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a></td></th>";
 				 			}
 				 			else
 				 			{
