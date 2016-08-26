@@ -99,6 +99,10 @@ if(Config::$is_connect == 1)
 					        		<img src="<?= Config::$path_public; ?>/images/point.png" alt="Argent en coffre" style="max-height:25px;">
 					        		<span style="font-size:13px;">Points : <?= $user->user_infos->point ?> Pts</span>
 					        </li>
+					        <li class="col-lg-12" style="color:white;">
+					        		<img src="<?= Config::$path_public; ?>/images/point.png" alt="Argent en coffre" style="max-height:25px;">
+					        		<span style="font-size:13px;">Points de vente : <?= $user->user_infos->point_vente ?> Pts</span>
+					        </li>
 				      	</ul>
 			      	</div>
 	    		</div><!-- /.navbar-collapse -->
