@@ -301,7 +301,6 @@ Class user_ressources extends user
 			if(isset($tab_product_in_stock[0]))
 			{
 				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
-				affiche_pre($tab_product_in_stock);
 				foreach($tab_product_in_stock as $key => $prod_in_stock)
 				{
 					if($prod_in_stock['id'] == $tab_product_recept[0]['id'])
@@ -340,17 +339,49 @@ Class user_ressources extends user
 		}
 		else if($ajout_or_delete == "-")
 		{
-			
+
 			//ça veux dire que l'on veux delete du produits, attention que si l'on tombe à 0 il faut absolument supprimer la (50,50,50) de la bases
+			if(isset($tab_product_in_stock[0]))
+			{
+				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
+				foreach($tab_product_in_stock as $key => $prod_in_stock)
+				{
+					if($prod_in_stock['id'] == $tab_product_recept[0]['id'] && $prod_in_stock['bases'] == $tab_product_recept[0]['bases'])
+					{
+						$tab_product_in_stock[$key]['nb'] -= $tab_product_recept[0]['nb'];
+						if($tab_product_in_stock[$key]['nb'] == "0")
+						{
+							unset($tab_product_in_stock[$key]);
+						}	
+					}
+					else
+						continue;
+				}
+			}
+			else
+			{
+				//c'est impossible mais dans le doute
+				$_SESSION['error'] = "une erreur est survenue, veuillez prendre contact avec l'administrateur";
+			}
 		}
 
 
-affiche_pre($tab_product_in_stock);
+		//il faut mettre la bases de données à jours apres avoir reconstruit la chaine de caractere
+		$new_string_product_for_bsd = "";
+
+		foreach($tab_product_in_stock as $new_row_product)
+		{
+			$new_string_product_for_bsd .= "(". implode(":", $new_row_product) ."),";
+		}
 
 
-
+		//on met a jour la base de données avec le noveau string des products
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->list_product = $new_string_product_for_bsd;
+		$req_sql->table = "product";
+		$req_sql->where = "id_user = ".$user->user_infos->id;
+		$this->update($req_sql);
+		unset($req_sql);
 	}
-
-
-
 }

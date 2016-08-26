@@ -190,7 +190,7 @@ Class remplissage_produit extends base_module
 
 	private function traitement_post($post, $user)
 	{
-		if(!user_ressources::maj_product_list_nb("45", "120", "2080", '+', $user))
+		if(!user_ressources::maj_product_list_nb("45", "10", "2080", '+', $user))
 			return 0;
 
 	}
