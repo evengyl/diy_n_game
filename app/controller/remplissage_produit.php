@@ -37,7 +37,13 @@ Class remplissage_produit extends base_module
 		{
 			if($_POST['secure'] == "71414242")
 			{
-				$this->traitement_post($_POST, $user);
+				//va retourer un tab comme les user ressources
+				$tab_propre_post_return = $this->traitement_post($_POST, $user);
+
+				//caculer le prix coutant en tout , verifier si argnet ok , si oui on passe a la suite
+				//faire un foreach sur le tab appeler la fonction d'ajout ou de suprrsion a chaque fois
+
+
 				unset($_POST);
 			}
 		}
@@ -190,8 +196,19 @@ Class remplissage_produit extends base_module
 
 	private function traitement_post($post, $user)
 	{
-		if(!user_ressources::maj_product_list_nb("45", "10", "2080", '+', $user))
-			return 0;
+
+		affiche_pre($post);
+		// prevoir un match pour catch les element du tab post
+		// revoyer un tab traiter comme dans le user ressource
+
+
+		if(isset($post['id']) && isset($post['nb']) && isset($post['bases']))
+		{
+
+		}
+
+		//if(!user_ressources::maj_product_list_nb("45", "10", "2080", '+', $user))
+		//	return 0;
 
 	}
 }
