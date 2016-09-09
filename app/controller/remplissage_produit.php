@@ -30,7 +30,6 @@ Class remplissage_produit extends base_module
 
 		//nous récupérons donc un tableau contenant les 4 bases avec le nombre maxi que l'on peux creer de produits
 		
-		
 		//traitement du post recu par le formualire, il vérfie les infos.
 		//récuprere la ligne de la table des produtis du joueur et traite les nouveau a créer, calcule également le prix et déduis
 		if(isset($_POST['secure']))
@@ -38,13 +37,11 @@ Class remplissage_produit extends base_module
 			if($_POST['secure'] == "71414242")
 			{
 				//va retourer un tab comme les user ressources
-				$tab_propre_post_return = $this->traitement_post($_POST, $user);
-
+				$this->traitement_post($_POST, $user);
 				//caculer le prix coutant en tout , verifier si argnet ok , si oui on passe a la suite
 				//faire un foreach sur le tab appeler la fonction d'ajout ou de suprrsion a chaque fois
-
-
 				unset($_POST);
+
 			}
 		}
 
@@ -197,16 +194,23 @@ Class remplissage_produit extends base_module
 	private function traitement_post($post, $user)
 	{
 
-		affiche_pre($post);
+		unset($post['secure']);
 		// prevoir un match pour catch les element du tab post
 		// revoyer un tab traiter comme dans le user ressource
 
-
-		if(isset($post['id']) && isset($post['nb']) && isset($post['bases']))
+		foreach($post as $row_command_txt => $nb)
 		{
+			if($nb != '0')
+			{
+				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 
+				user_ressources::maj_product_list_nb($match[2], $nb, $match[1], '+', $user);
+				//match 1 contient la base utilisée, match 2 l'id du prod	
+			}
+			
 		}
 
+		//ok ça ajoute ne base mais ne déduit pas les flacons et les pipttes voir
 		//if(!user_ressources::maj_product_list_nb("45", "10", "2080", '+', $user))
 		//	return 0;
 

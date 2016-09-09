@@ -167,7 +167,6 @@ Class user extends all_query
 			}
 			unset($res_fx);
 
-
 		}
 		else
 		{

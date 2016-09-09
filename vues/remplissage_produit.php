@@ -22,7 +22,8 @@
 			</div>
 
 			<div style='font-size:15px; color:green' class="col-lg-12 form-group">
-				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <?= min($array_nb_product_creable); ?> Produits (tout dépends la bases utilisée)</label>
+				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <strong style="font-size:20px;"><?= min($array_nb_product_creable); ?></strong>
+				 Produits (tout dépends la bases utilisée) et les autres ressources nécessaires.</label>
 			</div>
 
 

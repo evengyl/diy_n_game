@@ -2,35 +2,32 @@
 Class user_ressources extends user
 {
 	public $time_now;
+
 	public function __construct($user)
 	{
-		if(Config::$is_connect == 1)
+		$this->time_now = date("U");
+
+		//si je fait comme ça avec le user et le break je ne for que le user infos comme voulu !! <3
+		//car le user infos c'est le premier objet set dans le user
+		if(isset($user))
 		{
-			$this->time_now = date("U");
-
-			//si je fait comme ça avec le user et le break je ne for que le user infos comme voulu !! <3
-			//car le user infos c'est le premier objet set dans le user
-			if(isset($user))
+			foreach($user as $row_user)
 			{
-				foreach($user as $row_user)
-				{
-					$this->calc_diff_time($row_user);
-					$this->maj_time_last_connect_in_db($row_user);
+				$this->calc_diff_time($row_user);
+				$this->maj_time_last_connect_in_db($row_user);
 
-					//calcule combien de ressource le joueur gagne en seconde;
-					$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($user->champ_glycerine->production);
-					$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($user->usine_propylene->production);
+				//calcule combien de ressource le joueur gagne en seconde;
+				$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($user->champ_glycerine->production);
+				$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($user->usine_propylene->production);
 
-					//calcule combien il en a gagner depuis la derniere mise a jours des ressources
-					$this->calc_ressource_win($row_user);
-					$this->maj_ressource_in_db($row_user);
-					break;
-				}
-
-				//calcule le nombre de produits que le user à au total
-				$user->user_infos->nb_product_total = $this->calcul_nb_product_total($user);
+				//calcule combien il en a gagner depuis la derniere mise a jours des ressources
+				$this->calc_ressource_win($row_user);
+				$this->maj_ressource_in_db($row_user);
+				break;
 			}
-	
+
+			//calcule le nombre de produits que le user à au total
+			$this->calcul_nb_product_total($user);
 		}
 	}
 
@@ -242,50 +239,60 @@ Class user_ressources extends user
 		{
 			//mtn que l'on a la liste des product dispo de la table de l'user, on traie pour avoir un array propre id nb
 			//on enleve la derniere virgule de la table
-			$user->product->list_product = substr($user->product->list_product, 0, -1);
-			$user->product->list_product = array(explode(",", $user->product->list_product));
+			$tmp_user_product_bsd = new StdClass;
+			$tmp_user_product_bsd->list_product = new stdClass;
+			$tmp_user_product_bsd->list_product = $user->product->list_product;
+
+
+			$tmp_user_product_bsd->list_product = substr($tmp_user_product_bsd->list_product, 0, -1);
+			$tmp_user_product_bsd->list_product = array(explode(",", $tmp_user_product_bsd->list_product));
 
 			//un petit foreach sur le preg match pour récuper un tab propre avec les id et les nb
 			//et calcule du nb total de product fini
 			$array_final_id_nb = array();
 			$total_nb_product = 0;
-			foreach($user->product->list_product[0] as $row_product)
+			foreach($tmp_user_product_bsd->list_product[0] as $row_product)
 			{
 				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
 				$total_nb_product += $match[1];
 			}
-
-			return $total_nb_product;
+			$user->user_infos->nb_product_total = $total_nb_product;
 		}
 		else
 		{
-			//il n'y aucun produit en stock
-			return 0;
+			$user->user_infos->nb_product_total = '0';
 		}
 	}
 
 	public function maj_product_list_nb($id, $nb, $bases, $ajout_or_delete = '+', $user)
 	{
-		affiche_pre($ajout_or_delete);
-
 
 		$tab_product_recept = array();
-		
 		$tab_product_recept[0]["nb"] = $nb;
 		$tab_product_recept[0]["id"] = $id;
 		$tab_product_recept[0]["bases"] = $bases;
 
-		affiche_pre($tab_product_recept);
+
+
 
 		$tab_product_in_stock = array();
 
-		if($user->product->list_product != "")
+		// mais on en crée une copie pour pas foutr en l'air les autre fonction
+		$tmp_user_product_bsd = new StdClass;
+		$tmp_user_product_bsd->list_product = new stdClass;
+		$tmp_user_product_bsd->list_product = $user->product->list_product;
+
+
+
+		if($tmp_user_product_bsd->list_product != "")
 		{
-			$user->product->list_product = substr($user->product->list_product, 0, -1);
-			$user->product->list_product = array(explode(",", $user->product->list_product));
+			//on explode le string de la base de données des product pour travailler
+			$tmp_user_product_bsd->list_product = substr($tmp_user_product_bsd->list_product, 0, -1);
+			$tmp_user_product_bsd->list_product = array(explode(",", $tmp_user_product_bsd->list_product));
 
 			$i = 0;
-			foreach($user->product->list_product[0] as $row_product)
+			//on forceah l'explode pour avoir un tab propre avec un matching
+			foreach($tmp_user_product_bsd->list_product[0] as $row_product)
 			{
 				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
 				$tab_product_in_stock[$i]["nb"] = $match[1];
@@ -294,7 +301,6 @@ Class user_ressources extends user
 				$i++;
 			}
 		}
-
 
 		if($ajout_or_delete == '+')
 		{
@@ -311,6 +317,7 @@ Class user_ressources extends user
 							//on ajoute simplement a NB le nouveau nombre
 							$tab_product_in_stock[$key]['nb'] += $tab_product_recept[0]['nb'];
 							$ajout = 1;
+							break;
 						}
 						else
 						{
@@ -320,6 +327,7 @@ Class user_ressources extends user
 					}
 					else
 					{
+						$ajout = 0;
 						continue;
 					}
 				}
@@ -373,8 +381,6 @@ Class user_ressources extends user
 		{
 			$new_string_product_for_bsd .= "(". implode(":", $new_row_product) ."),";
 		}
-
-
 		//on met a jour la base de données avec le noveau string des products
 		$req_sql = new stdClass;
 		$req_sql->ctx = new stdClass;
@@ -383,5 +389,6 @@ Class user_ressources extends user
 		$req_sql->where = "id_user = ".$user->user_infos->id;
 		$this->update($req_sql);
 		unset($req_sql);
+
 	}
 }

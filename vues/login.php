@@ -12,7 +12,7 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 else
 {?>
 
-	<div class="col-lg-12 col-without-padding connect-form" style="margin-top:25px;">	
+	<div class="col-lg-12 col-without-padding connect-form">	
 		<div class="col-lg-12" style="padding:15px;">
 			Vous connecter vous permettra d'accèder au jeu, 
 			pour rappel, ce petit jeu est entièrement conçu à la main sans programmes ni personnes extérieur,</br>
