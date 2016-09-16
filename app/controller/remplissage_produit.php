@@ -41,6 +41,7 @@ Class remplissage_produit extends base_module
 				//caculer le prix coutant en tout , verifier si argnet ok , si oui on passe a la suite
 				//faire un foreach sur le tab appeler la fonction d'ajout ou de suprrsion a chaque fois
 				unset($_POST);
+				$user->get_variable_user();
 
 			}
 		}
@@ -200,19 +201,19 @@ Class remplissage_produit extends base_module
 
 		foreach($post as $row_command_txt => $nb)
 		{
-			if($nb != '0')
+			if((int)$nb != 0)
 			{
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 
 				user_ressources::maj_product_list_nb($match[2], $nb, $match[1], '+', $user);
-				//match 1 contient la base utilisée, match 2 l'id du prod	
+					//match 1 contient la base utilisée, match 2 l'id du prod	
+
+				//partie traitement du nombre pour les pipette et les flacons
+
+				user_ressources::maj_pipette($nb * Config::$nb_pipette_per_product, "-", $user);
+				user_ressources::maj_flacon($nb * Config::$nb_flacon_per_product, "-", $user);
+				
 			}
-			
 		}
-
-		//ok ça ajoute ne base mais ne déduit pas les flacons et les pipttes voir
-		//if(!user_ressources::maj_product_list_nb("45", "10", "2080", '+', $user))
-		//	return 0;
-
 	}
 }

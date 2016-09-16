@@ -91,7 +91,7 @@ Class sign_up extends base_module
 			}
 			else
 			{
-				$error[] = "Attention, Le clients à tenter un priratage";
+				$_SESSION['error'] = "Attention, Le clients à tenter un priratage";
 				return 0;
 			}
 

@@ -144,10 +144,7 @@ class all_query extends _db_connect
 	}
 
 
-    public function query_simple($query)
-    {
-        parent::query($query);
-    }
+
 
 	public function other_query($req_sql)
 	{
@@ -186,6 +183,10 @@ class all_query extends _db_connect
 		$this->db_link = parent::get_db_link();
 	}
 
+    public function query_simple($query)
+    {
+        parent::query($query);
+    }
 
 
 	public function generate_form_unpdate($table_needed, $id)
@@ -208,7 +209,7 @@ class all_query extends _db_connect
 		                                echo  'has-error';
 		                            else
 	    	                            echo 'has-success';
-        	                    ?>" style="margin-right:30px;">
+        	                    	?>" style="margin-right:30px;">
 
 	                                <div class="input-group">
 	                                    <div style="width: 200px;" class="input-group-addon"><?php echo $key ?></div>
@@ -227,9 +228,7 @@ class all_query extends _db_connect
 	            </div>
 	        </div>
 	    </div><?
-		
 	}
-
 
 
 	public function generate_form_insert_into($table_needed)
@@ -251,7 +250,7 @@ class all_query extends _db_connect
 		                                echo  'has-error';
 		                            else
 	    	                            echo 'has-success';
-        	                    ?>" style="margin-right:30px;">
+        	                    	?>" style="margin-right:30px;">
 
 	                                <div class="input-group">
 	                                    <div style="width: 200px;" class="input-group-addon"><?php echo $key ?></div>
@@ -269,10 +268,7 @@ class all_query extends _db_connect
 	            </div>
 	        </div>
 	    </div><?
-		
 	}
-
-
 }
 
 ?>

@@ -8,7 +8,12 @@ Class social_services extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);
 
-		$res_news = $this->other_query("SELECT * FROM news WHERE visible=1");
+		$req_news = new StdClass();
+		$req_news->table = "news";
+		$req_news->where = "visible = 1";
+		$req_news->var = "*";
+		$res_news = $this->select($req_news);
+		
 		if(!empty($res_news))
 		{
 			foreach($res_news as $row_news)

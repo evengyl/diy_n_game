@@ -391,4 +391,95 @@ Class user_ressources extends user
 		unset($req_sql);
 
 	}
+
+
+	public function maj_pipette($nb, $add_or_del = "-", $user)
+	{
+		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
+		if($add_or_del == "-")
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->pipette = $user->hardware->pipette - $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+
+		}
+		else
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->pipette = $user->hardware->pipette + $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+		}
+	}
+
+	public function maj_flacon($nb, $add_or_del = "-", $user)
+	{
+		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
+		if($add_or_del == "-")
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->flacon = $user->hardware->flacon - $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+
+		}
+		else
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->flacon = $user->hardware->flacon + $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+		}
+	}
+
+	public function maj_frigo($nb, $add_or_del = "-", $user)
+	{
+		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
+		if($add_or_del == "-")
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->frigo = $user->hardware->frigo - $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+
+		}
+		else
+		{
+			$nb = (int) $nb;
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->frigo = $user->hardware->frigo + $nb;
+			$req_sql->table = "hardware";
+			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$this->update($req_sql);
+			unset($req_sql);
+		}
+	}
 }

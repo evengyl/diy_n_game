@@ -65,7 +65,7 @@ Class my_account extends base_module
 			}
 			else
 			{
-				$error[] = "Attention, Le clients à tenter un priratage";
+				$_SESSION['error'] = "Attention, Le clients à tenter un priratage";
 				return 0;
 			}
 

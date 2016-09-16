@@ -9,7 +9,7 @@ Class buy_hardware extends base_module
 
 		if($_POST != "")
 		{
-			$this->traitement_post($_POST);
+			$this->traitement_post($_POST, $user);
 			$user->get_variable_user();
 		}
 			
@@ -17,35 +17,35 @@ Class buy_hardware extends base_module
 		return $this->assign_var('user', $user)->render();
 	}
 
-	public function traitement_post($post)
+	public function traitement_post($post, $user)
 	{
 		if(isset($post['buy_frigo_1']))
-			$this->receive_nb_frigo(1);
+			$this->receive_nb_frigo(1, $user);
 
 		if(isset($post['buy_frigo_10']))
-			$this->receive_nb_frigo(10);
+			$this->receive_nb_frigo(10, $user);
 
 		if(isset($post['buy_pipette_1']))
-			$this->receive_nb_pipette(1);
+			$this->receive_nb_pipette(1, $user);
 
 		if(isset($post['buy_pipette_10']))
-			$this->receive_nb_pipette(10);
+			$this->receive_nb_pipette(10, $user);
 
 		if(isset($post['buy_pipette_100']))
-			$this->receive_nb_pipette(100);
+			$this->receive_nb_pipette(100, $user);
 
 		if(isset($post['buy_flacon_10']))
-			$this->receive_nb_flacon(10);
+			$this->receive_nb_flacon(10, $user);
 
 		if(isset($post['buy_flacon_100']))
-			$this->receive_nb_flacon(100);
+			$this->receive_nb_flacon(100, $user);
 
 		if(isset($post['buy_flacon_1000']))
-			$this->receive_nb_flacon(1000);
+			$this->receive_nb_flacon(1000, $user);
 
 	}
 
-	public function receive_nb_frigo($nb_to_buy)
+	public function receive_nb_frigo($nb_to_buy, $user)
 	{
 		if($nb_to_buy == 1)
 			(int)$total_price = Config::$price_frigo;
@@ -55,12 +55,12 @@ Class buy_hardware extends base_module
 		if($this->verifiy_argent_user($total_price))
 		{
 			$this->set_argent_user($total_price);
-			$this->ajout_frigo_to_bsd($nb_to_buy);
+			user_ressources::maj_frigo($nb_to_buy, "+", $user);
 		}
 
 	}
 
-	public function receive_nb_pipette($nb_to_buy)
+	public function receive_nb_pipette($nb_to_buy, $user)
 	{
 		if($nb_to_buy == 1)
 			(int)$total_price = Config::$price_pipette;
@@ -72,11 +72,11 @@ Class buy_hardware extends base_module
 		if($this->verifiy_argent_user($total_price))
 		{
 			$this->set_argent_user($total_price);
-			$this->ajout_pipette_to_bsd($nb_to_buy);
+			user_ressources::maj_pipette($nb_to_buy, "+", $user);
 		}
 	}
 
-	public function receive_nb_flacon($nb_to_buy)
+	public function receive_nb_flacon($nb_to_buy, $user)
 	{
 		if($nb_to_buy == 10)
 			(int)$total_price = Config::$price_flacon_10;
@@ -88,43 +88,7 @@ Class buy_hardware extends base_module
 		if($this->verifiy_argent_user($total_price))
 		{
 			$this->set_argent_user($total_price);
-			$this->ajout_flacon_to_bsd($nb_to_buy);
+			user_ressources::maj_flacon($nb_to_buy, "+", $user);
 		}
 	}
-
-	public function ajout_frigo_to_bsd($nb)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "hardware";
-		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->frigo = (int)$this->user_obj->hardware->frigo + (int)$nb;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function ajout_pipette_to_bsd($nb)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "hardware";
-		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->pipette = (int)$this->user_obj->hardware->pipette + (int)$nb;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-
-	public function ajout_flacon_to_bsd($nb)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "hardware";
-		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->flacon = (int)$this->user_obj->hardware->flacon + (int)$nb;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-
 }

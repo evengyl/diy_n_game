@@ -1,5 +1,4 @@
 <?php
-
 class parser
 {
 	private $module_tpl_name;
@@ -9,80 +8,59 @@ class parser
 	private $is_connect;
 
 
-	public function __construct(&$user)
-	{
-		$this->user = &$user;
-	}
-
-	public function parser_main($page)
+	public function parser_main($page, &$user = "")
 	{
 
-		global $error;
-		//parser la page complète a la recherche des __TPL_bla__ et __MOD_bla__	
-		//__MOD_([a-z_]+)\(([^)]*)\)__
 		if(!empty($page))
 		{
+			if(!empty($user))
+				$this->user = $user;
 
 			if(preg_match('/__TPL0_[a-z_]+__/', $page, $match))
-			{
 				$page = $this->parse_template_init($match, $page);
-			}
+
 			else if(preg_match('/__MOD0_[a-z_]+__/', $page, $match))
-			{
 				$page = $this->parse_module_init($match, $page);
-			}
+
 			else if(preg_match('/__MOD0_[a-z_]+\([a-zA-Z0-9éèçàê_\' ]*\)__/', $page, $match))
-			{
 				$page = $this->parse_module_init_var($match, $page);
-			}
+
 			else
 			{
 				if(preg_match('/__TPL_[a-z_]+__/', $page, $match))
-				{
 					$page = $this->parse_template($match, $page);
-				}
+
 				else if(preg_match('/__MOD_[a-z_]+__/', $page, $match))
-				{
 					$page = $this->parse_module($match, $page);
-				}
+
 				else if(preg_match('/__MOD_[a-z_]+\([a-zA-Z0-9éèçàê_\' ]*\)__/', $page, $match))
-				{
 					$page = $this->parse_module_var($match, $page);
-				}
+
 				else
 				{
 					if(preg_match('/__TPL2_[a-z_]+__/', $page, $match))
-					{
 						$page = $this->parse_template_secondaire($match, $page);
-					}
+
 					else if(preg_match('/__MOD2_[a-z_]+__/', $page, $match))
-					{
 						$page = $this->parse_module_secondaire($match, $page);
-					}
+
 					else if(preg_match('/__MOD2_[a-z_]+\([a-zA-Z0-9éèçàê_\' ]*\)__/', $page, $match))
-					{
 						$page = $this->parse_module_secondaire_var($match, $page);
-					}
+
 					else
-					{
 						return $page;	
-					}
-					
 				}
 			}
 		}
 		else
-			$error[] = "Il y a un problème dans le parser Parser_main() la page n'est pas arrivée au parseur";
+			$_SESSION['error'] = "Il y a un problème dans le parser Parser_main() la page n'est pas arrivée au parseur";
 
 		return $page;
-		
 	}
 
 
 	private function parse_template($match, $page)
 	{
-		global $error;
-
 		$matching_temp = str_replace(array("__TPL_","__"), "", $match[0]);
 		$path_template = '../vues/'.$matching_temp.'.php';
 		$tpl_content ="";
@@ -95,23 +73,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le Template : '".$path_template. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le Template : '".$path_template. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $tpl_content, $page);
 
-
 		return $this->parser_main($page);
-
-
-		 // permet de descendre en profondeur des templates sera recusif sur le callback du parseur main tant qu'il en détectera dans le code
 	}
+
 
 	private function parse_template_secondaire($match, $page)
 	{
-		global $error;
-
 		$matching_temp = str_replace(array("__TPL2_","__"), "", $match[0]);
 		$path_template = '../vues/'.$matching_temp.'.php';
 		$tpl_content ="";
@@ -124,26 +97,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le Template : '".$path_template. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le Template : '".$path_template. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $tpl_content, $page);
 
-
 		return $this->parser_main($page);
-
-
-		 // permet de descendre en profondeur des templates sera recusif sur le callback du parseur main tant qu'il en détectera dans le code
 	}
-
-
 
 
 	private function parse_module($match, $page)
 	{
-		global $error;
-
 		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);				
 
 		if($this->module_tpl_name != "")
@@ -153,21 +118,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
 
-
 		return $this->parser_main($page);			
-			 				
 	}
+
 
 	private function parse_module_secondaire($match, $page)
 	{
-		global $error;
-
 		$this->module_tpl_name = str_replace(array("__MOD2_","__"), "", $match[0]);				
 
 		if($this->module_tpl_name != "")
@@ -177,24 +139,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
 
-
 		return $this->parser_main($page);			
-			 				
 	}
 
 
 	private function parse_module_var($match, $page)
 	{
-		global $error;
-
-//		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);	
-//		affiche_pre($module_tpl_name);
 		$var_in_module_name = stristr($match[0], "(");
 		$var_in_module_name = stristr($var_in_module_name, ")", true);
 		$var_in_module_name = substr($var_in_module_name, 1);
@@ -211,21 +167,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
+
 		return $this->parser_main($page);			
-				 				
 	}
+
 
 	private function parse_module_secondaire_var($match, $page)
 	{
-		global $error;
-
-//		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);	
-//		affiche_pre($module_tpl_name);
 		$var_in_module_name = stristr($match[0], "(");
 		$var_in_module_name = stristr($var_in_module_name, ")", true);
 		$var_in_module_name = substr($var_in_module_name, 1);
@@ -242,19 +195,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "' à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
+
 		return $this->parser_main($page);			
-				 				
 	}
+
 
 	private function parse_template_init($match, $page)
 	{
-		global $error;
-
 		$matching_temp = str_replace(array("__TPL0_","__"), "", $match[0]);
 		$path_template = '../vues/'.$matching_temp.'.php';
 		$tpl_content ="";
@@ -267,25 +219,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le Template : '".$path_template. "' primaire à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le Template : '".$path_template. "' primaire à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $tpl_content, $page);
 
-
 		return $this->parser_main($page);
-
-
-		 // permet de descendre en profondeur des templates sera recusif sur le callback du parseur main tant qu'il en détectera dans le code
 	}
 
 
 	private function parse_module_init($match, $page)
 	{
-
-		global $error;
-
 		$this->module_tpl_name = str_replace(array("__MOD0_","__"), "", $match[0]);				
 
 		if($this->module_tpl_name != "")
@@ -295,23 +240,18 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "'primaire à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "'primaire à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
 
-
 		return $this->parser_main($page);			
-			 				
 	}
+
 
 	private function parse_module_init_var($match, $page)
 	{
-		global $error;
-
-//		$this->module_tpl_name = str_replace(array("__MOD_","__"), "", $match[0]);	
-//		affiche_pre($module_tpl_name);
 		$var_in_module_name = stristr($match[0], "(");
 		$var_in_module_name = stristr($var_in_module_name, ")", true);
 		$var_in_module_name = substr($var_in_module_name, 1);
@@ -328,13 +268,13 @@ class parser
 		}
 		else
 		{
-			$error[] = "Le module : '".$path_module. "'primaire à été demander mais n'existe pas, le fichier n'est pas créé";
+			$_SESSION['error'] = "Le module : '".$path_module. "'primaire à été demander mais n'existe pas, le fichier n'est pas créé";
 			return '';
 		}
 
 		$page = str_replace($match[0], $this->rendu_module, $page);
+
 		return $this->parser_main($page);			
-				 				
 	}
 }
 ?>

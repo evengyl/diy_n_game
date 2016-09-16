@@ -36,7 +36,6 @@ Class user extends all_query
 
 	public function get_variable_user()
 	{
-		global $error;
 
 		if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
 		{
@@ -53,6 +52,8 @@ Class user extends all_query
 				$this->user_infos->$key = $values;			
 			}
 			unset($res_fx);
+		
+
 
 
 			$this->hardware = new stdClass();
@@ -170,7 +171,7 @@ Class user extends all_query
 		}
 		else
 		{
-			$error[] = "Voir SESSION[] : Il y a une soucis avec la variable SESSION au niveau de l'user ";
+			$_SESSION['error'] = "Voir SESSION[] : Il y a une soucis avec la variable SESSION au niveau de l'user ";
 		}
 		
 	}

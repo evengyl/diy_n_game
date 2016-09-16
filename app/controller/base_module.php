@@ -20,13 +20,15 @@ Class base_module extends all_query
 	{
 		if($module_tpl_name != "")
 		{
-			$this->user_obj = &$user;
 			$this->template_name = $module_tpl_name;
-			$this->set_template_path($this->template_name);		
-			$this->convert_sec_in_time_real();	
+			$this->set_template_path($this->template_name);	
 
+			if(Config::$is_connect)
+			{	
+				$this->user_obj = &$user;
+				$this->convert_sec_in_time_real();	
+			}
 		}
-		
 	}
 
 	public function assign_var($var_name , $value)
@@ -43,7 +45,7 @@ Class base_module extends all_query
         return $this;
 	}
 
-
+//partie setter du rendu
 	public function render()
 	{
 		ob_start();
@@ -79,6 +81,7 @@ Class base_module extends all_query
 	}
 
 
+//partie fonction utile de base
 
 
 	public function set_time_finish($name_batiment)

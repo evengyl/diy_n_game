@@ -111,6 +111,7 @@ class Config
     public static $nb_product_per_frigo = 1000;
     public static $nb_product_per_frigo_10 = 10000;
 
+
     public static $price_pipette = 0.5;
     public static $price_pipette_10 = 4.5;
     public static $price_pipette_100 = 40;
@@ -126,6 +127,8 @@ class Config
 
     //creation de produit
     public static $price_for_un_product = 2;
+    public static $nb_pipette_per_product = 1;
+    public static $nb_flacon_per_product = 1;
     //end
 
     /* fin des var utilisée par les controller */

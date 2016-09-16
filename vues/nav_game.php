@@ -74,6 +74,12 @@
 						</a>
 					</li>
 
+					<li class="presentation cl-effect-14">
+						<a style="color:white;" href="?page=stockage">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Stock
+						</a>
+					</li>
+
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#">

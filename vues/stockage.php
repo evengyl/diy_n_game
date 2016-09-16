@@ -8,18 +8,10 @@
 				<span>Dans Diy_n_game, Pour créer et vous aidez à conçevoir toujours plus de produits, des personnes sont la pour rechercher des améliorations.
 					Celles-ci permette de payer moins chère ou que votre coup en ressources soit réduits, ainsi que les temps des recherches des arômes par exemple ect...</span>
 			</div>
-			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_0']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error_0']))?'<label for="exampleInputPassword1">'.$_SESSION['error_0'].'</label>':''; ?>
+			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
+				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
 			</div>
-			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_1']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error_1']))?'<label for="exampleInputPassword1">'.$_SESSION['error_1'].'</label>':''; ?>
-			</div>
-			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_2']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error_2']))?'<label for="exampleInputPassword1">'.$_SESSION['error_2'].'</label>':''; ?>
-			</div>
-			<div style='font-size:15px; color:green' class="col-lg-12 form-group <?php echo (isset($_SESSION['error_3']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error_3']))?'<label for="exampleInputPassword1">'.$_SESSION['error_3'].'</label>':''; ?>
-			</div>
+			
 
 			<div style='font-size:15px; color:green' class="col-lg-12 form-group">
 				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <strong style="font-size:20px;"><?= min($array_nb_product_creable); ?></strong>
