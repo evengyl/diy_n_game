@@ -37,7 +37,7 @@ Class remplissage_produit extends base_module
 			if($_POST['secure'] == "71414242")
 			{
 				//va retourer un tab comme les user ressources
-				$this->traitement_post($_POST, $user);
+				$this->traitement_commande_de_produit_user($_POST, $user);
 				//caculer le prix coutant en tout , verifier si argnet ok , si oui on passe a la suite
 				//faire un foreach sur le tab appeler la fonction d'ajout ou de suprrsion a chaque fois
 				unset($_POST);
@@ -192,7 +192,7 @@ Class remplissage_produit extends base_module
 
 
 
-	private function traitement_post($post, $user)
+	private function traitement_commande_de_produit_user($post, $user)
 	{
 
 		unset($post['secure']);
@@ -205,7 +205,7 @@ Class remplissage_produit extends base_module
 			{
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 
-				user_ressources::maj_product_list_nb($match[2], $nb, $match[1], '+', $user);
+				user_ressources::maj_product_list_in_bsd($match[2], $nb, $match[1], '+', $user);
 					//match 1 contient la base utilisée, match 2 l'id du prod	
 
 				//partie traitement du nombre pour les pipette et les flacons

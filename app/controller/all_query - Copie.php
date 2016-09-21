@@ -3,7 +3,7 @@
 #	Createur : Evengyl
 #	Date de creation : 29-09-2014
 #	Version : 1.2
-#	Date de modif : 20-09-2016
+#	Date de modif : 29-10-2014
 ##########################################
 
 class all_query extends _db_connect
@@ -17,97 +17,147 @@ class all_query extends _db_connect
 
 		if(is_object($req_sql))
 		{
-
+			//partie traitement des var à select
 			if(isset($req_sql->var) && $req_sql->var != "")
-				$construct_req .= "SELECT ".$req_sql->var." ";
-			else
-				$construct_req .= "SELECT * ";
-
-
-			if(isset($req_sql->table) && $req_sql->table != "")
-				$construct_req .= "FROM ".$req_sql->table." ";
-			else
-				return 0;
-
-
-			if(isset($req_sql->where) && $req_sql->where != "")
-				$construct_req .= "WHERE ".$req_sql->where." ";	
-			else
-				$construct_req .= "WHERE 1 ";	
-
-
-			if(isset($req_sql->order) && $req_sql->order != "")
-				$construct_req .= "ORDER BY ".$req_sql->order." ";	
-			else
-				$construct_req .= "ORDER BY id ASC";	
-
-
-			$i = 0;
-
-			while($row = parent::fetch_object($construct_req))
 			{
-				$res_fx[$i] = $row;
-				$i++;
+				$construct_req .= "SELECT ".$req_sql->var." ";
+			}
+			else
+			{
+				$construct_req .= "SELECT * ";
 			}
 
-			unset($construct_req); //vide le buffer de memoire $req_sql pour liberer de la place 
-			if(!isset($res_fx))
-				return '';
-			else 
-				return $res_fx;		
+			
+			if(isset($req_sql->table) && $req_sql->table != "")
+			{
+				//partie traitement de la ou des tables
+				if(strpos($req_sql->table, ','))
+				{
+					preg_match("/([a-zA-Z_-]+)[ ]*([,])[ ]*([a-zA-Z_-]+)/", $req_sql->table, $match);
+					unset($match[0]);
+
+					$construct_req .= "FROM ";
+
+					//on compte le nombre d'élément pour savoir le nombre de virgule qu'il va falloir mettre nombre de table -1
+					$i = count($match)-1;
+
+					foreach($match as $row_table_from)
+					{
+						if($i > 0)
+							$construct_req .= $row_table_from .", ";	
+						else
+							$construct_req .= $row_table_from ." ";	
+						$i--;
+					}
+					//on indique pour la suite du script qu'il s'agit d'une requete multi table
+					$multi_table = true;
+				}
+				else
+				{
+					$construct_req .= "FROM ". $req_sql->table ." ";
+					$multi_table = false;
+				}
+
+
+				if($multi_table)
+				{
+					if(isset($req_sql->where) && $req_sql->where != "")
+					{
+						$construct_req .= "WHERE ";	
+
+						$i = count($match)-1;
+
+						foreach($match as $row_table_from)
+						{
+							if($i > 0)
+								$construct_req .= $row_table_from.".".$req_sql->where ." AND ";	
+							else
+								$construct_req .= $row_table_from.".".$req_sql->where ." ";	
+							$i--;
+						}
+					}
+				}
+				else
+				{
+					if(isset($req_sql->where) && $req_sql->where != "")
+					{
+						$construct_req .= "WHERE ".$req_sql->where." ";	
+					}
+					else
+					{
+						return 0;
+					}
+				}
+
+
+				if(isset($req_sql->order) && $req_sql->order != "")
+				{
+					$construct_req .= "ORDER BY ".$req_sql->order." ";	
+				}
+
+				$i = 0;
+				affiche_pre($construct_req);
+
+				while($row = parent::fetch_object($construct_req))
+				{
+					$res_fx[$i] = $row;
+					$i++;
+				}
+
+				unset($construct_req); //vide le buffer de memoire $req_sql pour liberer de la place 
+				if(!isset($res_fx))
+					return '';
+				else 
+					return $res_fx;	
+
+			}
+			else
+			{
+				return 0;
+			}
+
+
+	
+			
 		}
 	}
 
 
 	public function insert_into($res_sql) // opérationnel et fonctionnel , reste à tester sur la validation
 	{
-		$this->set_db_link();
 
-		$toute_les_colonnes = "";
-		$toute_les_valeurs = "";
+		$key_all = "";
+		$value_all = "";
 
-		foreach($res_sql->ctx as $nom_colonne => $valeur)
+		foreach($res_sql->ctx as $key => $values)
 		{			
-			$valeur = mysqli_real_escape_string($this->db_link, $valeur);
-
-			if($nom_colonne == "id")
-				$valeur = intval($valeur);
-
-			$toute_les_colonnes = $toute_les_colonnes.', '.$nom_colonne;
-			$toute_les_valeurs = $toute_les_valeurs.', "'.$valeur.'"';			
+			$key_all = $key_all.', '.$key;
+			$value_all = $value_all.', "'.$values.'"';			
 		}
 
-		$toute_les_colonnes = substr($toute_les_colonnes,2);
+		$key_all = substr($key_all,2);
 
-		$toute_les_valeurs = substr($toute_les_valeurs,2);
-		$req_sql = "INSERT INTO ".$res_sql->table." (".$toute_les_colonnes.") VALUES (".$toute_les_valeurs.")";
+		$value_all = substr($value_all,2);
+		$req_sql = "INSERT INTO ".$res_sql->table." (".$key_all.") VALUES (".$value_all.")";
 
 		parent::query($req_sql);
 		unset($_POST);
+		//echo '<p style="font-size:17px; padding:10px; text-align:center;" class="bg-success">Ligne Ajoutée !</p>';
 
 	}
 
-
-	public function update($object)
+	public function update($object) // en test et evolution
 	{
 		$set_all = "";
-
-		$this->set_db_link();
 
 		if(is_object($object->ctx))
 		{	
 			foreach($object->ctx as $key => $values)
 			{
-				$values = mysqli_real_escape_string($this->db_link, $values);
-
-				if($key == "id")
-					$values = intval($values);
-
 				$set_all = $set_all.', '.$key.' = "'.$values.'"';				
 			}
 		
 			$set_all = substr($set_all,2);
-
 			if(isset($object->where))
 			{				
 				if($object->where == "" OR $object->where == " ")

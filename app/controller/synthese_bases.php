@@ -11,16 +11,19 @@ Class synthese_bases extends base_module
 	public $nb_to_create = array();
 
 
+
 	public function __construct($module_tpl_name, &$user)
 	{	
+
 		parent::__construct($module_tpl_name, $user);
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
-		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8);
-		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5);
-		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2);
-		$this->nb_to_create[1000] = $this->nb_bases(1,1);
+		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8, $user);
+		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5, $user);
+		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2, $user);
+		$this->nb_to_create[1000] = $this->nb_bases(1,0, $user);
+
 
 		foreach($this->nb_to_create as $key => $values)
 		{
@@ -32,15 +35,15 @@ Class synthese_bases extends base_module
 		if(isset($_POST['convert_all_in_littre']))
 		{
 			$this->convert_all_ressource_in_littre($_POST['to_convert']);
-			$user->get_variable_user();
 		}
 
 		if(isset($_POST['create_bases'])) 
 		{
 			$this->recept_form_with_bases_to_create($_POST);
-			$user->get_variable_user();
 		}
 
+
+		$user->get_variable_user();
 		return $this->assign_var("nb_to_create", $this->nb_to_create)->assign_var("user", $user)->render();
 	}
 
@@ -231,11 +234,16 @@ Class synthese_bases extends base_module
 
 
 
-	public function nb_bases($dosage_vg = 1, $dosage_pg = 1)
+	public function nb_bases($dosage_vg = 1, $dosage_pg = 1, $user)
 	{
-		$nb_vg = floor($this->user_obj->user_infos->litter_vg / $dosage_vg);
+		$nb_vg = intval(floor($this->user_obj->user_infos->litter_vg / $dosage_vg));
 
-		$nb_pg = floor($this->user_obj->user_infos->litter_pg / $dosage_pg);
+		if($dosage_pg != 0)
+			$nb_pg = intval(floor($this->user_obj->user_infos->litter_pg / $dosage_pg));
+		else
+			$nb_pg = 0;
+
+
 
 		if($nb_vg > $nb_pg)
 			$nb_ok = $nb_pg;
@@ -249,35 +257,43 @@ Class synthese_bases extends base_module
 		if($dosage_vg == 1) //donc 100%
 			$nb_ok = $nb_vg;
 
+			//zone de test
+			$prix_vingt_quatre_vingt = Config::$prix_vingt_quatre_vingt;
+			$prix_cinquante_cinquante = Config::$prix_cinquante_cinquante;
+			$prix_quatre_vingt_vingt =  Config::$prix_quatre_vingt_vingt;
+			$prix_cent = Config::$prix_cent;
+
 
 		$argent_user = $this->user_obj->user_infos->argent;
 
 		if($dosage_vg == 0.2 && $dosage_pg == 0.8)
 		{
-			$prix_total_estimation_de_prod = Config::$prix_vingt_quatre_vingt * $nb_ok;
-			$list_price_user = Config::$prix_vingt_quatre_vingt;
+			$prix_total_estimation_de_prod = intval($prix_vingt_quatre_vingt * $nb_ok);
+			$list_price_user = $prix_vingt_quatre_vingt;
 		}
 		else if($dosage_vg == 0.5 && $dosage_pg == 0.5)
 		{
-			$prix_total_estimation_de_prod = Config::$prix_cinquante_cinquante * $nb_ok;
-			$list_price_user = Config::$prix_cinquante_cinquante;
+			$prix_total_estimation_de_prod = intval($prix_cinquante_cinquante * $nb_ok);
+			$list_price_user = $prix_cinquante_cinquante;
 		}
 		else if($dosage_vg == 0.8 && $dosage_pg == 0.2)
 		{
-			$prix_total_estimation_de_prod = Config::$prix_quatre_vingt_vingt * $nb_ok;
-			$list_price_user = Config::$prix_quatre_vingt_vingt;
+			$prix_total_estimation_de_prod = intval($prix_quatre_vingt_vingt * $nb_ok);
+			$list_price_user = $prix_quatre_vingt_vingt;
 		}
-		else if($dosage_vg == 1 && $dosage_pg == 1)
+		else if($dosage_vg == 1 && $dosage_pg == 0)
 		{
-			$prix_total_estimation_de_prod = Config::$prix_cent * $nb_ok;
-			$list_price_user = Config::$prix_cent;
+			$prix_total_estimation_de_prod = intval($prix_cent * $nb_ok);
+			$list_price_user = $prix_cent;
 		}
 		//donne le prix total que couterais toute la création de base dans cette sorte ci
 		// il faut mtn déterminer si le joueur peux tout faire avec
 
 		if($prix_total_estimation_de_prod <= $argent_user)
 			return $nb_ok; // il peux de toute facon tout créer
+			/*
 		else
 			return $nb_ok_after_calcule_argent = floor($argent_user / $list_price_user);
+			*/
 	}
 }

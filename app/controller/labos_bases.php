@@ -9,7 +9,7 @@ Class labos_bases extends base_module
 	{	
 		parent::__construct($module_tpl_name, $user);
 
-		$this->alert_construction_en_cours = $this->check_construction_en_cours($this->name_batiment, $user->labos_bases->prix);	
+		$this->alert_construction_en_cours = user_batiments::check_construction_en_cours($this->name_batiment, $user->labos_bases->prix);	
 
 
 		if($user->user_infos->level_labos_bases == $this->max_level_batiment)
@@ -30,7 +30,7 @@ Class labos_bases extends base_module
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
 					$this->time_finish_construct($user->labos_bases->time_construct);
 
-						$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);	
+						user_batiments::insert_construction_en_cours($this->name_batiment, $this->time_finish);	
 						$this->set_argent_user($user->labos_bases->prix, "-");
 						//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 						$user->get_variable_user();

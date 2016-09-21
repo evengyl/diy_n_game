@@ -19,7 +19,7 @@
 	        	<li><?php echo (isset($_SESSION['level']) && $_SESSION['level'] == '3')?'<a href="?page=tools_admin">Admin</a>' : ''; ?></li>			        
 		        <li><?php echo (!isset($_SESSION['pseudo']))?'<a href="?page=login">Se connecter</a>' : ''; ?></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=game_home">Accès au Jeu</a>' : ''; ?></li>
-		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="#">Classement</a>' : ''; ?></li>
+		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=classement">Classement</a>' : ''; ?></li>
 		        <li><a href="#">Nouveautés</a></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=my_account">Mon compte</a>' : ''; ?></li>
 		        <li><a href="?page=test">Test</a></li>

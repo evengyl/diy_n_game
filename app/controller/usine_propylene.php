@@ -8,7 +8,7 @@ Class usine_propylene extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);
 
-		$this->alert_construction_en_cours = $this->check_construction_en_cours($this->name_batiment, $this->user_obj->usine_propylene->prix);	
+		$this->alert_construction_en_cours = user_batiments::check_construction_en_cours($this->name_batiment, $this->user_obj->usine_propylene->prix);	
 		
 		if(isset($_POST['construct']))
 		{
@@ -21,7 +21,7 @@ Class usine_propylene extends base_module
 				{
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
 					$this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
-					$this->insert_construction_en_cours($this->name_batiment, $this->time_finish);
+					user_batiments::insert_construction_en_cours($this->name_batiment, $this->time_finish);
 					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 					$this->set_argent_user($this->user_obj->usine_propylene->prix, "-");
 					$this->user_obj->get_variable_user();

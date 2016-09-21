@@ -24,7 +24,7 @@ Class labos_update_tools extends base_module
 		//va vérifier si une recherhce est lancée		
 		foreach($this->array_name_search_and_price as $row_name => $row_price)
 		{
-			$this->alert_construction_en_cours = $this->check_update_en_cours($row_name, $row_price);
+			$this->alert_construction_en_cours = user_research_n_update::check_update_en_cours($row_name, $row_price);
 			if($this->alert_construction_en_cours == 1) // si il y a une recherche on interromp la boucle
 				break;
 		}
@@ -40,7 +40,7 @@ Class labos_update_tools extends base_module
 				$this->time_finish_construct(5400);
 				$real_name_search = $name_batiment."_name";
 
-				$this->insert_search_update_en_cours($name_batiment, $this->time_finish, Config::$$real_name_search);
+				user_research_n_update::insert_search_update_en_cours($name_batiment, $this->time_finish, Config::$$real_name_search);
 
 				//$this->set_argent_user($price, "-");
 				$this->user_obj->get_variable_user();

@@ -22,7 +22,6 @@ ob_start();
 //va être appeler a chaque démarage de script page et va checker si le joueur est connecter ou pas.
 $login = new login();
 
-
 if(Config::$is_connect == 1)
 {
 	if(!isset($user))
@@ -32,6 +31,7 @@ if(Config::$is_connect == 1)
 		{
 			new user_ressources($user);
 			new user_batiments($user);
+			new user_research_n_update($user);
 			$user->get_variable_user();
 
 			new set_update_var_global("",$user);

@@ -8,16 +8,6 @@
 				<span>Dans Diy_n_game, Pour créer et vous aidez à conçevoir toujours plus de produits, des personnes sont la pour rechercher des améliorations.
 					Celles-ci permette de payer moins chère ou que votre coup en ressources soit réduits, ainsi que les temps des recherches des arômes par exemple ect...</span>
 			</div>
-			<div style='font-size:15px; color:red' class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
-			</div>
-			
-
-			<div style='font-size:15px; color:green' class="col-lg-12 form-group">
-				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <strong style="font-size:20px;"><?= min($array_nb_product_creable); ?></strong>
-				 Produits (tout dépends la bases utilisée) et les autres ressources nécessaires.</label>
-			</div>
-
 
 			<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
 
@@ -39,23 +29,13 @@
 									<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 										<img src="<?= Config::$path_public.$row_arome->img ?>" style="height:130px;" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 										<div class="caption">
-											<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Nom de l'arome : <?= $row_arome->nom; ?></h3>
+											<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Nom : <?= $row_arome->nom; ?></h3>
 
-											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG</button>
-												<input type="number" name="quantity_2080_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['2080']; ?>" min="0" value="0" class="col-lg-12">
+											<div class="col-lg-12">
+												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>Base : <?= $row_arome->base; ?></button>
 											</div>
-											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG</button>
-												<input type="number" name="quantity_5050_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['5050']; ?>" min="0" value="0" class="col-lg-12">
-											</div>
-											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG</button>
-												<input type="number" name="quantity_8020_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['8020']; ?>" min="0" value="0" class="col-lg-12">
-											</div>
-											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>100% VG</button>
-												<input type="number" name="quantity_1000_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['1000']; ?>" min="0" value="0" class="col-lg-12">
+											<div class="col-lg-12">
+												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>Nombre : <?= $row_arome->nb; ?></button>
 											</div>
 										</div>
 									</div>
@@ -63,9 +43,6 @@
 						}
 
 					}?>
-					<input name='secure' value="71414242" type="hidden">
-					<input value="> > Créer < <" type="submit" class="btn btn-success col-lg-2" style="z-index:10000; position:fixed; top:500px; right:20px; padding:10px 0 10px 0;">
-					<button disabled class="btn btn-primary col-lg-2" style="z-index:10000; position:fixed; top:543px; right:20px; padding:10px 0 10px 0;">Prix par produits : <?= Config::$price_for_un_product; ?>&nbsp;&euro;</button>
 				</form>
 			</div>
 		</div>

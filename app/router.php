@@ -62,6 +62,9 @@ Class router
 			else if($this->route['page'] == 'stockage')
 				$this->is_connect()->assign_bread("Listing des produits en stock")->assign_mod();
 
+			else if($this->route['page'] == 'classement')
+				$this->is_connect()->assign_bread("Classement général des meilleurs shops")->assign_mod();
+
 			else if($this->route['page'] == 'my_account')
 				$this->is_connect()->assign_bread("Mon compte")->assign_mod();
 

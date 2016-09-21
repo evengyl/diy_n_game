@@ -138,7 +138,7 @@ if(isset($_GET['action']))
 		$arome_list->var = "id, marque, nom";
 		$arome_list->order = "marque";
 		$res_sql_arome_list = $this->select($arome_list);
-		$tab_final_arome_acquis_traiter = traitement_array_final_aromes($res_sql_arome_list);
+		$tab_final_arome_acquis_traiter = render_array_final_aromes($res_sql_arome_list);
 
 		?>
 
@@ -179,11 +179,8 @@ if(isset($_GET['action']))
 
 
 
-
-	function traitement_array_final_aromes(&$tab_final_arome_acquis)
+	function render_array_final_aromes($tab_final_arome_acquis)
 	{
-		//astuce pour ne pas avoir un element en moins dans le tableau lors de la premire passe pour inscrire le nom de la marque dans le tab
-
 		$tab_final_arome_acquis_traiter = array();
 		$i=0;
 
@@ -219,4 +216,3 @@ if(isset($_GET['action']))
 		}
 		return $tab_final_arome_acquis_traiter;
 	}
-?>

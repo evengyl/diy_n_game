@@ -20,6 +20,17 @@ function print_pre($var_a_print)
         print_r($var_a_print);
     ?></pre></div><?
 }
+    
+
+    function calcule_test_time($time_start)
+    {
+
+        $time_stop = microtime_float();
+        $time_laps = (float)$time_stop - $time_start;
+
+
+        affiche_pre("Executer en ".(float)$time_laps);
+    }
 
 function microtime_float()
 {

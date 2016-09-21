@@ -26,210 +26,180 @@ Class user extends all_query
 		if(Config::$is_connect == 1)
 		{
 			$this->get_variable_user();
-			$this->set_tab_prod_vg($this->user_infos->level_culture_vg);
-			$this->set_tab_prod_pg($this->user_infos->level_usine_pg);
-			$this->set_tab_labos($this->user_infos->level_labos_bases);
+			$this->calc_diff_time($this->user_infos);
+			$this->maj_time_last_connect_in_db($this->user_infos);
 		}
-
 	}
 
 
 	public function get_variable_user()
 	{
+		if(!isset($this->user_infos))
+			$this->user_infos = new stdClass();	
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->var = "*";
+		$req_sql->where = "login ='".$_SESSION['pseudo']."'";
+		$res_fx = $this->select($req_sql);
 
-		if($_SESSION['pseudo'] != "" || $_SESSION['pseudo'] != " ")
+		foreach($res_fx[0] as $key => $values)
 		{
-			if(!isset($this->user_infos))
-				$this->user_infos = new stdClass();	
-			$req_sql = new stdClass;
-			$req_sql->table = "login";
-			$req_sql->var = "*";
-			$req_sql->where = "login ='".$_SESSION['pseudo']."'";
-			$res_fx = $this->select($req_sql);
+			$this->user_infos->$key = $values;			
+		}
+		unset($res_fx);
+	
 
+
+
+		$this->hardware = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "hardware";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
 			foreach($res_fx[0] as $key => $values)
 			{
-				$this->user_infos->$key = $values;			
+				$this->hardware->$key = $values;
 			}
-			unset($res_fx);
-		
-
-
-
-			$this->hardware = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "hardware";
-			$req_sql->var = "*";
-			$req_sql->where = "id_user = '".$this->user_infos->id."'";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx[0] as $key => $values)
-				{
-					$this->hardware->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-
-			$this->bases = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "bases";
-			$req_sql->var = "*";
-			$req_sql->where = "id_user = '".$this->user_infos->id."'";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx[0] as $key => $values)
-				{
-					if($key == 'id' || $key == 'id_user')
-						continue;
-					$this->bases->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-			$this->amelioration_var_config = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "amelioration_var_config";
-			$req_sql->var = "*";
-			$req_sql->where = "id_user = '".$this->user_infos->id."'";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx[0] as $key => $values)
-				{
-					$this->amelioration_var_config->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-
-			$this->construction = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "construction_en_cours";
-			$req_sql->var = "*";
-			$req_sql->where = "";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx as $key => $values)
-				{
-					$this->construction->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-			$this->update = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "update_en_cours";
-			$req_sql->var = "*";
-			$req_sql->where = "";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx as $key => $values)
-				{
-					$this->update->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-
-			$this->search_arome = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "search_arome";
-			$req_sql->var = "*";
-			$req_sql->where = "id_user = '".$this->user_infos->id."'";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx as $key => $values)
-				{
-					$this->search_arome->$key = $values;
-				}
-			}
-			unset($res_fx);
-
-			$this->product = new stdClass();
-			$req_sql = new stdClass;
-			$req_sql->table = "product";
-			$req_sql->var = "*";
-			$req_sql->where = "id_user = '".$this->user_infos->id."'";
-			$res_fx = $this->select($req_sql);
-			if(!empty($res_fx))
-			{
-				foreach($res_fx[0] as $key => $values)
-				{
-					if($key == 'id' || $key == 'id_user')
-						continue;
-					$this->product->$key = $values;
-				}
-			}
-			unset($res_fx);
-
 		}
-		else
+		unset($res_fx);
+
+
+		$this->bases = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "bases";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
 		{
-			$_SESSION['error'] = "Voir SESSION[] : Il y a une soucis avec la variable SESSION au niveau de l'user ";
+			foreach($res_fx[0] as $key => $values)
+			{
+				if($key == 'id' || $key == 'id_user')
+					continue;
+				$this->bases->$key = $values;
+			}
 		}
-		
+		unset($res_fx);
+
+		$this->amelioration_var_config = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "amelioration_var_config";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx[0] as $key => $values)
+			{
+				$this->amelioration_var_config->$key = $values;
+			}
+		}
+		unset($res_fx);
+
+
+		$this->construction = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "construction_en_cours";
+		$req_sql->var = "*";
+		$req_sql->where = "";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx as $key => $values)
+			{
+				$this->construction->$key = $values;
+			}
+		}
+		unset($res_fx);
+
+		$this->update = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "update_en_cours";
+		$req_sql->var = "*";
+		$req_sql->where = "";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx as $key => $values)
+			{
+				$this->update->$key = $values;
+			}
+		}
+		unset($res_fx);
+
+
+		$this->search_arome = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "search_arome";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx as $key => $values)
+			{
+				$this->search_arome->$key = $values;
+			}
+		}
+		unset($res_fx);
+
+		$this->product = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "product";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx[0] as $key => $values)
+			{
+				if($key == 'id' || $key == 'id_user')
+					continue;
+				$this->product->$key = $values;
+			}
+		}
+		unset($res_fx);
+
 	}
 
 
-	public function reset_user_login_table()
- 	{
- 		$this->user_infos = new stdClass();
- 		$req_sql = new stdClass;
- 		$req_sql->table = "login";
- 		$req_sql->var = "*";
- 		$req_sql->where = "login ='".$_SESSION['pseudo']."'";
- 		$res_fx = $this->select($req_sql);
- 
- 		foreach($res_fx[0] as $key => $values)
- 		{
- 			$this->user_infos->$key = $values;			
- 		}
- 		unset($res_fx);
- 	}
+	private function calc_diff_time($row_user)
+	{
+		if($this->time_now > $row_user->last_connect)
+		{
+			$row_user->diff_time = 0;
+			$row_user->diff_time = $this->time_now - $row_user->last_connect;
+		}
+		else if($this->time_now == $row_user->last_connect)
+		{
+			$row_user->diff_time = 0;
+		}
+		else
+		{
+			$row_user->diff_time = 0;
+			$subject = "Attention le joueur : ".$row_user->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
+			mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
+			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...")</script><?
+			$this->maj_avertissement($row_user);
+		}
 
- 	public function set_tab_prod_vg($level_champ_glycerine)
- 	{
-		$tmp_level = $level_champ_glycerine;
-		$obj_user_prod_vg = new stdClass();
-		$obj_user_prod_vg->level = $tmp_level;
-		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.6) * 42)) * Config::$rate_vg_prod);
-		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
-		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 2);
-		$this->champ_glycerine = $obj_user_prod_vg;
- 	}
+		//quand on a set le temps de différence , on remet a jour le temps dans la base de données a date time stamp pour que le calcule 
+		//de la différence de temps soit correct
+	}
 
+	private function maj_time_last_connect_in_db($row_user)
+	{
 
- 	public function set_tab_prod_pg($level_usine_propylene)
- 	{
-		$tmp_level = $level_usine_propylene;
-		$obj_user_prod_pg = new stdClass();
-		$obj_user_prod_pg->level = $tmp_level;
-		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.4) * 42)) * Config::$rate_pg_prod);
-		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
-		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2.1) * 42)) * 2);
-		$this->usine_propylene = $obj_user_prod_pg;
- 	}
-
-
- 	public function set_tab_labos($level_labos_bases)
- 	{
-		$tmp_level = $level_labos_bases;
-		$obj_user_labos = new stdClass();
-		$obj_user_labos->level = $tmp_level;
-		$obj_user_labos->pourcent_down = $tmp_level * Config::$rate_labos_pourcent_down;
-		$obj_user_labos->prix = floor((pow($tmp_level,2.5) * 42));
-		$obj_user_labos->time_construct = floor(((pow($tmp_level,2.2) * 42)) * 2);
-		$this->labos_bases = $obj_user_labos;
- 	}
-
-
-
-
-
+		//sert a set au time now la base de donnée last connect
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->last_connect = date("U");
+		$req_sql->table = "login";
+		$req_sql->where = "id = ".$row_user->id;
+		$this->update($req_sql);
+		unset($req_sql);
+	}
 }

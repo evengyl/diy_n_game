@@ -11,18 +11,13 @@ Class user_ressources extends user
 		//car le user infos c'est le premier objet set dans le user
 		if(isset($user))
 		{
+			$this->set_tab_prod_vg($user->user_infos->level_culture_vg, $user);
+			$this->set_tab_prod_pg($user->user_infos->level_usine_pg, $user);
+			$this->set_tab_labos($user->user_infos->level_labos_bases, $user);
+
 			foreach($user as $row_user)
 			{
-				$this->calc_diff_time($row_user);
-				$this->maj_time_last_connect_in_db($row_user);
-
-				//calcule combien de ressource le joueur gagne en seconde;
-				$row_user->production_vg_sec = $this->calc_ressource_per_sec_vg($user->champ_glycerine->production);
-				$row_user->production_pg_sec = $this->calc_ressource_per_sec_pg($user->usine_propylene->production);
-
-				//calcule combien il en a gagner depuis la derniere mise a jours des ressources
-				$this->calc_ressource_win($row_user);
-				$this->maj_ressource_in_db($row_user);
+				$this->calc_and_maj_ressource_user_in_db($row_user, $user);
 				break;
 			}
 
@@ -33,54 +28,42 @@ Class user_ressources extends user
 
 	
 
-	private function maj_ressource_in_db($row_user)
+	public function calc_and_maj_ressource_user_in_db($row_user, $user)
 	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
+		$production_vg_sec = round((($user->champ_glycerine->production /60)/60),3);
+		$production_pg_sec = round((($user->usine_propylene->production /60)/60),3);
 
-		$row_user->new_numb_ressource_culture_vg = $row_user->last_culture_vg + $row_user->ressource_win_culture_vg;
-		$row_user->new_numb_ressource_usine_pg = $row_user->last_usine_pg + $row_user->ressource_win_usine_pg;
 
-		$req_sql->ctx->last_culture_vg = $row_user->new_numb_ressource_culture_vg;
-		$req_sql->ctx->last_usine_pg = $row_user->new_numb_ressource_usine_pg;
-
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
-
-	private function calc_ressource_win($row_user)
-	{
 		//determine combien de ressource le joueur gagne en une seconde car dans la bsd c'est en heure
-
-
-
 		//reset les ressources gangée à zero pour éviter les accumulation
-		$row_user->ressource_win_culture_vg = 0;
-		$row_user->ressource_win_usine_pg = 0;
+		$ressource_win_culture_vg = 0;
+		$ressource_win_usine_pg = 0;
 
-		$row_user->ressource_win_culture_vg = round($row_user->diff_time * $row_user->production_vg_sec, 3);
-		$row_user->ressource_win_usine_pg = round($row_user->diff_time * $row_user->production_pg_sec, 3);
+		$ressource_win_culture_vg = round($row_user->diff_time * $production_vg_sec, 3);
+		$ressource_win_usine_pg = round($row_user->diff_time * $production_pg_sec, 3);
 
 		//on remet a 0 le temps de la derniere mise a jour
 		$row_user->diff_time = 0;
 		$row_user->last_connect = $this->time_now;
 
-		
+
+		$new_numb_ressource_culture_vg = $row_user->last_culture_vg + $ressource_win_culture_vg;
+		$new_numb_ressource_usine_pg = $row_user->last_usine_pg + $ressource_win_usine_pg;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = ".$row_user->id;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->last_culture_vg = $new_numb_ressource_culture_vg;
+		$req_sql->ctx->last_usine_pg = $new_numb_ressource_usine_pg;
+
+
+		$this->update($req_sql);
+		unset($req_sql);
 	}
 
-	private function calc_ressource_per_sec_vg($production_vg)
-	{
-		return round((($production_vg /60)/60),3);
-	}
 
-	private function calc_ressource_per_sec_pg($production_pg)
-	{
-		return round((($production_pg /60)/60),3);
-	}
-
-	private function maj_avertissement($row_user)
+	public function maj_avertissement($row_user)
 	{
 		$req_sql = new stdClass;
 		$req_sql->ctx = new stdClass;
@@ -94,42 +77,7 @@ Class user_ressources extends user
 		//met dans la base de donnée un petit +1 pour avertissement
 	}
 
-	private function calc_diff_time($row_user)
-	{
-		if($this->time_now > $row_user->last_connect)
-		{
-			$row_user->diff_time = 0;
-			$row_user->diff_time = $this->time_now - $row_user->last_connect;
-		}
-		else if($this->time_now == $row_user->last_connect)
-		{
-			$row_user->diff_time = 0;
-		}
-		else
-		{
-			$row_user->diff_time = 0;
-			$subject = "Attention le joueur : ".$row_user->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
-			mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
-			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...")</script><?
-			$this->maj_avertissement($row_user);
-		}
 
-		//quand on a set le temps de différence , on remet a jour le temps dans la base de données a date time stamp pour que le calcule 
-		//de la différence de temps soit correct
-	}
-
-	private function maj_time_last_connect_in_db($row_user)
-	{
-
-		//sert a set au time now la base de donnée last connect
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->last_connect = date("U");
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
 
  	public function get_string_all_id_aromes()
  	{
@@ -144,6 +92,95 @@ Class user_ressources extends user
 			$string_id_arome .= $row_id_aromes->id.",";
 		}
 		return $string_id_arome;
+ 	}
+
+
+ 	public function set_list_product_acquis_for_tpl($user)
+ 	{
+ 		//on genere le tab qui contiendra tout lesp rod
+ 		$array_product_in_stock = array();
+
+		//on explode la liste des produit qui était sous forme de chaine
+		$data_from_user_product = substr($user->product->list_product, 0,-1);
+		$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
+
+ 		$i = 0;
+ 		foreach($array_product_in_stock_not_traited as $row_product)
+		{
+			preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
+
+			$req_sql = new stdClass();
+			$req_sql->table = "aromes";
+			$req_sql->where = "id = '".$match[1]."'";
+			$req_sql->var = "marque, nom";
+			$res_sql = $this->select($req_sql);
+			$res_sql = $res_sql[0];
+
+			$array_product_in_stock[$i] = new stdClass();
+			$array_product_in_stock[$i]->marque = $res_sql->marque;
+			$array_product_in_stock[$i]->nom = $res_sql->nom;
+			$array_product_in_stock[$i]->id = $match[1];
+			$array_product_in_stock[$i]->nb = $match[2];
+
+			if($match[3] == "2080")
+				$match[3] = "20% VG / 80% PG";
+
+			else if($match[3] == "5050")
+				$match[3] = "50% VG / 50% PG";
+
+			else if($match[3] == "8020")
+				$match[3] = "80% VG / 20% PG";
+
+			else if($match[3] == "1000")
+				$match[3] = "100% VG / 0% PG";
+
+			$array_product_in_stock[$i]->base = $match[3];
+			$i++;
+		}
+		//ici on a générer avec des requeste le meme tableau mais avec toutes les infos du produict
+
+		//tri du tableau pour avoir les marque triée 
+		$array_product_in_stock_tri = new ArrayObject($array_product_in_stock);
+		$array_product_in_stock_tri->asort();
+
+
+		$tab_final_arome_acquis_traiter = array();
+		$i = 0;
+
+		foreach($array_product_in_stock_tri as $row)
+		{
+			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+
+			if(key($tab_final_arome_acquis_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nb =  $row->nb;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->base = $row->base;
+
+			}
+			else
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+			$i++;
+		}
+
+		return $tab_final_arome_acquis_traiter;
  	}
 
 
@@ -167,7 +204,7 @@ Class user_ressources extends user
 
 
 		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
-		$array_total_aromes = $this->return_id_array_table_arome($res_sql_arome_list);
+		$array_total_aromes = self::return_id_array_table_arome($res_sql_arome_list);
 
 		//calcule la différence entre les deux et en ressort un tableau avec tout les id des aromes acquis
 		$array_id_arome_acquis  = array_diff($array_total_aromes, $array_not_have);
@@ -186,18 +223,85 @@ Class user_ressources extends user
 			}
 		}
 		
-		$tab_final_arome_acquis_traiter = user_ressources::traitement_array_final_aromes($tab_final_arome_acquis);
-		return $tab_final_arome_acquis_traiter;
-	}
-
-
-	public function traitement_array_final_aromes($tab_final_arome_acquis)
-	{
-		//astuce pour ne pas avoir un element en moins dans le tableau lors de la premire passe pour inscrire le nom de la marque dans le tab
-
 		$tab_final_arome_acquis_traiter = array();
 		$i=0;
 
+		foreach($tab_final_arome_acquis as $row)
+		{
+			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+
+			if(key($tab_final_arome_acquis_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+
+			}
+			else
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+			$i++;
+		}
+
+
+		return $tab_final_arome_acquis_traiter;
+	}
+
+	public function get_arome_win_for_tpl(&$user)
+	{
+
+		//traiement de la chaine pour la requete 
+		$user->id_arome_win = explode(",", $user->user_infos->id_arome_win);
+		$where = "";
+		
+		foreach($user->id_arome_win as $key => $row)
+		{
+			if($row == "")
+				unset($user->id_arome_win[$key]);
+			else
+				$where .= " id = ".$row." AND";
+		}
+		$where = substr($where, 0, -3);
+
+		$arome_win = new stdClass();
+		$arome_win->table = "aromes";
+		$arome_win->var = "id, marque, nom";
+		$arome_win->order = "marque";
+		$arome_win->where = $where;
+
+		return $this->select($arome_win);
+	}
+
+	public function return_id_array_table_arome(&$array_aromes_trier)
+	{
+		$array_id_aromes = array();
+		
+		foreach($array_aromes_trier as $key_aromes => $value_aromes)
+		{
+			$array_id_aromes[] = $value_aromes->id;
+		}
+		return $array_id_aromes;
+	}
+
+
+	public function render_arome_win($tab_final_arome_acquis)
+	{
+		$tab_final_arome_acquis_traiter = array();
+		$i=0;
 
 		foreach($tab_final_arome_acquis as $row)
 		{
@@ -264,26 +368,21 @@ Class user_ressources extends user
 		}
 	}
 
-	public function maj_product_list_nb($id, $nb, $bases, $ajout_or_delete = '+', $user)
+	public function maj_product_list_in_bsd($id, $nb, $bases, $ajout_or_delete = '+', $user)
 	{
-
 		$tab_product_recept = array();
 		$tab_product_recept[0]["nb"] = $nb;
 		$tab_product_recept[0]["id"] = $id;
 		$tab_product_recept[0]["bases"] = $bases;
 
-
-
-
-		$tab_product_in_stock = array();
-
+		
 		// mais on en crée une copie pour pas foutr en l'air les autre fonction
 		$tmp_user_product_bsd = new StdClass;
 		$tmp_user_product_bsd->list_product = new stdClass;
 		$tmp_user_product_bsd->list_product = $user->product->list_product;
 
 
-
+		$tab_product_in_stock = array();
 		if($tmp_user_product_bsd->list_product != "")
 		{
 			//on explode le string de la base de données des product pour travailler
@@ -407,7 +506,6 @@ Class user_ressources extends user
 			$req_sql->where = "id_user = ".$user->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
-
 		}
 		else
 		{
@@ -437,7 +535,6 @@ Class user_ressources extends user
 			$req_sql->where = "id_user = ".$user->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
-
 		}
 		else
 		{
@@ -467,7 +564,6 @@ Class user_ressources extends user
 			$req_sql->where = "id_user = ".$user->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
-
 		}
 		else
 		{
@@ -482,4 +578,40 @@ Class user_ressources extends user
 			unset($req_sql);
 		}
 	}
+
+ 	public function set_tab_prod_vg($level_champ_glycerine, $user)
+ 	{
+		$tmp_level = $level_champ_glycerine;
+		$obj_user_prod_vg = new stdClass();
+		$obj_user_prod_vg->level = $tmp_level;
+		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.6) * 42)) * Config::$rate_vg_prod);
+		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
+		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 2);
+		$user->champ_glycerine = $obj_user_prod_vg;
+ 	}
+
+
+ 	public function set_tab_prod_pg($level_usine_propylene, $user)
+ 	{
+		$tmp_level = $level_usine_propylene;
+		$obj_user_prod_pg = new stdClass();
+		$obj_user_prod_pg->level = $tmp_level;
+		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.4) * 42)) * Config::$rate_pg_prod);
+		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
+		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2.1) * 42)) * 2);
+		$user->usine_propylene = $obj_user_prod_pg;
+ 	}
+
+
+ 	public function set_tab_labos($level_labos_bases, $user)
+ 	{
+		$tmp_level = $level_labos_bases;
+		$obj_user_labos = new stdClass();
+		$obj_user_labos->level = $tmp_level;
+		$obj_user_labos->pourcent_down = $tmp_level * Config::$rate_labos_pourcent_down;
+		$obj_user_labos->prix = floor((pow($tmp_level,2.5) * 42));
+		$obj_user_labos->time_construct = floor(((pow($tmp_level,2.2) * 42)) * 2);
+		$user->labos_bases = $obj_user_labos;
+ 	}
+
 }

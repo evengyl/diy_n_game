@@ -47,7 +47,6 @@ class _db_connect extends Config
 			parent::set_list_req_sql($req_sql);
 			$this->last_res_sql = mysqli_query($this->db_link, $req_sql)or die('Probleme de requete = '. $req_sql);// enregistre une copie temporaire de la reponse requete
 		}// si les valeurs sont null ou diff�rente , enregistre les variable correctement
-
 		$res = mysqli_fetch_object($this->last_res_sql);  //enregistre les lignes de la requ�te sur un object
 		if (is_null($res))
 		 // fetch va vider l'objet envoyer donc on v�rifie si le resultat est null , 

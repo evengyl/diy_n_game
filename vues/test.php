@@ -1,4 +1,7 @@
 <? 
+
+
+/*
 $i =1;
 
 $array_test_1 = array();
@@ -34,7 +37,7 @@ while($i < 70)
 
 affiche_pre($array_test);
 
-
+*/
 // test pour le select avec image frame
 
 
