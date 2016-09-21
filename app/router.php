@@ -2,15 +2,12 @@
 Class router
 {
 	private $get = array();
-	private $echo_get;
 	public $route = array();
 
 	public function router($get = array())
 	{
 		$this->route = $get;
 		
-		if(!isset($this->route['construct']))
-			$this->route['construct'] = "";
 
 		if(isset($this->route['page']))
 		{

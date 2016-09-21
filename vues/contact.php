@@ -10,7 +10,7 @@
 		<form action="#" method="post" class="col-lg-6 col-lg-offset-3">
 
 			<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
+				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1" style="color:green;">'.$_SESSION['error'].'</label>':''; ?>
 				<input name="pseudo" type="text" class="form-control " required placeholder="Pseudo">
 			</div>
 			<div  class="col-lg-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">				

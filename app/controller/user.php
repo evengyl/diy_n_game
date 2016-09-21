@@ -192,7 +192,6 @@ Class user extends all_query
 
 	private function maj_time_last_connect_in_db($row_user)
 	{
-
 		//sert a set au time now la base de donnée last connect
 		$req_sql = new stdClass;
 		$req_sql->ctx = new stdClass;
@@ -201,5 +200,21 @@ Class user extends all_query
 		$req_sql->where = "id = ".$row_user->id;
 		$this->update($req_sql);
 		unset($req_sql);
+	}
+
+	public function check_post_sign_up_and_my_account($text)
+	{
+		$text = trim($text);
+		$text = htmlentities($text);
+		$nb_char = strlen($text);
+		if($nb_char <= 6)
+		{			
+			return 0;		
+		}
+		else
+		{
+			return $text;
+		}
+
 	}
 }

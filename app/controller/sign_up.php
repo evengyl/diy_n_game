@@ -26,10 +26,10 @@ Class sign_up extends base_module
 			{
 			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = $this->check_post_sign_up($post['pseudo']);
-			    	$password = $this->check_post_sign_up($post['password-1']);
-			    	$password_verification = $this->check_post_sign_up($post['password-2']);
-			    	$email = $this->check_post_sign_up($post['email']);
+			    	$pseudo = $user->check_post_sign_up_and_my_account($post['pseudo']);
+			    	$password = $user->check_post_sign_up_and_my_account($post['password-1']);
+			    	$password_verification = $user->check_post_sign_up_and_my_account($post['password-2']);
+			    	$email = $user->check_post_sign_up_and_my_account($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -106,21 +106,7 @@ Class sign_up extends base_module
 		}
 	}
 
-	private function check_post_sign_up($text)
-	{
-		$text = trim($text);
-		$text = htmlentities($text);
-		$nb_char = strlen($text);
-		if($nb_char <= 6)
-		{			
-			return 0;		
-		}
-		else
-		{
-			return $text;
-		}
 
-	}
 
 	public function set_time_now()
 	{

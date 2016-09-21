@@ -5,66 +5,7 @@
 	__TPL_nav_game__
 
 	<div class="col-xs-12 col-md-9">
-		<div class="col-lg-12" style="margin-bottom:15px;">
-			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-				Listes des batiments de production de ressources brut.
-			</h3>	
-			<div class="col-lg-12" style="background:#232D3B; margin-top:15px;">
-				<ul class="col-md-6 col-lg-6 grid cs-style-4">
-					<center><li>
-						<figure>
-							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
-							<figcaption>
-								<h3 style="font-size:20px;">Culture VG</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->champ_glycerine->level; ?></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->champ_glycerine->production; ?> /h</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /Jour : </b><br><?= $user->champ_glycerine->production*24; ?> /Jour</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?= $user->champ_glycerine->prix; ?>€</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->champ_glycerine->time_real_construct; ?></li>
-							</figcaption>
-						</figure>
-					</li></center>
-				</ul>
 
-				<ul class="col-md-6 col-lg-6 grid cs-style-4">
-					<center><li>
-						<figure>
-							<div><img src="<?= Config::$path_public; ?>/images/usine_pg.png" alt="img04"></div>
-							<figcaption>
-								<h3 style="font-size:20px;">Usines PG</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->usine_propylene->level; ?></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->usine_propylene->production; ?> /h</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /Jour : </b><br><?= $user->usine_propylene->production*24; ?> /Jour</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?= $user->usine_propylene->prix; ?>€</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->usine_propylene->time_real_construct; ?></li>
-							</figcaption>
-						</figure>
-					</li></center>
-				</ul>
-			</div>
-		</div>
-
-		<div class="col-lg-12" style="margin-bottom:15px;">
-			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-				Listes des batiments de production de ressources synthétisée.
-			</h3>				
-			<div class="col-lg-12" style="background:#232D3B; margin-top:15px;">
-				<ul class="col-md-6 col-lg-12 grid cs-style-4">
-					<center><li>
-						<figure>
-							<div><img src="<?= Config::$path_public; ?>/images/labos_bases.png" alt="img04"></div>
-							<figcaption>
-								<h3 style="font-size:20px;">Labos Des bases</h3>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?=$user->labos_bases->level ; ?></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Pourcentage d'éco : </b><br><?=$user->labos_bases->pourcent_down ; ?>%</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?=$user->labos_bases->prix ; ?>€</li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->labos_bases->time_real_construct; ?></li>
-							</figcaption>
-						</figure>
-					</li></center>
-				</ul>
-			</div>
-		</div>
 
 
 
@@ -138,6 +79,68 @@
 						</tr>
 					</table>
 				</div>
+			</div>
+		</div>
+
+
+				<div class="col-lg-12" style="margin-bottom:15px;">
+			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+				Listes des batiments de production de ressources brut.
+			</h3>	
+			<div class="col-lg-12" style="background:#232D3B; margin-top:15px;">
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="<?= Config::$path_public; ?>/images/plante_icon.png" alt="img04"></div>
+							<figcaption>
+								<h3 style="font-size:20px;">Culture VG</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->champ_glycerine->level; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->champ_glycerine->production; ?> /h</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /Jour : </b><br><?= $user->champ_glycerine->production*24; ?> /Jour</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?= $user->champ_glycerine->prix; ?>€</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->champ_glycerine->time_real_construct; ?></li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
+
+				<ul class="col-md-6 col-lg-6 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="<?= Config::$path_public; ?>/images/usine_pg.png" alt="img04"></div>
+							<figcaption>
+								<h3 style="font-size:20px;">Usines PG</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?= $user->usine_propylene->level; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /h : </b><br><?= $user->usine_propylene->production; ?> /h</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Production /Jour : </b><br><?= $user->usine_propylene->production*24; ?> /Jour</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?= $user->usine_propylene->prix; ?>€</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->usine_propylene->time_real_construct; ?></li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-lg-12" style="margin-bottom:15px;">
+			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+				Listes des batiments de production de ressources synthétisée.
+			</h3>				
+			<div class="col-lg-12" style="background:#232D3B; margin-top:15px;">
+				<ul class="col-md-6 col-lg-12 grid cs-style-4">
+					<center><li>
+						<figure>
+							<div><img src="<?= Config::$path_public; ?>/images/labos_bases.png" alt="img04"></div>
+							<figcaption>
+								<h3 style="font-size:20px;">Labos Des bases</h3>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Level : </b><br><?=$user->labos_bases->level ; ?></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Pourcentage d'éco : </b><br><?=$user->labos_bases->pourcent_down ; ?>%</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix level suivant : </b><br><?=$user->labos_bases->prix ; ?>€</li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Temps de construction : </b></br><?= $user->labos_bases->time_real_construct; ?></li>
+							</figcaption>
+						</figure>
+					</li></center>
+				</ul>
 			</div>
 		</div>
 	</div>
