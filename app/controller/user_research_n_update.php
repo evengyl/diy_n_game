@@ -195,7 +195,7 @@ Class user_research_n_update extends user
 
 	}
 
-	protected function check_update_en_cours($name_batiment_from_controller = "", $prix_level_up)
+	public function check_update_en_cours($name_batiment_from_controller = "", $prix_level_up)
 	{
 		if(!empty($this->user_obj->update))
 		{	

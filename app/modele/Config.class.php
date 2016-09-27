@@ -131,6 +131,15 @@ class Config
     public static $nb_flacon_per_product = 1;
     //end
 
+
+
+    //vente des produits
+    public static $duree_random_prod = 604800;
+    public static $nb_random_prod_shop = 20;
+    public static $sell_product_random = 15;
+    public static $sell_product_not_random = 7;
+    //end
+
     /* fin des var utilisée par les controller */
 
     

@@ -63,19 +63,7 @@ Class user_ressources extends user
 	}
 
 
-	public function maj_avertissement($row_user)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$old_values_avertissement = $row_user->avertissement;
-		$req_sql->ctx->avertissement = $old_values_avertissement+1;
-		$req_sql->ctx->last_connect = $this->time_now;
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-		//met dans la base de donnée un petit +1 pour avertissement
-	}
+
 
 
 
@@ -101,8 +89,16 @@ Class user_ressources extends user
  		$array_product_in_stock = array();
 
 		//on explode la liste des produit qui était sous forme de chaine
-		$data_from_user_product = substr($user->product->list_product, 0,-1);
-		$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
+		if(isset($user->product->list_product) && $user->product->list_product != "")
+		{
+			$data_from_user_product = substr($user->product->list_product, 0,-1);
+			$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
+		}
+		else
+		{
+			return false;
+		}
+
 
  		$i = 0;
  		foreach($array_product_in_stock_not_traited as $row_product)
@@ -111,7 +107,7 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass();
 			$req_sql->table = "aromes";
-			$req_sql->where = "id = '".$match[1]."'";
+			$req_sql->where = "id = '".$match[2]."'";
 			$req_sql->var = "marque, nom";
 			$res_sql = $this->select($req_sql);
 			$res_sql = $res_sql[0];
@@ -119,8 +115,9 @@ Class user_ressources extends user
 			$array_product_in_stock[$i] = new stdClass();
 			$array_product_in_stock[$i]->marque = $res_sql->marque;
 			$array_product_in_stock[$i]->nom = $res_sql->nom;
-			$array_product_in_stock[$i]->id = $match[1];
-			$array_product_in_stock[$i]->nb = $match[2];
+			$array_product_in_stock[$i]->id = $match[2];
+			$array_product_in_stock[$i]->nb = $match[1];
+			$array_product_in_stock[$i]->base_bsd = $match[3];
 
 			if($match[3] == "2080")
 				$match[3] = "20% VG / 80% PG";
@@ -170,6 +167,7 @@ Class user_ressources extends user
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->nb =  $row->nb;
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->base = $row->base;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->base_bsd = $row->base_bsd;
 
 			}
 			else
@@ -183,6 +181,58 @@ Class user_ressources extends user
 		return $tab_final_arome_acquis_traiter;
  	}
 
+ 	public function set_all_arome_for_tpl()
+ 	{
+		$this->nb_arome_total = 0;
+
+
+		$arome_list = new stdClass();
+		$arome_list->table = "aromes";
+		$arome_list->var = "id, marque, nom";
+		$arome_list->order = "marque";
+		$res_sql_arome_list = $this->select($arome_list);
+
+
+
+		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
+		$array_total_aromes = self::return_id_array_table_arome($res_sql_arome_list);
+
+		//tri du tableau pour avoir les marque triée 
+		$array_product_in_stock_tri = new ArrayObject($res_sql_arome_list);
+		$array_product_in_stock_tri->asort();
+
+
+		$tab_final_all_arome_traiter = array();
+		$i = 0;
+
+		foreach($array_product_in_stock_tri as $row)
+		{
+			if(!isset($tab_final_all_arome_traiter[$row->marque]))
+			{
+				$tab_final_all_arome_traiter[$row->marque] = array();
+				end($tab_final_all_arome_traiter);
+			}
+			
+
+			if(key($tab_final_all_arome_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_all_arome_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_all_arome_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_all_arome_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_all_arome_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_all_arome_traiter[$row->marque][$i]->marque = $row->marque;
+			}
+			$i++;
+		}
+
+		return $tab_final_all_arome_traiter;
+ 	}
 
 	public function set_arome_acquis_for_tpl($user)
 	{
@@ -226,39 +276,44 @@ Class user_ressources extends user
 		$tab_final_arome_acquis_traiter = array();
 		$i=0;
 
-		foreach($tab_final_arome_acquis as $row)
+		if(isset($tab_final_arome_acquis))
 		{
-			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+			foreach($tab_final_arome_acquis as $row)
 			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
+				if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+				{
+					$tab_final_arome_acquis_traiter[$row->marque] = array();
+					end($tab_final_arome_acquis_traiter);
+				}
 
-			if(key($tab_final_arome_acquis_traiter) == $row->marque)
-			{
-				$name_image = $row->marque;
-				$name_image .= "_".trim($row->nom).".jpg";
-				$name_image = str_replace(" ", "_", $name_image);
-				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
-				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+				if(key($tab_final_arome_acquis_traiter) == $row->marque)
+				{
+					$name_image = $row->marque;
+					$name_image .= "_".trim($row->nom).".jpg";
+					$name_image = str_replace(" ", "_", $name_image);
+					$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+					$name_image = "/images/aromes/".$row->marque."/".$name_image;
 
-				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+					$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+					$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+					$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+					$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+					$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
 
+				}
+				else
+				{
+					$tab_final_arome_acquis_traiter[$row->marque] = array();
+					end($tab_final_arome_acquis_traiter);
+				}
+				$i++;
 			}
-			else
-			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
-			$i++;
+			return $tab_final_arome_acquis_traiter;
 		}
-
-
-		return $tab_final_arome_acquis_traiter;
+		else
+		{
+			return false;
+		}
 	}
 
 	public function get_arome_win_for_tpl(&$user)
@@ -339,14 +394,13 @@ Class user_ressources extends user
 	public function calcul_nb_product_total($user)
 	{
 
-		if($user->product->list_product != "")
+		if(isset($user->product->list_product) && $user->product->list_product != "")
 		{
 			//mtn que l'on a la liste des product dispo de la table de l'user, on traie pour avoir un array propre id nb
 			//on enleve la derniere virgule de la table
 			$tmp_user_product_bsd = new StdClass;
 			$tmp_user_product_bsd->list_product = new stdClass;
 			$tmp_user_product_bsd->list_product = $user->product->list_product;
-
 
 			$tmp_user_product_bsd->list_product = substr($tmp_user_product_bsd->list_product, 0, -1);
 			$tmp_user_product_bsd->list_product = array(explode(",", $tmp_user_product_bsd->list_product));
@@ -371,33 +425,41 @@ Class user_ressources extends user
 	public function maj_product_list_in_bsd($id, $nb, $bases, $ajout_or_delete = '+', $user)
 	{
 		$tab_product_recept = array();
-		$tab_product_recept[0]["nb"] = $nb;
-		$tab_product_recept[0]["id"] = $id;
-		$tab_product_recept[0]["bases"] = $bases;
+		$tab_product_recept["nb"] = $nb;
+		$tab_product_recept["id"] = $id;
+		$tab_product_recept["bases"] = $bases;
 
-		
 		// mais on en crée une copie pour pas foutr en l'air les autre fonction
-		$tmp_user_product_bsd = new StdClass;
-		$tmp_user_product_bsd->list_product = new stdClass;
-		$tmp_user_product_bsd->list_product = $user->product->list_product;
-
+		//on dois aller chehcer la liste à chauqe fois dans la base car le progamme n'a pas encore encoder les nouvelle donnée car scrpit pas fini
+		$arome_win = new stdClass();
+		$arome_win->table = "product";
+		$arome_win->var = "*";
+		$arome_win->where = "id_user = '".$user->user_infos->id."'";
+		$tmp_user_product_bsd = $this->select($arome_win);
+		$tmp_user_product_bsd = $tmp_user_product_bsd[0]->list_product;
 
 		$tab_product_in_stock = array();
-		if($tmp_user_product_bsd->list_product != "")
+		if($tmp_user_product_bsd != "")
 		{
 			//on explode le string de la base de données des product pour travailler
-			$tmp_user_product_bsd->list_product = substr($tmp_user_product_bsd->list_product, 0, -1);
-			$tmp_user_product_bsd->list_product = array(explode(",", $tmp_user_product_bsd->list_product));
+			$tmp_user_product_bsd = substr($tmp_user_product_bsd, 0, -1);
+			$tmp_user_product_bsd = array(explode(",", $tmp_user_product_bsd));
 
 			$i = 0;
+
+
 			//on forceah l'explode pour avoir un tab propre avec un matching
-			foreach($tmp_user_product_bsd->list_product[0] as $row_product)
+			foreach($tmp_user_product_bsd as $row_product)
 			{
-				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
-				$tab_product_in_stock[$i]["nb"] = $match[1];
-				$tab_product_in_stock[$i]["id"] = $match[2];
-				$tab_product_in_stock[$i]["bases"] = $match[3];
-				$i++;
+				foreach($row_product as $row)
+				{
+					preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row, $match);
+					$tab_product_in_stock[$i]["nb"] = $match[1];
+					$tab_product_in_stock[$i]["id"] = $match[2];
+					$tab_product_in_stock[$i]["bases"] = $match[3];
+					$i++;
+				}
+
 			}
 		}
 
@@ -408,13 +470,13 @@ Class user_ressources extends user
 				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
 				foreach($tab_product_in_stock as $key => $prod_in_stock)
 				{
-					if($prod_in_stock['id'] == $tab_product_recept[0]['id'])
+					if($prod_in_stock['id'] == $tab_product_recept['id'])
 					{
 						//on le possède en stock donc on peux vérif si la bases est la meme
-						if($prod_in_stock['bases'] == $tab_product_recept[0]['bases'])
+						if($prod_in_stock['bases'] == $tab_product_recept['bases'])
 						{
 							//on ajoute simplement a NB le nouveau nombre
-							$tab_product_in_stock[$key]['nb'] += $tab_product_recept[0]['nb'];
+							$tab_product_in_stock[$key]['nb'] += $tab_product_recept['nb'];
 							$ajout = 1;
 							break;
 						}
@@ -435,12 +497,12 @@ Class user_ressources extends user
 				{
 					//ça veux dire que on a peux être le produits mais on l'as pas dans cette bases
 					//dnc on dois le rajouter a la fin du tab
-					array_push($tab_product_in_stock, $tab_product_recept[0]);
+					array_push($tab_product_in_stock, $tab_product_recept);
 				}
 			}
 			else
 			{
-				array_push($tab_product_in_stock, $tab_product_recept[0]);
+				array_push($tab_product_in_stock, $tab_product_recept);
 				//ici ça veux dire que l'on a rien comme produits, donc on peux ajouter direct;
 			}
 		}
@@ -453,9 +515,9 @@ Class user_ressources extends user
 				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
 				foreach($tab_product_in_stock as $key => $prod_in_stock)
 				{
-					if($prod_in_stock['id'] == $tab_product_recept[0]['id'] && $prod_in_stock['bases'] == $tab_product_recept[0]['bases'])
+					if($prod_in_stock['id'] == $tab_product_recept['id'] && $prod_in_stock['bases'] == $tab_product_recept['bases'])
 					{
-						$tab_product_in_stock[$key]['nb'] -= $tab_product_recept[0]['nb'];
+						$tab_product_in_stock[$key]['nb'] -= $tab_product_recept['nb'];
 						if($tab_product_in_stock[$key]['nb'] == "0")
 						{
 							unset($tab_product_in_stock[$key]);
@@ -473,6 +535,7 @@ Class user_ressources extends user
 		}
 
 
+
 		//il faut mettre la bases de données à jours apres avoir reconstruit la chaine de caractere
 		$new_string_product_for_bsd = "";
 
@@ -480,6 +543,7 @@ Class user_ressources extends user
 		{
 			$new_string_product_for_bsd .= "(". implode(":", $new_row_product) ."),";
 		}
+
 		//on met a jour la base de données avec le noveau string des products
 		$req_sql = new stdClass;
 		$req_sql->ctx = new stdClass;

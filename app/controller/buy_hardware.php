@@ -7,7 +7,7 @@ Class buy_hardware extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);
 
-		if($_POST != "")
+		if(isset($_POST) && $_POST != "")
 		{
 			$this->traitement_post($_POST, $user);
 			$user->get_variable_user();

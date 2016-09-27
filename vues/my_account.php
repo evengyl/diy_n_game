@@ -7,7 +7,7 @@
 		<div class="col-lg-12" style="margin-bottom:15px;">
 		<h2 class='col-xs-12 title_page_game' style="border-bottom:1px solid #FF7F00;">Changement d'informations personnelles</h2>
 
-<h4 class='title' style="padding-left:50px;">Changer de Mot de passe</h4>
+		<h4 class='title' style="padding-left:50px;">Changer de Mot de passe</h4>
 
 		<form action="#" method="post" class="col-lg-6 col-lg-offset-3">
 

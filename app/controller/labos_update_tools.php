@@ -42,7 +42,7 @@ Class labos_update_tools extends base_module
 
 				user_research_n_update::insert_search_update_en_cours($name_batiment, $this->time_finish, Config::$$real_name_search);
 
-				//$this->set_argent_user($price, "-");
+				$this->set_argent_user($price, "-");
 				$this->user_obj->get_variable_user();
 							//ça veux dire qu'il y a une recherhce en cours donc il faut set le temps de finition
 				$this->alert_construction_en_cours = 1;

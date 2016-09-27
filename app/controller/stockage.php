@@ -8,7 +8,9 @@ Class stockage extends base_module
 	{		
 		parent::__construct($module_tpl_name, $user);
 
-		$this->tab_final_arome_acquis_traiter = $this->get_list_product($user);
+		//on vérifie si l'user à quelque chose en stock ou pas
+		if(!empty($user->product->list_product))
+			$this->tab_final_arome_acquis_traiter = $this->get_list_product($user);
 
 		return $this->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->render();
 	}

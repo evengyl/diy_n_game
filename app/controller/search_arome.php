@@ -41,7 +41,7 @@ Class search_arome extends base_module
 				$this->percent_to_win = $this->convert_price_search_to_percent_win($this->value_to_search); 
 
 				//avec la valeur de recherhce on va renvoyer le temps de la recherhce total
-				$this->time_finish = $this->calcul_time_finish($value_to_search);
+				$this->time_finish = $this->calcul_time_finish($this->value_to_search);
 
 				//insère en base de donnée la ligne de recherhce, avec pourcentage de réussite, la valeur de la recherche, et la date de fin en unix time
 				user_research_n_update::insert_search_arome($this->percent_to_win, $this->value_to_search, $this->time_finish);

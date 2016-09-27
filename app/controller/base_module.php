@@ -166,7 +166,7 @@ Class base_module extends all_query
 
 	public function set_point_user_vente($argent_depenser)
 	{
-		$point_before = $this->user_obj->user_infos->point;
+		$point_before = $this->user_obj->user_infos->point_vente;
 		$point_gagner = $argent_depenser/1000;
 		$point_after = $point_before + $point_gagner;
 

@@ -217,4 +217,19 @@ Class user extends all_query
 		}
 
 	}
+
+
+	public function maj_avertissement($row_user)
+	{
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+		$old_values_avertissement = $row_user->avertissement;
+		$req_sql->ctx->avertissement = $old_values_avertissement+1;
+		$req_sql->ctx->last_connect = $this->time_now;
+		$req_sql->table = "login";
+		$req_sql->where = "id = ".$row_user->id;
+		$this->update($req_sql);
+		unset($req_sql);
+		//met dans la base de donnée un petit +1 pour avertissement
+	}
 }

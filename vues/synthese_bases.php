@@ -1,6 +1,6 @@
 <div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
 	__TPL_nav_game__
-	<div class="col-lg-8" style="margin-top:1px;">
+	<div class="col-lg-9" style="margin-top:1px;">
 
 		<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:10px; margin-bottom:10px;">
 			Convertir toutes les ressources en base primaire!.
@@ -45,10 +45,10 @@
 
 		<table class="table table-stripped table-hover" style="color:white;">
 			<tr class="success" style="color:black;">
-				<th>Quantité de ressource pour un littre SANS améliorations :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
+				<th>Quantité de ressource pour un littre SANS améliorations (Labos bases) :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
 			</tr>
 			<tr class="success" style="color:black;">
-				<th>Quantité de ressource pour un littre AVEC vos améliorations :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
+				<th>Quantité de ressource pour un littre AVEC vos améliorations (Labos bases) :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
 			</tr>
 		</table>	
 

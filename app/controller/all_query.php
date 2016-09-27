@@ -42,6 +42,12 @@ class all_query extends _db_connect
 				$construct_req .= "ORDER BY id ASC";	
 
 
+			if(isset($req_sql->limit) && $req_sql->limit != "")
+				$construct_req .= " LIMIT ".$req_sql->limit." ";	
+			else
+				$construct_req .= "";	
+
+
 			$i = 0;
 
 			while($row = parent::fetch_object($construct_req))
@@ -83,7 +89,7 @@ class all_query extends _db_connect
 		$req_sql = "INSERT INTO ".$res_sql->table." (".$toute_les_colonnes.") VALUES (".$toute_les_valeurs.")";
 
 		parent::query($req_sql);
-		unset($_POST);
+		unset($req_sql);
 
 	}
 
@@ -116,7 +122,9 @@ class all_query extends _db_connect
 					$req_sql = 'UPDATE '.$object->table.' SET '.$set_all.' WHERE '.$object->where;	
 			}
 
+
 			parent::query($req_sql);
+			unset($req_sql);
 
 		}
 		else

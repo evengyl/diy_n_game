@@ -1,6 +1,18 @@
 <div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
 	__TPL_nav_game__
-	<div class="col-lg-8" style="margin-top:1px;">
+	<div class="col-lg-9" style="margin-top:1px;">
+
+		<div class="col-lg-12 explication pull-right">
+			<h3 class="title">Explication : </h3>
+			<span>
+				Dans Diy_n_game, les ressources principales nécessaires pour votre développement et votre production de de ressource 
+				de bases sont les champs de glycérole et les usines à extraction de propylène,
+				les deux vont vous rapporter des marchandises de types brutes! elle ne peuvent être exploitée en tant que tel, 
+				vous devrez par la suite vous munir de laboratoire qui transformeront vos plantes et ressidu d'usine en VG et PG (Voir synthétiseur de bases), 
+				dans une premier temps vous disposerez d'un niveau de laboratoires qui vous permettra de convertir vos ressources.
+				plus les niveaux seront élevé dans les labos, moins vous payerez vos bases chère.
+			</span>
+		</div>
 
 		<div class="col-lg-12" style="background:#232D3B; min-height:600px;">
 			<div class="col-lg-4">
@@ -51,21 +63,12 @@
 				<h3 class="title">Petite histoire : </h3>
 				<span>Le propylène glycol (PG) ou propane-1,2-diol appelé aussi dihydroxypropane, 
 					méthyl glycol est un diol utilisé dans de nombreux usages industriels
-					 et pharmaceutiques ou agropharmaceutiques (solvant de pesticides), à faible dose comme
-					  additif alimentaire et depuis peu dans les cigarettes électroniques (liquide à vapoter).
-					   Il est issu à faible coût de la carbochimie, et généralement de la pétrochimie.</span>
+					et pharmaceutiques ou agropharmaceutiques (solvant de pesticides), à faible dose comme
+					additif alimentaire et depuis peu dans les cigarettes électroniques (liquide à vapoter).
+					Il est issu à faible coût de la carbochimie, et généralement de la pétrochimie.
+				</span>
 			</div>
-			<div class="col-lg-8 explication pull-right">
-				<h3 class="title">Explication : </h3>
-				<span>Dans Diy_n_game, les ressources principales nécessaires pour votre développement est les champs et glycérole et les usines qui vont manufacturer 
-					le propylène, les deux vont vous rapporter des marchandises de types brutes! elle ne peuvent être exploitée comme ça, 
-					vous devrez par la suite vous munir de laboratoire qui transformeront vos plantes et ressidu d'usine en VG et PG, 
-					dans une premier temps vous disposerez d'un niveau de laboratoires qui vous permettra de convertir vos ressources.
-					plus les niveaux seront élevé dans les labos, moins vous payerez vos bases chère.</span>
-			</div>
-
 
 		</div>		
 	</div>
-	__TPL_social_services__
 </div>

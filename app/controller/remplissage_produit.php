@@ -169,7 +169,7 @@ Class remplissage_produit extends base_module
 			if($user->user_infos->argent > ($row_nb_product_possible_argent * Config::$price_for_un_product))
 			{
 				//on a pas assez de frigo, on return le nombre que le frigo peux contenir
-				$_SESSION['error_3'] = "Vous possédez beaucoup d'argent c'est très bon pour votre société";
+				$_SESSION['error_3'] = "Vous possédez beaucoup d'argent par rapport à vos consommations c'est très bon pour votre société";
 				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
 
 			}	

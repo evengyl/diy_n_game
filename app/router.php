@@ -65,6 +65,9 @@ Class router
 			else if($this->route['page'] == 'my_account')
 				$this->is_connect()->assign_bread("Mon compte")->assign_mod();
 
+			else if($this->route['page'] == 'shop')
+				$this->is_connect()->assign_bread("Marché et shop de vente")->assign_mod();
+
 			else if($this->route['page'] == 'documentation')
 				$this->assign_bread("Documentation")->assign_mod();
 

@@ -20,15 +20,14 @@
 		        <li><?php echo (!isset($_SESSION['pseudo']))?'<a href="?page=login">Se connecter</a>' : ''; ?></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=game_home">Accès au Jeu</a>' : ''; ?></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=classement">Classement</a>' : ''; ?></li>
-		        <li><a href="#">Nouveautés</a></li>
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=my_account">Mon compte</a>' : ''; ?></li>
-		        <li><a href="?page=test">Test</a></li>
+		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=test">Test</a>' : ''; ?></li>
 		        <li class="dropdown">
 		          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Un problème ?&nbsp;<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
 		            <li><a href="?page=documentation">Consulter la doc</a></li>
 		            <li><a href="#">Forum</a></li>
-		            <li><a href="?page=contact">Contactez-moi</a></li>
+		            <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=contact">Contactez-moi</a>' : ''; ?></li>
 		          </ul>
 		        </li>
 		      </ul>

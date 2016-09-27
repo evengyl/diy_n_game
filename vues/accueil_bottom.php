@@ -43,4 +43,4 @@
 	<center><img src="<?= Config::$path_public; ?>/images/infographic01.png"></center>
 </div>
 
-<div class="title col-xs-12" style="margin-bottom: 50px; font-size:14px; text-align:center;">Si le jeu s'organise bien et que du monde s'y intérèsse je prendrai le temps de l'améliorer sans relache et peux-être organiser quelque concours pour vous faire gagner de vrais juice !!!</div>
+<div class="title col-xs-12" style="margin-bottom: 50px; font-size:14px; text-align:center;">Si le jeu s'organise bien et que du monde s'y intérèsse je prendrai le temps de l'améliorer sans relache et peux-être organiser quelques concours pour vous faire gagner de vrais juice !!!</div>

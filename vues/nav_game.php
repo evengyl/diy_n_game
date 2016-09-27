@@ -82,20 +82,18 @@
 
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Marchés d'offre
+						<a style="color:white;" href="?page=shop">
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Marchés d'offre et shop
 						</a>
 					</li>
 
 
 					<li class="presentation cl-effect-14">
 						<a style="color:white;" href="#">
-							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Statstiques des ressources
+							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Notes et Versions du jeu
 						</a>
 					</li>
-
 				</ul>
-
 			</div>
 		</nav>
 	</div>

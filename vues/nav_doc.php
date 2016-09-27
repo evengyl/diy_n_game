@@ -32,19 +32,7 @@
 						</a>
 					</li>
 
-					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#titre4">
-							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Titre 4
-						</a>
-					</li>
-
-					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#titre5">
-							<span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Titre 5
-						</a>
-					</li>
 				</ul>
-
 			</div>
 		</nav>
 	</div>

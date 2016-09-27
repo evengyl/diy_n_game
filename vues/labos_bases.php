@@ -1,6 +1,6 @@
 <div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
 	__TPL_nav_game__
-	<div class="col-lg-8" style="margin-top:1px;">
+	<div class="col-lg-9" style="margin-top:1px;">
 
 		<div class="col-lg-12" style="background:#232D3B;">
 			<div class="col-lg-4">
@@ -62,5 +62,4 @@
 			</div>
 		</div>	
 	</div>
-	__TPL_social_services__
 </div>

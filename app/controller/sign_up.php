@@ -10,13 +10,13 @@ Class sign_up extends base_module
 			parent::__construct($module_tpl_name, $user);
 
 		if(isset($_POST['return_form_complet']))
-			$this->doIt($_POST);
+			$this->traitement_post_inscription($_POST);
 		
 		return $this->render();
 	}
 
 
-	public function doIt($post)
+	public function traitement_post_inscription($post)
 	{
 
 		if(isset($post['return_form_complet'])) //on s'assure qu'aucun erreur est générée si pas logged
@@ -26,10 +26,10 @@ Class sign_up extends base_module
 			{
 			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = $user->check_post_sign_up_and_my_account($post['pseudo']);
-			    	$password = $user->check_post_sign_up_and_my_account($post['password-1']);
-			    	$password_verification = $user->check_post_sign_up_and_my_account($post['password-2']);
-			    	$email = $user->check_post_sign_up_and_my_account($post['email']);
+			    	$pseudo = user::check_post_sign_up_and_my_account($post['pseudo']);
+			    	$password = user::check_post_sign_up_and_my_account($post['password-1']);
+			    	$password_verification = user::check_post_sign_up_and_my_account($post['password-2']);
+			    	$email = user::check_post_sign_up_and_my_account($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -60,6 +60,15 @@ Class sign_up extends base_module
 							$req_sql->ctx->login = $pseudo;
 							$req_sql->ctx->password = $password;
 							$req_sql->ctx->last_connect = $this->time_now;
+							$req_sql->ctx->avertissement = 0;
+							$req_sql->ctx->level = 0;
+							$req_sql->ctx->level_culture_vg = 0;
+							$req_sql->ctx->level_usine_pg = 0;
+							$req_sql->ctx->level_labos_bases = 0;
+							$req_sql->ctx->last_culture_vg = 0;
+							$req_sql->ctx->last_usine_pg = 0;
+							$req_sql->ctx->point_vente = 0;
+							$req_sql->ctx->point = 0;
 							$req_sql->ctx->list_arome_not_have = user_ressources::get_string_all_id_aromes();
 							$req_sql->table = "login";
 							$this->insert_into($req_sql);
@@ -127,6 +136,7 @@ Class sign_up extends base_module
 			$id_user = $res_sql[0]->id;
 			unset($res_sql);
 		
+			unset($req_sql);
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
 			$req_sql->ctx->id_user = $id_user;
@@ -182,7 +192,7 @@ Class sign_up extends base_module
 			$req_sql->ctx->flacon = Config::$flacon;
 			$req_sql->table = "hardware";
 
-			$this->update($req_sql);
+			$this->insert_into($req_sql);
 			unset($req_sql);
 		}
 
