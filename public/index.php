@@ -85,7 +85,7 @@ if(!empty($_SESSION['error']))
 {
 	affiche_pre($_SESSION['error']);
 }
-//affiche_pre($user);
+affiche_pre($user);
 //affiche_pre(Config::$list_req_sql);
 //affiche_pre("Executer en ".(float)$time_laps);
 

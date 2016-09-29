@@ -89,7 +89,7 @@
 
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="#">
+						<a style="color:white;" href="?page=note_and_version">
 							<span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Notes et Versions du jeu
 						</a>
 					</li>

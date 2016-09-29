@@ -26,7 +26,7 @@
 		          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Un problème ?&nbsp;<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
 		            <li><a href="?page=documentation">Consulter la doc</a></li>
-		            <li><a href="#">Forum</a></li>
+		            <li><a href="?page=partenaire">Partenaire(s)</a></li>
 		            <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=contact">Contactez-moi</a>' : ''; ?></li>
 		          </ul>
 		        </li>

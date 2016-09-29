@@ -135,16 +135,61 @@
 							<h3 class="title">&nbsp;Exemple :</h3>
 							<table class="table table-stripped table-hover" style="color:white;">
 								<tr class="success" style="color:black;">
-									<th>Recherche n°1 à <?= Config::$price_search_1 ?>€ :</th><td><b><?= Config::$chance_to_win_1 ?>% de chances de tomber sur un arôme</td>
+									<th style="font-weight:500;">
+										Prix de la Recherche N°1 :<br>
+										De base est à : <b style="color:red;"><?= Config::$price_search_1_de_base ?>€<br></b>
+										Avec amélioration est à <b style="color:green;"><?= Config::$price_search_1 ?>€</b>
+									</th>
+
+									<td>
+										De base : <b style="color:red;"><?= Config::$chance_to_win_1_de_base ?>%</b><br>
+										Avec Amélioration : <b style="color:green;"><?= Config::$chance_to_win_1 ?>%</b>
+										<br>De chances de tomber sur un arôme
+									</td>
 								</tr>
 								<tr class="success" style="color:black;">
-									<th>Recherche n°2 à <?= Config::$price_search_2 ?>€ :</th><td><b><?= Config::$chance_to_win_2 ?>% de chances de tomber sur un arôme</td>
+									<th style="font-weight:500;">
+										Prix de la Recherche N°1 :<br>
+										De base est à : <b style="color:red;"><?= Config::$price_search_2_de_base ?>€<br></b>
+										Avec amélioration est à <b style="color:green;"><?= Config::$price_search_2 ?>€</b>
+									</th>
+
+									<td>
+										De base : <b style="color:red;"><?= Config::$chance_to_win_2_de_base ?>%</b><br>
+										Avec Amélioration : <b style="color:green;"><?= Config::$chance_to_win_2 ?>%</b>
+										<br>De chances de tomber sur un arôme
+									</td>
 								</tr>
 								<tr class="success" style="color:black;">
-									<th>Recherche n°3 à <?= Config::$price_search_3 ?>€ :</th><td><b><?= Config::$chance_to_win_3 ?>% de chances de tomber sur un arôme</td>
+									<th style="font-weight:500;">
+										Prix de la Recherche N°1 :<br>
+										De base est à : <b style="color:red;"><?= Config::$price_search_3_de_base ?>€<br></b>
+										Avec amélioration est à <b style="color:green;"><?= Config::$price_search_3 ?>€</b>
+									</th>
+
+									<td>
+										De base : <b style="color:red;"><?= Config::$chance_to_win_3_de_base ?>%</b><br>
+										Avec Amélioration : <b style="color:green;"><?= Config::$chance_to_win_3 ?>%</b>
+										<br>De chances de tomber sur un arôme
+									</td>
 								</tr>
 								<tr class="success" style="color:black;">
-						 			<th>Recherche perso àpd <?= Config::$price_search_3 ?> + <?= Config::$price_search_3 ?> par <?= Config::$chance_to_win_1 ?>% : ex <?= Config::$price_search_3*2 ?>€</th><td><b><?= Config::$chance_to_win_3 ?>% + <?= Config::$chance_to_win_1 ?>% extra de chances de tomber sur un arôme</td>					 					
+						 			<th>
+						 				Recherche perso àpd 
+						 				<b style="color:green;"><?= Config::$price_search_3 ?>€</b>
+						 				 + 
+						 				<b style="color:green;"><?= Config::$price_search_3 ?>€</b>
+						 				par
+						 				<b style="color:green;"><?= Config::$chance_to_win_1 ?>%</b>
+						 				 : ex <b style="color:green;"><?= Config::$price_search_3*2 ?>€</b>
+					 				</th>
+
+					 				<td>
+					 					<b><b style="color:green;"><?= Config::$chance_to_win_3 ?>%</b>
+					 					+
+					 					<b style="color:green;"><?= Config::$chance_to_win_1 ?>%</b> 
+					 					extra de chances de tomber sur un arôme
+				 					</td>					 					
 								</tr>
 							</table>
 						</div>

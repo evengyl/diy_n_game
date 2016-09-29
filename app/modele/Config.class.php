@@ -91,10 +91,16 @@ class Config
     public static $price_search_1 = 1000;
     public static $price_search_2 = 2500;
     public static $price_search_3 = 5000;
+    public static $price_search_1_de_base = 1000;
+    public static $price_search_2_de_base = 2500;
+    public static $price_search_3_de_base = 5000;
 
     public static $chance_to_win_1 = 10;
     public static $chance_to_win_2 = 25;
     public static $chance_to_win_3 = 50;
+    public static $chance_to_win_1_de_base = 10;
+    public static $chance_to_win_2_de_base = 25;
+    public static $chance_to_win_3_de_base = 50;
     public static $time_search_for_one_k_argent_depenser = 3600;
     //end
 
@@ -139,6 +145,22 @@ class Config
     public static $sell_product_random = 15;
     public static $sell_product_not_random = 7;
     //end
+
+
+    //amelioration et recherhce
+        public static $array_name_search_and_price = 
+                                            array(
+                                               "price_search_1" => array('prix_level' => 10000, 'level_max' => 19),
+                                               "price_search_2" => array('prix_level' => 15000, 'level_max' => 19),
+                                               "price_search_3" => array('prix_level' => 20000, 'level_max' => 19),
+                                               "chance_to_win_1" => array('prix_level' => 20000, 'level_max' => 50),
+                                               "chance_to_win_2" => array('prix_level' => 30000, 'level_max' => 50),
+                                               "chance_to_win_3" => array('prix_level' => 40000, 'level_max' => 50),
+                                               "time_search_for_one_k_argent_depenser" => array('prix_level' => 50000, 'level_max' => 50),
+                                               "prix_vingt_quatre_vingt" => array('prix_level' => 15000, 'level_max' => 30),
+                                               "prix_cinquante_cinquante" => array('prix_level' => 15000, 'level_max' => 30),
+                                               "prix_quatre_vingt_vingt" => array('prix_level' => 15000, 'level_max' => 30),
+                                               "prix_cent" => array('prix_level' => 15000, 'level_max' => 30));
 
     /* fin des var utilisée par les controller */
 

@@ -44,26 +44,26 @@
 
 							foreach($row_brand_arome as $row_arome)
 							{?>
-								<div class="col-sm-6 col-md-4">
+								<div class="col-sm-6 col-md-4 col-lg-3">
 									<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 										<img src="<?= Config::$path_public.$row_arome->img ?>" style="height:130px;" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 										<div class="caption">
 											<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Nom de l'arome : <?= $row_arome->nom; ?></h3>
 
 											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG</button>
+												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG</button>
 												<input type="number" name="quantity_2080_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['2080']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG</button>
+												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG</button>
 												<input type="number" name="quantity_5050_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['5050']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG</button>
+												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG</button>
 												<input type="number" name="quantity_8020_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['8020']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 											<div class="col-lg-6">
-												<button style="margin-top:15px;" class="col-lg-12 btn btn-primary" disabled>100% VG</button>
+												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>100% VG</button>
 												<input type="number" name="quantity_1000_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['1000']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 										</div>

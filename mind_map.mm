@@ -4,7 +4,7 @@
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="flag"/>
-<node CREATED="1467097203568" HGAP="51" ID="ID_1459742802" MODIFIED="1467186889591" POSITION="left" TEXT="Aromes list" VSHIFT="-68">
+<node CREATED="1467097203568" HGAP="70" ID="ID_1459742802" MODIFIED="1475148445123" POSITION="left" TEXT="Aromes list" VSHIFT="-24">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 <icon BUILTIN="yes"/>
 <node CREATED="1467098139393" ID="ID_1950838223" MODIFIED="1474984793606" TEXT="Terminer de r&#xe9;colter les images pour les aromes">
@@ -12,7 +12,7 @@
 <icon BUILTIN="messagebox_warning"/>
 </node>
 </node>
-<node CREATED="1467098170734" HGAP="2" ID="ID_1497186222" MODIFIED="1467135610592" POSITION="left" TEXT="Etudes du march&#xe9; " VSHIFT="-44">
+<node CREATED="1467098170734" HGAP="54" ID="ID_1497186222" MODIFIED="1475148432515" POSITION="left" TEXT="Etudes du march&#xe9; " VSHIFT="-44">
 <edge COLOR="#ff3333" STYLE="sharp_bezier" WIDTH="2"/>
 <icon BUILTIN="yes"/>
 <node CREATED="1474901166809" ID="ID_1903143599" MODIFIED="1474901194511" TEXT="dans une autre version, penser a mettre un compeur de produits vendu random pour offrir des r&#xe9;compense remise &#xe0; 0 chaque semaine"/>
@@ -22,17 +22,12 @@
 <node CREATED="1467114212745" ID="ID_670523201" MODIFIED="1467135603607" POSITION="left" TEXT="Systeme d&apos;entrepot " VSHIFT="-66">
 <node CREATED="1467114337216" ID="ID_909595563" MODIFIED="1474986285285" TEXT="une date de p&#xe9;remption des aromes"/>
 </node>
-<node CREATED="1467124345941" HGAP="77" ID="ID_1386822338" MODIFIED="1467184566403" POSITION="left" TEXT="Dans le labas , pr&#xe9;voir le fait que les joueur peuvent recevoir des p&#xe9;nalit&#xe9; de qualit&#xe9;, pr&#xe9;voir que toute les semaines un jeu de d&#xe9;s est lanc&#xe9; , toujours en fct du % de labos, de le mettre a 0 pendant  2 jours il faudras pour &#xe7;a pr&#xe9;voir un controller tool qui int&#xe9;ragira avec les controller de base pour les changer ind&#xe9;pendamment de son propre fonctionnement" VSHIFT="23"/>
+<node CREATED="1467124345941" HGAP="100" ID="ID_1386822338" MODIFIED="1475148430156" POSITION="left" TEXT="Dans le labas , pr&#xe9;voir le fait que les joueur peuvent recevoir des p&#xe9;nalit&#xe9; de qualit&#xe9;, pr&#xe9;voir que toute les semaines un jeu de d&#xe9;s est lanc&#xe9; , toujours en fct du % de labos, de le mettre a 0 pendant  2 jours il faudras pour &#xe7;a pr&#xe9;voir un controller tool qui int&#xe9;ragira avec les controller de base pour les changer ind&#xe9;pendamment de son propre fonctionnement" VSHIFT="-60"/>
 <node CREATED="1467184687130" ID="ID_1379161753" MODIFIED="1467186828370" POSITION="right" TEXT="l faut augmenter le cout pour la frabication des bases, vis a vis des ressource primaire car trop simple d&apos;en avoir bcp">
 <icon BUILTIN="yes"/>
 </node>
 <node CREATED="1467184957179" ID="ID_420878748" MODIFIED="1467185002683" POSITION="right" TEXT="Attention que actuellement l&apos;agout d&apos;arome n&apos;est pas possible car la fct qui cr&#xe9; le tab des aromes est pr&#xe9;vue pour que les marque se suivent sans e m&#xe9;langer , a corriger">
 <icon BUILTIN="messagebox_warning"/>
-</node>
-<node CREATED="1467269319557" ID="ID_631958755" MODIFIED="1474538876389" POSITION="left" TEXT="Cr&#xe9;ation de produit avec Ar&#xf4;mes dedans">
-<node CREATED="1467269662414" ID="ID_919781368" MODIFIED="1467269715479" TEXT="Les nouvvelles ressources seront stokee &#xe9;galement dans la table bases avec le m&#xea;me non que leur bases propre mais avec _10ml en plus"/>
-<node CREATED="1472136524185" ID="ID_1326963830" MODIFIED="1472136572991" TEXT="Pr&#xe9;voir de changer le systeme de stockage des promduits dans la bases car la c&apos;est (id:nb) mais il faut que ce soit (id:nb:bases)"/>
-<node CREATED="1474538878108" ID="ID_939003000" MODIFIED="1474538890809" TEXT="Probleme de creation multiple base dans un seul produit"/>
 </node>
 <node CREATED="1467817311805" ID="ID_1368231470" MODIFIED="1467817330927" POSITION="right" TEXT="V&#xe9;rifier que toute les var qui d&#xe9;pende du config soit bien utilis&#xe9;e avec le config::"/>
 <node CREATED="1470922085653" ID="ID_1886922511" MODIFIED="1470922107455" POSITION="right" TEXT="Dans les tools, pr&#xe9;voir l&apos;ajout des aromes , pour les mettre a jour ext"/>
@@ -45,5 +40,6 @@
 <node CREATED="1474986806416" HGAP="-1" ID="ID_1454246367" MODIFIED="1474986832064" POSITION="left" TEXT="Controller  : Search arome" VSHIFT="59">
 <node CREATED="1474986817168" ID="ID_388511094" MODIFIED="1474986827796" TEXT="Regarder pour mettre le prix de base sans am&#xe9;lioration"/>
 </node>
+<node CREATED="1475150149503" HGAP="3" ID="ID_467446498" MODIFIED="1475150181369" POSITION="left" TEXT="Pour les deux usine et le labos, mettre le temps de finition du level dans le tableau de base" VSHIFT="37"/>
 </node>
 </map>

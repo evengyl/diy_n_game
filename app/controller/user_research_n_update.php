@@ -195,31 +195,13 @@ Class user_research_n_update extends user
 
 	}
 
-	public function check_update_en_cours($name_batiment_from_controller = "", $prix_level_up)
+	public function check_update_en_cours()
 	{
-		if(!empty($this->user_obj->update))
-		{	
-		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans	
-			foreach($this->user_obj->update as $row_update)
-			{
-				if($row_update->name_batiment == $name_batiment_from_controller)
-					return 1;	//la consctruction était déjà lancée quand le joueur c'est logger
-			}
-			//si il sort de la boucle c'est qu'il n'a rien trouver dans la base
-			//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($this->user_obj->user_infos->argent >= $prix_level_up)
-				return 0;	//la tout est ok rien n'est lancé et il as assez d'argnet
-			else
-				return 2;	//2 egale que on a pas l'argent
-		}
+		$i = 0;
+		if(isset($this->user_obj->update->{0}))
+			return true;
 		else
-		{
-			//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($this->user_obj->user_infos->argent >= $prix_level_up)
-				return 0;
-			else
-				return 2;	
-		}
+			return false;
 	}
 
 } 

@@ -252,7 +252,7 @@ Class base_module extends all_query
 	{
 		$this->time_finish = "";
 		$time_now = date("U");
-		$this->time_finish = $time_now + $time_construct;
+		return $time_now + $time_construct;
 	}
 
 
@@ -306,7 +306,7 @@ Class base_module extends all_query
 
 	public function verifiy_argent_user($value_verif)
 	{
-		if((int)$value_verif < (int)$this->user_obj->user_infos->argent)
+		if((int)$value_verif <= (int)$this->user_obj->user_infos->argent)
 		{
 			return 1;
 		}

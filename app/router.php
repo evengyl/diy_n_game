@@ -71,6 +71,12 @@ Class router
 			else if($this->route['page'] == 'documentation')
 				$this->assign_bread("Documentation")->assign_mod();
 
+			else if($this->route['page'] == 'note_and_version')
+				$this->assign_bread("Note et version du jeu plus explications")->assign_tpl();
+
+			else if($this->route['page'] == 'partenaire')
+				$this->assign_bread("Partenaire")->assign_tpl();
+
 			else
 			{
 				unset($this->route['page']);

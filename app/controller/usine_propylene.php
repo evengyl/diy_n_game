@@ -20,8 +20,8 @@ Class usine_propylene extends base_module
 				if($this->alert_construction_en_cours == 0)
 				{
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
-					$this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
-					user_batiments::insert_construction_en_cours($this->name_batiment, $this->time_finish);
+					$time_finish = $this->time_finish_construct($this->user_obj->usine_propylene->time_construct);
+					user_batiments::insert_construction_en_cours($this->name_batiment, $time_finish);
 					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 					$this->set_argent_user($this->user_obj->usine_propylene->prix, "-");
 					$this->user_obj->get_variable_user();
@@ -29,10 +29,14 @@ Class usine_propylene extends base_module
 				}
 			}
 		}
+		else
+		{
+			$time_finish = 0;
+		}
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur
 		$this->set_time_finish($this->name_batiment);
 
-		return $this->assign_var("user", $this->user_obj)->assign_var("time_finish", $this->time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
+		return $this->assign_var("user", $this->user_obj)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
 	}
 
 }
