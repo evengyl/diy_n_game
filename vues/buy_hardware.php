@@ -50,6 +50,30 @@
 				</div>
 			</form>
 
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/frigo_100.png" ?>" class="img-responsive" alt="Frigo">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_100; ?>€</strong></h3>
+							<input name="buy_frigo_100" value="Acheter 100 Frigos" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/frigo_1000.png" ?>" class="img-responsive" alt="Frigo">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_1000; ?>€</strong></h3>
+							<input name="buy_frigo_1000" value="Acheter 1000 Frigos" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Les frigos servent à stocker les produits finis, <?= Config::$nb_product_per_frigo; ?> produits par frigo, Si vous ne possédez pas assez de frigo, vous ne pourrez plus produire de produits
 			</h3>
@@ -90,6 +114,19 @@
 				</div>
 			</form>
 
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/pipette_1000.png" ?>" class="img-responsive" alt="pipette">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_1000; ?>€</strong></h3>
+							<input name="buy_pipette_1000" value="Acheter 100 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+
 
 			<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
 				Les flacons vides doivent être acheté avant le lancement du remplissage des produits, stockage illimité.
@@ -126,6 +163,18 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_1000; ?>€</strong></h3>
 							<input name="buy_flacon_1000" value="Acheter 1000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form method="post" action="?page=buy_hardware">
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+						<img src="<?= Config::$path_public."/images/flacon_10000.png" ?>" class="img-responsive" alt="pipette">
+						<div class="caption">
+							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10000 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_10000; ?>€</strong></h3>
+							<input name="buy_flacon_10000" value="Acheter 1000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
 						</div>
 					</div>
 				</div>

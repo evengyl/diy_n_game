@@ -11,6 +11,8 @@ Class shop extends base_module
 
 		parent::__construct($module_tpl_name, $user);
 
+		//va me donner la list des aromes qui sont en random actuellement venant de la base de données
+		$tab_arome_random = $this->get_list_arome_random_actuel();
 
 //partie traitement des commande random
 		//avant de lancer un marcher aleatoire il faut recup la derniere date de l'aléatoire, on va stocker toute les semaines les produits aléatoire
@@ -21,12 +23,18 @@ Class shop extends base_module
 
 			//va boucler sur les produits random pour creer les requete et les envoyer directement en base de données
 			$this->insert_new_random_list($random_list);
+
+
+			//partie point bonus grace au vente
+			if(intval($user->user_infos->produit_vendu_week) >= 1000)
+			{
+				//va donner 3 point de vente bonnus tout les 1000 produits vendu 
+				$this->set_point_user_vente((intval($user->user_infos->produit_vendu_week)*15)*3);
+			}
+			//fin de la partie des bonus de point grace au vente
 		}
 
 
-
-		//va me donner la list des aromes qui sont en random actuellement venant de la base de données
-		$tab_arome_random = $this->get_list_arome_random_actuel();
 		//va traiter et synchroniser le tableau de prod aléatoire pour me rendre le meme tableau avec le nombre de produit si il y a , que le joueur possède
 		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random, $user);
 
@@ -47,6 +55,7 @@ Class shop extends base_module
 		//on va ici avec le tab des produit random et celui de ce que le joueur à, établir un tab avec uniquement ce que le joueeur à qui n'est pas dans la liste des product random
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter, $user);
 
+
 		//traitement du post voir l'autre c'est la meme chose pour les random
 		if(isset($_POST))
 		{
@@ -57,13 +66,19 @@ Class shop extends base_module
 		}
 // fin de la partie normal
 
-		$user->get_variable_user();
-		//pour remettre a jour le tpl tout de suite
-		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random, $user);
-		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter, $user);
 
-		return $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)->assign_var("tab_arome_with_user_value", $tab_arome_with_user_value)->render();
+
+		$user->get_variable_user();
+		$tab_final_product_traiter = user_ressources::set_list_product_acquis_for_tpl($user);
+		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter, $user);
+		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random, $user);
+
+
+		return $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)->assign_var("tab_arome_with_user_value", $tab_arome_with_user_value)->assign_var("user", $user)->render();
 	}
+
+
+
 
 	public function traitement_vente_form_post_not_random($post, $tab_arome_with_user_value, $user)
 	{
@@ -111,7 +126,6 @@ Class shop extends base_module
 		}
 
 
-
 		if($form_ok)//ok 
 		{
 			// on a mtn le propre tab avec toute les infos sur ce que le user vends , reste plus qu'a taiter sa demande 
@@ -121,10 +135,21 @@ Class shop extends base_module
 			{
 				//on calcule le total de la vente
 				$total_vente = Config::$sell_product_not_random * $row_user_prod_vente->nb_vendu;
+
+				$user->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
+
+				$req_sql = new stdClass;
+				$req_sql->table = "login";
+				$req_sql->where = "id = '".$user->user_infos->id."'";
+				$req_sql->ctx = new stdClass;
+				$req_sql->ctx->produit_vendu_total = $user->user_infos->produit_vendu_total;
+				$res_sql = $this->update($req_sql);
+				unset($req_sql);
+
 				//on lui ajoute son argent avant pour le récompenser même en cas de bug
 				$this->set_argent_user($total_vente, '+');
 				// et mtn il faut enlever les prod du user
-				user_ressources::maj_product_list_in_bsd($row_user_prod_vente->id, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base_bsd, $ajout_or_delete = '-', $user);
+				user_ressources::maj_product_list_in_bsd($row_user_prod_vente->id, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base_bsd, $row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-', $user);
 			}
 			return $total_vente;
 		}
@@ -185,6 +210,7 @@ Class shop extends base_module
 		//n recois le post avec tout les produits commander et ceux qui ne le sont pas son à 0, il faut quand même vérifié que ceux commander corresponde car on ne sais jamais avec les form...
 		//premiere étape, controller que les id recus et les quantités sont bonne
 		// ps : le tab post contient key:id_du_produits_dans_le_tab_random et en value:le_nb_de_produits_vendu
+
 		if(isset($post['secure_shop_random']))
 			unset($post['secure_shop_random']);
 
@@ -233,11 +259,24 @@ Class shop extends base_module
 			foreach($tab_arome_random_with_user_value as $row_user_prod_vente)
 			{
 				//on calcule le total de la vente
-					$total_vente = Config::$sell_product_random * $row_user_prod_vente->nb_vendu;
+				$total_vente = Config::$sell_product_random * $row_user_prod_vente->nb_vendu;
+				$user->user_infos->produit_vendu_week += $row_user_prod_vente->nb_vendu;
+				$user->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
+
+
+				$req_sql = new stdClass;
+				$req_sql->table = "login";
+				$req_sql->where = "id = '".$user->user_infos->id."'";
+				$req_sql->ctx = new stdClass;
+				$req_sql->ctx->produit_vendu_total = $user->user_infos->produit_vendu_total;
+				$req_sql->ctx->produit_vendu_week = $user->user_infos->produit_vendu_week;
+				$res_sql = $this->update($req_sql);
+				unset($req_sql);
 				//on lui ajoute son argent avant pour le récompenser même en cas de bug
 				$this->set_argent_user($total_vente, '+');
+
 				// et mtn il faut enlever les prod du user
-				user_ressources::maj_product_list_in_bsd($row_user_prod_vente->id_aromes, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base, $ajout_or_delete = '-', $user);
+				user_ressources::maj_product_list_in_bsd($row_user_prod_vente->id_aromes, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base ,$row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-', $user);
 			}
 			return $total_vente;
 		}
@@ -287,7 +326,11 @@ Class shop extends base_module
 		}
 		else
 		{
-			return false;
+			foreach($tab_arome_random as $key => $row_random_arome)
+			{
+				$tab_arome_random[$key]->nb_user_have = 0;
+			}
+			return $tab_arome_random;
 		}
 
 	}
@@ -379,7 +422,7 @@ Class shop extends base_module
 
 	public function verify_date()
 	{
-		
+		//vérifier la date de produits random pour voir si il sont encore valide ou pas 
 
 		$req_sql = new StdClass();
 		$req_sql->table = "random_shop";

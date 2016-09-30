@@ -19,10 +19,14 @@ Class synthese_bases extends base_module
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
-		$this->nb_to_create[2080] = $this->nb_bases(0.2,0.8, $user);
-		$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5, $user);
-		$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2, $user);
-		$this->nb_to_create[1000] = $this->nb_bases(1,0, $user);
+		if($user->user_infos->last_culture_vg > Config::$nb_plantes_for_littre && $user->user_infos->last_usine_pg > Config::$nb_propylene_for_littre)
+		{
+			$this->nb_to_create = $this->nb_bases($user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
+			//$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
+			//$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
+			//$this->nb_to_create[1000] = $this->nb_bases(1,0, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);	
+		}
+		
 
 
 		foreach($this->nb_to_create as $key => $values)
@@ -234,66 +238,80 @@ Class synthese_bases extends base_module
 
 
 
-	public function nb_bases($dosage_vg = 1, $dosage_pg = 1, $user)
+	public function nb_bases($litter_vg, $litter_pg, $argent)
 	{
-		$nb_vg = intval(floor($this->user_obj->user_infos->litter_vg / $dosage_vg));
 
-		if($dosage_pg != 0)
-			$nb_pg = intval(floor($this->user_obj->user_infos->litter_pg / $dosage_pg));
-		else
-			$nb_pg = 0;
-
-
-
-		if($nb_vg > $nb_pg)
-			$nb_ok = $nb_pg;
-		else if($nb_vg < $nb_pg)
-			$nb_ok = $nb_vg;
-
-		else
-			$nb_ok = $nb_vg;
-
-		//contradictions du 100% vg qui ne demande pas de pg donc qui sort du lot
-		if($dosage_vg == 1) //donc 100%
-			$nb_ok = $nb_vg;
-
-			//zone de test
-			$prix_vingt_quatre_vingt = Config::$prix_vingt_quatre_vingt;
-			$prix_cinquante_cinquante = Config::$prix_cinquante_cinquante;
-			$prix_quatre_vingt_vingt =  Config::$prix_quatre_vingt_vingt;
-			$prix_cent = Config::$prix_cent;
-
-
-		$argent_user = $this->user_obj->user_infos->argent;
-
-		if($dosage_vg == 0.2 && $dosage_pg == 0.8)
+		$tab_bases = array("2080", "5050", "8020", "1000");
+		foreach($tab_bases as $row_bases)
 		{
-			$prix_total_estimation_de_prod = intval($prix_vingt_quatre_vingt * $nb_ok);
-			$list_price_user = $prix_vingt_quatre_vingt;
-		}
-		else if($dosage_vg == 0.5 && $dosage_pg == 0.5)
-		{
-			$prix_total_estimation_de_prod = intval($prix_cinquante_cinquante * $nb_ok);
-			$list_price_user = $prix_cinquante_cinquante;
-		}
-		else if($dosage_vg == 0.8 && $dosage_pg == 0.2)
-		{
-			$prix_total_estimation_de_prod = intval($prix_quatre_vingt_vingt * $nb_ok);
-			$list_price_user = $prix_quatre_vingt_vingt;
-		}
-		else if($dosage_vg == 1 && $dosage_pg == 0)
-		{
-			$prix_total_estimation_de_prod = intval($prix_cent * $nb_ok);
-			$list_price_user = $prix_cent;
-		}
-		//donne le prix total que couterais toute la création de base dans cette sorte ci
-		// il faut mtn déterminer si le joueur peux tout faire avec
+			if($row_bases == "2080")
+			{
+				$nb_bases_ok_vg = $litter_vg / 0.2;
+				$nb_bases_ok_pg = $litter_pg / 0.8;
 
-		if($prix_total_estimation_de_prod <= $argent_user)
-			return $nb_ok; // il peux de toute facon tout créer
-			/*
-		else
-			return $nb_ok_after_calcule_argent = floor($argent_user / $list_price_user);
-			*/
+				if($nb_bases_ok_vg <= $nb_bases_ok_pg)
+					$nb_bases_ok = $nb_bases_ok_vg;
+				else
+					$nb_bases_ok = $nb_bases_ok_pg;
+
+				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+					$tab_bases['2080'] = $nb_bases_ok;
+				else
+					$tab_bases['2080'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+			}	
+
+			if($row_bases == "5050")
+			{
+				$nb_bases_ok_vg = $litter_vg / 0.5;			
+				$nb_bases_ok_pg = $litter_pg / 0.5;
+
+				if($nb_bases_ok_vg <= $nb_bases_ok_pg)
+					$nb_bases_ok = $nb_bases_ok_vg;
+				else
+					$nb_bases_ok = $nb_bases_ok_pg;
+
+				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+					$tab_bases['5050'] = $nb_bases_ok;
+				else
+					$tab_bases['5050'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+			}	
+
+			if($row_bases == "8020")
+			{
+				$nb_bases_ok_vg = $litter_vg / 0.8;
+				$nb_bases_ok_pg = $litter_pg / 0.2;
+
+				if($nb_bases_ok_vg <= $nb_bases_ok_pg)
+					$nb_bases_ok = $nb_bases_ok_vg;
+				else
+					$nb_bases_ok = $nb_bases_ok_pg;
+
+				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+					$tab_bases['8020'] = $nb_bases_ok;
+				else
+					$tab_bases['8020'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+			}	
+
+
+			if($row_bases == "1000")
+			{
+				$nb_bases_ok_vg = $litter_vg;
+				$nb_bases_ok_pg = $litter_vg;
+
+				if($nb_bases_ok_vg <= $nb_bases_ok_pg)
+					$nb_bases_ok = $nb_bases_ok_vg;
+				else
+					$nb_bases_ok = $nb_bases_ok_pg;
+
+				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+					$tab_bases['1000'] = $nb_bases_ok;
+				else
+					$tab_bases['1000'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+			}
+		}
+
+		unset($tab_bases[0], $tab_bases[1], $tab_bases[2], $tab_bases[3]);
+
+		return $tab_bases;
 	}
 }

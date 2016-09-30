@@ -35,6 +35,9 @@
 						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->usine_propylene->prix; ?> &euro;</b> pour lancer le prochain niveaux d'exploitation</td>
 					</tr>
 					<tr class="success" style="color:black;">
+						<th>Temps de construction :</th><td><? echo $user->usine_propylene->time_real_construct; ?></td>
+					</tr>
+					<tr class="success" style="color:black;">
 						<form method="post" action="#"><?
 				 			if($in_make == 1)
 				 			{

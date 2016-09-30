@@ -205,7 +205,7 @@ Class remplissage_produit extends base_module
 			{
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 
-				user_ressources::maj_product_list_in_bsd($match[2], $nb, $match[1], '+', $user);
+				user_ressources::maj_product_list_in_bsd($match[2], $nb, $match[1], date("U")+2592000, '+', $user);
 					//match 1 contient la base utilisée, match 2 l'id du prod	
 
 				//partie traitement du nombre pour les pipette et les flacons

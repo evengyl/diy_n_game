@@ -37,6 +37,7 @@ Class champ_glycerine extends base_module
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur
 		$this->set_time_finish($this->name_batiment);
 
+
 		return $this->assign_var("user", $this->user_obj)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
 	}
 

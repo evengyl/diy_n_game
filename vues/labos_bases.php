@@ -3,10 +3,20 @@
 	<div class="col-lg-9" style="margin-top:1px;">
 
 		<div class="col-lg-12" style="background:#232D3B;">
+
+
+			<div class="col-lg-12 explication pull-right">
+				<h3 class="title">Explication : </h3>
+				<span>Dans Diy_n_game, les laboratoires que vous achetez vous permettrons de payer la conception de vos bases moins chère.
+					Attention car beaucoup de laboratoires vont diminuer vos coût de production mais !,le revers de la médaille pourrais vous être fatale,
+					certaines personnes pourrais avoir à redire sur la sureté de leurs produits, plus vous diminuerez le coût de fabrication de vos 
+					bases plus des petit ennuis pourrait survenir :).</span>
+			</div>
+
 			<div class="col-lg-4">
 				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/labos.png">
 			</div>
-			
+
 			<div class="col-lg-8 pull-right ressource_now">
 				<h3 class="title">Actuellement vos Labos diminue vos prix de fabrication</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
@@ -24,6 +34,9 @@
 					</tr>
 					<tr class="success" style="color:black;">
 						<th>Quantité de ressource pour un littre AVEC améliorations :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
+					</tr>
+					<tr class="success" style="color:black;">
+						<th>Temps de construction :</th><td><? echo $user->labos_bases->time_real_construct; ?></td>
 					</tr>
 					<tr class="success" style="color:black;">
 						<form method="post" action="#"><?
@@ -53,13 +66,6 @@
 				</table>
 			</div>
 
-			<div class="col-lg-8 explication pull-right">
-				<h3 class="title">Explication : </h3>
-				<span>Dans Diy_n_game, les laboratoires que vous achetez vous permettrons de payer la conception de vos bases moins chère.
-					Attention car beaucoup de laboratoires vont diminuer vos coût de production mais !,le revers de la médaille pourrais vous être fatale,
-					certaines personnes pourrais avoir à redire sur la sureté de leurs produits, plus vous diminuerez le coût de fabrication de vos 
-					bases plus des petit ennuis pourrait survenir :).</span>
-			</div>
 		</div>	
 	</div>
 </div>

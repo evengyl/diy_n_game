@@ -1,5 +1,5 @@
 <h2 class='col-xs-12 title_page_game'>
-	Listes des batiments de production, pour une vues plus précises, passer par le menu de gauche
+	Listes des batiments de productions, vos stocks, liste des update et ce qu'y est lancé, pour une vues plus précises, passer par le menu de gauche
 </h2>
 <div class="col-xs-12 col-without-padding col-without-radius content_game">
 	__TPL_nav_game__
@@ -7,7 +7,39 @@
 	<div class="col-xs-12 col-md-9">
 
 
+			<div style="border:1px solid #FF7F00; padding-top:5px;" class="col-lg-12">
 
+				<h3 class='col-xs-12 title' style="margin-bottom:5px; font-size:16px;">
+					Résumé de vos produits en stock
+				</h3>
+				<?
+				if(!empty($stock))
+				{
+					foreach($stock as $brand => $row_brand_arome)
+					{
+						foreach($row_brand_arome as $row_arome)
+						{?>
+							<div class="col-sm-6 col-md-12">
+								<div class="thumbnail col-lg-12" style="padding:0px; margin-bottom:5px;">
+									<div class="caption" style="padding:2px; color:white;">
+										<h3 class="col-lg-3" style="font-size:12px; margin:7px 0 7px 0; color:white;">Nom : <?= $row_arome->nom; ?></h3>
+										<div class="col-lg-3 col-without-padding">Base : <?= $row_arome->base; ?></div>
+										<div class="col-lg-2 col-without-padding">Nombre : <?= $row_arome->nb; ?></div>
+										<div class="col-lg-4 col-without-padding">Périme dans : <?= $row_arome->date_peremption_to_rest; ?></div>
+									</div>
+								</div>
+							</div><?
+						}
+					}
+				}
+				else
+				{?>
+					<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
+						Vous n'avez pas de sotck.
+					</h3><?
+
+				}?>
+			</div>
 
 
 		<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">

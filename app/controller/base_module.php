@@ -270,7 +270,7 @@ Class base_module extends all_query
 				$reste = $reste%3600;
 				$minutes = floor($reste/60);
 				$secondes = $reste%60;
-				$row_user_obj->time_real_construct = $jours." Jours ".$heures."h : ".$minutes."m : ".$secondes;
+				$row_user_obj->time_real_construct = $jours." Jours ".$heures."h : ".$minutes."m : ".$secondes."s";
 			}
 		}
 	}

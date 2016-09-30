@@ -14,6 +14,7 @@ Class user_ressources extends user
 			$this->set_tab_prod_vg($user->user_infos->level_culture_vg, $user);
 			$this->set_tab_prod_pg($user->user_infos->level_usine_pg, $user);
 			$this->set_tab_labos($user->user_infos->level_labos_bases, $user);
+			$this->verify_peremption_product($user);
 
 			foreach($user as $row_user)
 			{
@@ -83,103 +84,7 @@ Class user_ressources extends user
  	}
 
 
- 	public function set_list_product_acquis_for_tpl($user)
- 	{
- 		//on genere le tab qui contiendra tout lesp rod
- 		$array_product_in_stock = array();
 
-		//on explode la liste des produit qui était sous forme de chaine
-		if(isset($user->product->list_product) && $user->product->list_product != "")
-		{
-			$data_from_user_product = substr($user->product->list_product, 0,-1);
-			$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
-		}
-		else
-		{
-			return false;
-		}
-
-
- 		$i = 0;
- 		foreach($array_product_in_stock_not_traited as $row_product)
-		{
-			preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
-
-			$req_sql = new stdClass();
-			$req_sql->table = "aromes";
-			$req_sql->where = "id = '".$match[2]."'";
-			$req_sql->var = "marque, nom";
-			$res_sql = $this->select($req_sql);
-			$res_sql = $res_sql[0];
-
-			$array_product_in_stock[$i] = new stdClass();
-			$array_product_in_stock[$i]->marque = $res_sql->marque;
-			$array_product_in_stock[$i]->nom = $res_sql->nom;
-			$array_product_in_stock[$i]->id = $match[2];
-			$array_product_in_stock[$i]->nb = $match[1];
-			$array_product_in_stock[$i]->base_bsd = $match[3];
-
-			if($match[3] == "2080")
-				$match[3] = "20% VG / 80% PG";
-
-			else if($match[3] == "5050")
-				$match[3] = "50% VG / 50% PG";
-
-			else if($match[3] == "8020")
-				$match[3] = "80% VG / 20% PG";
-
-			else if($match[3] == "1000")
-				$match[3] = "100% VG / 0% PG";
-
-			$array_product_in_stock[$i]->base = $match[3];
-			$i++;
-		}
-		//ici on a générer avec des requeste le meme tableau mais avec toutes les infos du produict
-
-		//tri du tableau pour avoir les marque triée 
-		$array_product_in_stock_tri = new ArrayObject($array_product_in_stock);
-		$array_product_in_stock_tri->asort();
-
-
-		$tab_final_arome_acquis_traiter = array();
-		$i = 0;
-
-		foreach($array_product_in_stock_tri as $row)
-		{
-			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
-			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
-
-			if(key($tab_final_arome_acquis_traiter) == $row->marque)
-			{
-				$name_image = $row->marque;
-				$name_image .= "_".trim($row->nom).".jpg";
-				$name_image = str_replace(" ", "_", $name_image);
-				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
-				$name_image = "/images/aromes/".$row->marque."/".$name_image;
-
-				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->nb =  $row->nb;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->base = $row->base;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->base_bsd = $row->base_bsd;
-
-			}
-			else
-			{
-				$tab_final_arome_acquis_traiter[$row->marque] = array();
-				end($tab_final_arome_acquis_traiter);
-			}
-			$i++;
-		}
-
-		return $tab_final_arome_acquis_traiter;
- 	}
 
  	public function set_all_arome_for_tpl()
  	{
@@ -391,6 +296,109 @@ Class user_ressources extends user
 		return $tab_final_arome_acquis_traiter;
 	}
 
+
+
+ 	public function set_list_product_acquis_for_tpl($user)
+ 	{
+ 		//on genere le tab qui contiendra tout lesp rod
+ 		$array_product_in_stock = array();
+
+		//on explode la liste des produit qui était sous forme de chaine
+		if(isset($user->product->list_product) && $user->product->list_product != "")
+		{
+			$data_from_user_product = substr($user->product->list_product, 0,-1);
+			$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
+		}
+		else
+		{
+			return false;
+		}
+
+
+ 		$i = 0;
+ 		foreach($array_product_in_stock_not_traited as $row_product)
+		{
+			preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
+
+			$req_sql = new stdClass();
+			$req_sql->table = "aromes";
+			$req_sql->where = "id = '".$match[2]."'";
+			$req_sql->var = "marque, nom";
+			$res_sql = $this->select($req_sql);
+			$res_sql = $res_sql[0];
+
+			$array_product_in_stock[$i] = new stdClass();
+			$array_product_in_stock[$i]->marque = $res_sql->marque;
+			$array_product_in_stock[$i]->nom = $res_sql->nom;
+			$array_product_in_stock[$i]->id = $match[2];
+			$array_product_in_stock[$i]->nb = $match[1];
+			$array_product_in_stock[$i]->base_bsd = $match[3];
+			$array_product_in_stock[$i]->date_peremption = $match[4];
+
+			if($match[3] == "2080")
+				$match[3] = "20% VG / 80% PG";
+
+			else if($match[3] == "5050")
+				$match[3] = "50% VG / 50% PG";
+
+			else if($match[3] == "8020")
+				$match[3] = "80% VG / 20% PG";
+
+			else if($match[3] == "1000")
+				$match[3] = "100% VG / 0% PG";
+
+			$array_product_in_stock[$i]->base = $match[3];
+			$i++;
+		}
+		//ici on a générer avec des requeste le meme tableau mais avec toutes les infos du produict
+
+		//tri du tableau pour avoir les marque triée 
+		$array_product_in_stock_tri = new ArrayObject($array_product_in_stock);
+		$array_product_in_stock_tri->asort();
+
+
+		$tab_final_arome_acquis_traiter = array();
+		$i = 0;
+
+		foreach($array_product_in_stock_tri as $row)
+		{
+			if(!isset($tab_final_arome_acquis_traiter[$row->marque]))
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+
+			if(key($tab_final_arome_acquis_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_arome_acquis_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->marque = $row->marque;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->nb =  $row->nb;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->base = $row->base;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->base_bsd = $row->base_bsd;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->date_peremption_unix = $row->date_peremption;
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->date_peremption_to_rest = Base_module::convert_sec_unix_in_time_real_to_rest($row->date_peremption);
+
+			}
+			else
+			{
+				$tab_final_arome_acquis_traiter[$row->marque] = array();
+				end($tab_final_arome_acquis_traiter);
+			}
+			$i++;
+		}
+
+		return $tab_final_arome_acquis_traiter;
+ 	}
+
 	public function calcul_nb_product_total($user)
 	{
 
@@ -411,7 +419,7 @@ Class user_ressources extends user
 			$total_nb_product = 0;
 			foreach($tmp_user_product_bsd->list_product[0] as $row_product)
 			{
-				preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
+				preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
 				$total_nb_product += $match[1];
 			}
 			$user->user_infos->nb_product_total = $total_nb_product;
@@ -422,12 +430,14 @@ Class user_ressources extends user
 		}
 	}
 
-	public function maj_product_list_in_bsd($id, $nb, $bases, $ajout_or_delete = '+', $user)
+	public function maj_product_list_in_bsd($id, $nb, $bases, $date_peremption, $ajout_or_delete = '+', $user)
 	{
 		$tab_product_recept = array();
 		$tab_product_recept["nb"] = $nb;
 		$tab_product_recept["id"] = $id;
 		$tab_product_recept["bases"] = $bases;
+		$tab_product_recept["date_peremption"] = $date_peremption;
+
 
 		// mais on en crée une copie pour pas foutr en l'air les autre fonction
 		//on dois aller chehcer la liste à chauqe fois dans la base car le progamme n'a pas encore encoder les nouvelle donnée car scrpit pas fini
@@ -439,6 +449,7 @@ Class user_ressources extends user
 		$tmp_user_product_bsd = $tmp_user_product_bsd[0]->list_product;
 
 		$tab_product_in_stock = array();
+
 		if($tmp_user_product_bsd != "")
 		{
 			//on explode le string de la base de données des product pour travailler
@@ -453,10 +464,11 @@ Class user_ressources extends user
 			{
 				foreach($row_product as $row)
 				{
-					preg_match('/\(([0-9]+):([0-9]+):([0-9]+)\)/', $row, $match);
+					preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $row, $match);
 					$tab_product_in_stock[$i]["nb"] = $match[1];
 					$tab_product_in_stock[$i]["id"] = $match[2];
 					$tab_product_in_stock[$i]["bases"] = $match[3];
+					$tab_product_in_stock[$i]["date_peremption"] = $match[4];
 					$i++;
 				}
 
@@ -475,10 +487,19 @@ Class user_ressources extends user
 						//on le possède en stock donc on peux vérif si la bases est la meme
 						if($prod_in_stock['bases'] == $tab_product_recept['bases'])
 						{
-							//on ajoute simplement a NB le nouveau nombre
-							$tab_product_in_stock[$key]['nb'] += $tab_product_recept['nb'];
-							$ajout = 1;
-							break;
+
+							if($prod_in_stock['date_peremption'] <= $tab_product_recept['date_peremption'])
+							{
+								$ajout = 0;
+								continue;
+							}
+							else
+							{
+								//on ajoute simplement a NB le nouveau nombre
+								$tab_product_in_stock[$key]['nb'] += $tab_product_recept['nb'];
+								$ajout = 1;
+								break;
+							}
 						}
 						else
 						{
@@ -515,7 +536,7 @@ Class user_ressources extends user
 				//on fait toutes les verif pour voir si on a déjà du produit et on ajoute ou supprime
 				foreach($tab_product_in_stock as $key => $prod_in_stock)
 				{
-					if($prod_in_stock['id'] == $tab_product_recept['id'] && $prod_in_stock['bases'] == $tab_product_recept['bases'])
+					if($prod_in_stock['id'] == $tab_product_recept['id'] && $prod_in_stock['bases'] == $tab_product_recept['bases'] && $prod_in_stock['date_peremption'] == $tab_product_recept['date_peremption'])
 					{
 						$tab_product_in_stock[$key]['nb'] -= $tab_product_recept['nb'];
 						if($tab_product_in_stock[$key]['nb'] == "0")
@@ -643,6 +664,56 @@ Class user_ressources extends user
 		}
 	}
 
+
+
+
+ 	public function verify_peremption_product($user)
+ 	{
+ 		if(isset($user->product->list_product) && !empty($user->product->list_product))
+ 		{
+ 			$list_product = $user->product->list_product;	
+
+
+			//on explode le string de la base de données des product pour travailler
+			$tmp_user_product_bsd = substr($list_product, 0, -1);
+			$tmp_user_product_bsd = array(explode(",", $tmp_user_product_bsd));
+
+			$tab_product_in_stock = array();
+			$array_poubelle = array();
+			$i = 0;
+			$j = 0;
+			foreach($tmp_user_product_bsd as $row_product)
+			{
+				foreach($row_product as $key_product => $value_product)
+				{
+					preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $value_product, $match);
+					$tab_product_in_stock[$i]["nb"] = $match[1];
+					$tab_product_in_stock[$i]["id"] = $match[2];
+					$tab_product_in_stock[$i]["bases"] = $match[3];
+					$tab_product_in_stock[$i]["date_peremption"] = $match[4];
+					
+
+					//mtn on va vérifié la date de préemption, ajouter un array dnas le user avec les produit périmé et les afficher dans un new onglet
+
+					if($tab_product_in_stock[$i]["date_peremption"] < date("U"))
+					{
+						$array_poubelle[$j] = $value_product;
+						//on l'ajoute au array poubelle et on le delete de l'autre array
+						$this->maj_product_list_in_bsd($tab_product_in_stock[$i]["id"], $tab_product_in_stock[$i]["nb"], $tab_product_in_stock[$i]["bases"], $tab_product_in_stock[$i]["date_peremption"], $ajout_or_delete = '-', $user);
+						
+						$j++;
+					}
+
+					$i++;
+				}
+			}
+ 		}
+ 		else
+ 			return 0;
+ 	}
+
+
+
  	public function set_tab_prod_vg($level_champ_glycerine, $user)
  	{
 		$tmp_level = $level_champ_glycerine;
@@ -650,7 +721,7 @@ Class user_ressources extends user
 		$obj_user_prod_vg->level = $tmp_level;
 		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.6) * 42)) * Config::$rate_vg_prod);
 		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
-		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 2);
+		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4);
 		$user->champ_glycerine = $obj_user_prod_vg;
  	}
 
@@ -662,7 +733,7 @@ Class user_ressources extends user
 		$obj_user_prod_pg->level = $tmp_level;
 		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.4) * 42)) * Config::$rate_pg_prod);
 		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
-		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2.1) * 42)) * 2);
+		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4.5);
 		$user->usine_propylene = $obj_user_prod_pg;
  	}
 
@@ -674,8 +745,7 @@ Class user_ressources extends user
 		$obj_user_labos->level = $tmp_level;
 		$obj_user_labos->pourcent_down = $tmp_level * Config::$rate_labos_pourcent_down;
 		$obj_user_labos->prix = floor((pow($tmp_level,2.5) * 42));
-		$obj_user_labos->time_construct = floor(((pow($tmp_level,2.2) * 42)) * 2);
+		$obj_user_labos->time_construct = floor(((pow($tmp_level,2) * 42)) * 6);
 		$user->labos_bases = $obj_user_labos;
  	}
-
 }

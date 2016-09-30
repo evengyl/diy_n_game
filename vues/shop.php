@@ -13,6 +13,27 @@
 					Bonne chance à tous !!!
 				</span>
 			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<h3 class="title">Petit bonus : </h3>
+				<span>
+					Vérifié vos produits en stock avec vos date de péremption... si elle dépasse la date limite, adieu à la poubelle.
+				</span>
+			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<span style="font-size:13px;">
+					Nombre total de produits vendus cette semaine : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_week; ?></b> (Remis à zéro à chaque changement de produits aléatoire).
+				</span>
+			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<span style="font-size:13px;">
+					Nombre total de produits vendus : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_total; ?></b> 
+				</span>
+			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<span style="font-size:13px;">
+					Tout les 1000 produits vendus, en fin de semaine vous receverez 3 points de ventes en bonus !!! ce qui équivaut à 200 produits au top vendus !!
+				</span>
+			</div>
 			
 			<form method="post" action="?page=shop">
 
@@ -70,7 +91,7 @@
 					</div><?
 					//je vais envoyer au formulaire la clé du tab contenant le produits, plus facile à manipuler
 					$i = 0;
-					if(!empty($tab_atab_arome_with_user_valuerome_random))
+					if(!empty($tab_arome_with_user_value))
 					{
 						foreach($tab_arome_with_user_value as $row_arome)
 						{?>
@@ -82,9 +103,10 @@
 										<h3 style="font-size:11px; margin:7px 0 7px 0; color:white;">Nom de l'arome : <?= $row_arome->nom; ?></h3>
 										<h3 style="font-size:11px; margin:7px 0 7px 0; color:white;">Base en : <br><b style="color:yellow;"><?= $row_arome->base; ?></b></h3>
 										<h3 style="font-size:12px; margin:7px 0 7px 0; color:yellow;">Vous en disposez de : <?= $row_arome->nb; ?></h3>
+										<h3 style="font-size:12px; margin:7px 0 7px 0; color:red;">Périme dans  : <br><?= $row_arome->date_peremption_to_rest; ?></h3>
 
 										<div class="col-lg-12 col-without-padding">
-											<input type="number" name="<?= $i ?>" max="<?= $row_arome->nb_user_have; ?>" min="0" value="0" class="col-lg-12">
+											<input type="number" name="<?= $i ?>" max="<?= $row_arome->nb; ?>" min="0" value="0" class="col-lg-12">
 										</div>
 										
 									</div>
@@ -93,6 +115,12 @@
 							$i++;
 						}?>
 						<input name='secure_shop' value="71414242" type="hidden"><?
+					}else
+					{?>
+						<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
+							Vous n'avez pas de sotck.
+						</h3><?
+
 					}?>
 				</div>
 			</form>

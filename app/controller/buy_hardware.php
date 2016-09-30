@@ -25,6 +25,14 @@ Class buy_hardware extends base_module
 		if(isset($post['buy_frigo_10']))
 			$this->receive_nb_frigo(10, $user);
 
+		if(isset($post['buy_frigo_100']))
+			$this->receive_nb_frigo(100, $user);
+
+		if(isset($post['buy_frigo_1000']))
+			$this->receive_nb_frigo(1000, $user);
+
+
+
 		if(isset($post['buy_pipette_1']))
 			$this->receive_nb_pipette(1, $user);
 
@@ -33,6 +41,11 @@ Class buy_hardware extends base_module
 
 		if(isset($post['buy_pipette_100']))
 			$this->receive_nb_pipette(100, $user);
+
+		if(isset($post['buy_pipette_1000']))
+			$this->receive_nb_pipette(1000, $user);
+
+
 
 		if(isset($post['buy_flacon_10']))
 			$this->receive_nb_flacon(10, $user);
@@ -43,6 +56,9 @@ Class buy_hardware extends base_module
 		if(isset($post['buy_flacon_1000']))
 			$this->receive_nb_flacon(1000, $user);
 
+		if(isset($post['buy_flacon_10000']))
+			$this->receive_nb_flacon(10000, $user);
+
 	}
 
 	public function receive_nb_frigo($nb_to_buy, $user)
@@ -51,6 +67,10 @@ Class buy_hardware extends base_module
 			(int)$total_price = Config::$price_frigo;
 		if($nb_to_buy == 10)
 			(int)$total_price = Config::$price_frigo_10;
+		if($nb_to_buy == 100)
+			(int)$total_price = Config::$price_frigo_100;
+		if($nb_to_buy == 1000)
+			(int)$total_price = Config::$price_frigo_1000;
 
 		if($this->verifiy_argent_user($total_price))
 		{
@@ -68,6 +88,8 @@ Class buy_hardware extends base_module
 			(int)$total_price = Config::$price_pipette_10;
 		if($nb_to_buy == 100)
 			(int)$total_price = Config::$price_pipette_100;
+		if($nb_to_buy == 1000)
+			(int)$total_price = Config::$price_pipette_1000;
 
 		if($this->verifiy_argent_user($total_price))
 		{
@@ -84,6 +106,8 @@ Class buy_hardware extends base_module
 			(int)$total_price = Config::$price_flacon_100;
 		if($nb_to_buy == 1000)
 			(int)$total_price = Config::$price_flacon_1000;
+		if($nb_to_buy == 10000)
+			(int)$total_price = Config::$price_flacon_10000;
 
 		if($this->verifiy_argent_user($total_price))
 		{

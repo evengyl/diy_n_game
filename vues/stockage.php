@@ -12,9 +12,9 @@
 			<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
 
 				<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
-					Liste des arômes pour le remplissage des produits finaux.
+					Liste exhaustive de vos produits en stock
 				</h3>
-				<form method="post" action="?page=remplissage_produit"><?
+				<?
 					if(!empty($tab_final_arome_acquis_traiter))
 					{
 						foreach($tab_final_arome_acquis_traiter as $brand => $row_brand_arome)
@@ -38,6 +38,9 @@
 												<div class="col-lg-12 col-without-padding">
 													<button style="font-size:11px; margin-top:5px;" class="col-lg-12 btn btn-primary col-without-padding" disabled>Nombre : <?= $row_arome->nb; ?></button>
 												</div>
+												<div class="col-lg-12 col-without-padding">
+													<button style="font-size:11px; margin-top:5px;" class="col-lg-12 btn btn-primary col-without-padding" disabled>Périme dans :<br> <?= $row_arome->date_peremption_to_rest; ?></button>
+												</div>
 											</div>
 										</div>
 									</div><?
@@ -52,7 +55,7 @@
 						</h3><?
 
 					}?>
-				</form>
+				
 			</div>
 		</div>
 	</div>
