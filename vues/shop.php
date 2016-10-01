@@ -21,17 +21,17 @@
 			</div>
 			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
 				<span style="font-size:13px;">
-					Nombre total de produits vendus cette semaine : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_week; ?></b> (Remis à zéro à chaque changement de produits aléatoire).
+					Nombre total de produits au top vendus cette semaine : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_week; ?></b> (Remis à zéro à chaque changement de produits aléatoire).
 				</span>
 			</div>
 			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
 				<span style="font-size:13px;">
-					Nombre total de produits vendus : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_total; ?></b> 
+					Nombre total de produits global vendus : <b style="color:yellow;"><?= $user->user_infos->produit_vendu_total; ?></b> 
 				</span>
 			</div>
 			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
 				<span style="font-size:13px;">
-					Tout les 1000 produits vendus, en fin de semaine vous receverez 3 points de ventes en bonus !!! ce qui équivaut à 200 produits au top vendus !!
+					Tout les 1000 produits au top vendus, en fin de semaine vous receverez 3 points de ventes en bonus !!! ce qui équivaut à 200 produits au top vendus !!
 				</span>
 			</div>
 			

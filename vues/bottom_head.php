@@ -6,7 +6,6 @@
 
 <script>
 	$('#rotate').animo({animation: "spinner", iterate: "infinite"});
-	$('#titre').animo( { animation: "bounce", duration: 4 } );
 	$('#logo_fiole').animo( { animation: "tada", iterate: "infinite" } );
 </script>
 

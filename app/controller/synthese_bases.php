@@ -19,12 +19,16 @@ Class synthese_bases extends base_module
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
-		if($user->user_infos->last_culture_vg > Config::$nb_plantes_for_littre && $user->user_infos->last_usine_pg > Config::$nb_propylene_for_littre)
+		if($user->user_infos->litter_vg >= 1)
 		{
 			$this->nb_to_create = $this->nb_bases($user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
-			//$this->nb_to_create[5050] = $this->nb_bases(0.5,0.5, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
-			//$this->nb_to_create[8020] = $this->nb_bases(0.8,0.2, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
-			//$this->nb_to_create[1000] = $this->nb_bases(1,0, $user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);	
+		}
+		else
+		{
+			$this->nb_to_create[2080] = 0;
+			$this->nb_to_create[5050] = 0;
+			$this->nb_to_create[8020] = 0;
+			$this->nb_to_create[1000] = 0;
 		}
 		
 
@@ -43,7 +47,7 @@ Class synthese_bases extends base_module
 
 		if(isset($_POST['create_bases'])) 
 		{
-			$this->recept_form_with_bases_to_create($_POST);
+			$this->recept_form_with_bases_to_create($_POST, $user);
 		}
 
 
@@ -105,20 +109,21 @@ Class synthese_bases extends base_module
 
 
 
-	public function recept_form_with_bases_to_create($post)
+	public function recept_form_with_bases_to_create($post, $user)
 	{
 		//nettoyage du post principale et secondaire tmp
 		unset($post['create_bases']);
 		unset($_POST['create_bases']);
 
-		foreach($post as $name_form_bases => $nb_form_bases)
+		foreach($post as $name_bases => $nb_bases)
 		{
-			if($nb_form_bases >= 0)
+			if(intval($nb_bases) > 0)
 			{
-				$total_price = $this->calcul_price_total_cost_bases($name_form_bases, intval($nb_form_bases));
+				$total_price = $this->calcul_price_total_cost_bases($name_bases, intval($nb_bases));
+				
 				if($total_price != 0)
 				{
-					$this->calcul_cost_ressource_and_set_total($name_form_bases, intval($nb_form_bases));
+					$this->calcul_cost_ressource_and_set_total($name_bases, intval($nb_bases));
 
 					//set dans la base de données les bases creer
 					if($this->cout_total_vg != 0 || $this->cout_total_pg != 0)
@@ -126,16 +131,12 @@ Class synthese_bases extends base_module
 						$this->set_ressource_litter_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
 					}
 
-					$this->ajout_bases_in_bsd($name_form_bases, intval($nb_form_bases), "+");
+					user_ressources::ajout_bases_in_bsd($name_bases, intval($nb_bases), "+", $user);
 					//set dans la base de données l'argnet que ça à couté
 					$this->set_argent_user($total_price, "-");
 					unset($_POST);
 				}
-				else
-					return 0;
 			}
-			else
-				return 0;
 		}
 	}
 
@@ -206,34 +207,7 @@ Class synthese_bases extends base_module
 		}
 	}
 
-	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
-	{
-		$stx_bases = "bases_".$row_post;
-		$bases_before = $this->user_obj->bases->$stx_bases;
-		
-		if($moins_plus == "-")
-		{
-			$bases_after = $bases_before - $value_post;	
-		}
-		else if($moins_plus == "+")
-		{
-			$bases_after = $bases_before + $value_post;
-		}
-		else
-		{
-			$bases_after = $bases_before - $value_post;
-		}
 
-		$req_sql = new stdClass;
-		$req_sql->table = "bases";
-		$req_sql->where = "id_user = '".$this->user_obj->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$var_bsd = "bases_".$row_post;
-		$req_sql->ctx->$var_bsd = $bases_after;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
-	}
 
 
 

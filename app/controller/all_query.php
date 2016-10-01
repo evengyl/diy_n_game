@@ -122,7 +122,6 @@ class all_query extends _db_connect
 					$req_sql = 'UPDATE '.$object->table.' SET '.$set_all.' WHERE '.$object->where;	
 			}
 
-
 			parent::query($req_sql);
 			unset($req_sql);
 

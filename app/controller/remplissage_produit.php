@@ -204,15 +204,24 @@ Class remplissage_produit extends base_module
 			if((int)$nb != 0)
 			{
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
-
-				user_ressources::maj_product_list_in_bsd($match[2], $nb, $match[1], date("U")+2592000, '+', $user);
+				$id = $match[2];
+				$bases = $match[1];
+				user_ressources::maj_product_list_in_bsd($id, $nb, $bases, date("U")+Config::$duree_peremption, '+', $user);
 					//match 1 contient la base utilisée, match 2 l'id du prod	
 
-				//partie traitement du nombre pour les pipette et les flacons
+				//partie décompte des bases vapable
+				$nb_bases = $nb * 0.01;
 
+				user_ressources::ajout_bases_in_bsd($bases, $nb_bases, "-", $user);
+
+				//partie traitement du nombre pour les pipette et les flacons
 				user_ressources::maj_pipette($nb * Config::$nb_pipette_per_product, "-", $user);
 				user_ressources::maj_flacon($nb * Config::$nb_flacon_per_product, "-", $user);
-				
+
+				//mise a jour de l'argent 
+				$total_price_cost = Config::$price_for_un_product * $nb;
+				$this->set_argent_user($total_price_cost, "-");
+
 			}
 		}
 	}

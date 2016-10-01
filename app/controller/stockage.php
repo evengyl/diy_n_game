@@ -18,6 +18,10 @@ Class stockage extends base_module
 	public function get_list_product($user)
 	{
 		$tab_final_arome_acquis_traiter = user_ressources::set_list_product_acquis_for_tpl($user);
+
 		return $tab_final_arome_acquis_traiter;
 	}
+
+
+
 }

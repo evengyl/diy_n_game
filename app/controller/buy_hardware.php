@@ -33,9 +33,6 @@ Class buy_hardware extends base_module
 
 
 
-		if(isset($post['buy_pipette_1']))
-			$this->receive_nb_pipette(1, $user);
-
 		if(isset($post['buy_pipette_10']))
 			$this->receive_nb_pipette(10, $user);
 
@@ -44,6 +41,9 @@ Class buy_hardware extends base_module
 
 		if(isset($post['buy_pipette_1000']))
 			$this->receive_nb_pipette(1000, $user);
+
+		if(isset($post['buy_pipette_10000']))
+			$this->receive_nb_pipette(10000, $user);
 
 
 
@@ -82,13 +82,13 @@ Class buy_hardware extends base_module
 
 	public function receive_nb_pipette($nb_to_buy, $user)
 	{
-		if($nb_to_buy == 1)
-			(int)$total_price = Config::$price_pipette;
 		if($nb_to_buy == 10)
-			(int)$total_price = Config::$price_pipette_10;
+			(int)$total_price = Config::$price_pipette;
 		if($nb_to_buy == 100)
-			(int)$total_price = Config::$price_pipette_100;
+			(int)$total_price = Config::$price_pipette_10;
 		if($nb_to_buy == 1000)
+			(int)$total_price = Config::$price_pipette_100;
+		if($nb_to_buy == 10000)
 			(int)$total_price = Config::$price_pipette_1000;
 
 		if($this->verifiy_argent_user($total_price))

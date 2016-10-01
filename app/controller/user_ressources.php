@@ -713,13 +713,45 @@ Class user_ressources extends user
  	}
 
 
+	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus, $user)
+	{
+		$stx_bases = "bases_".$row_post;
+		$bases_before = $user->bases->$stx_bases;
+
+
+		
+		if($moins_plus == "-")
+		{
+			$bases_after = $bases_before - $value_post;	
+		}
+		else if($moins_plus == "+")
+		{
+			$bases_after = $bases_before + $value_post;
+		}
+		else
+		{
+			$bases_after = $bases_before - $value_post;
+		}
+
+		$req_sql = new stdClass;
+		$req_sql->table = "bases";
+		$req_sql->where = "id_user = '".$user->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$var_bsd = "bases_".$row_post;
+		$req_sql->ctx->$var_bsd = $bases_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
+	}
+
+
 
  	public function set_tab_prod_vg($level_champ_glycerine, $user)
  	{
 		$tmp_level = $level_champ_glycerine;
 		$obj_user_prod_vg = new stdClass();
 		$obj_user_prod_vg->level = $tmp_level;
-		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.6) * 42)) * Config::$rate_vg_prod);
+		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.55) * 42)) * Config::$rate_vg_prod);
 		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
 		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4);
 		$user->champ_glycerine = $obj_user_prod_vg;
@@ -731,7 +763,7 @@ Class user_ressources extends user
 		$tmp_level = $level_usine_propylene;
 		$obj_user_prod_pg = new stdClass();
 		$obj_user_prod_pg->level = $tmp_level;
-		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.4) * 42)) * Config::$rate_pg_prod);
+		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.45) * 42)) * Config::$rate_pg_prod);
 		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
 		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4.5);
 		$user->usine_propylene = $obj_user_prod_pg;

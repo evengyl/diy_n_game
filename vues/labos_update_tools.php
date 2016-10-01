@@ -57,7 +57,7 @@
 						 			}
 						 			else if($row_update->ok_for_search == 1)
 						 			{
-						 				echo "<a disabled class='btn btn-primary' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
+						 				echo "<a disabled class='btn btn-primary col-lg-12' style='background:#FF7F00;' href=''>&nbsp;Vous n'avez pas les moyens pour construire ceci&nbsp;</a>";
 						 			}
 						 			else if($row_update->ok_for_search == 2)
 						 			{

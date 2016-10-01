@@ -112,10 +112,10 @@ class Config
     //end
 
     //hardawre 
-    public static $price_frigo = 800;
-    public static $price_frigo_10 = 7000;
-    public static $price_frigo_100 = 65000;
-    public static $price_frigo_1000 = 600000;
+    public static $price_frigo = 1500;
+    public static $price_frigo_10 = 14000;
+    public static $price_frigo_100 = 130000;
+    public static $price_frigo_1000 = 1200000;
 
     public static $nb_product_per_frigo = 1000;
     public static $nb_product_per_frigo_10 = 10000;
@@ -124,10 +124,10 @@ class Config
 
 
 
-    public static $price_pipette = 0.5;
-    public static $price_pipette_10 = 4.5;
-    public static $price_pipette_100 = 40;
-    public static $price_pipette_1000 = 375;
+    public static $price_pipette_10 = 5;
+    public static $price_pipette_100 = 47;
+    public static $price_pipette_1000 = 450;
+    public static $price_pipette_10000 = 4300;
 
 
     public static $price_flacon_10 = 1;
@@ -143,6 +143,7 @@ class Config
     public static $price_for_un_product = 2;
     public static $nb_pipette_per_product = 1;
     public static $nb_flacon_per_product = 1;
+    public static $duree_peremption = 2592000;
     //end
 
 
