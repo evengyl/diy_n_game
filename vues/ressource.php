@@ -24,23 +24,23 @@ if(Config::$is_connect == 1)
 				      	<ul class="col-lg-12 nav navbar-nav">
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
-					        		<span style="font-size:13px;">Champs : <?= round($user->user_infos->last_culture_vg, 2) ?></span>
+					        		<span style="font-size:13px;">Champs brut: <?= round($user->user_infos->last_culture_vg, 2) ?></span>
 					        </li>
 
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Propylènes : <?= round($user->user_infos->last_usine_pg, 2) ?></span>
+					        		<span style="font-size:13px;">Propylènes brut: <?= round($user->user_infos->last_usine_pg, 2) ?></span>
 					        </li>
 
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/plantes.png" alt="Champs de Glycerine" style="max-height:25px;">
-					        		<span style="font-size:13px;">Littre VG : <?= $user->user_infos->litter_vg ?> Lts</span>
+					        		<span style="font-size:13px;">Littre VG brut: <?= $user->user_infos->litter_vg ?> Lts</span>
 					        </li>
 
 
 					        <li class="col-lg-6" style="color:white;">
 					        		<img src="<?= Config::$path_public; ?>/images/usines.png" alt="Usines de propylène" style="max-height:25px;">
-					        		<span style="font-size:13px;">Littre PG : <?= $user->user_infos->litter_pg ?> Lts</span>
+					        		<span style="font-size:13px;">Littre PG brut: <?= $user->user_infos->litter_pg ?> Lts</span>
 					        </li>
 
 					    </ul>

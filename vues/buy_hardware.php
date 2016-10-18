@@ -27,6 +27,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût d'un frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo; ?>€</strong></h3>
 							<input name="buy_frigo_1" value="Acheter un Frigo" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_frigo" value="1" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -39,6 +40,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_10; ?>€</strong></h3>
 							<input name="buy_frigo_10" value="Acheter 10 Frigos" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_frigo" value="10" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -51,6 +53,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_100; ?>€</strong></h3>
 							<input name="buy_frigo_100" value="Acheter 100 Frigos" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_frigo" value="100" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -63,6 +66,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 frigo : <strong style="color:#31DE44;"><?= Config::$price_frigo_1000; ?>€</strong></h3>
 							<input name="buy_frigo_1000" value="Acheter 1000 Frigos" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_frigo" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -79,6 +83,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_10; ?>€</strong></h3>
 							<input name="buy_pipette_10" value="Acheter 10 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_pipette" value="10" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -91,6 +96,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_100; ?>€</strong></h3>
 							<input name="buy_pipette_100" value="Acheter 100 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_pipette" value="100" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -103,6 +109,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_1000; ?>€</strong></h3>
 							<input name="buy_pipette_1000" value="Acheter 1000 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_pipette" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -115,6 +122,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10000 pipettes : <strong style="color:#31DE44;"><?= Config::$price_pipette_10000; ?>€</strong></h3>
 							<input name="buy_pipette_10000" value="Acheter 10000 pipettes" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_pipette" value="10000" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -133,6 +141,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_10; ?>€</strong></h3>
 							<input name="buy_flacon_10" value="Acheter 10 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_flacon" value="10" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -145,6 +154,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 100 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_100; ?>€</strong></h3>
 							<input name="buy_flacon_100" value="Acheter 100 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_flacon" value="100" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -157,6 +167,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 1000 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_1000; ?>€</strong></h3>
 							<input name="buy_flacon_1000" value="Acheter 1000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_flacon" value="1000" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>
@@ -169,6 +180,7 @@
 						<div class="caption">
 							<h3 style="font-size:14px; margin:7px 0 7px 0; color:white;">Coût de 10000 Flacons : <strong style="color:#31DE44;"><?= Config::$price_flacon_10000; ?>€</strong></h3>
 							<input name="buy_flacon_10000" value="Acheter 10000 Flacons" class="col-lg-12 btn btn-primary" type="submit">
+							<input name="buy_flacon" value="10000" class="col-lg-12 btn btn-primary" type="hidden">
 						</div>
 					</div>
 				</div>

@@ -1,38 +1,16 @@
 <?php
-Class user_ressources extends user
+Class user_ressources extends user_batiments
 {
-	public $time_now;
-
-	public function __construct($user)
+	public function __construct()
 	{
-		$this->time_now = date("U");
-
-		//si je fait comme ça avec le user et le break je ne for que le user infos comme voulu !! <3
-		//car le user infos c'est le premier objet set dans le user
-		if(isset($user))
-		{
-			$this->set_tab_prod_vg($user->user_infos->level_culture_vg, $user);
-			$this->set_tab_prod_pg($user->user_infos->level_usine_pg, $user);
-			$this->set_tab_labos($user->user_infos->level_labos_bases, $user);
-			$this->verify_peremption_product($user);
-
-			foreach($user as $row_user)
-			{
-				$this->calc_and_maj_ressource_user_in_db($row_user, $user);
-				break;
-			}
-
-			//calcule le nombre de produits que le user à au total
-			$this->calcul_nb_product_total($user);
-		}
+		parent::__construct();
 	}
 
-	
 
-	public function calc_and_maj_ressource_user_in_db($row_user, $user)
+	public function calc_and_maj_ressource_user_in_db()
 	{
-		$production_vg_sec = round((($user->champ_glycerine->production /60)/60),3);
-		$production_pg_sec = round((($user->usine_propylene->production /60)/60),3);
+		$production_vg_sec = round((($this->champ_glycerine->production /60)/60),3);
+		$production_pg_sec = round((($this->usine_propylene->production /60)/60),3);
 
 
 		//determine combien de ressource le joueur gagne en une seconde car dans la bsd c'est en heure
@@ -40,31 +18,26 @@ Class user_ressources extends user
 		$ressource_win_culture_vg = 0;
 		$ressource_win_usine_pg = 0;
 
-		$ressource_win_culture_vg = round($row_user->diff_time * $production_vg_sec, 3);
-		$ressource_win_usine_pg = round($row_user->diff_time * $production_pg_sec, 3);
+		$ressource_win_culture_vg = round($this->user_infos->diff_time * $production_vg_sec, 3);
+		$ressource_win_usine_pg = round($this->user_infos->diff_time * $production_pg_sec, 3);
 
 		//on remet a 0 le temps de la derniere mise a jour
-		$row_user->diff_time = 0;
-		$row_user->last_connect = $this->time_now;
+		$this->user_infos->diff_time = 0;
+		$this->user_infos->last_connect = $this->user_infos->time_now;
 
-
-		$new_numb_ressource_culture_vg = $row_user->last_culture_vg + $ressource_win_culture_vg;
-		$new_numb_ressource_usine_pg = $row_user->last_usine_pg + $ressource_win_usine_pg;
+		$new_numb_ressource_culture_vg = $this->user_infos->last_culture_vg + $ressource_win_culture_vg;
+		$new_numb_ressource_usine_pg = $this->user_infos->last_usine_pg + $ressource_win_usine_pg;
 
 		$req_sql = new stdClass;
 		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
+		$req_sql->where = "id = ".$this->user_infos->id;
 		$req_sql->ctx = new stdClass;
 		$req_sql->ctx->last_culture_vg = $new_numb_ressource_culture_vg;
 		$req_sql->ctx->last_usine_pg = $new_numb_ressource_usine_pg;
 
-
 		$this->update($req_sql);
 		unset($req_sql);
 	}
-
-
-
 
 
 
@@ -153,7 +126,7 @@ Class user_ressources extends user
 
 		//recupere un tableau avec les ids des aromes non posseder par le joueur
 		//contient tout les id des aromes non connu
-		$data_from_bsd = substr($user->user_infos->list_arome_not_have, 0,-1);
+		$data_from_bsd = substr($this->user_infos->list_arome_not_have, 0,-1);
 		$array_not_have = explode(",", $data_from_bsd);
 		
 
@@ -221,17 +194,17 @@ Class user_ressources extends user
 		}
 	}
 
-	public function get_arome_win_for_tpl(&$user)
+	public function get_arome_win_for_tpl()
 	{
 
 		//traiement de la chaine pour la requete 
-		$user->id_arome_win = explode(",", $user->user_infos->id_arome_win);
+		$this->id_arome_win = explode(",", $this->user_infos->id_arome_win);
 		$where = "";
 		
-		foreach($user->id_arome_win as $key => $row)
+		foreach($this->id_arome_win as $key => $row)
 		{
 			if($row == "")
-				unset($user->id_arome_win[$key]);
+				unset($this->id_arome_win[$key]);
 			else
 				$where .= " id = ".$row." AND";
 		}
@@ -298,15 +271,15 @@ Class user_ressources extends user
 
 
 
- 	public function set_list_product_acquis_for_tpl($user)
+ 	public function set_list_product_acquis_for_tpl()
  	{
  		//on genere le tab qui contiendra tout lesp rod
  		$array_product_in_stock = array();
 
 		//on explode la liste des produit qui était sous forme de chaine
-		if(isset($user->product->list_product) && $user->product->list_product != "")
+		if(isset($this->product->list_product) && $this->product->list_product != "")
 		{
-			$data_from_user_product = substr($user->product->list_product, 0,-1);
+			$data_from_user_product = substr($this->product->list_product, 0,-1);
 			$array_product_in_stock_not_traited = explode(",", $data_from_user_product);
 		}
 		else
@@ -385,7 +358,7 @@ Class user_ressources extends user
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->base = $row->base;
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->base_bsd = $row->base_bsd;
 				$tab_final_arome_acquis_traiter[$row->marque][$i]->date_peremption_unix = $row->date_peremption;
-				$tab_final_arome_acquis_traiter[$row->marque][$i]->date_peremption_to_rest = Base_module::convert_sec_unix_in_time_real_to_rest($row->date_peremption);
+				$tab_final_arome_acquis_traiter[$row->marque][$i]->date_peremption_to_rest = $this->convert_sec_unix_in_time_real_to_rest($row->date_peremption);
 
 			}
 			else
@@ -399,16 +372,16 @@ Class user_ressources extends user
 		return $tab_final_arome_acquis_traiter;
  	}
 
-	public function calcul_nb_product_total($user)
+	public function calcul_nb_product_total()
 	{
 
-		if(isset($user->product->list_product) && $user->product->list_product != "")
+		if(isset($this->product->list_product) && $this->product->list_product != "")
 		{
 			//mtn que l'on a la liste des product dispo de la table de l'user, on traie pour avoir un array propre id nb
 			//on enleve la derniere virgule de la table
 			$tmp_user_product_bsd = new StdClass;
 			$tmp_user_product_bsd->list_product = new stdClass;
-			$tmp_user_product_bsd->list_product = $user->product->list_product;
+			$tmp_user_product_bsd->list_product = $this->product->list_product;
 
 			$tmp_user_product_bsd->list_product = substr($tmp_user_product_bsd->list_product, 0, -1);
 			$tmp_user_product_bsd->list_product = array(explode(",", $tmp_user_product_bsd->list_product));
@@ -422,15 +395,15 @@ Class user_ressources extends user
 				preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $row_product, $match);
 				$total_nb_product += $match[1];
 			}
-			$user->user_infos->nb_product_total = $total_nb_product;
+			$this->user_infos->nb_product_total = $total_nb_product;
 		}
 		else
 		{
-			$user->user_infos->nb_product_total = '0';
+			$this->user_infos->nb_product_total = '0';
 		}
 	}
 
-	public function maj_product_list_in_bsd($id, $nb, $bases, $date_peremption, $ajout_or_delete = '+', $user)
+	public function maj_product_list_in_bsd($id, $nb, $bases, $date_peremption, $ajout_or_delete = '+')
 	{
 		$tab_product_recept = array();
 		$tab_product_recept["nb"] = $nb;
@@ -444,7 +417,7 @@ Class user_ressources extends user
 		$arome_win = new stdClass();
 		$arome_win->table = "product";
 		$arome_win->var = "*";
-		$arome_win->where = "id_user = '".$user->user_infos->id."'";
+		$arome_win->where = "id_user = '".$this->user_infos->id."'";
 		$tmp_user_product_bsd = $this->select($arome_win);
 		$tmp_user_product_bsd = $tmp_user_product_bsd[0]->list_product;
 
@@ -570,14 +543,14 @@ Class user_ressources extends user
 		$req_sql->ctx = new stdClass;
 		$req_sql->ctx->list_product = $new_string_product_for_bsd;
 		$req_sql->table = "product";
-		$req_sql->where = "id_user = ".$user->user_infos->id;
+		$req_sql->where = "id_user = ".$this->user_infos->id;
 		$this->update($req_sql);
 		unset($req_sql);
 
 	}
 
 
-	public function maj_pipette($nb, $add_or_del = "-", $user)
+	public function maj_pipette($nb, $add_or_del = "-")
 	{
 		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
 		if($add_or_del == "-")
@@ -586,9 +559,9 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->pipette = $user->hardware->pipette - $nb;
+			$req_sql->ctx->pipette = $this->hardware->pipette - $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
@@ -598,15 +571,15 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->pipette = $user->hardware->pipette + $nb;
+			$req_sql->ctx->pipette = $this->hardware->pipette + $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
 	}
 
-	public function maj_flacon($nb, $add_or_del = "-", $user)
+	public function maj_flacon($nb, $add_or_del = "-")
 	{
 		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
 		if($add_or_del == "-")
@@ -615,9 +588,9 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->flacon = $user->hardware->flacon - $nb;
+			$req_sql->ctx->flacon = $this->hardware->flacon - $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
@@ -627,15 +600,15 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->flacon = $user->hardware->flacon + $nb;
+			$req_sql->ctx->flacon = $this->hardware->flacon + $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
 	}
 
-	public function maj_frigo($nb, $add_or_del = "-", $user)
+	public function maj_frigo($nb, $add_or_del = "-")
 	{
 		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
 		if($add_or_del == "-")
@@ -644,9 +617,9 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->frigo = $user->hardware->frigo - $nb;
+			$req_sql->ctx->frigo = $this->hardware->frigo - $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
@@ -656,9 +629,9 @@ Class user_ressources extends user
 
 			$req_sql = new stdClass;
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->frigo = $user->hardware->frigo + $nb;
+			$req_sql->ctx->frigo = $this->hardware->frigo + $nb;
 			$req_sql->table = "hardware";
-			$req_sql->where = "id_user = ".$user->user_infos->id;
+			$req_sql->where = "id_user = ".$this->user_infos->id;
 			$this->update($req_sql);
 			unset($req_sql);
 		}
@@ -667,11 +640,11 @@ Class user_ressources extends user
 
 
 
- 	public function verify_peremption_product($user)
+ 	public function verify_peremption_product()
  	{
- 		if(isset($user->product->list_product) && !empty($user->product->list_product))
+ 		if(isset($this->product->list_product) && !empty($this->product->list_product))
  		{
- 			$list_product = $user->product->list_product;	
+ 			$list_product = $this->product->list_product;	
 
 
 			//on explode le string de la base de données des product pour travailler
@@ -699,7 +672,7 @@ Class user_ressources extends user
 					{
 						$array_poubelle[$j] = $value_product;
 						//on l'ajoute au array poubelle et on le delete de l'autre array
-						$this->maj_product_list_in_bsd($tab_product_in_stock[$i]["id"], $tab_product_in_stock[$i]["nb"], $tab_product_in_stock[$i]["bases"], $tab_product_in_stock[$i]["date_peremption"], $ajout_or_delete = '-', $user);
+						$this->maj_product_list_in_bsd($tab_product_in_stock[$i]["id"], $tab_product_in_stock[$i]["nb"], $tab_product_in_stock[$i]["bases"], $tab_product_in_stock[$i]["date_peremption"], $ajout_or_delete = '-');
 						
 						$j++;
 					}
@@ -713,29 +686,25 @@ Class user_ressources extends user
  	}
 
 
-	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus, $user)
+	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
 	{
 		$stx_bases = "bases_".$row_post;
-		$bases_before = $user->bases->$stx_bases;
+		$bases_before = $this->bases->$stx_bases;
 
 
 		
 		if($moins_plus == "-")
-		{
 			$bases_after = $bases_before - $value_post;	
-		}
+
 		else if($moins_plus == "+")
-		{
 			$bases_after = $bases_before + $value_post;
-		}
+
 		else
-		{
 			$bases_after = $bases_before - $value_post;
-		}
 
 		$req_sql = new stdClass;
 		$req_sql->table = "bases";
-		$req_sql->where = "id_user = '".$user->user_infos->id."'";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
 		$req_sql->ctx = new stdClass;
 		$var_bsd = "bases_".$row_post;
 		$req_sql->ctx->$var_bsd = $bases_after;
@@ -744,40 +713,162 @@ Class user_ressources extends user
 		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
 	}
 
+	public function verifiy_argent_user($value_verif)
+	{
+		if((int)$value_verif <= (int)$this->user_infos->argent)
+			return 1;
+		
+		else
+		{
+			$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
+			return 0;
+		}
+	}
 
 
- 	public function set_tab_prod_vg($level_champ_glycerine, $user)
- 	{
-		$tmp_level = $level_champ_glycerine;
-		$obj_user_prod_vg = new stdClass();
-		$obj_user_prod_vg->level = $tmp_level;
-		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.55) * 42)) * Config::$rate_vg_prod);
-		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
-		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4);
-		$user->champ_glycerine = $obj_user_prod_vg;
- 	}
+	public function set_litter_vg($littre_vg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_vg = $this->user_infos->litter_vg + $littre_vg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_litter_pg($littre_pg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_pg = $this->user_infos->litter_pg + $littre_pg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
+	{
+		
+
+		$argent_before = $this->user_infos->argent;
+		
+		if($moins_plus == "-")
+		{
+			$this->set_point_user($prix_a_deduire);
+			$argent_after = $argent_before - $prix_a_deduire;
+		}
+		else if($moins_plus == "+")
+		{
+			$this->set_point_user_vente($prix_a_deduire);
+			$argent_after = $argent_before + $prix_a_deduire;
+		}
+			
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->argent = $argent_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_point_user($argent_depenser)
+	{
+		$point_before = $this->user_infos->point;
+		$point_gagner = $argent_depenser/1000;
+		$point_after = $point_before + $point_gagner;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->point = $point_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_point_user_vente($argent_depenser)
+	{
+		$point_before = $this->user_infos->point_vente;
+		$point_gagner = $argent_depenser/1000;
+		$point_after = $point_before + $point_gagner;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->point_vente = $point_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
 
 
- 	public function set_tab_prod_pg($level_usine_propylene, $user)
- 	{
-		$tmp_level = $level_usine_propylene;
-		$obj_user_prod_pg = new stdClass();
-		$obj_user_prod_pg->level = $tmp_level;
-		$obj_user_prod_pg->production = floor(((pow($tmp_level,1.45) * 42)) * Config::$rate_pg_prod);
-		$obj_user_prod_pg->prix = floor((pow($tmp_level,2.2) * 42));
-		$obj_user_prod_pg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4.5);
-		$user->usine_propylene = $obj_user_prod_pg;
- 	}
+	public function set_ressource_brut_user($vg_to_operate = 0, $pg_to_operate = 0, $moins_plus = "-")
+	{
+		$vg_before = $this->user_infos->last_culture_vg;
+		$pg_before = $this->user_infos->last_usine_pg;
+		
+		if($moins_plus == "-")
+		{
+			$pg_after = $pg_before - $pg_to_operate;
+			$vg_after = $vg_before - $vg_to_operate;
+		}
+		else if($moins_plus == "+")
+		{
+			$pg_after = $pg_before + $pg_to_operate;
+			$vg_after = $vg_before + $vg_to_operate;
+		}
+		else
+		{
+			$pg_after = $pg_before - $pg_to_operate;
+			$vg_after = $vg_before - $vg_to_operate;
+		}
+		
 
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->last_culture_vg = $vg_after;
+		$req_sql->ctx->last_usine_pg = $pg_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
 
- 	public function set_tab_labos($level_labos_bases, $user)
- 	{
-		$tmp_level = $level_labos_bases;
-		$obj_user_labos = new stdClass();
-		$obj_user_labos->level = $tmp_level;
-		$obj_user_labos->pourcent_down = $tmp_level * Config::$rate_labos_pourcent_down;
-		$obj_user_labos->prix = floor((pow($tmp_level,2.5) * 42));
-		$obj_user_labos->time_construct = floor(((pow($tmp_level,2) * 42)) * 6);
-		$user->labos_bases = $obj_user_labos;
- 	}
+		
+	}
+
+	public function set_ressource_litter_user($litter_vg_to_operate = 0, $litter_pg_to_operate = 0, $moins_plus = "-")
+	{
+		$vg_before = $this->user_infos->litter_vg;
+		$pg_before = $this->user_infos->litter_pg;
+		
+		if($moins_plus == "-")
+		{
+			$pg_after = $pg_before - $litter_pg_to_operate;
+			$vg_after = $vg_before - $litter_vg_to_operate;
+		}
+		else if($moins_plus == "+")
+		{
+			$pg_after = $pg_before + $litter_pg_to_operate;
+			$vg_after = $vg_before + $litter_vg_to_operate;
+		}
+		else
+		{
+			$pg_after = $pg_before - $litter_pg_to_operate;
+			$vg_after = $vg_before - $litter_vg_to_operate;
+		}
+		
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_vg = $vg_after;
+		$req_sql->ctx->litter_pg = $pg_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		
+	}
 }

@@ -58,7 +58,7 @@
 							<th>Nom du batiments<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Fini dans<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 						</tr><?
-						foreach($user->construction as $row_search)
+						foreach($construct_en_cours as $row_search)
 						{?>
 							<tr class="info" style="color:black;">
 								<td><?= $row_search->real_name_batiments; ?></td>
@@ -105,9 +105,13 @@
 							<th>Ce que vous cherchez<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Temps restant<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 						</tr>
-						<tr class="info" style="color:black;">
-							<td><?= (isset($user->update->{0}))? $user->update->{0}->real_name_search :''; ?></td>
-							<td><?= (isset($user->update->{0}))? $user->update->{0}->time_finish_real :''; ?></td>
+						<tr class="info" style="color:black;"><?
+							foreach($update_en_cours as $row_update)
+							{?>
+								<td><?= (isset($row_update->{0}))? $row_update->{0}->real_name_search :''; ?></td>
+								<td><?= (isset($row_update->{0}))? $row_update->{0}->time_finish_real :''; ?></td><?
+							}?>
+							
 						</tr>
 					</table>
 				</div>

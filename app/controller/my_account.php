@@ -2,25 +2,25 @@
 
 Class my_account extends base_module
 {
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{		
-		parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 
 		if(isset($_POST['return_post_account_pass_change']))
-			$this->change_infos($_POST, $user);
+			$this->change_infos($_POST);
 
-		return $this->assign_var("user", $this->user_obj)->render();
+		return $this->assign_var("user", $this)->render();
 	}
 
 
-	public function change_infos($post, $user)
+	public function change_infos($post)
 	{
 		if($post['return_post_account_pass_change'] == 18041997)
 		{
 		    if(isset($post["password-1"]) && isset($post["password-2"]))
 		    {
-		    	$password = $user->check_post_sign_up_and_my_account($post['password-1']);
-		    	$password_verification = $user->check_post_sign_up_and_my_account($post['password-2']);
+		    	$password = $this->check_post_sign_up_and_my_account($post['password-1']);
+		    	$password_verification = $this->check_post_sign_up_and_my_account($post['password-2']);
 
 		    	if($password == '0' || $password_verification == '0')
 		    	{
@@ -38,7 +38,7 @@ Class my_account extends base_module
 					$req_sql->table = "login";
 					$req_sql->ctx = new stdClass;
 					$req_sql->ctx->password = $password = password_hash($password, PASSWORD_DEFAULT);
-					$req_sql->where = "login = '".$user->user_infos->login."'";
+					$req_sql->where = "login = '".$this->user_infos->login."'";
 					$res_sql = $this->update($req_sql);
 
 	            	$_SESSION['error'] = 'Votre mot de passe à bien été changé.';

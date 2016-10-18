@@ -7,12 +7,11 @@ class Config
     public static $Mpass = "darkevengyl";
     public static $base = 'diy_n_game';
 
-    public static $path_app = "../app";
     public static $path_public = "../public";
     public static $base_path = "/diy_n_game";
 
     public static $mail = "dark.evengyl@gmail.com";
-    public static $is_connect;
+    public static $is_connect = 0;
 
 
 

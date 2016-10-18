@@ -3,31 +3,18 @@
 
 Class user extends all_query
 {
-	public $user_infos; // ne surtout pas changer de place cette proprietes
-	public $product;
-	public $champ_glycerine;
-	public $usine_propylene;
-	public $labos_bases;
-	public $bases;
-	public $amelioration_var_config;
-	public $search_arome;
-	public $construction;
-	public $update;
-	public $time_now;
-	public $hardware;
-	public $array_user_prod_vg;
-	public $array_user_prod_pg;
+
+
+
+	//a test 
+	public $gain_per_level_search_arome;
 
 
 	public function __construct()
 	{
-		$this->time_now = date("U");
-
 		if(Config::$is_connect == 1)
 		{
-			$this->get_variable_user();
-			$this->calc_diff_time($this->user_infos);
-			$this->maj_time_last_connect_in_db($this->user_infos);
+			parent::__construct();
 		}
 	}
 
@@ -163,73 +150,5 @@ Class user extends all_query
 		}
 		unset($res_fx);
 
-	}
-
-
-	private function calc_diff_time($row_user)
-	{
-		if($this->time_now > $row_user->last_connect)
-		{
-			$row_user->diff_time = 0;
-			$row_user->diff_time = $this->time_now - $row_user->last_connect;
-		}
-		else if($this->time_now == $row_user->last_connect)
-		{
-			$row_user->diff_time = 0;
-		}
-		else
-		{
-			$row_user->diff_time = 0;
-			$subject = "Attention le joueur : ".$row_user->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
-			mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
-			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... première avertissement...")</script><?
-			$this->maj_avertissement($row_user);
-		}
-
-		//quand on a set le temps de différence , on remet a jour le temps dans la base de données a date time stamp pour que le calcule 
-		//de la différence de temps soit correct
-	}
-
-	private function maj_time_last_connect_in_db($row_user)
-	{
-		//sert a set au time now la base de donnée last connect
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->last_connect = date("U");
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function check_post_sign_up_and_my_account($text)
-	{
-		$text = trim($text);
-		$text = htmlentities($text);
-		$nb_char = strlen($text);
-		if($nb_char <= 6)
-		{			
-			return 0;		
-		}
-		else
-		{
-			return $text;
-		}
-
-	}
-
-
-	public function maj_avertissement($row_user)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$old_values_avertissement = $row_user->avertissement;
-		$req_sql->ctx->avertissement = $old_values_avertissement+1;
-		$req_sql->ctx->last_connect = $this->time_now;
-		$req_sql->table = "login";
-		$req_sql->where = "id = ".$row_user->id;
-		$this->update($req_sql);
-		unset($req_sql);
-		//met dans la base de donnée un petit +1 pour avertissement
 	}
 }

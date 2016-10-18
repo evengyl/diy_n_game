@@ -6,27 +6,28 @@ Class remplissage_produit extends base_module
 	public $tab_final_arome_acquis_traiter = array();
 	public $array_nb_product_creable = array();
 
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{		
-		parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 
-		$this->tab_final_arome_acquis_traiter = user_ressources::set_arome_acquis_for_tpl($user);
+		
+		$this->tab_final_arome_acquis_traiter = $this->set_arome_acquis_for_tpl($user);
 
 		//il faut d'abbord vérifier combien on peux faire de produits avec les bases actuel pour l'envoyer au formulaire dans le template
-		$this->array_nb_product_creable_a_partir_des_bases = $this->nb_product_creable_bases($user->bases);
+		$this->array_nb_product_creable_a_partir_des_bases = $this->nb_product_creable_bases($this->bases);
 		//mtn on a un array avec le nombre de flacons créable a partir des bases
 
 		//mtn il faut virifier par rapport au frigos
-		$this->array_nb_product_creable_a_partir_des_frigos = $this->nb_product_creable_frigo($this->array_nb_product_creable_a_partir_des_bases, $user);
+		$this->array_nb_product_creable_a_partir_des_frigos = $this->nb_product_creable_frigo($this->array_nb_product_creable_a_partir_des_bases);
 
 		//mtn que l'on à ça, on dois vérifier par rapport au nombre de pipette de remplissage
-		$this->array_nb_product_creable_a_partir_des_pipette = $this->nb_product_creable_pipette($this->array_nb_product_creable_a_partir_des_frigos, $user);
+		$this->array_nb_product_creable_a_partir_des_pipette = $this->nb_product_creable_pipette($this->array_nb_product_creable_a_partir_des_frigos);
 
 		//mtn il ne nous reste plus qu'a voir avec le nombre de flacons vide
-		$this->array_nb_product_creable_a_partir_des_flacon = $this->nb_product_creable_flacon($this->array_nb_product_creable_a_partir_des_pipette, $user);
+		$this->array_nb_product_creable_a_partir_des_flacon = $this->nb_product_creable_flacon($this->array_nb_product_creable_a_partir_des_pipette);
 
 		//mtn il ne nous reste plus qu'a voir avec l'argent disponible'
-		$this->array_nb_product_creable = $this->nb_product_creable_argent($this->array_nb_product_creable_a_partir_des_flacon, $user);
+		$this->array_nb_product_creable = $this->nb_product_creable_argent($this->array_nb_product_creable_a_partir_des_flacon);
 
 		//nous récupérons donc un tableau contenant les 4 bases avec le nombre maxi que l'on peux creer de produits
 		
@@ -37,18 +38,16 @@ Class remplissage_produit extends base_module
 			if($_POST['secure'] == "71414242")
 			{
 				//va retourer un tab comme les user ressources
-				$this->traitement_commande_de_produit_user($_POST, $user);
+				$this->traitement_commande_de_produit_user($_POST);
 				//caculer le prix coutant en tout , verifier si argnet ok , si oui on passe a la suite
 				//faire un foreach sur le tab appeler la fonction d'ajout ou de suprrsion a chaque fois
 				unset($_POST);
-				$user->get_variable_user();
-
 			}
 		}
 
 		return $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)
 					->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)
-					->assign_var("user", $user)->render();
+					->assign_var("user", $this)->render();
 	}
 
 	private function nb_product_creable_bases($bases_user)
@@ -67,13 +66,13 @@ Class remplissage_produit extends base_module
 	}
 
 
-	private function nb_product_creable_frigo($array_nb_product_creable_a_partir_des_bases, $user)
+	private function nb_product_creable_frigo($array_nb_product_creable_a_partir_des_bases)
 	{
 		//avant ça il faut prévoir le fct dans user_ressource pour savoir cmb de produit on a en stock déjà
-		$max_product_possible = Config::$nb_product_per_frigo * $user->hardware->frigo;
+		$max_product_possible = Config::$nb_product_per_frigo * $this->hardware->frigo;
 
 		//sur base du nombre de produit que l'on a déja, calcule simplement ce que l'on peux encoroe créer;
-		$max_product_restant_a_creer_frigo = $max_product_possible - $user->user_infos->nb_product_total;
+		$max_product_restant_a_creer_frigo = $max_product_possible - $this->user_infos->nb_product_total;
 
 		//apres on if pour savoir si on peux creer tout ce que les bases propose ou uniquement ce que les frigos propose
 		$array_nb_product_creable = array();
@@ -101,7 +100,7 @@ Class remplissage_produit extends base_module
 		return $array_nb_product_creable;
 	}
 
-	private function nb_product_creable_pipette($array_nb_product_creable_a_partir_des_frigos, $user)
+	private function nb_product_creable_pipette($array_nb_product_creable_a_partir_des_frigos)
 	{
 		//sur base du nombre de produit que l'on a déja, calcule simplement ce que l'on peux encoroe créer;
 		//apres on if pour savoir si on peux creer tout ce que les bases propose ou uniquement ce que les frigos propose
@@ -109,14 +108,14 @@ Class remplissage_produit extends base_module
 
 		foreach($array_nb_product_creable_a_partir_des_frigos as $key => $row_nb_product_possible_frigo)
 		{
-			if($row_nb_product_possible_frigo > $user->hardware->pipette)
+			if($row_nb_product_possible_frigo > $this->hardware->pipette)
 			{
 				//on a pas assez de frigo, on return le nombre que le frigo peux contenir
 				$_SESSION['error_1'] = "Vous devriez construire plus de pipettes";
-				$array_nb_product_creable[$key] = $user->hardware->pipette;
+				$array_nb_product_creable[$key] = $this->hardware->pipette;
 
 			}	
-			else if($row_nb_product_possible_frigo < $user->hardware->pipette)
+			else if($row_nb_product_possible_frigo < $this->hardware->pipette)
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_1'] = "Vous n'avez plus beaucoup de ressources par rapport à vos pipettes";
@@ -125,26 +124,26 @@ Class remplissage_produit extends base_module
 			else
 			{
 				//peux probable mais c'est que le nombre sont tout pile exacte on return le nb par frigo
-				$array_nb_product_creable[$key] = $user->hardware->pipette;
+				$array_nb_product_creable[$key] = $this->hardware->pipette;
 			}
 		}
 		return $array_nb_product_creable;
 	}
 
 
-	private function nb_product_creable_flacon($array_nb_product_creable_a_partir_des_pipette, $user)
+	private function nb_product_creable_flacon($array_nb_product_creable_a_partir_des_pipette)
 	{
 
 		foreach($array_nb_product_creable_a_partir_des_pipette as $key => $row_nb_product_possible_pipette)
 		{
-			if($row_nb_product_possible_pipette > $user->hardware->flacon)
+			if($row_nb_product_possible_pipette > $this->hardware->flacon)
 			{
 				//on a pas assez de frigo, on return le nombre que le frigo peux contenir
 				$_SESSION['error_2'] = "Vous devriez construire plus de flacons";
-				$array_nb_product_creable[$key] = $user->hardware->flacon;
+				$array_nb_product_creable[$key] = $this->hardware->flacon;
 
 			}	
-			else if($row_nb_product_possible_pipette < $user->hardware->flacon)
+			else if($row_nb_product_possible_pipette < $this->hardware->flacon)
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_2'] = "Vous n'avez plus beaucoup de ressources par rapport à vos flacons";
@@ -153,32 +152,32 @@ Class remplissage_produit extends base_module
 			else
 			{
 				//peux probable mais c'est que le nombre sont tout pile exacte on return le nb par frigo
-				$array_nb_product_creable[$key] = $user->hardware->flacon;
+				$array_nb_product_creable[$key] = $this->hardware->flacon;
 			}
 		}
 		return $array_nb_product_creable;
 	}
 
 
-	private function nb_product_creable_argent($array_nb_product_creable_a_partir_des_flacon, $user)
+	private function nb_product_creable_argent($array_nb_product_creable_a_partir_des_flacon)
 	{
 
 
 		foreach($array_nb_product_creable_a_partir_des_flacon as $key => $row_nb_product_possible_argent)
 		{
-			if($user->user_infos->argent > ($row_nb_product_possible_argent * Config::$price_for_un_product))
+			if($this->user_infos->argent > ($row_nb_product_possible_argent * Config::$price_for_un_product))
 			{
 				//on a pas assez de frigo, on return le nombre que le frigo peux contenir
 				$_SESSION['error_3'] = "Vous possédez beaucoup d'argent par rapport à vos consommations c'est très bon pour votre société";
 				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
 
 			}	
-			else if($user->user_infos->argent < ($row_nb_product_possible_argent * Config::$price_for_un_product))
+			else if($this->user_infos->argent < ($row_nb_product_possible_argent * Config::$price_for_un_product))
 			{
 				//ici le nombre est plus petit que ce que les firgo peuvbent contenir donc on renvoi sur bases des bases créable
 				$_SESSION['error_3'] = "Vous n'avez pas assez d'argent pour créer le maximum de produits possible";
 				//on doit alors calculer ce que l'on peux réellement creer avec notre argent
-				$total_possible = $user->user_infos->argent / Config::$price_for_un_product;
+				$total_possible = $this->user_infos->argent / Config::$price_for_un_product;
 				$array_nb_product_creable[$key] = $row_nb_product_possible_argent;
 			}
 			else
@@ -192,7 +191,7 @@ Class remplissage_produit extends base_module
 
 
 
-	private function traitement_commande_de_produit_user($post, $user)
+	private function traitement_commande_de_produit_user($post)
 	{
 
 		unset($post['secure']);
@@ -206,17 +205,17 @@ Class remplissage_produit extends base_module
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 				$id = $match[2];
 				$bases = $match[1];
-				user_ressources::maj_product_list_in_bsd($id, $nb, $bases, date("U")+Config::$duree_peremption, '+', $user);
+				$this->maj_product_list_in_bsd($id, $nb, $bases, date("U")+Config::$duree_peremption, '+');
 					//match 1 contient la base utilisée, match 2 l'id du prod	
 
 				//partie décompte des bases vapable
 				$nb_bases = $nb * 0.01;
 
-				user_ressources::ajout_bases_in_bsd($bases, $nb_bases, "-", $user);
+				$this->ajout_bases_in_bsd($bases, $nb_bases, "-");
 
 				//partie traitement du nombre pour les pipette et les flacons
-				user_ressources::maj_pipette($nb * Config::$nb_pipette_per_product, "-", $user);
-				user_ressources::maj_flacon($nb * Config::$nb_flacon_per_product, "-", $user);
+				$this->maj_pipette($nb * Config::$nb_pipette_per_product, "-");
+				$this->maj_flacon($nb * Config::$nb_flacon_per_product, "-");
 
 				//mise a jour de l'argent 
 				$total_price_cost = Config::$price_for_un_product * $nb;

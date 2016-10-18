@@ -1,13 +1,9 @@
 <?php 
 
-Class login extends base_module
+Class login extends all_query
 {
-	public function __construct($module_tpl_name = "", &$user = "", $post = array())
+	public function __construct()
 	{		
-		if($module_tpl_name != "")
-			parent::__construct($module_tpl_name, $user);
-
-
 		//va checker a chaque page si on est bien logger
 		if(isset($_POST['return_form_complet'])) 
 			config::$is_connect = $this->check_session($_POST);
@@ -19,8 +15,7 @@ Class login extends base_module
 			config::$is_connect = 0;
 
 
-		if($module_tpl_name != "")
-			return $this->render();
+		return $this->render();
 	}
 
 	public function check_session($post)
@@ -59,6 +54,7 @@ Class login extends base_module
 		                $_SESSION['pseudo'] = $res_fx->login;
 		                $_SESSION['level'] = $res_fx->level;
 		                $_SESSION['last_connect'] = $res_fx->last_connect;
+		                $_SESSION['is_connect'] = 1;
 		                return 1;
 		            }
 		            else
@@ -91,5 +87,23 @@ Class login extends base_module
 			return 0;		
 		else
 			return $text;
+	}
+
+	public function render()
+	{
+		ob_start();
+			if(!empty($this->var_to_extract))
+			{
+				extract($this->var_to_extract);
+			}			
+			require("../vues/login.php");
+		$rendu = ob_get_contents();
+		ob_end_clean();
+		$this->rendu = $rendu;
+	}
+
+	public function get_rendu()
+	{
+		return $this->rendu;
 	}
 }

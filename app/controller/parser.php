@@ -2,20 +2,14 @@
 class parser
 {
 	private $module_tpl_name;
-	private $var_in_mdl;
 	private $rendu_module ="";
-	private $user;
-	private $is_connect;
 
 
-	public function parser_main($page, &$user = "")
+	public function parser_main($page)
 	{
 
 		if(!empty($page))
 		{
-			if(!empty($user))
-				$this->user = $user;
-
 			if(preg_match('/__TPL0_[a-z_]+__/', $page, $match))
 				$page = $this->parse_template_init($match, $page);
 
@@ -113,8 +107,8 @@ class parser
 
 		if($this->module_tpl_name != "")
 		{
-			$module = new $this->module_tpl_name($this->module_tpl_name, $this->user);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_tpl_name();
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -122,7 +116,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}
@@ -134,8 +128,8 @@ class parser
 
 		if($this->module_tpl_name != "")
 		{
-			$module = new $this->module_tpl_name($this->module_tpl_name, $this->user);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_tpl_name();
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -143,7 +137,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}
@@ -162,8 +156,8 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_name($var_in_module_name);
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -171,7 +165,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}
@@ -190,8 +184,8 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_name($var_in_module_name);
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -199,7 +193,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}
@@ -235,8 +229,8 @@ class parser
 
 		if($this->module_tpl_name != "")
 		{
-			$module = new $this->module_tpl_name($this->module_tpl_name, $this->user);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_tpl_name();
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -244,7 +238,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}
@@ -263,8 +257,8 @@ class parser
 
 		if($this->module_name != "")
 		{
-			$module = new $this->module_name($this->module_name, $this->user, $var_in_module_name);
-			$this->rendu_module =  $module->get_rendu();
+			$module = new $this->module_name($var_in_module_name);
+			$rendu_module =  $module->get_rendu();
 		}
 		else
 		{
@@ -272,7 +266,7 @@ class parser
 			return '';
 		}
 
-		$page = str_replace($match[0], $this->rendu_module, $page);
+		$page = str_replace($match[0], $rendu_module, $page);
 
 		return $this->parser_main($page);			
 	}

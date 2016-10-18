@@ -63,11 +63,11 @@
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <br><?= $user->bases->bases_2080 ?> </b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : <br>450€</b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au recherche : <br><?= Config::$prix_vingt_quatre_vingt ?>€</b></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[2080]; ?></p></b></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= floor($nb_base_wish_to_create[2080]); ?></p></b></li>
 								<select name="2080">
 									<?php
 									$i = 0;
-									while($i <= $nb_to_create[2080])
+									while($i <= $nb_base_wish_to_create[2080])
 									{
 										echo '<option value="'.$i.'">'.$i.'</option>'; 
 										$i++;
@@ -88,11 +88,11 @@
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <br><?= $user->bases->bases_5050 ?> </b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : <br>400€</b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au recherche : <br><?= Config::$prix_cinquante_cinquante ?>€</b></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[5050]; ?></p></b></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= floor($nb_base_wish_to_create[5050]); ?></p></b></li>
 								<select name="5050">
 									<?php
 									$i = 0;
-									while($i <= $nb_to_create[5050])
+									while($i <= $nb_base_wish_to_create[5050])
 									{
 										echo '<option value="'.$i.'">'.$i.'</option>'; 
 										$i++;
@@ -113,11 +113,11 @@
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <br><?= $user->bases->bases_8020 ?> </b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : <br>370€</b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au recherche :<br> <?= Config::$prix_quatre_vingt_vingt ?>€</b></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nb de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[8020]; ?></p></b></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nb de synthèse possible : </br><p style="text-align:center;"><?= floor($nb_base_wish_to_create[8020]); ?></p></b></li>
 								<select name="8020">
 									<?php
 									$i = 0;
-									while($i <= $nb_to_create[8020])
+									while($i <= $nb_base_wish_to_create[8020])
 									{
 										echo '<option value="'.$i.'">'.$i.'</option>'; 
 										$i++;
@@ -138,11 +138,11 @@
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Quantité en stock : <br><?= $user->bases->bases_1000 ?> </b></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix brut : <br>350€</b><br></li>
 								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Prix avec réduction due au recherche : <br><?= Config::$prix_cent ?>€</b></li>
-								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= $nb_to_create[1000]; ?></p></b></li>
+								<li style="font-size:12px;" class="col-xs-12 pull-right"><b>Nombre de synthèse possible : </br><p style="text-align:center;"><?= floor($nb_base_wish_to_create[1000]); ?></p></b></li>
 								<select name="1000">
 									<?php
 									$i = 0;
-									while($i <= $nb_to_create[1000])
+									while($i <= $nb_base_wish_to_create[1000])
 									{
 										echo '<option value="'.$i.'">'.$i.'</option>'; 
 										$i++;

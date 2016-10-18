@@ -3,11 +3,9 @@
 Class sign_up extends base_module
 {
 	public $time_now;
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{		
-
-		if($module_tpl_name != "")
-			parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 
 		if(isset($_POST['return_form_complet']))
 			$this->traitement_post_inscription($_POST);

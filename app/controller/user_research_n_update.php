@@ -1,26 +1,24 @@
 <?php
 
 
-Class user_research_n_update extends user
+Class user_research_n_update extends user_ressources
 {
 	public $time_now = 0;
 
-	public function __construct($user)
+	public function __construct()
 	{
-		$this->time_now = date("U");
-		$this->validate_update($user);
-		$this->validate_search_arome($user);
+		parent::__construct();
 	}
 
 
 
-	public function validate_update($user)
+	public function validate_update()
 	{
 		$req_sql = new stdClass;
 		$req_sql->table = "update_en_cours";
 		$req_sql->var = "*";
-		$req_sql->where = "id_user= '".$user->user_infos->id."'";
-		$res_sql = all_query::select($req_sql);
+		$req_sql->where = "id_user= '".$this->user_infos->id."'";
+		$res_sql = $this->select($req_sql);
 		unset($req_sql);
 
 
@@ -31,31 +29,31 @@ Class user_research_n_update extends user
 				if($row_update->time_finish <= $this->time_now)
 				{
 					//on indique dans la base que le level est changer 
-					$set_level_up = $user->amelioration_var_config->{$row_update->name_batiment}+1;
+					$set_level_up = $this->amelioration_var_config->{$row_update->name_batiment}+1;
 					$req_sql = new stdClass;
 					$req_sql->table = "amelioration_var_config";
 					$req_sql->where = "id_user = '".$row_update->id_user."'";
 					$req_sql->ctx = new stdClass;
 					$req_sql->ctx->{$row_update->name_batiment} = $set_level_up;
-					all_query::update($req_sql);
+					$this->update($req_sql);
 
 					//et on delete la ligne qui est finie;
 					$del_sql = new stdClass;
 					$del_sql->table = "update_en_cours";
-					$del_sql->where = "id = '".$row_update->id."' AND id_user = '".$user->user_infos->id."'";
-					all_query::delete($del_sql);
+					$del_sql->where = "id = '".$row_update->id."' AND id_user = '".$this->user_infos->id."'";
+					$this->delete($del_sql);
 				}
 			}
 		}		
 	}
 
-	public function validate_search_arome($user)
+	public function validate_search_arome()
 	{
 		$req_sql = new stdClass;
 		$req_sql->table = "search_arome";
 		$req_sql->var = "*";
-		$req_sql->where = "id_user= '".$user->user_infos->id."'";
-		$res_sql = all_query::select($req_sql);
+		$req_sql->where = "id_user= '".$this->user_infos->id."'";
+		$res_sql = $this->select($req_sql);
 		unset($req_sql);
 
 
@@ -71,8 +69,8 @@ Class user_research_n_update extends user
 					$req_sql = new stdClass;
 					$req_sql->table = "login";
 					$req_sql->var = "list_arome_not_have";
-					$req_sql->where = "id = '".$user->user_infos->id."'";
-					$res_fx = all_query::select($req_sql);
+					$req_sql->where = "id = '".$this->user_infos->id."'";
+					$res_fx = $this->select($req_sql);
 
 					if(!empty($res_fx))
 					{
@@ -96,7 +94,7 @@ Class user_research_n_update extends user
 						if($id_ok_win != 0)
 						{
 							//on set l'arome gagné dans le user pour l'utiliser dans le tpl arome list
-							$user->user_infos->id_arome_win .= $id_ok_win.",";
+							$this->user_infos->id_arome_win .= $id_ok_win.",";
 
 							foreach($array_id_arome_player_not_had as $key => $id_arome_not_have)
 							{
@@ -113,14 +111,14 @@ Class user_research_n_update extends user
 							$req_sql->where = "id = '".$row_search->id_user."'";
 							$req_sql->ctx = new stdClass;
 							$req_sql->ctx->list_arome_not_have = $string_for_bsd;
-							all_query::update($req_sql);
+							$this->update($req_sql);
 						}
 
 						//et on delete la ligne qui est finie;
 						$del_sql = new stdClass;
 						$del_sql->table = "search_arome";
-						$del_sql->where = "id = '".$row_search->id."' AND id_user = '".$user->user_infos->id."'";
-						all_query::delete($del_sql);
+						$del_sql->where = "id = '".$row_search->id."' AND id_user = '".$this->user_infos->id."'";
+						$this->delete($del_sql);
 					}
 					unset($res_fx);
 				}
@@ -170,38 +168,10 @@ Class user_research_n_update extends user
 			return 0;
 	}
 
-	public function insert_search_arome($pourcent_to_win, $price_value_search, $time_finish)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->id_user = $this->user_obj->user_infos->id;
-		$req_sql->ctx->price_value_search = $price_value_search;
-		$req_sql->ctx->time_finish = $time_finish;
-		$req_sql->ctx->pourcent_win = $pourcent_to_win;
-		$req_sql->table = "search_arome";
-		$this->insert_into($req_sql);
-	}
 
-	public function insert_search_update_en_cours($name_batiment, $time_finish, $real_name_search)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->id_user = $this->user_obj->user_infos->id;
-		$req_sql->ctx->name_batiment = $name_batiment;
-		$req_sql->ctx->time_finish = $time_finish;
-		$req_sql->ctx->real_name_search = $real_name_search;
-		$req_sql->table = "update_en_cours";
-		$this->insert_into($req_sql);
 
-	}
 
-	public function check_update_en_cours()
-	{
-		$i = 0;
-		if(isset($this->user_obj->update->{0}))
-			return true;
-		else
-			return false;
-	}
+
+
 
 } 

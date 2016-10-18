@@ -8,32 +8,32 @@ Class synthese_bases extends base_module
 	public	$cout_total_vg = 0;
 	public	$cout_total_pg = 0;
 
-	public $nb_to_create = array();
+	public $nb_base_wish_to_create = array();
 
 
 
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{	
 
-		parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
-		if($user->user_infos->litter_vg >= 1)
+		if($this->user_infos->litter_vg >= 1)
 		{
-			$this->nb_to_create = $this->nb_bases($user->user_infos->litter_vg, $user->user_infos->litter_pg, $user->user_infos->argent);
+			$this->nb_base_wish_to_create = $this->calcul_nb_bases_possible_to_create($this->user_infos->litter_vg, $this->user_infos->litter_pg, $this->user_infos->argent);
 		}
 		else
 		{
-			$this->nb_to_create[2080] = 0;
-			$this->nb_to_create[5050] = 0;
-			$this->nb_to_create[8020] = 0;
-			$this->nb_to_create[1000] = 0;
+			$this->nb_base_wish_to_create[2080] = 0;
+			$this->nb_base_wish_to_create[5050] = 0;
+			$this->nb_base_wish_to_create[8020] = 0;
+			$this->nb_base_wish_to_create[1000] = 0;
 		}
 		
 
 
-		foreach($this->nb_to_create as $key => $values)
+		foreach($this->nb_base_wish_to_create as $key => $values)
 		{
 			if($values == 0)
 				$_SESSION["little_infos"] = "Vous ne possédez pas assez de ressource  pour créer chaque sorte de bases";
@@ -47,29 +47,19 @@ Class synthese_bases extends base_module
 
 		if(isset($_POST['create_bases'])) 
 		{
-			$this->recept_form_with_bases_to_create($_POST, $user);
+			$this->recept_form_with_bases_to_create($_POST);
 		}
 
-
-		$user->get_variable_user();
-		return $this->assign_var("nb_to_create", $this->nb_to_create)->assign_var("user", $user)->render();
+		return $this->assign_var("nb_base_wish_to_create", $this->nb_base_wish_to_create)->assign_var("user", $this)->render();
 	}
 
-
-	public function set_reduction_coup_with_labos($nb_total_de_bases, $pourcent_down)
-	{
-		$reduction_calcul = (100 - (float)$pourcent_down)/100;
-		$nb_total_de_bases = $nb_total_de_bases * (float)$reduction_calcul;
-
-		return (float)$nb_total_de_bases;
-	}
 
 	
 	public function convert_all_ressource_in_littre($name_to_create)
 	{
 		if($name_to_create == 'vg')
 		{
-			$plante_stock = $this->user_obj->user_infos->last_culture_vg;
+			$plante_stock = $this->user_infos->last_culture_vg;
 			$littre_vg_possible = floor(round($plante_stock / Config::$nb_plantes_for_littre, 2));
 
 			
@@ -88,7 +78,7 @@ Class synthese_bases extends base_module
 
 		else if($name_to_create == 'pg')
 		{
-			$propylene_stock = $this->user_obj->user_infos->last_usine_pg;
+			$propylene_stock = $this->user_infos->last_usine_pg;
 			$littre_pg_possible = floor(round($propylene_stock / Config::$nb_propylene_for_littre, 2));
 
 
@@ -109,7 +99,7 @@ Class synthese_bases extends base_module
 
 
 
-	public function recept_form_with_bases_to_create($post, $user)
+	public function recept_form_with_bases_to_create($post)
 	{
 		//nettoyage du post principale et secondaire tmp
 		unset($post['create_bases']);
@@ -131,7 +121,7 @@ Class synthese_bases extends base_module
 						$this->set_ressource_litter_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
 					}
 
-					user_ressources::ajout_bases_in_bsd($name_bases, intval($nb_bases), "+", $user);
+					user_ressources::ajout_bases_in_bsd($name_bases, intval($nb_bases), "+");
 					//set dans la base de données l'argnet que ça à couté
 					$this->set_argent_user($total_price, "-");
 					unset($_POST);
@@ -146,7 +136,7 @@ Class synthese_bases extends base_module
 	{
 
 			//operation
-			if($nb_form_bases > $this->nb_to_create[$name_form_bases])
+			if($nb_form_bases > $this->nb_base_wish_to_create[$name_form_bases])
 			{
 				$_SESSION["error"] = "Erreur vous ne possédez pas assez de ressources pour tous créer";
 				return 0;
@@ -169,7 +159,7 @@ Class synthese_bases extends base_module
 					$total_price += Config::$prix_cent * $nb_form_bases;
 
 				//il faut vérifier si il a assez d'argnet également
-				if($this->user_obj->user_infos->argent >= $total_price)
+				if($this->user_infos->argent >= $total_price)
 				{
 					return $total_price;
 				}					
@@ -212,7 +202,7 @@ Class synthese_bases extends base_module
 
 
 
-	public function nb_bases($litter_vg, $litter_pg, $argent)
+	public function calcul_nb_bases_possible_to_create($litter_vg, $litter_pg, $argent)
 	{
 
 		$tab_bases = array("2080", "5050", "8020", "1000");
@@ -231,7 +221,7 @@ Class synthese_bases extends base_module
 				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
 					$tab_bases['2080'] = $nb_bases_ok;
 				else
-					$tab_bases['2080'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+					$tab_bases['2080'] = $argent / Config::$prix_vingt_quatre_vingt;
 			}	
 
 			if($row_bases == "5050")
@@ -244,10 +234,10 @@ Class synthese_bases extends base_module
 				else
 					$nb_bases_ok = $nb_bases_ok_pg;
 
-				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+				if($argent >= ($nb_bases_ok * Config::$prix_cinquante_cinquante))
 					$tab_bases['5050'] = $nb_bases_ok;
 				else
-					$tab_bases['5050'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+					$tab_bases['5050'] = $argent / Config::$prix_cinquante_cinquante;
 			}	
 
 			if($row_bases == "8020")
@@ -260,10 +250,10 @@ Class synthese_bases extends base_module
 				else
 					$nb_bases_ok = $nb_bases_ok_pg;
 
-				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+				if($argent >= ($nb_bases_ok * Config::$prix_quatre_vingt_vingt))
 					$tab_bases['8020'] = $nb_bases_ok;
 				else
-					$tab_bases['8020'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+					$tab_bases['8020'] = $argent / Config::$prix_quatre_vingt_vingt;
 			}	
 
 
@@ -277,10 +267,10 @@ Class synthese_bases extends base_module
 				else
 					$nb_bases_ok = $nb_bases_ok_pg;
 
-				if($argent >= ($nb_bases_ok * Config::$prix_vingt_quatre_vingt))
+				if($argent >= ($nb_bases_ok * Config::$prix_cent))
 					$tab_bases['1000'] = $nb_bases_ok;
 				else
-					$tab_bases['1000'] = $nb_bases_ok / Config::$prix_vingt_quatre_vingt;
+					$tab_bases['1000'] = $argent / Config::$prix_cent;
 			}
 		}
 

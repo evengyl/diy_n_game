@@ -4,9 +4,9 @@ Class social_services extends base_module
 {
 	private $news = array();
 
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{		
-		parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 
 		$req_news = new StdClass();
 		$req_news->table = "news";

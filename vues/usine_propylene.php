@@ -16,7 +16,7 @@
 
 		<div class="col-lg-12" style="background:#232D3B; min-height:600px;">
 			<div class="col-lg-4">
-				<img class="img-responsive" src="../public/images/usines.png">
+				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/usines.png">
 			</div>
 
 			<div class="col-lg-8 pull-right ressource_now">
@@ -43,7 +43,7 @@
 				 			{
 								if(isset($time_finish))
 							 	{
-							 		echo "<th>Votre construction sera terminée le/dans : </th>";
+							 		echo "<th>Votre construction sera terminée le : </th>";
 							 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
 							 	}
 				 			}

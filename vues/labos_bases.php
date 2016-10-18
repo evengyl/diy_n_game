@@ -1,3 +1,4 @@
+
 <div class="col-xs-10 col-lg-12 col-without-padding col-without-radius content_game">
 	__TPL_nav_game__
 	<div class="col-lg-9" style="margin-top:1px;">
@@ -26,8 +27,11 @@
 					<tr class="success" style="color:black;">
 						<th>Réduction :</th><td><b><? echo $user->labos_bases->pourcent_down; ?></b> % du coût des bases</td>
 					</tr>
-					<tr class="success" style="color:black;">
-						<th>Prix pour le niveau suivant :</th><td><b><? echo $user->labos_bases->prix; ?> &euro;</b> pour acheter un nouveaux laboratoire</td>
+					<tr class="success" style="color:black;"><?
+						if($in_make != 3)
+			 			{
+							?><th>Prix pour le niveau suivant :</th><td><b><? echo $user->labos_bases->prix; ?> &euro;</b> pour acheter un nouveaux laboratoire</td><?
+						}?>
 					</tr>
 					<tr class="success" style="color:black;">
 						<th>Quantité de ressource pour un littre SANS améliorations :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
@@ -35,8 +39,11 @@
 					<tr class="success" style="color:black;">
 						<th>Quantité de ressource pour un littre AVEC améliorations :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
 					</tr>
-					<tr class="success" style="color:black;">
-						<th>Temps de construction :</th><td><? echo $user->labos_bases->time_real_construct; ?></td>
+					<tr class="success" style="color:black;"><?
+						if($in_make != 3)
+			 			{
+							?><th>Temps de construction :</th><td><? echo $user->labos_bases->time_real_construct; ?></td><?
+						}?>
 					</tr>
 					<tr class="success" style="color:black;">
 						<form method="post" action="#"><?
@@ -44,7 +51,7 @@
 				 			{
 								if(isset($time_finish))
 							 	{
-							 		echo "<th>Votre construction sera terminée le/dans : </th>";
+							 		echo "<th>Votre construction sera terminée le : </th>";
 							 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
 							 	}
 				 			}

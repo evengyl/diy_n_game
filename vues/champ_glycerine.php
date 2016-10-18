@@ -18,7 +18,7 @@
 			<div class="col-lg-4">
 				<img class="img-responsive" src="<?= Config::$path_public; ?>/images/plantes.png">
 			</div>
-			
+
 			<div class="col-lg-8 pull-right ressource_now">
 				<h3 class="title">Actuellement vos champs vous rapporte :</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
@@ -43,7 +43,7 @@
 				 			{
 								if(isset($time_finish))
 							 	{
-							 		echo "<th>Votre construction sera terminée le/dans : </th>";
+							 		echo "<th>Votre construction sera terminée le : </th>";
 							 		echo "<td><b>".date('d/m/Y', $time_finish)." &agrave; ".date('H:i:s', $time_finish)."</b></td>";
 							 	}
 				 			}

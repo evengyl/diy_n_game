@@ -16,6 +16,8 @@ class Autoloader
         	require "../app/modele/".$class.".class.php";
         else if($class == "router")
         	require "../app/".$class.".php";
+        else if($class == "config")
+            require "../app/modele/".$class.".class.php";
         else
         	require $class.'.php';
     }

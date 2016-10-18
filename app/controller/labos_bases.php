@@ -3,16 +3,17 @@ Class labos_bases extends base_module
 {
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_labos_bases";
+	public $name_batiment_in_user_var = "labos_bases";
 	public $max_level_batiment = 80;
 
-	public function __construct($module_tpl_name, &$user)
+	public function __construct()
 	{	
-		parent::__construct($module_tpl_name, $user);
+		parent::__construct(__CLASS__);
 
-		$this->alert_construction_en_cours = user_batiments::check_construction_en_cours($this->name_batiment, $user->labos_bases->prix);	
+		$this->alert_construction_en_cours = $this->user->check_construction_en_cours($this->name_batiment, $this->user->labos_bases->prix);	
 
 
-		if($user->user_infos->level_labos_bases == $this->max_level_batiment)
+		if($this->user->user_infos->level_labos_bases == $this->max_level_batiment)
 		{
 			// 3 signifie que le level max à été atteint
 			$this->alert_construction_en_cours = 3;
@@ -28,26 +29,19 @@ Class labos_bases extends base_module
 				if($this->alert_construction_en_cours == 0)
 				{
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
-					$time_finish = $this->time_finish_construct($user->labos_bases->time_construct);
+					$time_finish = $this->user->user_infos->time_now + $this->{$this->name_batiment_in_user_var}->time_construct;
 
-						user_batiments::insert_construction_en_cours($this->name_batiment, $time_finish);	
-						$this->set_argent_user($user->labos_bases->prix, "-");
-						//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
-						$user->get_variable_user();
-						$this->alert_construction_en_cours = 1;
-					
-					
+					$this->user->insert_construction_en_cours($this->name_batiment, $time_finish);	
+					$this->user->set_argent_user($this->labos_bases->prix, "-");
+					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
+					$this->alert_construction_en_cours = 1;
+					$this->user->get_variable_user();
 				}
 			}
 		}
-		else
-		{
-			$time_finish = 0;
-		}
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur
-		$this->set_time_finish($this->name_batiment);
+		$time_finish = $this->user->set_time_finish($this->name_batiment);
 
-		return $this->assign_var("user", $user)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
+		return $this->assign_var("user", $this->user)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
 	}
-
 }

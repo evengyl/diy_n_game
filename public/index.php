@@ -16,31 +16,17 @@ if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
 
-
 ob_start();
+
+
 
 //va être appeler a chaque démarage de script page et va checker si le joueur est connecter ou pas.
 $login = new login();
 
-if(Config::$is_connect == 1)
-{
-	if(!isset($user))
-	{
-		$user = new user();
-		if(!empty($user))
-		{
-			new user_ressources($user);
-			new user_batiments($user);
-			new user_research_n_update($user);
-			$user->get_variable_user();
 
-			new set_update_var_global("",$user);
-		}
-		else
-		{
-			$_GET['page'] = "login";
-		}
-	}
+if(Config::$is_connect)
+{
+	$user = singleton::getInstance();
 }?>
 
 
@@ -66,7 +52,7 @@ if(Config::$is_connect == 1)
 $page = ob_get_clean();
 //appel le parseur qui rendra tout les modules et tout les vues
 $parser = new parser();
-$page = $parser->parser_main($page, $user);
+$page = $parser->parser_main($page);
 //affiche la page complete avec toute les données traitée
 echo $page; 
 
@@ -85,8 +71,8 @@ if(!empty($_SESSION['error']))
 {
 	affiche_pre($_SESSION['error']);
 }
-//affiche_pre($user);
-//affiche_pre(Config::$list_req_sql);
+affiche_pre($user);
+affiche_pre(Config::$list_req_sql);
 //affiche_pre("Executer en ".(float)$time_laps);
 
 if(!empty($_POST))
@@ -96,3 +82,10 @@ if(!empty($_POST))
 		unset($_POST[$key]);
 	}
 }
+
+
+
+
+
+
+
