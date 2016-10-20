@@ -14,7 +14,10 @@
 				</span>
 			</div>
 			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
-				<h3 class="title">Petit bonus : </h3>
+				<center><img src="<?= Config::$path_public; ?>/images/shop.png"></center>
+			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<h3 class="title">Petit bonus représentatif: </h3>
 				<span>
 					Vérifié vos produits en stock avec vos date de péremption... si elle dépasse la date limite, adieu à la poubelle.
 				</span>

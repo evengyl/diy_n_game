@@ -50,7 +50,7 @@ Class shop extends base_module
 
 //parti autre produits non repris dans la liste des random
 		//on recuprer la liste de produits que l'on pssède traiter et tout
-		$tab_final_product_traiter = $this->set_list_product_acquis_for_tpl();
+		$tab_final_product_traiter = $this->user->set_list_product_acquis_for_tpl();
 
 		//on va ici avec le tab des produit random et celui de ce que le joueur à, établir un tab avec uniquement ce que le joueeur à qui n'est pas dans la liste des product random
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
@@ -68,7 +68,7 @@ Class shop extends base_module
 
 
 
-		$tab_final_product_traiter = $this->set_list_product_acquis_for_tpl();
+		$tab_final_product_traiter = $this->user->set_list_product_acquis_for_tpl();
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
 		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random);
 
@@ -292,7 +292,7 @@ Class shop extends base_module
 	public function get_nb_product_have_and_render($tab_arome_random)
 	{
 		//on recuprer la liste de produits que l'on pssède traiter et tout
-		$tab_final_arome_acquis_traiter = $this->set_list_product_acquis_for_tpl();
+		$tab_final_arome_acquis_traiter = $this->user->set_list_product_acquis_for_tpl();
 
 		//on procède deux foreach pour rendre le tableau creer pour le template plus prorpe sans les entete et tout
 		//on vérifie que on en recois pas un false
@@ -344,7 +344,7 @@ Class shop extends base_module
 		$req_sql->var = "*";
 		$req_sql->order = "id DESC";
 		$req_sql->limit = Config::$nb_random_prod_shop;
-		$res_sql = $this->select($req_sql);
+		$res_sql = $this->user->select($req_sql);
 
 		
 		foreach($res_sql as $row_sql)
@@ -379,7 +379,7 @@ Class shop extends base_module
 			$req_sql->ctx->nb_vente = "0";
 			//attention que lors de l'ajout des 15 nouvaux armes en random il faut mettre la date_stop avec une semaine de plus que date_now 604800 seconde 
 			$req_sql->ctx->date_stop = $this->date_now + Config::$duree_random_prod;
-			$this->insert_into($req_sql);
+			$this->user->insert_into($req_sql);
 		}
 	}
 
@@ -430,7 +430,7 @@ Class shop extends base_module
 		$req_sql->var = "date_stop";
 		$req_sql->limit = "1";
 		$req_sql->order = 'id DESC';
-		$res_sql = $this->select($req_sql);
+		$res_sql = $this->user->select($req_sql);
 
 		if(empty($res_sql))
 			return true;
