@@ -79,11 +79,11 @@ class Config
     /*varible utilisée par les controller */
     //pour ajouter des recherche il faut ajouter ici, dans le tpl labos update, dans la base de données, et dans le module labos update
     //et faire les fonction de set dans le set update var global
-    public static $nb_plantes_for_littre_at_start_game_labos_0 = 3000;
-    public static $nb_propylene_for_littre_at_start_game_labos_0 = 2100;
+    public static $nb_plantes_for_littre_at_start_game_labos_0 = 6000;
+    public static $nb_propylene_for_littre_at_start_game_labos_0 = 4200;
 
-    public static $nb_plantes_for_littre = 3000;
-    public static $nb_propylene_for_littre = 2100;
+    public static $nb_plantes_for_littre = 13000;
+    public static $nb_propylene_for_littre = 10000;
 
 
     //arome list

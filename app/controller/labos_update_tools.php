@@ -24,7 +24,7 @@ Class labos_update_tools extends base_module
 
 						$this->insert_search_update_en_cours($name_batiment, $array_update_for_tpl[$_POST['name_search']]->time_finish, Config::$$real_name_search);
 
-						$this->set_argent_user($price, "-");
+						$this->user->set_argent_user($price, "-");
 						
 					}
 				}
@@ -33,7 +33,7 @@ Class labos_update_tools extends base_module
 
 		$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
 
-		return $this->assign_var("user", $this)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render();
+		return $this->assign_var("user", $this->user)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render();
 	}
 
 
@@ -41,12 +41,12 @@ Class labos_update_tools extends base_module
 	public function prepare_array_update_for_tpl($array_name_search_and_price)
 	{
 		//il faut calculer le prix des recherche en fct du level et faire un tab propre pour le tpl
-		unset($this->amelioration_var_config->id);
-		unset($this->amelioration_var_config->id_user);
+		unset($this->user->amelioration_var_config->id);
+		unset($this->user->amelioration_var_config->id_user);
 
 		$array_update_final_tpl = array();
 
-		foreach($this->amelioration_var_config as $name_update => $level_update)
+		foreach($this->user->amelioration_var_config as $name_update => $level_update)
 		{
 			$array_update_final_tpl[$name_update] = new StdClass();
 			$array_update_final_tpl[$name_update]->name = $name_update;
@@ -67,15 +67,15 @@ Class labos_update_tools extends base_module
 				$array_update_final_tpl[$name_update]->prix_next_level = $array_name_search_and_price[$name_update]['prix_level'];
 			}
 			$array_update_final_tpl[$name_update]->time_finish = date("U") + $array_update_final_tpl[$name_update]->time_construct_unix;
-			$array_update_final_tpl[$name_update]->time_finish_construct_real = $this->convert_sec_unix_in_time_real_to_rest( date("U") + $array_update_final_tpl[$name_update]->time_construct_unix);
+			$array_update_final_tpl[$name_update]->time_finish_construct_real = $this->user->convert_sec_unix_in_time_real_to_rest( date("U") + $array_update_final_tpl[$name_update]->time_construct_unix);
 
 
 			//va vérifier si une recherhce est lancée		
 			foreach($array_update_final_tpl as $key => $value)
 			{
-				if(!$this->check_update_en_cours($user))
+				if(!$this->check_update_en_cours())
 				{
-					if($this->verifiy_argent_user($value->prix_next_level))
+					if($this->user->verifiy_argent_user($value->prix_next_level))
 					{
 						$array_update_final_tpl[$name_update]->ok_for_search = 2;
 					}
@@ -100,19 +100,19 @@ Class labos_update_tools extends base_module
 	{
 		$req_sql = new stdClass;
 		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->id_user = $this->user_infos->id;
+		$req_sql->ctx->id_user = $this->user->user_infos->id;
 		$req_sql->ctx->name_batiment = $name_batiment;
 		$req_sql->ctx->time_finish = $time_finish;
 		$req_sql->ctx->real_name_search = $real_name_search;
 		$req_sql->table = "update_en_cours";
-		$this->insert_into($req_sql);
+		$this->user->insert_into($req_sql);
 
 	}
 
-	public function check_update_en_cours($user)
+	public function check_update_en_cours()
 	{
 		$i = 0;
-		if(isset($this->update->{0}))
+		if(isset($this->user->update->{0}))
 			return true;
 		else
 			return false;

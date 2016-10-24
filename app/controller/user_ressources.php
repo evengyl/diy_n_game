@@ -112,7 +112,7 @@ Class user_ressources extends user_batiments
 		return $tab_final_all_arome_traiter;
  	}
 
-	public function set_arome_acquis_for_tpl($user)
+	public function set_arome_acquis_for_tpl()
 	{
 		$this->nb_arome_total = 0;
 		$this->nb_arome_total_acquis = 0;

@@ -3,7 +3,6 @@ Class champ_glycerine extends base_module
 {
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_culture_vg";
-	public $name_batiment_in_user_var = "champ_glycerine";
 
 
 	public function __construct()
@@ -23,7 +22,7 @@ Class champ_glycerine extends base_module
 				{
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
 			
-					$time_finish = $this->user->user_infos->time_now + $this->user->{$this->name_batiment_in_user_var}->time_construct;
+					$time_finish = $this->user->user_infos->time_now + $this->user->champ_glycerine->time_construct;
 
 					$this->user->insert_construction_en_cours($this->name_batiment, $time_finish);
 					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé

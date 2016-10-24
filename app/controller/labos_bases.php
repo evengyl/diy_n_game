@@ -3,7 +3,6 @@ Class labos_bases extends base_module
 {
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_labos_bases";
-	public $name_batiment_in_user_var = "labos_bases";
 	public $max_level_batiment = 80;
 
 	public function __construct()
@@ -29,10 +28,10 @@ Class labos_bases extends base_module
 				if($this->alert_construction_en_cours == 0)
 				{
 					// on va recuprer les données en base de données et on applique sur la table des construction le level suivant OK
-					$time_finish = $this->user->user_infos->time_now + $this->{$this->name_batiment_in_user_var}->time_construct;
+					$time_finish = $this->user->user_infos->time_now + $this->user->labos_bases->time_construct;
 
 					$this->user->insert_construction_en_cours($this->name_batiment, $time_finish);	
-					$this->user->set_argent_user($this->labos_bases->prix, "-");
+					$this->user->set_argent_user($this->user->labos_bases->prix, "-");
 					//ici je rappel la fonction qui gere la table user pour mettre a jour le fait qu'un batiment est lancé
 					$this->alert_construction_en_cours = 1;
 					$this->user->get_variable_user();

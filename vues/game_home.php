@@ -106,7 +106,7 @@
 							<th>Temps restant<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 						</tr>
 						<tr class="info" style="color:black;"><?
-							foreach($update_en_cours as $row_update)
+							foreach($user->update as $row_update)
 							{?>
 								<td><?= (isset($row_update->{0}))? $row_update->{0}->real_name_search :''; ?></td>
 								<td><?= (isset($row_update->{0}))? $row_update->{0}->time_finish_real :''; ?></td><?

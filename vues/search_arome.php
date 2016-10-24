@@ -57,7 +57,7 @@
 								<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 								<th>temps restant <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							</tr><?
-							foreach($array_search_en_cours as $row_search)
+							foreach($user->search_arome as $row_search)
 							{?>
 
 								<tr class="success" style="color:black;">

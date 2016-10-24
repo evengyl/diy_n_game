@@ -35,7 +35,7 @@ Class search_arome extends base_module
 		if($this->value_to_search != 0)
 		{
 			//verifier si il a assez d'argnet pour faire sa search va return 0 si pas et 1 si ok
-			if($this->verifiy_argent_user($this->value_to_search))
+			if($this->user->verifiy_argent_user($this->value_to_search))
 			{
 				//Va se charger de convertir la valeur d'argnet envoyer pour la recherhce en % de change gagnante
 				$this->percent_to_win = $this->convert_price_search_to_percent_win($this->value_to_search); 
@@ -44,57 +44,53 @@ Class search_arome extends base_module
 				$this->time_finish = $this->calcul_time_finish($this->value_to_search);
 
 				//insère en base de donnée la ligne de recherhce, avec pourcentage de réussite, la valeur de la recherche, et la date de fin en unix time
-				$this->insert_search_arome($this->percent_to_win, $this->value_to_search, $this->time_finish);
+				$this->user->insert_search_arome($this->percent_to_win, $this->value_to_search, $this->time_finish);
 
 				//on enleve l'argent à l'user
-				$this->set_argent_user($this->value_to_search, $moins_plus = "-");
+				$this->user->set_argent_user($this->value_to_search, $moins_plus = "-");
 			}
 		}
 
-
-
-
-
 		//partie traitement de l'arome gagner pour l'envoi au tpl
 		//on regarde dans la talbe user infos si un id est gagner
-		if(isset($this->user_infos->id_arome_win) && $this->user_infos->id_arome_win != "")
+		if(isset($this->user->user_infos->id_arome_win) && $this->user->user_infos->id_arome_win != "")
 		{
 			//va cehrcher l'arome dans la base pour les infos
-			$arome_win_for_tpl = $this->get_arome_win_for_tpl();
+			$arome_win_for_tpl = $this->user->get_arome_win_for_tpl();
 			//traite l'id pour ressortir avec image et tout
-			$arome_win_for_tpl = $this->render_arome_win($arome_win_for_tpl);
+			$arome_win_for_tpl = $this->user->render_arome_win($arome_win_for_tpl);
 		}
 		else
 			$arome_win_for_tpl = "";
 
 		//recupere les recherche en cours pour les envoyer au tpl elle sont dans le user
-		$array_search_en_cours = $this->get_search_en_cours();
+		
 
 		//set la petit phrase pour les aromes trouver ou pas 
 		$string_arome_string_nb = "Arômes trouvés : ".$this->nb_arome_total_acquis." sur ".$this->nb_arome_total;
 
 		
 		//va aller chercher et traiter la liste des aromes que le joueurs à obetnu pour l'affichage dans le template
-		$this->tab_final_arome_acquis_traiter = $this->set_arome_acquis_for_tpl();
+		$this->tab_final_arome_acquis_traiter = $this->user->set_arome_acquis_for_tpl();
 
 		unset($_POST);//detruit tout les post pour éviter des doublons
+		
+		$this->user->get_variable_user();
+		$this->instance_search_en_cours_for_tpl();
+
 
 		return $this->assign_var("string_arome_string_nb",$string_arome_string_nb)
 					->assign_var("arome_win_for_tpl",$arome_win_for_tpl)
 					->assign_var("array_aromes_trier", $this->tab_final_arome_acquis_traiter)
-					->assign_var("array_search_en_cours",$array_search_en_cours)
-					->assign_var("user", $this)->render();
+					->assign_var("user", $this->user)->render();
 	}
 
-	private function get_search_en_cours()
+	private function instance_search_en_cours_for_tpl()
 	{
-		$array_search_en_cours = array();
-		foreach($this->search_arome as $row_search)
+		foreach($this->user->search_arome as $key => $row_search)
 		{
-			$row_search->real_time_finish = $this->convert_sec_unix_in_time_real_to_rest($row_search->time_finish);
-			$array_search_en_cours[] = $row_search;
+			$this->user->search_arome->{$key}->real_time_finish = $this->user->convert_sec_unix_in_time_real_to_rest($row_search->time_finish);
 		}
-		return $array_search_en_cours;
 	}
 
 
@@ -163,16 +159,6 @@ Class search_arome extends base_module
 	}
 
 
-	public function insert_search_arome($pourcent_to_win, $price_value_search, $time_finish)
-	{
-		$req_sql = new stdClass;
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->id_user = $this->user_infos->id;
-		$req_sql->ctx->price_value_search = $price_value_search;
-		$req_sql->ctx->time_finish = $time_finish;
-		$req_sql->ctx->pourcent_win = $pourcent_to_win;
-		$req_sql->table = "search_arome";
-		$this->insert_into($req_sql);
-	}
+
 
 }

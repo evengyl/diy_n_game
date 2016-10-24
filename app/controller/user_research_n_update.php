@@ -49,19 +49,11 @@ Class user_research_n_update extends user_ressources
 
 	public function validate_search_arome()
 	{
-		$req_sql = new stdClass;
-		$req_sql->table = "search_arome";
-		$req_sql->var = "*";
-		$req_sql->where = "id_user= '".$this->user_infos->id."'";
-		$res_sql = $this->select($req_sql);
-		unset($req_sql);
-
-
-		if(!empty($res_sql))
+		if(!empty($this->search_arome))
 		{
-			foreach($res_sql as $row_search)
+			foreach($this->search_arome as $row_search)
 			{
-				if($row_search->time_finish <= $this->time_now)
+				if($row_search->time_finish <= $this->user_infos->time_now)
 				{
 					$array_arome_not_have = array();
 
@@ -169,6 +161,18 @@ Class user_research_n_update extends user_ressources
 	}
 
 
+
+	public function insert_search_arome($pourcent_to_win, $price_value_search, $time_finish)
+	{
+		$req_sql = new stdClass;
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->id_user = $this->user_infos->id;
+		$req_sql->ctx->price_value_search = $price_value_search;
+		$req_sql->ctx->time_finish = $time_finish;
+		$req_sql->ctx->pourcent_win = $pourcent_to_win;
+		$req_sql->table = "search_arome";
+		$this->insert_into($req_sql);
+	}
 
 
 

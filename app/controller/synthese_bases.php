@@ -19,9 +19,9 @@ Class synthese_bases extends base_module
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
-		if($this->user_infos->litter_vg >= 1)
+		if($this->user->user_infos->litter_vg >= 1)
 		{
-			$this->nb_base_wish_to_create = $this->calcul_nb_bases_possible_to_create($this->user_infos->litter_vg, $this->user_infos->litter_pg, $this->user_infos->argent);
+			$this->nb_base_wish_to_create = $this->calcul_nb_bases_possible_to_create($this->user->user_infos->litter_vg, $this->user->user_infos->litter_pg, $this->user->user_infos->argent);
 		}
 		else
 		{
@@ -50,7 +50,9 @@ Class synthese_bases extends base_module
 			$this->recept_form_with_bases_to_create($_POST);
 		}
 
-		return $this->assign_var("nb_base_wish_to_create", $this->nb_base_wish_to_create)->assign_var("user", $this)->render();
+		$this->user->get_variable_user();
+
+		return $this->assign_var("nb_base_wish_to_create", $this->nb_base_wish_to_create)->assign_var("user", $this->user)->render();
 	}
 
 
@@ -59,7 +61,7 @@ Class synthese_bases extends base_module
 	{
 		if($name_to_create == 'vg')
 		{
-			$plante_stock = $this->user_infos->last_culture_vg;
+			$plante_stock = $this->user->user_infos->last_culture_vg;
 			$littre_vg_possible = floor(round($plante_stock / Config::$nb_plantes_for_littre, 2));
 
 			
@@ -68,17 +70,17 @@ Class synthese_bases extends base_module
 				$_SESSION['error_bases_down'] = "Infos : Vous devrier construire plus de batiments de production";	
 			}
 
-			$this->set_litter_vg($littre_vg_possible);
+			$this->user->set_litter_vg($littre_vg_possible);
 
 			$cout_total_ressource = $littre_vg_possible * Config::$nb_plantes_for_littre;
-			$this->set_ressource_brut_user($cout_total_ressource, 0, $moins_plus = "-");
+			$this->user->set_ressource_brut_user($cout_total_ressource, 0, $moins_plus = "-");
 			$_SESSION['error_bases_down'] = "Infos : Vos plantes on été convertie en littre de bases !";
 
 		}
 
 		else if($name_to_create == 'pg')
 		{
-			$propylene_stock = $this->user_infos->last_usine_pg;
+			$propylene_stock = $this->user->user_infos->last_usine_pg;
 			$littre_pg_possible = floor(round($propylene_stock / Config::$nb_propylene_for_littre, 2));
 
 
@@ -87,10 +89,10 @@ Class synthese_bases extends base_module
 				$_SESSION['error_bases_down'] = "Infos : Vous devrier construire plus de batiments de production";	
 			}
 
-			$this->set_litter_pg($littre_pg_possible);
+			$this->user->set_litter_pg($littre_pg_possible);
 
 			$cout_total_ressource = $littre_pg_possible * Config::$nb_propylene_for_littre;
-			$this->set_ressource_brut_user(0, $cout_total_ressource, $moins_plus = "-");
+			$this->user->set_ressource_brut_user(0, $cout_total_ressource, $moins_plus = "-");
 			$_SESSION['error_bases_down'] = "Infos : Votre propylène brut à été converti en littre de bases !";
 
 		}
@@ -118,12 +120,12 @@ Class synthese_bases extends base_module
 					//set dans la base de données les bases creer
 					if($this->cout_total_vg != 0 || $this->cout_total_pg != 0)
 					{
-						$this->set_ressource_litter_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
+						$this->user->set_ressource_litter_user($this->cout_total_vg, $this->cout_total_pg, $moins_plus = "-");
 					}
 
-					user_ressources::ajout_bases_in_bsd($name_bases, intval($nb_bases), "+");
+					$this->user->ajout_bases_in_bsd($name_bases, intval($nb_bases), "+");
 					//set dans la base de données l'argnet que ça à couté
-					$this->set_argent_user($total_price, "-");
+					$this->user->set_argent_user($total_price, "-");
 					unset($_POST);
 				}
 			}
@@ -159,7 +161,7 @@ Class synthese_bases extends base_module
 					$total_price += Config::$prix_cent * $nb_form_bases;
 
 				//il faut vérifier si il a assez d'argnet également
-				if($this->user_infos->argent >= $total_price)
+				if($this->user->user_infos->argent >= $total_price)
 				{
 					return $total_price;
 				}					
@@ -199,13 +201,11 @@ Class synthese_bases extends base_module
 
 
 
-
-
-
 	public function calcul_nb_bases_possible_to_create($litter_vg, $litter_pg, $argent)
 	{
 
 		$tab_bases = array("2080", "5050", "8020", "1000");
+
 		foreach($tab_bases as $row_bases)
 		{
 			if($row_bases == "2080")

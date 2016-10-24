@@ -45,10 +45,10 @@
 
 		<table class="table table-stripped table-hover" style="color:white;">
 			<tr class="success" style="color:black;">
-				<th>Quantité de ressource pour un littre SANS améliorations (Labos bases) :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
+				<th>Quantité de ressource pour un littre SANS améliorations (<a href='?page=labos_bases'>Labos bases</a>) :</th><td><b><?= Config::$nb_plantes_for_littre_at_start_game_labos_0 ?> VG et <?= Config::$nb_propylene_for_littre_at_start_game_labos_0 ?> PG</td>
 			</tr>
 			<tr class="success" style="color:black;">
-				<th>Quantité de ressource pour un littre AVEC vos améliorations (Labos bases) :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
+				<th>Quantité de ressource pour un littre AVEC vos améliorations (<a href='?page=labos_bases'>Labos bases</a>) :</th><td><b><?= Config::$nb_plantes_for_littre ?> VG et <?= Config::$nb_propylene_for_littre ?> PG</td>
 			</tr>
 		</table>	
 
