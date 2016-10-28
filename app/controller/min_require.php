@@ -30,6 +30,7 @@ Class min_require extends user_set_global_var
                     $this->user_infos->id_arome_win = "";
                     $this->user_infos->diff_time = "";
                     $this->user_infos->nb_product_total = "";
+                    $this->user_infos->list_arome_not_have = $this->compare_id_not_have_with_bsd(); //au cas ou des aromes sont suprimer, ou ajouter , il faut mettre les liste à jours
                     //user end
 
                     //user_account start

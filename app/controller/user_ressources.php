@@ -39,85 +39,81 @@ Class user_ressources extends user_batiments
 		unset($req_sql);
 	}
 
+	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
+	{
+		
 
-
- 	public function get_string_all_id_aromes()
- 	{
- 		$string_id_arome = "";
- 		$req_sql = new stdClass();
-		$req_sql->table = "aromes";
-		$req_sql->var = "id";
-		$array_id_arome = $this->select($req_sql);
-
-		foreach($array_id_arome as $row_id_aromes)
+		$argent_before = $this->user_infos->argent;
+		
+		if($moins_plus == "-")
 		{
-			$string_id_arome .= $row_id_aromes->id.",";
+			$this->set_point_user($prix_a_deduire);
+			$argent_after = $argent_before - $prix_a_deduire;
 		}
-		return $string_id_arome;
- 	}
-
-
-
-
- 	public function set_all_arome_for_tpl()
- 	{
-		$this->nb_arome_total = 0;
-
-
-		$arome_list = new stdClass();
-		$arome_list->table = "aromes";
-		$arome_list->var = "id, marque, nom";
-		$arome_list->order = "marque";
-		$res_sql_arome_list = $this->select($arome_list);
-
-
-
-		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
-		$array_total_aromes = self::return_id_array_table_arome($res_sql_arome_list);
-
-		//tri du tableau pour avoir les marque triée 
-		$array_product_in_stock_tri = new ArrayObject($res_sql_arome_list);
-		$array_product_in_stock_tri->asort();
-
-
-		$tab_final_all_arome_traiter = array();
-		$i = 0;
-
-		foreach($array_product_in_stock_tri as $row)
+		else if($moins_plus == "+")
 		{
-			if(!isset($tab_final_all_arome_traiter[$row->marque]))
-			{
-				$tab_final_all_arome_traiter[$row->marque] = array();
-				end($tab_final_all_arome_traiter);
-			}
+			$this->set_point_user_vente($prix_a_deduire);
+			$argent_after = $argent_before + $prix_a_deduire;
+		}
 			
 
-			if(key($tab_final_all_arome_traiter) == $row->marque)
-			{
-				$name_image = $row->marque;
-				$name_image .= "_".trim($row->nom).".jpg";
-				$name_image = str_replace(" ", "_", $name_image);
-				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
-				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->argent = $argent_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
 
-				$tab_final_all_arome_traiter[$row->marque][$i] = new stdClass();
-				$tab_final_all_arome_traiter[$row->marque][$i]->nom = $row->nom;
-				$tab_final_all_arome_traiter[$row->marque][$i]->id = $row->id;
-				$tab_final_all_arome_traiter[$row->marque][$i]->img = $name_image;
-				$tab_final_all_arome_traiter[$row->marque][$i]->marque = $row->marque;
-			}
-			$i++;
-		}
+	public function set_point_user($argent_depenser)
+	{
+		$point_before = $this->user_infos->point;
+		$point_gagner = $argent_depenser/1000;
+		$point_after = $point_before + $point_gagner;
 
-		return $tab_final_all_arome_traiter;
- 	}
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->point = $point_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_point_user_vente($argent_depenser)
+	{
+		$point_before = $this->user_infos->point_vente;
+		$point_gagner = $argent_depenser/1000;
+		$point_after = $point_before + $point_gagner;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->point_vente = $point_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+
+
+
+
+
+
+
+
+
+//////////////////////
+//					//
+//	Partie aromes 	//
+//					//
+//					//
+//////////////////////
 
 	public function set_arome_acquis_for_tpl()
 	{
-		$this->nb_arome_total = 0;
-		$this->nb_arome_total_acquis = 0;
-
-
 		$arome_list = new stdClass();
 		$arome_list->table = "aromes";
 		$arome_list->var = "id, marque, nom";
@@ -140,14 +136,10 @@ Class user_ressources extends user_batiments
 
 		foreach($res_sql_arome_list as $key_aromes => $value_arome)
 		{
-			$this->nb_arome_total++;
 			foreach($array_id_arome_acquis as $row_acquis)
 			{
 				if((string)$row_acquis == (string)$value_arome->id)
-				{
-					$this->nb_arome_total_acquis++;
 					$tab_final_arome_acquis[] = $value_arome;
-				}
 			}
 		}
 		
@@ -269,6 +261,173 @@ Class user_ressources extends user_batiments
 		return $tab_final_arome_acquis_traiter;
 	}
 
+
+		public function compare_id_not_have_with_bsd()
+	{
+		$string_aromes_id_bsd = $this->get_string_all_id_aromes();
+		$string_aromes_id_bsd = substr($string_aromes_id_bsd, 0,-1);
+		$array_aromes_id_bsd = explode(",", $string_aromes_id_bsd);
+
+		$string_aromes_id_user_not_have = $this->user_infos->list_arome_not_have;
+		$string_aromes_id_user_not_have = substr($string_aromes_id_user_not_have, 0,-1);
+		$array_aromes_user_not_have = explode(",", $string_aromes_id_user_not_have);
+
+
+		//au cas ou des aromes sont supprimer de la bases de données
+		foreach(array_diff($array_aromes_user_not_have, $array_aromes_id_bsd) as $row)
+		{
+			foreach($array_aromes_user_not_have as $key => $row_not_have)
+			{
+				if($row_not_have == $row)
+				{
+					unset($array_aromes_user_not_have[$key]);
+				}
+			}
+
+		}
+
+		$string_id_arome = "";
+		foreach($array_aromes_user_not_have as $row_id_aromes)
+		{
+			$string_id_arome .= $row_id_aromes.",";
+		}
+
+		return $string_id_arome;
+	}
+
+
+
+ 	public function get_string_all_id_aromes()
+ 	{
+ 		$string_id_arome = "";
+ 		$req_sql = new stdClass();
+		$req_sql->table = "aromes";
+		$req_sql->var = "id";
+		$array_id_arome = $this->select($req_sql);
+
+		foreach($array_id_arome as $row_id_aromes)
+		{
+			$string_id_arome .= $row_id_aromes->id.",";
+		}
+		return $string_id_arome;
+ 	}
+
+
+
+
+ 	public function set_all_arome_for_tpl()
+ 	{
+		$this->nb_arome_total = 0;
+
+
+		$arome_list = new stdClass();
+		$arome_list->table = "aromes";
+		$arome_list->var = "id, marque, nom";
+		$arome_list->order = "marque";
+		$res_sql_arome_list = $this->select($arome_list);
+
+
+
+		//recupere un tableau contenant tout les id des aromes disponible dans la table aromes
+		$array_total_aromes = self::return_id_array_table_arome($res_sql_arome_list);
+
+		//tri du tableau pour avoir les marque triée 
+		$array_product_in_stock_tri = new ArrayObject($res_sql_arome_list);
+		$array_product_in_stock_tri->asort();
+
+
+		$tab_final_all_arome_traiter = array();
+		$i = 0;
+
+		foreach($array_product_in_stock_tri as $row)
+		{
+			if(!isset($tab_final_all_arome_traiter[$row->marque]))
+			{
+				$tab_final_all_arome_traiter[$row->marque] = array();
+				end($tab_final_all_arome_traiter);
+			}
+			
+
+			if(key($tab_final_all_arome_traiter) == $row->marque)
+			{
+				$name_image = $row->marque;
+				$name_image .= "_".trim($row->nom).".jpg";
+				$name_image = str_replace(" ", "_", $name_image);
+				$name_image = mb_convert_case($name_image, MB_CASE_LOWER, "UTF-8"); 
+				$name_image = "/images/aromes/".$row->marque."/".$name_image;
+
+				$tab_final_all_arome_traiter[$row->marque][$i] = new stdClass();
+				$tab_final_all_arome_traiter[$row->marque][$i]->nom = $row->nom;
+				$tab_final_all_arome_traiter[$row->marque][$i]->id = $row->id;
+				$tab_final_all_arome_traiter[$row->marque][$i]->img = $name_image;
+				$tab_final_all_arome_traiter[$row->marque][$i]->marque = $row->marque;
+			}
+			$i++;
+		}
+
+		return $tab_final_all_arome_traiter;
+ 	}
+
+
+
+
+
+
+
+
+
+//////////////////////
+//					//
+//	Partie Product 	//
+//					//
+//					//
+//////////////////////
+
+
+ 	public function verify_peremption_product()
+ 	{
+ 		if(isset($this->product->list_product) && !empty($this->product->list_product))
+ 		{
+ 			$list_product = $this->product->list_product;	
+
+
+			//on explode le string de la base de données des product pour travailler
+			$tmp_user_product_bsd = substr($list_product, 0, -1);
+			$tmp_user_product_bsd = array(explode(",", $tmp_user_product_bsd));
+
+			$tab_product_in_stock = array();
+			$array_poubelle = array();
+			$i = 0;
+			$j = 0;
+			foreach($tmp_user_product_bsd as $row_product)
+			{
+				foreach($row_product as $key_product => $value_product)
+				{
+					preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $value_product, $match);
+					$tab_product_in_stock[$i]["nb"] = $match[1];
+					$tab_product_in_stock[$i]["id"] = $match[2];
+					$tab_product_in_stock[$i]["bases"] = $match[3];
+					$tab_product_in_stock[$i]["date_peremption"] = $match[4];
+					
+
+					//mtn on va vérifié la date de préemption, ajouter un array dnas le user avec les produit périmé et les afficher dans un new onglet
+
+					if($tab_product_in_stock[$i]["date_peremption"] < date("U"))
+					{
+						$array_poubelle[$j] = $value_product;
+						//on l'ajoute au array poubelle et on le delete de l'autre array
+						$this->maj_product_list_in_bsd($tab_product_in_stock[$i]["id"], $tab_product_in_stock[$i]["nb"], $tab_product_in_stock[$i]["bases"], $tab_product_in_stock[$i]["date_peremption"], $ajout_or_delete = '-');
+						
+						$j++;
+					}
+
+					$i++;
+				}
+			}
+ 		}
+ 		else
+ 			return 0;
+ 	}
 
 
  	public function set_list_product_acquis_for_tpl()
@@ -550,6 +709,22 @@ Class user_ressources extends user_batiments
 	}
 
 
+
+
+
+
+
+
+
+
+//////////////////////
+//					//
+//	Partie Hardware //
+//					//
+//					//
+//////////////////////
+
+
 	public function maj_pipette($nb, $add_or_del = "-")
 	{
 		//function qui permet de rajouter ou d'enlever un nombre défini de pipette de remplissage
@@ -640,170 +815,19 @@ Class user_ressources extends user_batiments
 
 
 
- 	public function verify_peremption_product()
- 	{
- 		if(isset($this->product->list_product) && !empty($this->product->list_product))
- 		{
- 			$list_product = $this->product->list_product;	
 
 
-			//on explode le string de la base de données des product pour travailler
-			$tmp_user_product_bsd = substr($list_product, 0, -1);
-			$tmp_user_product_bsd = array(explode(",", $tmp_user_product_bsd));
-
-			$tab_product_in_stock = array();
-			$array_poubelle = array();
-			$i = 0;
-			$j = 0;
-			foreach($tmp_user_product_bsd as $row_product)
-			{
-				foreach($row_product as $key_product => $value_product)
-				{
-					preg_match('/\(([0-9]+):([0-9]+):([0-9]+):([0-9]+)\)/', $value_product, $match);
-					$tab_product_in_stock[$i]["nb"] = $match[1];
-					$tab_product_in_stock[$i]["id"] = $match[2];
-					$tab_product_in_stock[$i]["bases"] = $match[3];
-					$tab_product_in_stock[$i]["date_peremption"] = $match[4];
-					
-
-					//mtn on va vérifié la date de préemption, ajouter un array dnas le user avec les produit périmé et les afficher dans un new onglet
-
-					if($tab_product_in_stock[$i]["date_peremption"] < date("U"))
-					{
-						$array_poubelle[$j] = $value_product;
-						//on l'ajoute au array poubelle et on le delete de l'autre array
-						$this->maj_product_list_in_bsd($tab_product_in_stock[$i]["id"], $tab_product_in_stock[$i]["nb"], $tab_product_in_stock[$i]["bases"], $tab_product_in_stock[$i]["date_peremption"], $ajout_or_delete = '-');
-						
-						$j++;
-					}
-
-					$i++;
-				}
-			}
- 		}
- 		else
- 			return 0;
- 	}
 
 
-	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
-	{
-		$stx_bases = "bases_".$row_post;
-		$bases_before = $this->bases->$stx_bases;
 
 
-		
-		if($moins_plus == "-")
-			$bases_after = $bases_before - $value_post;	
+//////////////////////
+//					//
+//	Partie Bases    //
+//					//
+//					//
+//////////////////////
 
-		else if($moins_plus == "+")
-			$bases_after = $bases_before + $value_post;
-
-		else
-			$bases_after = $bases_before - $value_post;
-
-		$req_sql = new stdClass;
-		$req_sql->table = "bases";
-		$req_sql->where = "id_user = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$var_bsd = "bases_".$row_post;
-		$req_sql->ctx->$var_bsd = $bases_after;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
-	}
-
-	public function verifiy_argent_user($value_verif)
-	{
-		if((int)$value_verif <= (int)$this->user_infos->argent)
-			return 1;
-		
-		else
-		{
-			$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
-			return 0;
-		}
-	}
-
-
-	public function set_litter_vg($littre_vg_possible)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->where = "id = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->litter_vg = $this->user_infos->litter_vg + $littre_vg_possible;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function set_litter_pg($littre_pg_possible)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->where = "id = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->litter_pg = $this->user_infos->litter_pg + $littre_pg_possible;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function set_argent_user($prix_a_deduire, $moins_plus = "-")
-	{
-		
-
-		$argent_before = $this->user_infos->argent;
-		
-		if($moins_plus == "-")
-		{
-			$this->set_point_user($prix_a_deduire);
-			$argent_after = $argent_before - $prix_a_deduire;
-		}
-		else if($moins_plus == "+")
-		{
-			$this->set_point_user_vente($prix_a_deduire);
-			$argent_after = $argent_before + $prix_a_deduire;
-		}
-			
-
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->where = "id = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->argent = $argent_after;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function set_point_user($argent_depenser)
-	{
-		$point_before = $this->user_infos->point;
-		$point_gagner = $argent_depenser/1000;
-		$point_after = $point_before + $point_gagner;
-
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->where = "id = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->point = $point_after;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
-
-	public function set_point_user_vente($argent_depenser)
-	{
-		$point_before = $this->user_infos->point_vente;
-		$point_gagner = $argent_depenser/1000;
-		$point_after = $point_before + $point_gagner;
-
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->where = "id = '".$this->user_infos->id."'";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->point_vente = $point_after;
-		$res_sql = $this->update($req_sql);
-		unset($req_sql);
-	}
 
 
 	public function set_ressource_brut_user($vg_to_operate = 0, $pg_to_operate = 0, $moins_plus = "-")
@@ -871,4 +895,68 @@ Class user_ressources extends user_batiments
 		unset($req_sql);
 		
 	}
+
+
+	public function set_litter_vg($littre_vg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_vg = $this->user_infos->litter_vg + $littre_vg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+	public function set_litter_pg($littre_pg_possible)
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = "login";
+		$req_sql->where = "id = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->litter_pg = $this->user_infos->litter_pg + $littre_pg_possible;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+	}
+
+
+	public function ajout_bases_in_bsd($row_post, $value_post, $moins_plus)
+	{
+		$stx_bases = "bases_".$row_post;
+		$bases_before = $this->bases->$stx_bases;
+
+
+		
+		if($moins_plus == "-")
+			$bases_after = $bases_before - $value_post;	
+
+		else if($moins_plus == "+")
+			$bases_after = $bases_before + $value_post;
+
+		else
+			$bases_after = $bases_before - $value_post;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "bases";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$req_sql->ctx = new stdClass;
+		$var_bsd = "bases_".$row_post;
+		$req_sql->ctx->$var_bsd = $bases_after;
+		$res_sql = $this->update($req_sql);
+		unset($req_sql);
+		//idealement recevra un tableau associatif avec le nom de la bses avec un autre array dedans  qui aura le prix total a déduire grace a la fct dans le bases module et la quantité a ajoutée en bases
+	}
+
+	public function verifiy_argent_user($value_verif)
+	{
+		if((int)$value_verif <= (int)$this->user_infos->argent)
+			return 1;
+		
+		else
+		{
+			$_SESSION["error"] = "Erreur vous ne possédez pas assez d'argent pour tous créer";
+			return 0;
+		}
+	}
+
 }

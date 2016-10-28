@@ -67,7 +67,7 @@ Class sign_up extends base_module
 							$req_sql->ctx->last_usine_pg = 0;
 							$req_sql->ctx->point_vente = 0;
 							$req_sql->ctx->point = 0;
-							$req_sql->ctx->list_arome_not_have = user_ressources::get_string_all_id_aromes();
+							$req_sql->ctx->list_arome_not_have = $this->user->get_string_all_id_aromes();
 							$req_sql->table = "login";
 							$this->insert_into($req_sql);
 

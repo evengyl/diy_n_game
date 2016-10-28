@@ -26,9 +26,9 @@ if(isset($_GET['action']))
 			$arome_list_player->table = "login";
 			$arome_list_player->var = "list_arome_not_have, id";
 			$arome_list_player->order = "id";
-			$arome_list_player = $this->select($arome_list_player);
+			$arome_list_player = $this->user->select($arome_list_player);
 
-
+continue();
 			//ajout a la liste des aromes dans la table aromes
 			$post = $_POST;
 			$new_arome = new stdClass();
@@ -38,14 +38,14 @@ if(isset($_GET['action']))
 			$new_arome->ctx->nom = $post['nom'];
 			$new_arome->ctx->type = $post['type'];
 			$new_arome->ctx->quality = $post['quality'];
-			$this->insert_into($new_arome);
+			$this->user->insert_into($new_arome);
 
 
 			//on dois aller recupérr l'id du new aromes
 			$last_add = new stdClass();
 			$last_add->table = "aromes";
 			$last_add->var = "id";
-			$id_last_arome = $this->select($last_add);
+			$id_last_arome = $this->user->select($last_add);
 			$id_last_arome = end($id_last_arome);
 			$id_last_arome = $id_last_arome->id;
 
@@ -59,7 +59,7 @@ if(isset($_GET['action']))
 				$req_sql->where = "id = '".$row_player->id."'";
 				$req_sql->ctx = new stdClass;
 				$req_sql->ctx->list_arome_not_have = $row_player->list_arome_not_have;
-				$res_sql = $this->update($req_sql);
+				$res_sql = $this->user->update($req_sql);
 			}
 
 			paragraphe_style("L'insertion c'est bien déroulée");
@@ -68,7 +68,21 @@ if(isset($_GET['action']))
 		}
 		else
 		{
-			$this->generate_form_insert_into("aromes");
+			$this->user->generate_form_insert_into("aromes");
+			//pour plus de facilité je vais lister la liste des marques qu'il y a déjà pour éviter des encombre dnas les string name
+			$marque_arome = new stdClass();
+			$marque_arome->table = "aromes";
+			$marque_arome->var = "marque";
+			$marque_arome->distinct = true;
+			$marque_arome = $this->user->select($marque_arome);?>
+			
+			<table class="table table-bordered" style="margin-top:15px; background:white;">
+				<tr><th>Marque déjà connue dans le jeu</th></tr><?
+				foreach($marque_arome as $key => $values)
+				{
+					?><tr><td>--- &nbsp;<?= $values->marque; ?></td></tr><?
+				}?>
+			</table><?
 		}
 
 	}

@@ -150,5 +150,16 @@ Class user extends all_query
 		}
 		unset($res_fx);
 
+		$this->nb_arome = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "aromes";
+		$req_sql->var = "id";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			$this->user_infos->nb_arome_total = count($res_fx);
+		}
+		unset($res_fx);
+
 	}
 }

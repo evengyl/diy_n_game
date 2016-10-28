@@ -17,11 +17,25 @@ class all_query extends _db_connect
 
 		if(is_object($req_sql))
 		{
+			$construct_req .= "SELECT ";
 
 			if(isset($req_sql->var) && $req_sql->var != "")
-				$construct_req .= "SELECT ".$req_sql->var." ";
+			{
+				if(isset($req_sql->distinct) && $req_sql->distinct != false)
+					$construct_req .="DISTINCT ";
+
+				$construct_req .= $req_sql->var." ";
+			}
 			else
-				$construct_req .= "SELECT * ";
+			{
+				if(isset($req_sql->distinct) && $req_sql->distinct != false)
+					$construct_req .="DISTINCT ";
+
+				$construct_req .= "* ";
+			}
+				
+
+			
 
 
 			if(isset($req_sql->table) && $req_sql->table != "")

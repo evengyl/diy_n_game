@@ -67,7 +67,7 @@ Class search_arome extends base_module
 		
 
 		//set la petit phrase pour les aromes trouver ou pas 
-		$string_arome_string_nb = "Arômes trouvés : ".$this->nb_arome_total_acquis." sur ".$this->nb_arome_total;
+		$string_arome_string_nb = "Arômes trouvés : ".$this->nb_arome_total_acquis()." sur ".$this->user->user_infos->nb_arome_total;
 
 		
 		//va aller chercher et traiter la liste des aromes que le joueurs à obetnu pour l'affichage dans le template
@@ -92,6 +92,17 @@ Class search_arome extends base_module
 			$this->user->search_arome->{$key}->real_time_finish = $this->user->convert_sec_unix_in_time_real_to_rest($row_search->time_finish);
 		}
 	}
+
+	public function nb_arome_total_acquis()
+	{
+		if(!empty($this->user->user_infos->list_arome_not_have))
+		{
+			$data_from_bsd = substr($this->user->user_infos->list_arome_not_have, 0,-1);
+			$array_not_have = explode(",", $data_from_bsd);
+			return $this->user->user_infos->nb_arome_total - count($array_not_have);
+		}
+	}
+
 
 
 	
