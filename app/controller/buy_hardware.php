@@ -9,11 +9,11 @@ Class buy_hardware extends base_module
 
 		if(isset($_POST) && $_POST != "")
 		{
-			$this->user->traitement_post($_POST);
+			$this->traitement_post($_POST);
 		}
 
 
-
+		$this->user->get_variable_user();
 		return $this->assign_var('user', $this->user)->render();
 	}
 
@@ -52,13 +52,13 @@ Class buy_hardware extends base_module
 	public function receive_nb_pipette($nb_to_buy)
 	{
 		if($nb_to_buy == 10)
-			(int)$total_price = Config::$price_pipette;
-		if($nb_to_buy == 100)
 			(int)$total_price = Config::$price_pipette_10;
-		if($nb_to_buy == 1000)
+		if($nb_to_buy == 100)
 			(int)$total_price = Config::$price_pipette_100;
-		if($nb_to_buy == 10000)
+		if($nb_to_buy == 1000)
 			(int)$total_price = Config::$price_pipette_1000;
+		if($nb_to_buy == 10000)
+			(int)$total_price = Config::$price_pipette_10000;
 
 		if($this->user->verifiy_argent_user($total_price))
 		{

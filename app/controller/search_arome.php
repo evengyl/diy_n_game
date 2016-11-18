@@ -5,16 +5,9 @@ Class search_arome extends base_module
 	private $value_to_search = 0;
 	private $percent_to_win = 0;
 
-	public $alert_search_en_cours = 0;
-
-	public $tab_final_arome_acquis = array();
 	public $tab_final_arome_acquis_traiter = array();
 
-	public $nb_arome_total = 0;
 	public $nb_arome_total_acquis = 0;
-
-
-
 
 	public function __construct() // on a recu pas une référence mais bien tout l'objet
 	{		

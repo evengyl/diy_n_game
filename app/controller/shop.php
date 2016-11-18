@@ -26,10 +26,10 @@ Class shop extends base_module
 
 
 			//partie point bonus grace au vente
-			if(intval($this->user_infos->produit_vendu_week) >= 1000)
+			if(intval($this->user->user_infos->produit_vendu_week) >= 1000)
 			{
 				//va donner 3 point de vente bonnus tout les 1000 produits vendu 
-				$this->set_point_user_vente((intval($this->user_infos->produit_vendu_week)*15)*3);
+				$this->user->set_point_user_vente((intval($this->user->user_infos->produit_vendu_week)*15)*3);
 			}
 			//fin de la partie des bonus de point grace au vente
 		}
@@ -75,7 +75,7 @@ Class shop extends base_module
 
 		return $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)
 					->assign_var("tab_arome_with_user_value", $tab_arome_with_user_value)
-					->assign_var("user", $this)->render();
+					->assign_var("user", $this->user)->render();
 	}
 
 
@@ -109,10 +109,10 @@ Class shop extends base_module
 					//donc on le signal et on le met à 0
 					$_SESSION['error'] = "Vous avez tenter de trafiquer le formulaire, l'admin en est informé..";
 					//envoi du mail d'avertissement
-					$subject = "Attention le joueur : ".$this->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
+					$subject = "Attention le joueur : ".$this->user->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
 					mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
 					//msie a jour du nobmre d'avertissement que le user possède
-					$this->maj_avertissement_db($this->user_infos);
+					$this->user->maj_avertissement_db($this->user_infos);
 
 					//on delete cette cle
 					unset($post[$key_post]);
@@ -137,20 +137,20 @@ Class shop extends base_module
 				//on calcule le total de la vente
 				$total_vente = Config::$sell_product_not_random * $row_user_prod_vente->nb_vendu;
 
-				$this->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
+				$this->user->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
 
 				$req_sql = new stdClass;
 				$req_sql->table = "login";
-				$req_sql->where = "id = '".$this->user_infos->id."'";
+				$req_sql->where = "id = '".$this->user->user_infos->id."'";
 				$req_sql->ctx = new stdClass;
-				$req_sql->ctx->produit_vendu_total = $this->user_infos->produit_vendu_total;
-				$res_sql = $this->update($req_sql);
+				$req_sql->ctx->produit_vendu_total = $this->user->user_infos->produit_vendu_total;
+				$res_sql = $this->user->update($req_sql);
 				unset($req_sql);
 
 				//on lui ajoute son argent avant pour le récompenser même en cas de bug
 				$this->set_argent_user($total_vente, '+');
 				// et mtn il faut enlever les prod du user
-				$this->maj_product_list_in_bsd($row_user_prod_vente->id, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base_bsd, $row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-');
+				$this->user->maj_product_list_in_bsd($row_user_prod_vente->id, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base_bsd, $row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-');
 			}
 			return $total_vente;
 		}
@@ -235,10 +235,10 @@ Class shop extends base_module
 					//donc on le signal et on le met à 0
 					$_SESSION['error'] = "Vous avez tenter de trafiquer le formulaire, l'admin en est informé..";
 					//envoi du mail d'avertissement
-					$subject = "Attention le joueur : ".$this->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
+					$subject = "Attention le joueur : ".$this->user->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
 					mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
 					//msie a jour du nobmre d'avertissement que le user possède
-					user::maj_avertissement($this->user_infos);
+					user::maj_avertissement($this->user->user_infos);
 
 					//on delete cette cle
 					unset($post[$key_post]);
@@ -269,15 +269,15 @@ Class shop extends base_module
 				$req_sql->table = "login";
 				$req_sql->where = "id = '".$this->user_infos->id."'";
 				$req_sql->ctx = new stdClass;
-				$req_sql->ctx->produit_vendu_total = $this->user_infos->produit_vendu_total;
-				$req_sql->ctx->produit_vendu_week = $this->user_infos->produit_vendu_week;
-				$res_sql = $this->update($req_sql);
+				$req_sql->ctx->produit_vendu_total = $this->user->user_infos->produit_vendu_total;
+				$req_sql->ctx->produit_vendu_week = $this->user->user_infos->produit_vendu_week;
+				$res_sql = $this->user->update($req_sql);
 				unset($req_sql);
 				//on lui ajoute son argent avant pour le récompenser même en cas de bug
-				$this->set_argent_user($total_vente, '+');
+				$this->user->set_argent_user($total_vente, '+');
 
 				// et mtn il faut enlever les prod du user
-				$this->maj_product_list_in_bsd($row_user_prod_vente->id_aromes, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base ,$row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-');
+				$this->user->maj_product_list_in_bsd($row_user_prod_vente->id_aromes, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base ,$row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-');
 			}
 			return $total_vente;
 		}
@@ -386,7 +386,7 @@ Class shop extends base_module
 
 	public function get_new_list_random()
 	{
-		$tab_final_all_arome_traiter = $this->set_all_arome_for_tpl();
+		$tab_final_all_arome_traiter = $this->user->set_all_arome_for_tpl();
 
 		$array_arome = array();
 

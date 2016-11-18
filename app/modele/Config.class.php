@@ -37,13 +37,13 @@ class Config
     public static $level_usine_pg = "Usines de production de Propylène";
     public static $level_labos_bases = "Laboratoire d'amélioration des bases";
 
-    public static $price_search_1_name = "Amélioration du prix de la recherche d'arômes de stade 1";
-    public static $price_search_2_name = "Amélioration du prix de la recherche d'arômes de stade 2";
-    public static $price_search_3_name = "Amélioration du prix de la recherche d'arômes de stade 3";
+    public static $price_search_1_name = "Amélioration du prix de la recherche d'arômes de stade Inférieur";
+    public static $price_search_2_name = "Amélioration du prix de la recherche d'arômes de stade Intermédiaire";
+    public static $price_search_3_name = "Amélioration du prix de la recherche d'arômes de stade Supérieur";
 
-    public static $chance_to_win_1_name = "Augmente les chances de trouver un arômes pour le stade de recherche 1";
-    public static $chance_to_win_2_name = "Augmente les chances de trouver un arômes pour le stade de recherche 2";
-    public static $chance_to_win_3_name = "Augmente les chances de trouver un arômes pour le stade de recherche 3";
+    public static $chance_to_win_1_name = "Augmente les chances de trouver un arômes pour le stade de recherche Inférieur";
+    public static $chance_to_win_2_name = "Augmente les chances de trouver un arômes pour le stade de recherche Intermédiaire";
+    public static $chance_to_win_3_name = "Augmente les chances de trouver un arômes pour le stade de recherche Supérieur";
 
     public static $time_search_for_one_k_argent_depenser_name = "Diminue le temps de recherche des arômes de 60 secondes";
 
@@ -157,18 +157,18 @@ class Config
 
     //amelioration et recherhce
         public static $array_name_search_and_price = 
-                                            array(
-                                               "price_search_1" => array('prix_level' => 10000, 'level_max' => 19),
-                                               "price_search_2" => array('prix_level' => 15000, 'level_max' => 19),
-                                               "price_search_3" => array('prix_level' => 20000, 'level_max' => 19),
-                                               "chance_to_win_1" => array('prix_level' => 20000, 'level_max' => 50),
-                                               "chance_to_win_2" => array('prix_level' => 30000, 'level_max' => 50),
-                                               "chance_to_win_3" => array('prix_level' => 40000, 'level_max' => 50),
-                                               "time_search_for_one_k_argent_depenser" => array('prix_level' => 50000, 'level_max' => 50),
-                                               "prix_vingt_quatre_vingt" => array('prix_level' => 15000, 'level_max' => 30),
-                                               "prix_cinquante_cinquante" => array('prix_level' => 15000, 'level_max' => 30),
-                                               "prix_quatre_vingt_vingt" => array('prix_level' => 15000, 'level_max' => 30),
-                                               "prix_cent" => array('prix_level' => 15000, 'level_max' => 30));
+            array(
+               "price_search_1" => array('prix_level' => 10000, 'level_max' => 19),
+               "price_search_2" => array('prix_level' => 15000, 'level_max' => 19),
+               "price_search_3" => array('prix_level' => 20000, 'level_max' => 19),
+               "chance_to_win_1" => array('prix_level' => 20000, 'level_max' => 50),
+               "chance_to_win_2" => array('prix_level' => 30000, 'level_max' => 50),
+               "chance_to_win_3" => array('prix_level' => 40000, 'level_max' => 50),
+               "time_search_for_one_k_argent_depenser" => array('prix_level' => 50000, 'level_max' => 50),
+               "prix_vingt_quatre_vingt" => array('prix_level' => 15000, 'level_max' => 30),
+               "prix_cinquante_cinquante" => array('prix_level' => 15000, 'level_max' => 30),
+               "prix_quatre_vingt_vingt" => array('prix_level' => 15000, 'level_max' => 30),
+               "prix_cent" => array('prix_level' => 15000, 'level_max' => 30));
 
     /* fin des var utilisée par les controller */
 
