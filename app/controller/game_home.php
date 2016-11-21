@@ -43,7 +43,7 @@ Class game_home extends base_module
 		{
 			foreach($this->user->update as $key => $row)
 			{
-				$this->user->update{$key}->time_finish_real = $this->user->convert_sec_unix_in_time_real_to_rest($row->time_finish);
+				$this->user->update->{$key}->time_finish_real = $this->user->convert_sec_unix_in_time_real_to_rest($row->time_finish);
 			}	
 		}
 	}
