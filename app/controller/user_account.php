@@ -62,7 +62,7 @@ Class user_account extends user
 		$req_sql->ctx = new stdClass;
 		$old_values_avertissement = $this->user_infos->avertissement;
 		$req_sql->ctx->avertissement = $old_values_avertissement+1;
-		$req_sql->ctx->last_connect = $this->time_now;
+		$req_sql->ctx->last_connect = $this->user_infos->time_now;
 		$req_sql->table = "login";
 		$req_sql->where = "id = ".$this->user_infos->id;
 		$this->update($req_sql);

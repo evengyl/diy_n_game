@@ -24,10 +24,12 @@ Class user_research_n_update extends user_ressources
 
 		if(!empty($res_sql))
 		{
+
 			foreach($res_sql as $row_update)
 			{
-				if($row_update->time_finish <= $this->time_now)
+				if($row_update->time_finish <= $this->user_infos->time_now)
 				{
+
 					//on indique dans la base que le level est changer 
 					$set_level_up = $this->amelioration_var_config->{$row_update->name_batiment}+1;
 					$req_sql = new stdClass;

@@ -31,9 +31,10 @@ Class labos_update_tools extends base_module
 			}
 		}
 
-		$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
-
 		$this->user->get_variable_user();
+		
+			$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
+		
 		return $this->assign_var("user", $this->user)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render();
 	}
 

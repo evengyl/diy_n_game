@@ -51,13 +51,13 @@ Class sign_up extends base_module
 
 		            	if(empty($res_sql))
 			            {
-			                $this->time_now = $this->set_time_now();
+			                $this->user_infos->time_now = $this->set_time_now();
 			                $password = password_hash($password, PASSWORD_DEFAULT);
 				    		$req_sql = new stdClass;
 							$req_sql->ctx = new stdClass;
 							$req_sql->ctx->login = $pseudo;
 							$req_sql->ctx->password = $password;
-							$req_sql->ctx->last_connect = $this->time_now;
+							$req_sql->ctx->last_connect = $this->user_infos->time_now;
 							$req_sql->ctx->avertissement = 0;
 							$req_sql->ctx->level = 0;
 							$req_sql->ctx->level_culture_vg = 0;
@@ -75,7 +75,7 @@ Class sign_up extends base_module
 							
 							$_SESSION['pseudo'] = $pseudo;
 			                $_SESSION['password'] = $password;
-			                $_SESSION['last_connect'] = $this->time_now;
+			                $_SESSION['last_connect'] = $this->user_infos->time_now;
 			                $_SESSION['success'] = "Vous êtes désormais inscrit ! Merci !";
 				    		unset($_SESSION['error']);
 				            unset($post);

@@ -42,7 +42,7 @@
 
 					<form method="post" action="?page=labos_update_tools">
 						<div class="col-sm-6 col-md-4">
-							<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
+							<div class="thumbnail col-lg-12" style="height:350px; padding-bottom:10px;">
 								<img src="<?= Config::$path_public."/images/update_search_aromes.jpg" ?>" style="height:130px;" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 								<div class="caption">
 									<h3 style="font-size:16px; margin:7px 0 7px 0; color:white;"><?= $row_update->real_name; ?></h3>
