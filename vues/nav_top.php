@@ -30,6 +30,7 @@
 		            <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?page=contact">Contactez-moi</a>' : ''; ?></li>
 		          </ul>
 		        </li>
+		        <li><a href="?page=aide">Infos, Aides</a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="logout.php">Se déconnecter</a>' : ''; ?></li>

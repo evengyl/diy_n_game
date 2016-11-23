@@ -22,7 +22,7 @@
 			</div>
 
 			<div style='font-size:15px; color:green' class="col-lg-12 form-group">
-				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <strong style="font-size:20px;"><?= min($array_nb_product_creable); ?></strong>
+				<label for="exampleInputPassword1">Après calcul des restrictions vous pouvez créer +- : <strong style="font-size:20px;"><?= max($array_nb_product_creable); ?></strong>
 				 Produits (tout dépends la bases utilisée) et les autres ressources nécessaires.</label>
 			</div>
 
@@ -48,22 +48,23 @@
 									<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 										<img src="<?= Config::$path_public.$row_arome->img ?>" style="height:130px;" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 										<div class="caption">
-											<h3 style="font-size:18px; margin:7px 0 7px 0; color:white;">Nom de l'arome : <?= $row_arome->nom; ?></h3>
+											<h3 style="font-size:16px; margin:7px 0 7px 0; color:white;">Nom de l'arome : <br>
+												<i style="color:green;"><?= $row_arome->nom; ?></i></h3>
 
-											<div class="col-lg-6">
-												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG</button>
+											<div class="col-lg-6" style="margin-bottom:10px; padding-left:5px; padding-right:5px;">
+												<button style="font-size:11px;" class="col-lg-12 btn btn-primary" disabled>20% VG / 80% PG<br>NB poss. : <i style="color:yellow;"><?= $array_nb_product_creable['2080']; ?></i></button>
 												<input type="number" name="quantity_2080_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['2080']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
-											<div class="col-lg-6">
-												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG</button>
+											<div class="col-lg-6" style="margin-bottom:10px; padding-left:5px; padding-right:5px;">
+												<button style="font-size:11px;" class="col-lg-12 btn btn-primary" disabled>50% VG / 50% PG<br>NB poss. : <i style="color:yellow;"><?= $array_nb_product_creable['5050']; ?></i></button>
 												<input type="number" name="quantity_5050_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['5050']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
-											<div class="col-lg-6">
-												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG</button>
+											<div class="col-lg-6" style="margin-bottom:10px; padding-left:5px; padding-right:5px;">
+												<button style="font-size:11px;" class="col-lg-12 btn btn-primary" disabled>80% VG / 20% PG<br>NB poss. : <i style="color:yellow;"><?= $array_nb_product_creable['8020']; ?></i></button>
 												<input type="number" name="quantity_8020_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['8020']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
-											<div class="col-lg-6">
-												<button style="font-size:12px;" class="col-lg-12 btn btn-primary" disabled>100% VG</button>
+											<div class="col-lg-6" style="margin-bottom:10px; padding-left:5px; padding-right:5px;">
+												<button style="font-size:11px;" class="col-lg-12 btn btn-primary" disabled>100% VG<br>NB poss. : <i style="color:yellow;"><?= $array_nb_product_creable['1000']; ?></i></button>
 												<input type="number" name="quantity_1000_id_<?= $row_arome->id; ?>" max="<?= $array_nb_product_creable['1000']; ?>" min="0" value="0" class="col-lg-12">
 											</div>
 										</div>

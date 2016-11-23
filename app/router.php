@@ -77,6 +77,9 @@ Class router
 			else if($this->route['page'] == 'partenaire')
 				$this->assign_bread("Partenaire")->assign_tpl();
 
+			else if($this->route['page'] == 'aide')
+				$this->assign_bread("Aide et infos pratique")->assign_tpl();
+
 			else if($this->route['page'] == 'avatar')
 				$this->assign_bread("Test avatar GD")->assign_mod();
 
