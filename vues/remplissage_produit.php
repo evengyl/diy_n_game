@@ -90,3 +90,7 @@
 </div>
 <?
 unset($_SESSION['error']);
+unset($_SESSION['error_0']);
+unset($_SESSION['error_1']);
+unset($_SESSION['error_2']);
+unset($_SESSION['error_3']);

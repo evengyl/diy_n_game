@@ -80,11 +80,29 @@
 				</div>
 			</form>
 
-			<form method="post" action="?page=shop">
-				<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
+			
+			<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
+				<form method="post" action="?page=shop">
+					<? 
+					$valeur_marchande_total = Config::$sell_product_not_random * $user->user_infos->nb_product_total;
+					?>
+					<input value="> > Vendre TOUT (non-annulable) pour <?= $valeur_marchande_total ?>€ < <" type="submit" class="btn btn-success col-lg-6 col-lg-offset-3" style="padding:7px 0 7px 0; margin-bottom:5px;"><?
+					
+					$i = 0;
+					if(!empty($tab_arome_with_user_value))
+					{
+						foreach($tab_arome_with_user_value as $row_arome)
+						{?>
+							<input type="hidden" name="<?= $i ?>" value="<?= $row_arome->nb; ?>"><?
+							$i++;
+						}
+					}?>
+					<input name='secure_shop_all' value="71414242" type="hidden">
+				</form>
 
-					<input value="> > Vendre < <" type="submit" class="btn btn-success col-lg-4 col-lg-offset-4" style="padding:10px 0 10px 0;">
-					<button disabled class="btn btn-primary col-lg-4 col-lg-offset-4" style="padding:10px 0 10px 0;">Prix des autres Produits : <?= Config::$sell_product_not_random; ?>&nbsp;&euro;</button>
+
+				<form method="post" action="?page=shop">
+					<input value="> > Vendre <?= Config::$sell_product_not_random; ?>€ / p < <" type="submit" class="btn btn-success col-lg-4 col-lg-offset-4" style="padding:7px 0 7px 0;">
 					
 					<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
 						Liste des produits qu'y ne sont pas d'acutalité mais dont vous pouvez liquider les stocks (<b style='color:yellow;'><?= Config::$sell_product_not_random ?>&euro;</b> par produits vendu).
@@ -125,8 +143,8 @@
 						</h3><?
 
 					}?>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

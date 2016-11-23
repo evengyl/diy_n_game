@@ -83,6 +83,10 @@ Class router
 			else if($this->route['page'] == 'avatar')
 				$this->assign_bread("Test avatar GD")->assign_mod();
 
+			else if($this->route['page'] == 'password_change')
+				$this->assign_bread("Changement de mot de passe de votre compte")->assign_mod('my_account');
+			
+
 			else
 			{
 				unset($this->route['page']);
@@ -116,9 +120,12 @@ Class router
 		return $this;
 	}
 
-	private function assign_mod()
+	private function assign_mod($specific_module = false)
 	{
-		echo "__MOD_".$this->route['page']."__";
+		if(!$specific_module)
+			echo "__MOD_".$this->route['page']."__";
+		else
+			echo "__MOD_".$specific_module."__";
 	}
 
 	private function assign_mod_var($var)

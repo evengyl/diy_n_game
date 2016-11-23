@@ -149,7 +149,7 @@ class Config
 
     //vente des produits
     public static $duree_random_prod = 604800;
-    public static $nb_random_prod_shop = 20;
+    public static $nb_random_prod_shop = 18;
     public static $sell_product_random = 15;
     public static $sell_product_not_random = 7;
     //end

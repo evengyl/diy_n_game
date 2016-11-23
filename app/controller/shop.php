@@ -67,6 +67,19 @@ Class shop extends base_module
 // fin de la partie normal
 
 
+//vente de tout les produits en stock
+		if(isset($_POST))
+		{
+			if(isset($_POST['secure_shop_all']) && isset($_POST['secure_shop_all']) == '71414242')
+			{
+				$this->traitement_vente_form_post_not_random($_POST, $tab_arome_with_user_value);
+			}
+		}
+//fin
+
+
+		$this->user->get_variable_user();
+		$this->user->calcul_nb_product_total();
 
 		$tab_final_product_traiter = $this->user->set_list_product_acquis_for_tpl();
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
@@ -88,6 +101,9 @@ Class shop extends base_module
 		// ps : le tab post contient key:id_du_produits_dans_le_tab_random et en value:le_nb_de_produits_vendu
 		if(isset($post['secure_shop']))
 			unset($post['secure_shop']);
+		if(isset($post['secure_shop_all']))
+			unset($post['secure_shop_all']);
+
 
 		$form_ok = false;
 
@@ -110,9 +126,9 @@ Class shop extends base_module
 					$_SESSION['error'] = "Vous avez tenter de trafiquer le formulaire, l'admin en est informé..";
 					//envoi du mail d'avertissement
 					$subject = "Attention le joueur : ".$this->user->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
-					mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
+					mail(Config::$mail, "Message d'erreur du site Diy N Game.", $subject);
 					//msie a jour du nobmre d'avertissement que le user possède
-					$this->user->maj_avertissement_db($this->user_infos);
+					$this->user->maj_avertissement_db($this->user->user_infos);
 
 					//on delete cette cle
 					unset($post[$key_post]);
@@ -148,7 +164,7 @@ Class shop extends base_module
 				unset($req_sql);
 
 				//on lui ajoute son argent avant pour le récompenser même en cas de bug
-				$this->set_argent_user($total_vente, '+');
+				$this->user->set_argent_user($total_vente, '+');
 				// et mtn il faut enlever les prod du user
 				$this->user->maj_product_list_in_bsd($row_user_prod_vente->id, $row_user_prod_vente->nb_vendu, $row_user_prod_vente->base_bsd, $row_user_prod_vente->date_peremption_unix, $ajout_or_delete = '-');
 			}

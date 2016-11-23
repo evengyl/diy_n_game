@@ -23,7 +23,7 @@ Class user_account extends user
 			$this->user_infos->diff_time = 0;
 			$subject = "Attention le joueur : ".$this->user_infos->login." a un last connect plus grand que le time UNIX , il s'agit ou d'une erreur ou d'une piratage des données.";
 			mail(Config::$mail, "Message d'erreur du site Diy N Game.", $subject);
-			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... avertissement recu...")</script><?
+			?><script>alert("Une erreur est survenue ou alors vous avez tenté de faire les petits malins... avertissement reçu...")</script><?
 			$this->maj_avertissement_db();
 		}
 

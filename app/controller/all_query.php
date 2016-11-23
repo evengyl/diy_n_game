@@ -114,36 +114,34 @@ class all_query extends _db_connect
 
 		$this->set_db_link();
 
-		if(is_object($object->ctx))
-		{	
-			foreach($object->ctx as $key => $values)
-			{
-				$values = mysqli_real_escape_string($this->db_link, $values);
+		foreach($object->ctx as $key => $values)
+		{
+			$values = mysqli_real_escape_string($this->db_link, $values);
 
-				if($key == "id")
-					$values = intval($values);
+			if($key == "id")
+				$values = intval($values);
 
-				$set_all = $set_all.', '.$key.' = "'.$values.'"';				
-			}
-		
-			$set_all = substr($set_all,2);
-
-			if(isset($object->where))
-			{				
-				if($object->where == "" OR $object->where == " ")
-					$req_sql = 'UPDATE '.$object->table.' SET '.$set_all;
-				else
-					$req_sql = 'UPDATE '.$object->table.' SET '.$set_all.' WHERE '.$object->where;	
-			}
-
-			parent::query($req_sql);
-			unset($req_sql);
-
+			$set_all = $set_all.', '.$key.' = "'.$values.'"';				
 		}
+	
+		$set_all = substr($set_all,2);
+
+		if(isset($object->where))
+		{				
+			if($object->where == "" OR $object->where == " ")
+				$req_sql = 'UPDATE '.$object->table.' SET '.$set_all;
+			else
+				$req_sql = 'UPDATE '.$object->table.' SET '.$set_all.' WHERE '.$object->where;	
+		}
+
+		$requete_win_lost = parent::query_update($req_sql);
+		if($requete_win_lost > 0)
+			return $erreur = 'modification bien appliquée';
 		else
 		{
-			echo "la requete n'est pas passée car on attendait un objet.";
+			return false;
 		}
+		unset($req_sql);
         return $erreur = 'modification bien appliquée';
 
 	}
@@ -261,7 +259,7 @@ class all_query extends _db_connect
 	}
 
 
-	public function generate_form_insert_into($table_needed)
+	public function generate_form_insert_into($table_needed, $option = array("TYPE" => null, "CHAMPS" => array()))
 	{
 		$req_simply = new stdClass();
 		$req_simply->table = $table_needed;
@@ -271,11 +269,34 @@ class all_query extends _db_connect
 	    <div class='contenu_compte'>
 	        <div class="row">
 	            <div class="col-lg-12">
-	                <form class="form-inline" style="margin:auto;" role="form" action="" method="POST">
+	                <form class="" style="margin:auto;" role="form" action="" method="POST">
 	                    <br><?php
 	                    foreach($req_simply[0] as $key => $value)
-	                    {?>
-	                            <div class="form-group <?
+	                    {
+                    		if(in_array($key, $option['CHAMPS']) && $option['TYPE'] != null)
+							{
+								if($option['TYPE'] == "select")
+								{
+									$for_select = new stdClass();
+									$for_select->table = $table_needed;
+									$for_select->var = "marque";
+									$for_select->distinct = true;
+									$for_select = $this->select($for_select);?>
+									
+									<div class="input-group">
+										<div style="width: 200px;" class="input-group-addon"><?php echo $key ?></div>
+										<select name="<?= $key; ?>" style="width:450px;" class="form-control "><?
+											foreach($for_select as $row_select)
+											{?>
+												<option value="<?= $row_select->{$option['CHAMPS'][array_search($key, $option['CHAMPS'])]} ?>"><?= $row_select->{$option['CHAMPS'][array_search($key, $option['CHAMPS'])]} ?></option><?
+											}?>
+										</select>
+									</div><br><?
+								}
+							}
+							else
+							{?>
+								<div class="form-group <?
 		                            if($key == 'id')
 		                                echo  'has-error';
 		                            else
@@ -290,8 +311,8 @@ class all_query extends _db_connect
 	                                           class="form-control" name="<?php echo $key ?>">
 
 	                                </div>
-	                            </div>
-	                            <br><?
+	                            </div><?
+							}
 	                    }?>
 	                    <button style="width: 650px; margin-top:15px;" type="submit" class="btn btn-default">Submit</button>
 	                </form>

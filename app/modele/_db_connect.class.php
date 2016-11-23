@@ -111,6 +111,21 @@ class _db_connect extends Config
 		$this->connect();
 		$time_request_before = date("U");
 		$res_sql = mysqli_query($this->db_link, $req_sql)or die(mysqli_error($this->db_link));
+		$nb_link_affected = $this->db_link->affected_rows;
+		$time_request_after = date("U");
+
+		$_SESSION["time_exec_sql"] = (double)$time_request_after - $time_request_before;
+
+		return $res_sql;
+	}
+
+	public function query_update($req_sql) //not for return somethings
+	{
+		parent::set_list_req_sql($req_sql);
+		$this->connect();
+		$time_request_before = date("U");
+		$res_sql = mysqli_query($this->db_link, $req_sql)or die(mysqli_error($this->db_link));
+		$nb_link_affected = $this->db_link->affected_rows;
 		$time_request_after = date("U");
 
 		$_SESSION["time_exec_sql"] = (double)$time_request_after - $time_request_before;

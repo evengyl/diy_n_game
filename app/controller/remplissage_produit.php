@@ -205,7 +205,7 @@ Class remplissage_produit extends base_module
 				preg_match('/quantity_([0-9]+)_id_([0-9]+)/',$row_command_txt, $match);
 				$id = $match[2];
 				$bases = $match[1];
-				$this->maj_product_list_in_bsd($id, $nb, $bases, date("U")+Config::$duree_peremption, '+');
+				$this->user->maj_product_list_in_bsd($id, $nb, $bases, date("U")+Config::$duree_peremption, '+');
 					//match 1 contient la base utilisée, match 2 l'id du prod	
 
 				//partie décompte des bases vapable
