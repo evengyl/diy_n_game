@@ -314,6 +314,16 @@ Class user_ressources extends user_batiments
 
 
 
+	public function get_array_id_arome_not_have()
+	{
+		if(!empty($this->user_infos->list_arome_not_have))
+		{
+			$data_from_bsd = substr($this->user_infos->list_arome_not_have, 0,-1);
+			$array_not_have = explode(",", $data_from_bsd);
+			return $array_not_have;
+		}
+	}
+
 
  	public function set_all_arome_for_tpl()
  	{

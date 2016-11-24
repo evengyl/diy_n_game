@@ -37,13 +37,21 @@
 					Tout les 1000 produits au top vendus, en fin de semaine vous receverez 3 points de ventes en bonus !!! ce qui équivaut à 200 produits au top vendus !!
 				</span>
 			</div>
+			<div class="col-lg-12 explication pull-right" style="margin-bottom:5px;">
+				<span style="font-size:13px;">
+					Les produits en fond rosé son des produits dont vous ne disposez pas de l'arôme pour le fabriquer, lancer des recherches !!, en vert vous pouvez le produire !
+				</span>
+			</div>
 			
-			<form method="post" action="?page=shop">
-
+			<form method="post" action="?page=shop"><?
+				$valeur_marchande_total = 0;
+				foreach($tab_arome_random as $row_product_have)
+				{
+					$valeur_marchande_total += Config::$sell_product_random * $row_product_have->nb_user_have;
+				}?>
 
 				<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
-					<input value="> > Vendre < <" type="submit" class="btn btn-success col-lg-4 col-lg-offset-4" style="padding:10px 0 10px 0;">
-					<button disabled class="btn btn-primary col-lg-4 col-lg-offset-4" style="padding:10px 0 10px 0;">Prix par produits au TOP : <?= Config::$sell_product_random; ?>&nbsp;&euro;</button>
+					<button disabled class="btn btn-primary col-lg-6 col-lg-offset-3" style="padding:10px 0 10px 0;">Valeur marchande de vos produits au top : <?= $valeur_marchande_total ?> €</button>
 
 					<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
 						Voici la liste après rapport de nos agents qui nous affirme que les clients payerons bien chère cette semaine pour ces <?= Config::$nb_random_prod_shop ?> produits (<b style='color:yellow;'><?= Config::$sell_product_random ?>&euro;</b> par produits vendu).
@@ -58,7 +66,7 @@
 						foreach($tab_arome_random as $row_arome)
 						{?>
 							<div class="col-sm-6 col-md-2">
-								<div class="thumbnail col-lg-12" style="max-height:300px; padding-bottom:10px;">
+								<div class="thumbnail col-lg-12" style="<?=($row_arome->have_arome)?'background-color:rgba(0,255,33,0.1);':'background-color:rgba(255,0,0,0.1);';?> max-height:300px; padding-bottom:10px;">
 									<img src="<?= Config::$path_public.$row_arome->img ?>" style="height:100px;" class="img-responsive" alt="Qualité de la recherche d'aromes 1">
 									<div class="caption">
 
@@ -67,7 +75,7 @@
 										<h3 style="font-size:12px; margin:7px 0 7px 0; color:yellow;">Vous en disposez de : <?= $row_arome->nb_user_have; ?></h3>
 
 										<div class="col-lg-12 col-without-padding">
-											<input type="number" name="<?= $i ?>" max="<?= $row_arome->nb_user_have; ?>" min="0" value="0" class="col-lg-12">
+											<input type="submit" <?=($row_arome->nb_user_have == '0')?'disabled':''; ?> name="<?= $i ?>" value="<?= $row_arome->nb_user_have; ?>" class="col-lg-12">
 										</div>
 										
 									</div>
@@ -82,11 +90,16 @@
 
 			
 			<div style="border:1px solid #FF7F00; padding-top:15px; margin-top:25px;" class="col-lg-12">
-				<form method="post" action="?page=shop">
-					<? 
-					$valeur_marchande_total = Config::$sell_product_not_random * $user->user_infos->nb_product_total;
-					?>
-					<input value="> > Vendre TOUT (non-annulable) pour <?= $valeur_marchande_total ?>€ < <" type="submit" class="btn btn-success col-lg-6 col-lg-offset-3" style="padding:7px 0 7px 0; margin-bottom:5px;"><?
+				<form method="post" action="?page=shop"><?
+					$valeur_marchande_total = 0;
+					if(!empty($tab_arome_with_user_value))
+					{
+						foreach($tab_arome_with_user_value as $row_product_have)
+						{
+							$valeur_marchande_total += Config::$sell_product_not_random * $row_product_have->nb;
+						}
+					}?>
+					<input <?=(empty($tab_arome_with_user_value))?"disabled":""; ?> value="> > Vendre TOUT (non-annulable) pour <?= $valeur_marchande_total ?> € < <" type="submit" class="btn btn-success col-lg-6 col-lg-offset-3" style="padding:7px 0 7px 0; margin-bottom:5px;"><?
 					
 					$i = 0;
 					if(!empty($tab_arome_with_user_value))
@@ -102,7 +115,6 @@
 
 
 				<form method="post" action="?page=shop">
-					<input value="> > Vendre <?= Config::$sell_product_not_random; ?>€ / p < <" type="submit" class="btn btn-success col-lg-4 col-lg-offset-4" style="padding:7px 0 7px 0;">
 					
 					<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
 						Liste des produits qu'y ne sont pas d'acutalité mais dont vous pouvez liquider les stocks (<b style='color:yellow;'><?= Config::$sell_product_not_random ?>&euro;</b> par produits vendu).

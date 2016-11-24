@@ -56,7 +56,7 @@ Class shop extends base_module
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
 
 
-		//traitement du post voir l'autre c'est la meme chose pour les random
+//traitement du post voir l'autre c'est la meme chose pour les random
 		if(isset($_POST))
 		{
 			if(isset($_POST['secure_shop']) && isset($_POST['secure_shop']) == '71414242')
@@ -85,7 +85,6 @@ Class shop extends base_module
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
 		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random);
 
-
 		return $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)
 					->assign_var("tab_arome_with_user_value", $tab_arome_with_user_value)
 					->assign_var("user", $this->user)->render();
@@ -111,6 +110,8 @@ Class shop extends base_module
 		{
 			if($nb_post != '0')
 			{
+				if(!isset($tab_arome_with_user_value[$key_post]->nb)) continue;
+				
 				if($nb_post <= $tab_arome_with_user_value[$key_post]->nb)
 				{
 					//ok l'user à enter une valeur inférieur ou égale à la bonne valeur
@@ -231,39 +232,39 @@ Class shop extends base_module
 		if(isset($post['secure_shop_random']))
 			unset($post['secure_shop_random']);
 
+		//on initialise les vente a 0 dans tout les arome random
+		foreach($tab_arome_random_with_user_value as $key => $row)
+		{
+			$tab_arome_random_with_user_value[$key]->nb_vendu = 0;
+		}
+
 		$form_ok = false;
 
 		foreach($post as $key_post => $nb_post)
 		{
-			if($nb_post != '0')
+			$tab_arome_random_with_user_value[$key_post]->nb_vendu = 0;
+
+			if($nb_post <= $tab_arome_random_with_user_value[$key_post]->nb_user_have)
 			{
-				if($nb_post <= $tab_arome_random_with_user_value[$key_post]->nb_user_have)
-				{
-					//ok l'user à enter une valeur inférieur ou égale à la bonne valeur
-					$form_ok = true;
-					//ici je rajoute une petite var la ou l'user a voulu vendre un propduits avec le nombre qu'il à voulu vendre pour avec un seul tableau porpre et rempli
-					$tab_arome_random_with_user_value[$key_post]->nb_vendu = $nb_post;
+				//ok l'user à enter une valeur inférieur ou égale à la bonne valeur
+				$form_ok = true;
+				//ici je rajoute une petite var la ou l'user a voulu vendre un propduits avec le nombre qu'il à voulu vendre pour avec un seul tableau porpre et rempli
+				$tab_arome_random_with_user_value[$key_post]->nb_vendu = $nb_post;
 
-				}
-				else
-				{
-					//si on arrive ici y a d'office un soucis, il a délibérement trafiquer le nb... 
-					//donc on le signal et on le met à 0
-					$_SESSION['error'] = "Vous avez tenter de trafiquer le formulaire, l'admin en est informé..";
-					//envoi du mail d'avertissement
-					$subject = "Attention le joueur : ".$this->user->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
-					mail(parent::$mail, "Message d'erreur du site Diy N Game.", $subject);
-					//msie a jour du nobmre d'avertissement que le user possède
-					user::maj_avertissement($this->user->user_infos);
-
-					//on delete cette cle
-					unset($post[$key_post]);
-				}
 			}
 			else
 			{
-				//je supprime le reste des élément pour alleger les requeste et tout 
-				unset($tab_arome_random_with_user_value[$key_post]);
+				
+				//si on arrive ici y a d'office un soucis, il a délibérement trafiquer le nb... 
+				//donc on le signal et on le met à 0
+				$_SESSION['error'] = "Vous avez tenter de trafiquer le formulaire, l'admin en est informé..";
+				//envoi du mail d'avertissement
+				$subject = "Attention le joueur : ".$this->user->user_infos->login." à tenter de trafiquer le formulaire de vente de produits.";
+				mail(Config::$mail, "Message d'erreur du site Diy N Game.", $subject);
+				//msie a jour du nobmre d'avertissement que le user possède
+				user::maj_avertissement($this->user->user_infos);
+
+				//on delete cette cle
 				unset($post[$key_post]);
 			}
 		}
@@ -273,17 +274,18 @@ Class shop extends base_module
 			// on a mtn le propre tab avec toute les infos sur ce que le user vends , reste plus qu'a taiter sa demande 
 			$total_vente = 0;
 
-			foreach($tab_arome_random_with_user_value as $row_user_prod_vente)
+			foreach($tab_arome_random_with_user_value as $key => $row_user_prod_vente)
 			{
+				if($row_user_prod_vente->nb_vendu == '0') continue;
 				//on calcule le total de la vente
 				$total_vente = Config::$sell_product_random * $row_user_prod_vente->nb_vendu;
-				$this->user_infos->produit_vendu_week += $row_user_prod_vente->nb_vendu;
-				$this->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
+				$this->user->user_infos->produit_vendu_week += $row_user_prod_vente->nb_vendu;
+				$this->user->user_infos->produit_vendu_total += $row_user_prod_vente->nb_vendu;
 
 
 				$req_sql = new stdClass;
 				$req_sql->table = "login";
-				$req_sql->where = "id = '".$this->user_infos->id."'";
+				$req_sql->where = "id = '".$this->user->user_infos->id."'";
 				$req_sql->ctx = new stdClass;
 				$req_sql->ctx->produit_vendu_total = $this->user->user_infos->produit_vendu_total;
 				$req_sql->ctx->produit_vendu_week = $this->user->user_infos->produit_vendu_week;
@@ -333,6 +335,8 @@ Class shop extends base_module
 						if($row_random_arome->base == $prod_have->base_bsd)
 						{
 							$tab_arome_random[$key]->nb_user_have += $prod_have->nb;	
+							$tab_arome_random[$key]->date_peremption_unix = $prod_have->date_peremption_unix;	
+							$tab_arome_random[$key]->date_peremption_to_rest = $prod_have->date_peremption_to_rest;	
 						}
 					}
 				}
@@ -362,7 +366,8 @@ Class shop extends base_module
 		$req_sql->limit = Config::$nb_random_prod_shop;
 		$res_sql = $this->user->select($req_sql);
 
-		
+		$array_arome_not_have = $this->user->get_array_id_arome_not_have();
+
 		foreach($res_sql as $row_sql)
 		{
 			if($row_sql->base == "2080")
@@ -376,9 +381,18 @@ Class shop extends base_module
 
 			else if($row_sql->base == "1000")
 				$row_sql->base_string = "100% VG / 0% PG";
+
+			//mtn on vérifie avec la liste des not have pour mettre une infos sur le tpl pour facilité la vue des arome random que l'on a ou pas
+			if(in_array($row_sql->id_aromes, $array_arome_not_have))
+				$row_sql->have_arome = 0;
+			else
+				$row_sql->have_arome = 1;
+
 		}
 		return $res_sql;
 	}
+
+
 
 	public function insert_new_random_list($random_list)
 	{

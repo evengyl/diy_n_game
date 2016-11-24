@@ -6,40 +6,37 @@
 
 	<div class="col-xs-12 col-md-9">
 
-
-			<div style="border:1px solid #FF7F00; padding-top:5px;" class="col-lg-12">
-
-				<h3 class='col-xs-12 title' style="margin-bottom:5px; font-size:16px;">
-					Résumé de vos produits en stock
-				</h3>
-				<?
-				if(!empty($stock))
+		<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
+			Résumé de vos produits en stock
+		</h3>
+		<div class="col-lg-12"><?
+			if(!empty($stock))
+			{
+				foreach($stock as $brand => $row_brand_arome)
 				{
-					foreach($stock as $brand => $row_brand_arome)
-					{
-						foreach($row_brand_arome as $row_arome)
-						{?>
-							<div class="col-sm-6 col-md-12">
-								<div class="thumbnail col-lg-12" style="padding:0px; margin-bottom:5px;">
-									<div class="caption" style="padding:2px; color:white;">
-										<h3 class="col-lg-3" style="font-size:12px; margin:7px 0 7px 0; color:white;">Nom : <?= $row_arome->nom; ?></h3>
-										<div class="col-lg-3 col-without-padding">Base : <?= $row_arome->base; ?></div>
-										<div class="col-lg-2 col-without-padding">Nombre : <?= $row_arome->nb; ?></div>
-										<div class="col-lg-4 col-without-padding">Périme dans : <?= $row_arome->date_peremption_to_rest; ?></div>
-									</div>
+					foreach($row_brand_arome as $row_arome)
+					{?>
+						<div class="col-sm-6 col-md-6">
+							<div class="thumbnail col-lg-12" style="padding:0px; margin-bottom:5px;">
+								<div class="caption" style="padding:2px; color:white;">
+									<h3 class="col-lg-3" style="font-size:10px; margin:7px 0 7px 0; color:white;">Nom : <?= $row_arome->nom; ?></h3>
+									<div style="font-size:10px;" class="col-lg-3 col-without-padding">Base : <?= $row_arome->base; ?></div>
+									<div style="font-size:10px;" class="col-lg-2 col-without-padding">Nombre : <?= $row_arome->nb; ?></div>
+									<div style="font-size:10px;" class="col-lg-4 col-without-padding">Périme dans : <?= $row_arome->date_peremption_to_rest; ?></div>
 								</div>
-							</div><?
-						}
+							</div>
+						</div><?
 					}
 				}
-				else
-				{?>
-					<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
-						Vous n'avez pas de sotck.
-					</h3><?
+			}
+			else
+			{?>
+				<h3 class='col-xs-12 title' style="margin-bottom:10px; font-size:18px;">
+					Vous n'avez pas de sotck.
+				</h3><?
 
-				}?>
-			</div>
+			}?>
+		</div>
 
 
 		<h3 class='col-xs-12 title' style="margin-bottom:15px; border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
@@ -53,7 +50,7 @@
 			<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 				<div class="col-lg-12 pull-right ressource_now">
 					<h3 class="title">&nbsp;Batiments en cours de construction :</h3>
-					<table class="table table-stripped table-hover" style="color:white;">
+					<table class="table table-stripped table-hover" style="margin-bottom:0px; color:white;">
 						<tr class="success" style="color:black;">
 							<th>Nom du batiments<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Fini dans<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
@@ -75,7 +72,7 @@
 			<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 				<div class="col-lg-12 pull-right ressource_now">
 					<h3 class="title">&nbsp;Recherches d'arômes en cours :</h3>
-					<table class="table table-stripped table-hover" style="color:white;">
+					<table class="table table-stripped table-hover" style="margin-bottom:0px; color:white;">
 						<tr class="success" style="color:black;">
 							<th>Valeur de la recherche <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Pourcentage de réussite <span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
@@ -100,7 +97,7 @@
 			<div class="thumbnail col-lg-12" style="padding-bottom:10px;">
 				<div class="col-lg-12 pull-right ressource_now">
 					<h3 class="title">&nbsp;Recherches d'upgrade en cours :</h3>
-					<table class="table table-stripped table-hover" style="color:white;">
+					<table class="table table-stripped table-hover" style="margin-bottom:0px; color:white;">
 						<tr class="success" style="color:black;">
 							<th>Ce que vous cherchez<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
 							<th>Temps restant<span style="color:black;" class="glyphicon glyphicon-arrow-down"></span></th>
@@ -155,14 +152,7 @@
 						</figure>
 					</li></center>
 				</ul>
-			</div>
-		</div>
 
-		<div class="col-lg-12" style="margin-bottom:15px;">
-			<h3 class='col-xs-12 title' style="border-bottom:1px solid #FF7F00; font-size:18px; padding-top:25px;">
-				Listes des batiments de production de ressources synthétisée.
-			</h3>				
-			<div class="col-lg-12" style="background:#232D3B; margin-top:15px;">
 				<ul class="col-md-6 col-lg-12 grid cs-style-4">
 					<center><li>
 						<figure>

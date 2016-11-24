@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 23 Novembre 2016 à 16:12
+-- Généré le :  Jeu 24 Novembre 2016 à 16:18
 -- Version du serveur :  10.1.13-MariaDB
 -- Version de PHP :  5.6.21
 
@@ -485,7 +485,7 @@ TRUNCATE TABLE `bases`;
 --
 
 INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, `bases_1000`) VALUES
-(1, 6, 15.05, 0, 0, 30),
+(1, 6, 14.95, 1026.04, 0, 30),
 (2, 11, 0, 0, 0, 0),
 (3, 12, 0, 0, 0, 0),
 (4, 13, 0, 0, 0, 0),
@@ -548,7 +548,7 @@ TRUNCATE TABLE `hardware`;
 --
 
 INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`, `flacon`) VALUES
-(1, 6, 3, 201, 1776),
+(1, 6, 3, 9795, 1370),
 (2, 27, 1, 10, 100);
 
 -- --------------------------------------------------------
@@ -590,7 +590,7 @@ TRUNCATE TABLE `login`;
 --
 
 INSERT INTO `login` (`id`, `login`, `password`, `point`, `produit_vendu_week`, `produit_vendu_total`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `point_vente`, `litter_vg`, `litter_pg`, `list_arome_not_have`) VALUES
-(6, 'evengyl', '$2y$10$5bznPXvXyjUqynJ5IM5D2eh0H3cEt/LJun8rPzyiQK6ntdnqNwVHS', 3585.06, 0, 106, '1479913635', 16, 3, 14, 19, 18, 1582270, 1892310, 37980056, 1.12, 2541, 1529, '1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,145,146,147,148,149,150,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,207,209,210,211,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,257,258,259,260,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,324,325,326,327,328,329,330,331,332,333,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,358,359,361,362,363,364,365,366,367,368,369,370,375,'),
+(6, 'evengyl', '$2y$10$5bznPXvXyjUqynJ5IM5D2eh0H3cEt/LJun8rPzyiQK6ntdnqNwVHS', 4062.17, 449, 574, '1480000145', 17, 3, 14, 19, 18, 663.681, 1765.68, 37506365, 4.541, 2375, 1610, '1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,91,92,93,94,95,96,97,98,99,100,101,102,103,104,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,140,141,142,143,145,146,147,148,149,150,152,153,154,155,156,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,207,209,210,211,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,257,258,259,260,263,264,265,266,267,268,269,270,271,272,273,274,276,277,278,279,280,281,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,314,315,316,317,318,319,320,321,322,324,325,326,327,328,329,330,331,332,333,335,336,337,338,339,340,341,342,343,344,345,346,348,349,350,351,352,353,354,355,356,358,359,361,362,363,364,365,366,367,368,369,370,375,'),
 (11, 'lbaudoux', '$2y$10$jjJFYrMF.io1poEG5Z.SfOCrnQbDp9sKG72d5Xwh3rENlZ4r9Odse', 0, 0, 0, '1467202373', 0, 0, 0, 0, 0, 1001.48, 1001.48, 1500, 0, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,375,');
 
 -- --------------------------------------------------------
@@ -652,7 +652,7 @@ TRUNCATE TABLE `product`;
 --
 
 INSERT INTO `product` (`id`, `id_user`, `list_product`) VALUES
-(1, 6, '(2:12:2080:1482490578),(2:12:2080:1482490671),(1:12:2080:1482490689),(1:12:2080:1482490703),(3:12:2080:1482490759),');
+(1, 6, '');
 
 -- --------------------------------------------------------
 
@@ -682,26 +682,24 @@ TRUNCATE TABLE `random_shop`;
 --
 
 INSERT INTO `random_shop` (`id`, `date_stop`, `nom_aromes`, `id_aromes`, `img`, `marque`, `base`, `nb_vente`) VALUES
-(247, '1480507244', 'Pina Colada', 4, '/images/aromes/Bickford Flavors/bickford_flavors_pina_colada.jpg', 'Bickford Flavors', '5050', '0'),
-(248, '1480507244', 'Banane', 9, '/images/aromes/Bickford Flavors/bickford_flavors_banane.jpg', 'Bickford Flavors', '2080', '0'),
-(249, '1480507244', 'Fraise Banane', 14, '/images/aromes/Bickford Flavors/bickford_flavors_fraise_banane.jpg', 'Bickford Flavors', '1000', '0'),
-(250, '1480507244', 'Goyave', 19, '/images/aromes/Bickford Flavors/bickford_flavors_goyave.jpg', 'Bickford Flavors', '2080', '0'),
-(251, '1480507244', 'Pomme Cerise', 30, '/images/aromes/Bickford Flavors/bickford_flavors_pomme_cerise.jpg', 'Bickford Flavors', '2080', '0'),
-(252, '1480507244', 'Sirop d''érable', 70, '/images/aromes/Cappela Flavor/cappela_flavor_sirop_d''érable.jpg', 'Cappela Flavor', '8020', '0'),
-(253, '1480507244', 'MTS Vap Wizard', 73, '/images/aromes/Flavour Art/flavour_art_mts_vap_wizard.jpg', 'Flavour Art', '5050', '0'),
-(254, '1480507244', 'Banane', 94, '/images/aromes/Flavour Art/flavour_art_banane.jpg', 'Flavour Art', '8020', '0'),
-(255, '1480507244', 'Noisette', 133, '/images/aromes/Flavour Art/flavour_art_noisette.jpg', 'Flavour Art', '8020', '0'),
-(256, '1480507244', 'Panettone', 135, '/images/aromes/Flavour Art/flavour_art_panettone.jpg', 'Flavour Art', '8020', '0'),
-(257, '1480507244', 'Jamaique Rhum', 172, '/images/aromes/Inawera/inawera_jamaique_rhum.jpg', 'Inawera', '8020', '0'),
-(258, '1480507244', 'Thé Noir', 176, '/images/aromes/Inawera/inawera_thé_noir.jpg', 'Inawera', '1000', '0'),
-(259, '1480507244', 'Thé Vert', 177, '/images/aromes/Inawera/inawera_thé_vert.jpg', 'Inawera', '1000', '0'),
-(260, '1480507244', 'Sweetener', 234, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_sweetener.jpg', 'The Perfumer''s Apprentice', '8020', '0'),
-(261, '1480507244', 'Cerise', 244, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_cerise.jpg', 'The Perfumer''s Apprentice', '2080', '0'),
-(262, '1480507244', 'Melon Cantaloupe', 254, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_melon_cantaloupe.jpg', 'The Perfumer''s Apprentice', '8020', '0'),
-(263, '1480507244', 'Ry 4 Double', 284, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_ry_4_double.jpg', 'The Perfumer''s Apprentice', '5050', '0'),
-(264, '1480507244', 'Jon freeze', 339, '/images/aromes/T-juice/t-juice_jon_freeze.jpg', 'T-juice', '2080', '0'),
-(265, '1480507244', 'Forest affair', 345, '/images/aromes/T-juice/t-juice_forest_affair.jpg', 'T-juice', '8020', '0'),
-(266, '1480507244', 'Quintessence', 354, '/images/aromes/T-juice/t-juice_quintessence.jpg', 'T-juice', '8020', '0');
+(285, '1480578987', 'Bourbon', 1, '/images/aromes/Bickford Flavors/bickford_flavors_bourbon.jpg', 'Bickford Flavors', '8020', '0'),
+(286, '1480578987', 'Orange', 25, '/images/aromes/Bickford Flavors/bickford_flavors_orange.jpg', 'Bickford Flavors', '8020', '0'),
+(287, '1480578987', 'Lavande', 84, '/images/aromes/Flavour Art/flavour_art_lavande.jpg', 'Flavour Art', '2080', '0'),
+(288, '1480578987', 'Mangue', 109, '/images/aromes/Flavour Art/flavour_art_mangue.jpg', 'Flavour Art', '8020', '0'),
+(289, '1480578987', 'Melon', 111, '/images/aromes/Flavour Art/flavour_art_melon.jpg', 'Flavour Art', '2080', '0'),
+(290, '1480578987', 'Orange', 115, '/images/aromes/Flavour Art/flavour_art_orange.jpg', 'Flavour Art', '2080', '0'),
+(291, '1480578987', 'Chocolat', 127, '/images/aromes/Flavour Art/flavour_art_chocolat.jpg', 'Flavour Art', '8020', '0'),
+(292, '1480578987', 'Cookie', 128, '/images/aromes/Flavour Art/flavour_art_cookie.jpg', 'Flavour Art', '8020', '0'),
+(293, '1480578987', 'Tutti Frutti', 142, '/images/aromes/Flavour Art/flavour_art_tutti_frutti.jpg', 'Flavour Art', '1000', '0'),
+(294, '1480578987', 'Shade', 162, '/images/aromes/Flavour Art/flavour_art_shade.jpg', 'Flavour Art', '8020', '0'),
+(295, '1480578987', 'Brandy', 166, '/images/aromes/Inawera/inawera_brandy.jpg', 'Inawera', '1000', '0'),
+(296, '1480578987', 'Pinacolada', 173, '/images/aromes/Inawera/inawera_pinacolada.jpg', 'Inawera', '2080', '0'),
+(297, '1480578987', 'Anis', 181, '/images/aromes/Inawera/inawera_anis.jpg', 'Inawera', '2080', '0'),
+(298, '1480578987', 'Prune', 209, '/images/aromes/Inawera/inawera_prune.jpg', 'Inawera', '2080', '0'),
+(299, '1480578987', 'Desert Voyager', 220, '/images/aromes/Inawera/inawera_desert_voyager.jpg', 'Inawera', '8020', '0'),
+(300, '1480578987', 'Chocolat au Lait', 273, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_chocolat_au_lait.jpg', 'The Perfumer''s Apprentice', '1000', '0'),
+(301, '1480578987', 'Ml Boro Premium', 282, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_ml_boro_premium.jpg', 'The Perfumer''s Apprentice', '5050', '0'),
+(302, '1480578987', 'Bittersweet ', 286, '/images/aromes/The Perfumer''s Apprentice/the_perfumer''s_apprentice_bittersweet.jpg', 'The Perfumer''s Apprentice', '1000', '0');
 
 -- --------------------------------------------------------
 
@@ -868,17 +866,17 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `random_shop`
 --
 ALTER TABLE `random_shop`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 --
 -- AUTO_INCREMENT pour la table `search_arome`
 --
 ALTER TABLE `search_arome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `update_en_cours`
 --
 ALTER TABLE `update_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
