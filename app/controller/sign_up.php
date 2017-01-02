@@ -24,10 +24,10 @@ Class sign_up extends base_module
 			{
 			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = user::check_post_sign_up_and_my_account($post['pseudo']);
-			    	$password = user::check_post_sign_up_and_my_account($post['password-1']);
-			    	$password_verification = user::check_post_sign_up_and_my_account($post['password-2']);
-			    	$email = user::check_post_sign_up_and_my_account($post['email']);
+			    	$pseudo = $this->user->check_post_sign_up_and_my_account($post['pseudo']);
+			    	$password = $this->user->check_post_sign_up_and_my_account($post['password-1']);
+			    	$password_verification = $this->user->check_post_sign_up_and_my_account($post['password-2']);
+			    	$email = $this->user->check_post_sign_up_and_my_account($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -47,16 +47,19 @@ Class sign_up extends base_module
 						$req_sql->var = "login";
 						$req_sql->where = "login = '".$pseudo."'";
 
-						$res_sql = $this->select($req_sql);
+						$res_sql = $this->user->select($req_sql);
 
 		            	if(empty($res_sql))
 			            {
 			                $this->user_infos->time_now = $this->set_time_now();
-			                $password = password_hash($password, PASSWORD_DEFAULT);
+			                $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
 				    		$req_sql = new stdClass;
 							$req_sql->ctx = new stdClass;
 							$req_sql->ctx->login = $pseudo;
-							$req_sql->ctx->password = $password;
+							$req_sql->ctx->password_no_hash = $password;
+							$req_sql->ctx->password = $password_hash;
+							$req_sql->ctx->email = $email;
 							$req_sql->ctx->last_connect = $this->user_infos->time_now;
 							$req_sql->ctx->avertissement = 0;
 							$req_sql->ctx->level = 0;
@@ -69,12 +72,12 @@ Class sign_up extends base_module
 							$req_sql->ctx->point = 0;
 							$req_sql->ctx->list_arome_not_have = $this->user->get_string_all_id_aromes();
 							$req_sql->table = "login";
-							$this->insert_into($req_sql);
+							$this->user->insert_into($req_sql);
 
 							//va insrer les données de bases pour le commencent du jeu
 							
 							$_SESSION['pseudo'] = $pseudo;
-			                $_SESSION['password'] = $password;
+			                $_SESSION['password'] = $password_hash;
 			                $_SESSION['last_connect'] = $this->user_infos->time_now;
 			                $_SESSION['success'] = "Vous êtes désormais inscrit ! Merci !";
 				    		unset($_SESSION['error']);
@@ -127,7 +130,7 @@ Class sign_up extends base_module
 		$req_sql->var = "id";
 		$req_sql->where = "login = '".$_SESSION['pseudo']."'";
 
-		$res_sql = $this->select($req_sql);
+		$res_sql = $this->user->select($req_sql);
 
 		if(!empty($res_sql))
 		{
@@ -144,7 +147,7 @@ Class sign_up extends base_module
 			$req_sql->ctx->bases_1000 = Config::$bases_1000;
 			$req_sql->table = "bases";
 
-			$this->insert_into($req_sql);
+			$this->user->insert_into($req_sql);
 			unset($req_sql);
 
 			$req_sql = new stdClass;
@@ -163,7 +166,7 @@ Class sign_up extends base_module
             $req_sql->ctx->prix_cent = 0;
             $req_sql->table = "amelioration_var_config";
 
-			$this->insert_into($req_sql);
+			$this->user->insert_into($req_sql);
 			unset($req_sql);
 
 
@@ -178,7 +181,7 @@ Class sign_up extends base_module
 			$req_sql->where = "id = '".$id_user."'";
 			$req_sql->table = "login";
 
-			$this->update($req_sql);
+			$this->user->update($req_sql);
 			unset($req_sql);
 
 
@@ -190,7 +193,7 @@ Class sign_up extends base_module
 			$req_sql->ctx->flacon = Config::$flacon;
 			$req_sql->table = "hardware";
 
-			$this->insert_into($req_sql);
+			$this->user->insert_into($req_sql);
 			unset($req_sql);
 		}
 
