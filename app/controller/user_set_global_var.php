@@ -34,10 +34,10 @@ Class user_set_global_var extends user_research_n_update
     }
     public function set_global__price_search_2()
     {
-    	//gain total
-    	$this->gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_2;
+        //gain total
+        $this->gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_2;
 
-    	Config::$price_search_2 = Config::$price_search_2 - ((Config::$price_search_2 / 100)*$this->gain_per_level_search_arome);
+        Config::$price_search_2 = Config::$price_search_2 - ((Config::$price_search_2 / 100)*$this->gain_per_level_search_arome);
     }
     public function set_global__price_search_3()
     {

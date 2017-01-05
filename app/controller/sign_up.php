@@ -51,7 +51,6 @@ Class sign_up extends base_module
 
 		            	if(empty($res_sql))
 			            {
-			                $this->user_infos->time_now = $this->set_time_now();
 			                $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 				    		$req_sql = new stdClass;
@@ -60,7 +59,7 @@ Class sign_up extends base_module
 							$req_sql->ctx->password_no_hash = $password;
 							$req_sql->ctx->password = $password_hash;
 							$req_sql->ctx->email = $email;
-							$req_sql->ctx->last_connect = $this->user_infos->time_now;
+							$req_sql->ctx->last_connect = $this->set_time_now();
 							$req_sql->ctx->avertissement = 0;
 							$req_sql->ctx->level = 0;
 							$req_sql->ctx->level_culture_vg = 0;
@@ -76,13 +75,11 @@ Class sign_up extends base_module
 
 							//va insrer les données de bases pour le commencent du jeu
 							
-							$_SESSION['pseudo'] = $pseudo;
-			                $_SESSION['password'] = $password_hash;
-			                $_SESSION['last_connect'] = $this->user_infos->time_now;
+							$_SESSION['last_added_subscribe'] = 1;
 			                $_SESSION['success'] = "Vous êtes désormais inscrit ! Merci !";
 				    		unset($_SESSION['error']);
 				            unset($post);
-				            $this->set_all_component_basic();
+				            $this->set_all_component_basic($pseudo);
 				            return 1;
 				            
 			            }else{
@@ -123,12 +120,12 @@ Class sign_up extends base_module
 		return date("U");
 	}
 
-	public function set_all_component_basic()
+	public function set_all_component_basic($pseudo)
 	{
 		$req_sql = new stdClass;
 		$req_sql->table = "login";
 		$req_sql->var = "id";
-		$req_sql->where = "login = '".$_SESSION['pseudo']."'";
+		$req_sql->where = "login = '".$pseudo."'";
 
 		$res_sql = $this->user->select($req_sql);
 
@@ -192,6 +189,16 @@ Class sign_up extends base_module
 			$req_sql->ctx->pipette = Config::$pipette;
 			$req_sql->ctx->flacon = Config::$flacon;
 			$req_sql->table = "hardware";
+			
+			$this->user->insert_into($req_sql);
+			unset($req_sql);
+
+
+			$req_sql = new stdClass;
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->id_user = $id_user;
+			$req_sql->ctx->list_product = "";
+			$req_sql->table = "product";
 
 			$this->user->insert_into($req_sql);
 			unset($req_sql);

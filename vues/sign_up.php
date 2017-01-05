@@ -1,13 +1,15 @@
 <?
-if(isset($_SESSION['pseudo'])) //donc il est connecté
+if(isset($_SESSION['last_added_subscribe']) && $_SESSION['last_added_subscribe'])
 {?>
-	<div class="col-lg-12 col-without-padding connect-form">		
-		<?php if(isset($_SESSION['success'])){
+	<div class="col-lg-12 col-without-padding connect-form"><?
+		if(isset($_SESSION['success']))
+		{
 			echo '<p class="bg-success">'.$_SESSION['success'].'</p>';
 			unset($_SESSION['success']);
-		} ?>
-		<p class="bg-info" style="text-align: center; font-size:16px; color:black">Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?>, <a href="logout.php">Se déconnecter</a>, ou <a href="?page=game_home">Accès au Jeu</a></p>
+		}?>
+		<p class="bg-info" style="text-align: center; font-size:16px; color:black">Vous pouvez vous connecté directement ici : <a href="?page=login">Se connecter</a></p>
 	</div><?
+	unset($_SESSION['last_added_subscribe']);
 }
 else
 {?>
