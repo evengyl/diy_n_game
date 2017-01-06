@@ -62,7 +62,7 @@ class Config
     //variable de bases inscrite dans la base de données au démarrage d'un new joueur
     public static $last_culture_vg = 1000;
     public static $last_usine_pg = 1000;
-    public static $argent = 1500;
+    public static $argent = 5000;
     public static $litter_vg = 10;
     public static $litter_pg = 10;
     public static $frigo = 1;

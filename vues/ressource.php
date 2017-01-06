@@ -115,6 +115,18 @@ if(Config::$is_connect == 1)
 			<img style="display:inline-block;" src="images/bouton-collapse-ressource.png">
 		</center>	
 	</div>
+	<div class="logo_ressource col-lg-6 col-lg-offset-3">	
+		<center>
+			<p style="padding:5px; margin-bottom:5px;" class="bg-info">Correction : problème avec la listes des construction en cours, réglée !</p>
+		</center>	
+	</div>
+	<div class="logo_ressource col-lg-6 col-lg-offset-3">	
+		<center>
+			<p style="padding:5px; margin-bottom:5px;" class="bg-info">1000 pg, 1000vg et 1000€ offert au joueurs pour le bug.</p>
+		</center>	
+	</div>
+
+
 <?
 }?>
 

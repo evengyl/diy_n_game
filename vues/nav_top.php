@@ -35,6 +35,7 @@
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="logout.php">Se déconnecter</a>' : ''; ?></li>
 		      </ul>
+
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>

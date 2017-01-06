@@ -91,7 +91,7 @@ Class user extends all_query
 		$req_sql = new stdClass;
 		$req_sql->table = "construction_en_cours";
 		$req_sql->var = "*";
-		$req_sql->where = "";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
 		$res_fx = $this->select($req_sql);
 		if(!empty($res_fx))
 		{

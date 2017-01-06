@@ -85,6 +85,9 @@ Class router
 
 			else if($this->route['page'] == 'password_change')
 				$this->assign_bread("Changement de mot de passe de votre compte")->assign_mod('my_account');
+
+			else if($this->route['page'] == 'mail_box')
+				$this->assign_bread("Boite de réception")->assign_mod('my_account');
 			
 
 			else
