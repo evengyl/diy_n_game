@@ -34,7 +34,7 @@ Class labos_update_tools extends base_module
 		$this->user->get_variable_user();
 		
 			$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
-		
+
 		return $this->assign_var("user", $this->user)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render();
 	}
 
@@ -60,8 +60,8 @@ Class labos_update_tools extends base_module
 
 			if($array_update_final_tpl[$name_update]->level > '0')
 			{
-				$array_update_final_tpl[$name_update]->time_construct_unix = 5400 * $level_update;
-				$array_update_final_tpl[$name_update]->prix_next_level = ($array_update_final_tpl[$name_update]->level -1) * $array_name_search_and_price[$name_update]['prix_level'];
+				$array_update_final_tpl[$name_update]->time_construct_unix = 5400 * ($level_update+1);
+				$array_update_final_tpl[$name_update]->prix_next_level = ($array_update_final_tpl[$name_update]->next_level ) * $array_name_search_and_price[$name_update]['prix_level'];
 			}
 			else
 			{

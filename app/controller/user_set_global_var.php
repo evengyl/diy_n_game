@@ -28,21 +28,21 @@ Class user_set_global_var extends user_research_n_update
     public function set_global__price_search_1()
     {
     	//gain total
-    	$this->gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_1;
+    	$gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_1;
 
     	Config::$price_search_1 = Config::$price_search_1 - ((Config::$price_search_1 / 100)*$this->gain_per_level_search_arome);
     }
     public function set_global__price_search_2()
     {
         //gain total
-        $this->gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_2;
+        $gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_2;
 
-        Config::$price_search_2 = Config::$price_search_2 - ((Config::$price_search_2 / 100)*$this->gain_per_level_search_arome);
+        Config::$price_search_2 = Config::$price_search_2_de_base - ((Config::$price_search_2_de_base / 100)*$this->gain_per_level_search_arome);
     }
     public function set_global__price_search_3()
     {
     	//gain total
-    	$this->gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_3;
+    	$gain_per_level_search_arome = $this->gain_per_level_search_arome * $this->amelioration_var_config->price_search_3;
 
     	Config::$price_search_3 = Config::$price_search_3 - ((Config::$price_search_3 / 100)*$this->gain_per_level_search_arome);
     }

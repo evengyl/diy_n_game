@@ -246,6 +246,7 @@ class parser
 
 	private function parse_module_init_var($match, $page)
 	{
+		affiche_pre($match);
 		$var_in_module_name = stristr($match[0], "(");
 		$var_in_module_name = stristr($var_in_module_name, ")", true);
 		$var_in_module_name = substr($var_in_module_name, 1);
