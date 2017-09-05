@@ -1,15 +1,22 @@
+<?
+//echo "Le site DIY revient bientot, la premières maintenance à été lancée, merci de votre compréhension";
+session_start();
+?>
 <!DOCTYPE html>
 <?
 //require de base avec les fonciton diverse et le loader, la fonction microtime est la uniquement pour le temps d'execution des requete pour optimiser
+
+
 require "../app/controller/fonction.php";
 $time_start = microtime_float();
 require '../app/controller/load_class.php'; 
 
+
 //mise en route de l'autoload
 Autoloader::register(); 
-
+Config::test_ip();
 //mise en route de la session
-session_start();
+
 
 
 if(!isset($_GET['page']))
@@ -69,10 +76,12 @@ $time_laps = (float)$time_stop - $time_start;
 //affiche les messages d'erreur du code
 if(!empty($_SESSION['error']))
 {
-	affiche_pre($_SESSION['error']);
+	//affiche_pre($_SESSION['error']);
 }
-affiche_pre($user);
-affiche_pre(Config::$list_req_sql);
+
+
+//affiche_pre($user);
+//affiche_pre(Config::$list_req_sql);
 //affiche_pre("Executer en ".(float)$time_laps);
 
 if(!empty($_POST))
@@ -82,10 +91,4 @@ if(!empty($_POST))
 		unset($_POST[$key]);
 	}
 }
-
-
-
-
-
-
 

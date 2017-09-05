@@ -2,22 +2,35 @@
 
 class Config
 {
-    public static $hote = "localhost";
-    public static $user = "root";
-    public static $Mpass = "darkevengyl";
-    public static $base = 'diy_n_game';
+    public static $hote = "evengylbiznecro.mysql.db";
+    public static $user = "evengylbiznecro";
+    public static $Mpass = "Darkevengyl4";
+    public static $base = 'evengylbiznecro';
 
-    public static $path_public = "../public";
+    public static $path_public = "";
     public static $base_path = "/diy_n_game";
 
-    public static $mail = "dark.evengyl@gmail.com";
-    public static $is_connect = 0;
+    public static $mail = "contact@evengyl.be";
+    public static $is_connect;
 
 
 
     public static function set_name_base($base)
     {
         self::$base = $base;
+    }
+
+    public static function test_ip()
+    {
+        if($_SERVER['SERVER_NAME'] != 'diy-and-game.com')
+        {
+            self::$path_public = "../public";
+            self::$base_path = "/diy_n_game";
+            self::$hote = "localhost";
+            self::$user = "root";
+            self::$Mpass = "darkevengyl";
+            self::$base = 'diy_n_game';
+        }
     }
 
 
