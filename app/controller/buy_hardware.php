@@ -3,9 +3,11 @@
 Class buy_hardware extends base_module
 {
 
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		if(isset($_POST) && $_POST != "")
 		{
@@ -14,7 +16,7 @@ Class buy_hardware extends base_module
 
 
 		$this->user->get_variable_user();
-		return $this->assign_var('user', $this->user)->render();
+		$this->get_html_tpl =  $this->assign_var('user', $this->user)->render_tpl();
 	}
 
 	public function traitement_post($post)

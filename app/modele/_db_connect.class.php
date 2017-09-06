@@ -34,10 +34,6 @@ class _db_connect extends Config
 	//elle recois la requete envoyer par l'appelant  
 	public function fetch_object($req_sql)  // elle recois la requ�te sql sous forme de string
 	{	
-
-		
-		
-
 		if($this->is_connected == false) // v�rifie si la connection � la DB est �tablie si pas , elle le fait
 			$this->connect(); //appel la fonction
 
@@ -46,6 +42,11 @@ class _db_connect extends Config
 			$this->last_req_sql = $req_sql; // enregistre une copie temporaire de la requete
 			parent::set_list_req_sql($req_sql);
 			$this->last_res_sql = mysqli_query($this->db_link, $req_sql)or die('Probleme de requete = '. $req_sql);// enregistre une copie temporaire de la reponse requete
+			
+			if(!$this->last_res_sql && $_SERVER['HTTP_HOST'] == "localhost")
+			{
+            	affiche_pre(mysqli_error($this->db_link));
+        	}
 		}// si les valeurs sont null ou diff�rente , enregistre les variable correctement
 		$res = mysqli_fetch_object($this->last_res_sql);  //enregistre les lignes de la requ�te sur un object
 		if (is_null($res))
@@ -58,50 +59,6 @@ class _db_connect extends Config
 		
 		
 		return $res; // renvoi un tableau d'objet
-	}
-
-
-	public function fetch_array($req_sql)
-	{
-		parent::set_list_req_sql($req_sql);
-		if($this->is_connected == false)
-			$this->connect();
-	
-		if(is_null($this->last_req_sql) || is_null($this->last_res_sql) || $req_sql != $this->last_req_sql)
-		{
-			$this->last_req_sql = $req_sql;
-			parent::set_list_req_sql($req_sql);
-			$this->last_res_sql = mysqli_query($this->db_link, $req_sql);
-		}
-		$res = mysqli_fetch_array($this->last_res_sql);
-		if (is_null($res))
-		{
-			mysqli_free_result($this->last_res_sql);
-			$this->last_res_sql = null;
-		}
-		return $res; // renvoi des trucs bizarre petite erreur quelque part
-	}
-
-
-	public function fetch_assoc($req_sql)
-	{
-		parent::set_list_req_sql($req_sql);
-		if($this->is_connected == false)
-			$this->connect();
-	
-		if(is_null($this->last_req_sql) || is_null($this->last_res_sql) || $req_sql != $this->last_req_sql)
-		{
-			$this->last_req_sql = $req_sql;
-			parent::set_list_req_sql($req_sql);
-			$this->last_res_sql = mysqli_query($this->db_link, $req_sql);
-		}
-		$res = mysqli_fetch_assoc($this->last_res_sql);
-		if (is_null($res))
-		{
-			mysqli_free_result($this->last_res_sql);
-			$this->last_res_sql = null;
-		}
-		return $res; //renvoi un tableau de tableau assosiatif
 	}
 
 

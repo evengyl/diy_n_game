@@ -4,15 +4,17 @@ Class stockage extends base_module
 {
 	public $tab_final_arome_acquis_traiter;
 
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		//on vérifie si l'user à quelque chose en stock ou pas
 		if(!empty($this->user->product->list_product))
 			$this->tab_final_arome_acquis_traiter = $this->get_list_product();
 
-		return $this->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->render();
+		$this->get_html_tpl =  $this->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)->render_tpl();
 	}
 
 	public function get_list_product()

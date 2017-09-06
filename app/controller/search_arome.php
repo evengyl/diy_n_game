@@ -9,9 +9,11 @@ Class search_arome extends base_module
 
 	public $nb_arome_total_acquis = 0;
 
-	public function __construct() // on a recu pas une référence mais bien tout l'objet
+	public function __construct(&$_app) // on a recu pas une référence mais bien tout l'objet
 	{		
-		parent::__construct(__CLASS__);		
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");	
 
 		//on check si une recherhce à été lancée
 		if(isset($_POST['search_form_validate_1000']) || isset($_POST['search_form_validate_2500']) || isset($_POST['search_form_validate_5000']))
@@ -72,10 +74,10 @@ Class search_arome extends base_module
 		$this->instance_search_en_cours_for_tpl();
 
 
-		return $this->assign_var("string_arome_string_nb",$string_arome_string_nb)
+		$this->get_html_tpl =  $this->assign_var("string_arome_string_nb",$string_arome_string_nb)
 					->assign_var("arome_win_for_tpl",$arome_win_for_tpl)
 					->assign_var("array_aromes_trier", $this->tab_final_arome_acquis_traiter)
-					->assign_var("user", $this->user)->render();
+					->assign_var("user", $this->user)->render_tpl();
 	}
 
 	private function instance_search_en_cours_for_tpl()

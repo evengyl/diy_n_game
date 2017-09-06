@@ -5,11 +5,13 @@ Class shop extends base_module
 
 	public $date_now = 0;
 
-	public function __construct()
+	public function __construct(&$_app)
 	{		
 		$this->date_now = date("U");
 
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		//va me donner la list des aromes qui sont en random actuellement venant de la base de données
 		$tab_arome_random = $this->get_list_arome_random_actuel();
@@ -85,9 +87,9 @@ Class shop extends base_module
 		$tab_arome_with_user_value = $this->render_tab_with_product_have_not_random($tab_arome_random, $tab_final_product_traiter);
 		$tab_arome_random_with_user_value = $this->get_nb_product_have_and_render($tab_arome_random);
 
-		return $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)
+		$this->get_html_tpl =  $this->assign_var("tab_arome_random", $tab_arome_random_with_user_value)
 					->assign_var("tab_arome_with_user_value", $tab_arome_with_user_value)
-					->assign_var("user", $this->user)->render();
+					->assign_var("user", $this->user)->render_tpl();
 	}
 
 

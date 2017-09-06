@@ -6,9 +6,11 @@ Class remplissage_produit extends base_module
 	public $tab_final_arome_acquis_traiter = array();
 	public $array_nb_product_creable = array();
 
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		
 		$this->tab_final_arome_acquis_traiter = $this->user->set_arome_acquis_for_tpl($this->user);
@@ -45,9 +47,9 @@ Class remplissage_produit extends base_module
 			}
 		}
 
-		return $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)
+		$this->get_html_tpl =  $this->assign_var("array_nb_product_creable", $this->array_nb_product_creable)
 					->assign_var("tab_final_arome_acquis_traiter", $this->tab_final_arome_acquis_traiter)
-					->assign_var("user", $this->user)->render();
+					->assign_var("user", $this->user)->render_tpl();
 	}
 
 	private function nb_product_creable_bases($bases_user)

@@ -6,36 +6,17 @@ session_start();
 <?
 //require de base avec les fonciton diverse et le loader, la fonction microtime est la uniquement pour le temps d'execution des requete pour optimiser
 
-
-require "../app/controller/fonction.php";
-$time_start = microtime_float();
-require '../app/controller/load_class.php'; 
-
-
-//mise en route de l'autoload
-Autoloader::register(); 
-Config::test_ip();
+require "../app/includes/app_min_load.php";
+//va être appeler a chaque démarage de script page et va checker si le user est connecter ou pas.
+new security($_app);
 //mise en route de la session
 
-
+Config::test_ip();
 
 if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
-
-ob_start();
-
-
-
-//va être appeler a chaque démarage de script page et va checker si le joueur est connecter ou pas.
-$login = new login();
-
-
-if(Config::$is_connect)
-{
-	$user = singleton::getInstance();
-}?>
-
+ob_start();?>
 
 <html lang="Fr-be">
 	<head>
@@ -43,22 +24,20 @@ if(Config::$is_connect)
 	</head>
 	<body onload="timer()">
 
-		__MOD2_header__
+		__MOD_header__
+		__MOD2_breadcrumb__
 		
-		<?  $route = new router();
-			$route->router($_GET); ?>
+		<?  new router($_GET['page'], $_app); ?>
+		__TPL_footer__
 			
-		__TPL2_bottom_head__
-
-		__TPL2_footer__
-		
 	</body>
+	__TPL2_bottom_head__
 </html><?
 
 
 $page = ob_get_clean();
 //appel le parseur qui rendra tout les modules et tout les vues
-$parser = new parser();
+$parser = new parser($_app);
 $page = $parser->parser_main($page);
 //affiche la page complete avec toute les données traitée
 echo $page; 
@@ -68,21 +47,19 @@ echo $page;
 
 
 
+if(Config::$view_time_executed_in_footer_page)
+	view_time_exec_page();
 
-$time_stop = microtime_float();
-$time_laps = (float)$time_stop - $time_start;
 
-
+affiche_pre($_app);
 //affiche les messages d'erreur du code
 if(!empty($_SESSION['error']))
 {
-	//affiche_pre($_SESSION['error']);
+	paragraphe_style($_SESSION['error']);
+	unset($_SESSION['error']);
 }
 
-
-//affiche_pre($user);
-//affiche_pre(Config::$list_req_sql);
-//affiche_pre("Executer en ".(float)$time_laps);
+Config::get_sql_list();
 
 if(!empty($_POST))
 {

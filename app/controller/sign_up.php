@@ -3,14 +3,15 @@
 Class sign_up extends base_module
 {
 	public $time_now;
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 		if(isset($_POST['return_form_complet']))
 			$this->traitement_post_inscription($_POST);
 		
-		return $this->render();
+		$this->get_html_tpl =  $this->render_tpl();
 	}
 
 
@@ -24,10 +25,10 @@ Class sign_up extends base_module
 			{
 			    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 			    {
-			    	$pseudo = $this->user->check_post_sign_up_and_my_account($post['pseudo']);
-			    	$password = $this->user->check_post_sign_up_and_my_account($post['password-1']);
-			    	$password_verification = $this->user->check_post_sign_up_and_my_account($post['password-2']);
-			    	$email = $this->user->check_post_sign_up_and_my_account($post['email']);
+			    	$pseudo = $this->user->check_post_login($post['pseudo']);
+			    	$password = $this->user->check_post_login($post['password-1']);
+			    	$password_verification = $this->user->check_post_login($post['password-2']);
+			    	$email = $this->user->check_post_login($post['email']);
 
 			    	if($pseudo == '0'|| $password == '0' || $password_verification == '0' || $email == '0')
 			    	{
@@ -42,12 +43,14 @@ Class sign_up extends base_module
 			    	else
 			    	{
 
+
 			    		$req_sql = new stdClass;
 						$req_sql->table = "login";
 						$req_sql->var = "login";
 						$req_sql->where = "login = '".$pseudo."'";
 
-						$res_sql = $this->user->select($req_sql);
+						$res_sql = $this->sql->select($req_sql);
+
 
 		            	if(empty($res_sql))
 			            {
@@ -62,16 +65,8 @@ Class sign_up extends base_module
 							$req_sql->ctx->last_connect = $this->set_time_now();
 							$req_sql->ctx->avertissement = 0;
 							$req_sql->ctx->level = 0;
-							$req_sql->ctx->level_culture_vg = 0;
-							$req_sql->ctx->level_usine_pg = 0;
-							$req_sql->ctx->level_labos_bases = 0;
-							$req_sql->ctx->last_culture_vg = 0;
-							$req_sql->ctx->last_usine_pg = 0;
-							$req_sql->ctx->point_vente = 0;
-							$req_sql->ctx->point = 0;
-							$req_sql->ctx->list_arome_not_have = $this->user->get_string_all_id_aromes();
 							$req_sql->table = "login";
-							$this->user->insert_into($req_sql);
+							$this->sql->insert_into($req_sql);
 
 							//va insrer les données de bases pour le commencent du jeu
 							
@@ -82,7 +77,9 @@ Class sign_up extends base_module
 				            $this->set_all_component_basic($pseudo);
 				            return 1;
 				            
-			            }else{
+			            }
+			            else
+			            {
 			            	$_SESSION['error'] = 'Ce pseudo est déjà utilisé.';
 			        		return 0;
 			            }
@@ -133,75 +130,6 @@ Class sign_up extends base_module
 		{
 			$id_user = $res_sql[0]->id;
 			unset($res_sql);
-		
-			unset($req_sql);
-			$req_sql = new stdClass;
-			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->id_user = $id_user;
-			$req_sql->ctx->bases_2080 = Config::$bases_2080;
-			$req_sql->ctx->bases_5050 = Config::$bases_5050;
-			$req_sql->ctx->bases_8020 = Config::$bases_8020;
-			$req_sql->ctx->bases_1000 = Config::$bases_1000;
-			$req_sql->table = "bases";
-
-			$this->user->insert_into($req_sql);
-			unset($req_sql);
-
-			$req_sql = new stdClass;
-			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->id_user = $id_user;
-            $req_sql->ctx->price_search_1 = 0;
-            $req_sql->ctx->price_search_2 = 0;
-            $req_sql->ctx->price_search_3 = 0;
-            $req_sql->ctx->chance_to_win_1 = 0;
-            $req_sql->ctx->chance_to_win_2 = 0;
-            $req_sql->ctx->chance_to_win_3 = 0;
-            $req_sql->ctx->time_search_for_one_k_argent_depenser = 0;
-            $req_sql->ctx->prix_vingt_quatre_vingt = 0;
-            $req_sql->ctx->prix_cinquante_cinquante = 0;
-            $req_sql->ctx->prix_quatre_vingt_vingt = 0;
-            $req_sql->ctx->prix_cent = 0;
-            $req_sql->table = "amelioration_var_config";
-
-			$this->user->insert_into($req_sql);
-			unset($req_sql);
-
-
-			$req_sql = new stdClass;
-			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->last_culture_vg = Config::$last_culture_vg;
-			$req_sql->ctx->last_usine_pg = Config::$last_usine_pg;
-			$req_sql->ctx->argent = Config::$argent;
-			$req_sql->ctx->litter_vg = Config::$litter_vg;
-			$req_sql->ctx->litter_pg = Config::$litter_pg;
-			$req_sql->ctx->point = 0;
-			$req_sql->where = "id = '".$id_user."'";
-			$req_sql->table = "login";
-
-			$this->user->update($req_sql);
-			unset($req_sql);
-
-
-			$req_sql = new stdClass;
-			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->id_user = $id_user;
-			$req_sql->ctx->frigo = Config::$frigo;
-			$req_sql->ctx->pipette = Config::$pipette;
-			$req_sql->ctx->flacon = Config::$flacon;
-			$req_sql->table = "hardware";
-			
-			$this->user->insert_into($req_sql);
-			unset($req_sql);
-
-
-			$req_sql = new stdClass;
-			$req_sql->ctx = new stdClass;
-			$req_sql->ctx->id_user = $id_user;
-			$req_sql->ctx->list_product = "";
-			$req_sql->table = "product";
-
-			$this->user->insert_into($req_sql);
-			unset($req_sql);
 		}
 
 	}

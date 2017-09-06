@@ -2,9 +2,11 @@
 
 Class game_home extends base_module
 {
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		$construct_en_cours = $this->set_construction_en_cours_name_real_for_tpl();
 		$this->set_update_en_cours_et_traitement_pour_tpl();
@@ -13,10 +15,10 @@ Class game_home extends base_module
 		$array_stock_for_home = new stockage('stockage');
 		$array_stock_for_home = $array_stock_for_home->tab_final_arome_acquis_traiter;
 
-		return $this->assign_var("user", $this->user)
+		$this->get_html_tpl =  $this->assign_var("user", $this->user)
 					->assign_var("construct_en_cours", $construct_en_cours)
 					->assign_var("stock", $array_stock_for_home)
-					->render();
+					->render_tpl();
 	}
 
 	public function set_construction_en_cours_name_real_for_tpl()

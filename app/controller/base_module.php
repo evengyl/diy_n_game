@@ -4,91 +4,84 @@
 Class base_module
 {
 
-	public $rendu;
-	public $content;
+	public $get_html_tpl;
 	public $var_to_extract;
 	public $template_name;
 	public $template_path;
 	public $user;
+	public $module_name;
+	public $sql;
+	public $_app;
 
 
-	public function __construct($module_tpl_name = "")
+	public function __construct(&$_app)
 	{
+		$this->_app = &$_app;
 
+		if($_app->sql != "")
+			$this->sql = &$_app->sql;
+		else
+			$this->sql = new all_query();
 
-		$this->user = singleton::getInstance()->user;
-		
-
-		if($module_tpl_name != "")
+		if(Config::$is_connect)
 		{
-			$this->template_name = $module_tpl_name;
-			$this->set_template_path($this->template_name);
+			if(!isset($_app->user) || !empty($_app->user))
+				$this->user = singleton::get_singleton()->user;
+			else
+				$this->user = $this->_app->user;
 		}
+
+		$this->module_name = $this->_app->module_name;
 	}
 
 	public function assign_var($var_name , $value)
 	{
+		if(empty($var_name) && !empty($value))
+			$this->var_to_extract[$value] = $value;
 
-        if(is_array($var_name))
-        {
-            $this->var_to_extract = array_merge($this->var_to_extract, $var_name);
-        }
-        else
-        {
-            $this->var_to_extract[$var_name] = $value;
-        }
+		else if(empty($value) && !empty($var_name))
+			$this->var_to_extract[$var_name] = $var_name;
+		else		
+        	$this->var_to_extract[$var_name] = $value;
+        
         return $this;
 	}
 
-//partie setter du rendu
-	public function render()
+//partie setter du get_html_tpl
+
+
+	public function render_tpl()
 	{
 		ob_start();
 			if(!empty($this->var_to_extract))
-			{
 				extract($this->var_to_extract);
-			}			
-			require($this->get_template_path());
-		$rendu = ob_get_contents();
+
+			$this->set_template_path();	
+
+			require($this->template_path);
+
+			$get_html_tpl = ob_get_contents();
 		ob_end_clean();
-		$this->set_rendu($rendu);
+		return $get_html_tpl;
 	}
 
-	public function maj_user($ok = false, $user = "")
+	public function use_template($template_name = "")
 	{
-		if($ok)
-		{
-			$this->get_variable_user();
-		}
+		$this->template_name = $template_name;
+		$this->set_template_path();
+			
 		return $this;
 	}
 
-	public function set_rendu($rendu)
+	public function set_template_path()
 	{
-		$this->rendu = $rendu;
-	}
+		if(empty($this->template_name))
+			$this->template_name = $this->module_name;
 
-	public function get_rendu()
-	{
-		//renvoi le rendu tpl générer dans render, le renvoi au parseur qui s'occuepra de le mettre dans la page html
-		return $this->rendu;
-	}
-
-	public function set_template_path($name_template)
-	{
-		$this->template_path = "../vues/".$name_template.".php";
+		if(strpos($this->template_name, "admin_") !== false)
+			$this->template_path = "../vues/admin_tool/".$this->template_name.".php";
+		else
+			$this->template_path = "../vues/".$this->template_name.".php";
 
 	}
-
-	public function get_template_path()
-	{
-		return $this->template_path;
-	}
-
-
-//partie fonction utile de base
-
-
-
-
 }

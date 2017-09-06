@@ -4,12 +4,14 @@ class avatar extends base_module
     private $image;
 
     // Même fonctionnement que create() sauf au moment de l'affichage, se référer aux commentaires faits dans le fichier avatar.php
-    public function __construct()
+    public function __construct(&$_app)
     {
-        parent::__construct(__CLASS__);
+        $_app->module_name = __CLASS__;
+        parent::__construct($_app);
+        $this->_app->navigation->set_breadcrumb("Consommation");
 
         
-        return $this->render();
+        $this->get_html_tpl = $this->render_tpl();
     }
 
     public function construct_image_test()

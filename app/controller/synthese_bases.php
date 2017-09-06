@@ -12,10 +12,12 @@ Class synthese_bases extends base_module
 
 
 
-	public function __construct()
+	public function __construct(&$_app)
 	{	
 
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 		//cette fonctions va vérifier si le client a assez d'argnet et combien de base il peux creer en dependant de son argent
 
 		//va calculer cmb le joueur peux creer avec ses bases et sont argent
@@ -52,7 +54,7 @@ Class synthese_bases extends base_module
 
 		$this->user->get_variable_user();
 
-		return $this->assign_var("nb_base_wish_to_create", $this->nb_base_wish_to_create)->assign_var("user", $this->user)->render();
+		$this->get_html_tpl =  $this->assign_var("nb_base_wish_to_create", $this->nb_base_wish_to_create)->assign_var("user", $this->user)->render_tpl();
 	}
 
 

@@ -2,9 +2,11 @@
 
 Class labos_update_tools extends base_module
 {
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 
 		$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
@@ -35,7 +37,7 @@ Class labos_update_tools extends base_module
 		
 			$array_update_for_tpl = $this->prepare_array_update_for_tpl(Config::$array_name_search_and_price);
 
-		return $this->assign_var("user", $this->user)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render();
+		$this->get_html_tpl =  $this->assign_var("user", $this->user)->assign_var('array_update_for_tpl', $array_update_for_tpl)->render_tpl();
 	}
 
 

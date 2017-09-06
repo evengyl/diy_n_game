@@ -5,9 +5,11 @@ Class labos_bases extends base_module
 	public $name_batiment = "level_labos_bases";
 	public $max_level_batiment = 80;
 
-	public function __construct()
+	public function __construct(&$_app)
 	{	
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		$this->alert_construction_en_cours = $this->user->check_construction_en_cours($this->name_batiment, $this->user->labos_bases->prix);	
 
@@ -41,6 +43,6 @@ Class labos_bases extends base_module
 		//dans tout les cas il faut set la variable du temps parce que sinon aucun affichage de temps pour le joueur
 		$time_finish = $this->user->set_time_finish($this->name_batiment);
 
-		return $this->assign_var("user", $this->user)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render();
+		$this->get_html_tpl =  $this->assign_var("user", $this->user)->assign_var("time_finish", $time_finish)->assign_var("in_make", $this->alert_construction_en_cours)->render_tpl();
 	}
 }

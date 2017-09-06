@@ -3,9 +3,11 @@
 Class mail_box extends base_module
 {
 
-	public function __construct()
+	public function __construct(&$_app)
 	{		
-		parent::__construct(__CLASS__);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		$req_sql = new stdClass();
 		$req_sql->table = "login";
@@ -27,7 +29,7 @@ Class mail_box extends base_module
 
 		$this->position_this_user = $this->get_position_user($list_user);
 
-		return $this->assign_var("list_user", $list_user)->assign_var("user", $this->user)->assign_var("position_user",$this->position_this_user)->render();
+		$this->get_html_tpl =  $this->assign_var("list_user", $list_user)->assign_var("user", $this->user)->assign_var("position_user",$this->position_this_user)->render_tpl();
 	}
 
 	public function get_position_user($list_user)

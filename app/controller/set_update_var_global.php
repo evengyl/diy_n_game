@@ -3,9 +3,11 @@
 Class set_update_var_global extends base_module
 {
 
-	public function __construct($module_tpl_name = "", &$user)
+	public function __construct(&$_app)
 	{		
-		parent::__construct($module_tpl_name, $user);
+		$_app->module_name = __CLASS__;
+        parent::__construct($_app);
+        $this->_app->navigation->set_breadcrumb("Consommation");
 
 
         $user->gain_per_level_search_arome = 5;
