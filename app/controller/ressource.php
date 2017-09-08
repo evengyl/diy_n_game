@@ -8,7 +8,6 @@ Class ressource extends base_module
 		parent::__construct($_app);
 
 		//converti les point en point avec virgule francaise
-		affiche_pre($this->user);
 		$this->user->get_variable_user();
 		$this->user->user_infos->point = str_replace(".", ",", $this->user->user_infos->point);
 		$this->user->user_infos->point_vente = str_replace(".", ",", $this->user->user_infos->point_vente);

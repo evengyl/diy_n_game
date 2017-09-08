@@ -34,13 +34,7 @@ Class base_module
 
 	public function assign_var($var_name , $value)
 	{
-		if(empty($var_name) && !empty($value))
-			$this->var_to_extract[$value] = $value;
-
-		else if(empty($value) && !empty($var_name))
-			$this->var_to_extract[$var_name] = $var_name;
-		else		
-        	$this->var_to_extract[$var_name] = $value;
+    	$this->var_to_extract[$var_name] = $value;
         
         return $this;
 	}

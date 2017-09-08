@@ -7,8 +7,7 @@ class singleton
 
   private function __construct()
   {
-    $this->user = new user();
-    $this->user->get_variable_user();
+    $this->user = new min_require();
   }
 
 

@@ -8,7 +8,7 @@ Class stockage extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
-		$this->_app->navigation->set_breadcrumb("Consommation");
+		$this->_app->navigation->set_breadcrumb("Unité de Stockage");
 
 		//on vérifie si l'user à quelque chose en stock ou pas
 		if(!empty($this->user->product->list_product))
