@@ -111,9 +111,7 @@ if(Config::$is_connect == 1)
 	</div>
 
 	<div class="logo_ressource col-xxs-12 col-lg-6 col-lg-offset-3">	
-		<center>
-			<img style="display:inline-block;" src="images/bouton-collapse-ressource.png">
-		</center>	
+		<span class="detail_ressource">Détails sur les Ressources collectées</span>
 	</div>
 
 
