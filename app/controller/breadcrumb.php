@@ -25,7 +25,7 @@ Class breadcrumb extends base_module
 		
 		$i = count($breadcrumb);
 
-		$title_page ="<div class='col-xs-12 breadcrumb_top'><h1><div class='home_button_bread'><a class='hidden-xs' href='?page=home'><span class='glyphicon glyphicon-home'></span></a></div>";
+		$title_page ="<div class='col-xs-12 breadcrumb_top'><h1><div class='home_button_bread'><a class='hidden-xs' href='?page=home'><span class='glyphicon glyphicon-home'></span>&nbsp;&nbsp;></a></div>";
 		foreach($breadcrumb as $title => $link)
 		{
 			$i--;
