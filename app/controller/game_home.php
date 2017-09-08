@@ -6,7 +6,6 @@ Class game_home extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
-		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		$construct_en_cours = $this->set_construction_en_cours_name_real_for_tpl();
 		$this->set_update_en_cours_et_traitement_pour_tpl();

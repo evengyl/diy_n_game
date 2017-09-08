@@ -21,7 +21,6 @@ Class breadcrumb extends base_module
 				$breadcrumb = array($_GET['page'] => "?page=".$_GET['page']);
 		}
 		
-		$breadcrumb = array_merge(array("Accueil" => "?page=home"), $breadcrumb);
 		
 		
 		$i = count($breadcrumb);
