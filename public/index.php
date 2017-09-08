@@ -1,23 +1,20 @@
 <?
-//echo "Le site DIY revient bientot, la premières maintenance à été lancée, merci de votre compréhension";
+session_name('dng');
 session_start();
-?>
-<!DOCTYPE html>
-<?
-//require de base avec les fonciton diverse et le loader, la fonction microtime est la uniquement pour le temps d'execution des requete pour optimiser
 
 require "../app/includes/app_min_load.php";
 //va être appeler a chaque démarage de script page et va checker si le user est connecter ou pas.
+Config::set_config_compared_domain();
 new security($_app);
 //mise en route de la session
 
-Config::test_ip();
 
 if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
 ob_start();?>
 
+<!DOCTYPE html>
 <html lang="Fr-be">
 	<head>
 		__TPL_top_head__
@@ -69,3 +66,7 @@ if(!empty($_POST))
 	}
 }
 
+
+
+affiche_pre($_COOKIE);
+affiche_pre($_SESSION);

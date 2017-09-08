@@ -12,7 +12,7 @@ Class game_home extends base_module
 		$this->set_update_en_cours_et_traitement_pour_tpl();
 		$this->set_search_arome_et_traitement_pour_tpl();
 
-		$array_stock_for_home = new stockage('stockage');
+		$array_stock_for_home = new stockage($_app);
 		$array_stock_for_home = $array_stock_for_home->tab_final_arome_acquis_traiter;
 
 		$this->get_html_tpl =  $this->assign_var("user", $this->user)

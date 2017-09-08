@@ -18,19 +18,17 @@ Class base_module
 	{
 		$this->_app = &$_app;
 
+		//recuperer le sql
 		if($_app->sql != "")
 			$this->sql = &$_app->sql;
 		else
 			$this->sql = new all_query();
 
+		//mettre le uer à jour
 		if(Config::$is_connect)
 		{
-			if(!isset($_app->user) || !empty($_app->user))
-				$this->user = singleton::get_singleton()->user;
-			else
-				$this->user = $this->_app->user;
+			$this->user = $_app->user->user;
 		}
-
 		$this->module_name = $this->_app->module_name;
 	}
 

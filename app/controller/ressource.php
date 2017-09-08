@@ -6,9 +6,9 @@ Class ressource extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
-		$this->_app->navigation->set_breadcrumb("Consommation");
 
 		//converti les point en point avec virgule francaise
+		affiche_pre($this->user);
 		$this->user->get_variable_user();
 		$this->user->user_infos->point = str_replace(".", ",", $this->user->user_infos->point);
 		$this->user->user_infos->point_vente = str_replace(".", ",", $this->user->user_infos->point_vente);

@@ -30,7 +30,7 @@ class Config
 
 
    
-    public static function test_ip()
+    public static function set_config_compared_domain()
     {
         if($_SERVER['SERVER_NAME'] != 'diy-and-game.com')
         {

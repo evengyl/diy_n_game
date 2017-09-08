@@ -110,24 +110,9 @@ if(Config::$is_connect == 1)
 		</div>
 	</div>
 
-	<div class="logo_ressource col-lg-6 col-lg-offset-3">	
+	<div class="logo_ressource col-xxs-12 col-lg-6 col-lg-offset-3">	
 		<center>
 			<img style="display:inline-block;" src="images/bouton-collapse-ressource.png">
-		</center>	
-	</div>
-	<div class="logo_ressource col-lg-4">	
-		<center>
-			<p style="padding:2px; margin-bottom:5px;" class="bg-info">Correction : problème avec la listes des construction en cours, réglée !</p>
-		</center>	
-	</div>
-	<div class="logo_ressource col-lg-4">	
-		<center>
-			<p style="padding:2px; margin-bottom:5px;" class="bg-info">Correction : Problème lié aux améliorations de recherches corrigé</p>
-		</center>	
-	</div>
-	<div class="logo_ressource col-lg-4">	
-		<center>
-			<p style="padding:2px; margin-bottom:5px;" class="bg-info">1000 pg, 1000vg et 1000€ offert au joueurs pour les bugs.</p>
 		</center>	
 	</div>
 

@@ -33,7 +33,7 @@
 		        <li><a href="?page=aide">Infos, Aides</a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="logout.php">Se déconnecter</a>' : ''; ?></li>
+		        <li><?php echo (isset($_SESSION['pseudo']))?'<a href="?logout=1">Se déconnecter</a>' : ''; ?></li>
 		      </ul>
 
 		    </div><!-- /.navbar-collapse -->

@@ -8,6 +8,7 @@ class singleton
   private function __construct()
   {
     $this->user = new user();
+    $this->user->get_variable_user();
   }
 
 
