@@ -72,6 +72,8 @@ Class base_module
 
 		if(strpos($this->template_name, "admin_") !== false)
 			$this->template_path = "../vues/admin_tool/".$this->template_name.".php";
+		else if(strpos($this->template_name, "mine_") !== false)
+			$this->template_path = "../vues/mine/".$this->template_name.".php";
 		else
 			$this->template_path = "../vues/".$this->template_name.".php";
 

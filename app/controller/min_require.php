@@ -40,7 +40,7 @@ Class min_require extends user_set_global_var
 
                     //user_batiment start
                     $this->validate_construct();
-                    $this->set_object_user_tab_prod_vg();
+                    $this->set_prod_fer();
                     $this->set_object_user_tab_prod_pg();
                     $this->set_object_user_tab_labos();
                     //user_batiment end

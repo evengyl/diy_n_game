@@ -90,7 +90,7 @@ class Config
     
 
     //name for présenation général de l'entreprise.
-    public static $level_culture_vg = "Champs de Glycérine";
+    public static $lvl_mine_fer = "Mines de fer";
     public static $level_usine_pg = "Usines de production de Propylène";
     public static $level_labos_bases = "Laboratoire d'amélioration des bases";
 

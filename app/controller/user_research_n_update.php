@@ -15,7 +15,7 @@ Class user_research_n_update extends user_ressources
 	public function validate_update()
 	{
 		$req_sql = new stdClass;
-		$req_sql->table = "update_en_cours";
+		$req_sql->table = "user_update_in_construct";
 		$req_sql->var = "*";
 		$req_sql->where = "id_user= '".$this->user_infos->id."'";
 		$res_sql = $this->select($req_sql);
@@ -41,7 +41,7 @@ Class user_research_n_update extends user_ressources
 
 					//et on delete la ligne qui est finie;
 					$del_sql = new stdClass;
-					$del_sql->table = "update_en_cours";
+					$del_sql->table = "user_update_in_construct";
 					$del_sql->where = "id = '".$row_update->id."' AND id_user = '".$this->user_infos->id."'";
 					$this->delete($del_sql);
 				}

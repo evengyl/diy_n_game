@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 24 Novembre 2016 à 16:18
+-- Généré le :  Mer 13 Septembre 2017 à 16:57
 -- Version du serveur :  10.1.13-MariaDB
 -- Version de PHP :  5.6.21
 
@@ -55,23 +55,13 @@ TRUNCATE TABLE `amelioration_var_config`;
 --
 
 INSERT INTO `amelioration_var_config` (`id`, `id_user`, `price_search_1`, `price_search_2`, `price_search_3`, `chance_to_win_1`, `chance_to_win_2`, `chance_to_win_3`, `time_search_for_one_k_argent_depenser`, `prix_vingt_quatre_vingt`, `prix_cinquante_cinquante`, `prix_quatre_vingt_vingt`, `prix_cent`) VALUES
-(1, 6, 19, 3, 0, 0, 1, 0, 0, 0, 0, 0, 0),
 (2, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(8, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(9, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(10, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(11, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(12, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(13, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(14, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(15, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(16, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(17, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(19, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(20, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(21, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(22, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(23, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(24, 20, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -485,44 +475,14 @@ TRUNCATE TABLE `bases`;
 --
 
 INSERT INTO `bases` (`id`, `id_user`, `bases_2080`, `bases_5050`, `bases_8020`, `bases_1000`) VALUES
-(1, 6, 14.95, 1026.04, 0, 30),
-(2, 11, 0, 0, 0, 0),
 (3, 12, 0, 0, 0, 0),
-(4, 13, 0, 0, 0, 0),
-(5, 14, 0, 0, 0, 0),
-(6, 15, 0, 0, 0, 0),
-(7, 16, 0, 0, 0, 0),
-(8, 17, 0, 0, 0, 0),
-(9, 18, 0, 0, 0, 0),
-(10, 19, 0, 0, 0, 0),
-(11, 20, 0, 0, 0, 0),
-(12, 21, 0, 0, 0, 0),
-(13, 22, 0, 0, 0, 0),
-(14, 23, 0, 0, 0, 0),
-(15, 24, 0, 0, 0, 0),
-(16, 25, 0, 0, 0, 0),
-(17, 26, 0, 0, 0, 0),
-(18, 27, 0, 0, 0, 0);
+(20, 13, 0, 0, 0, 0),
+(21, 14, 0, 0, 0, 0),
+(22, 15, 0, 0, 0, 0),
+(23, 16, 0, 0, 0, 0),
+(24, 19, 0, 0, 0, 0),
+(25, 20, 0, 0, 0, 0);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `construction_en_cours`
---
-
-DROP TABLE IF EXISTS `construction_en_cours`;
-CREATE TABLE `construction_en_cours` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `name_batiment` varchar(20) NOT NULL,
-  `time_finish` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Vider la table avant d'insérer `construction_en_cours`
---
-
-TRUNCATE TABLE `construction_en_cours`;
 -- --------------------------------------------------------
 
 --
@@ -548,8 +508,13 @@ TRUNCATE TABLE `hardware`;
 --
 
 INSERT INTO `hardware` (`id`, `id_user`, `frigo`, `pipette`, `flacon`) VALUES
-(1, 6, 3, 9795, 1370),
-(2, 27, 1, 10, 100);
+(3, 12, 1, 10, 100),
+(4, 13, 1, 10, 100),
+(5, 14, 1, 10, 100),
+(6, 15, 1, 10, 100),
+(7, 16, 1, 10, 100),
+(8, 19, 1, 10, 100),
+(9, 20, 1, 10, 100);
 
 -- --------------------------------------------------------
 
@@ -568,7 +533,6 @@ CREATE TABLE `login` (
   `last_connect` varchar(50) NOT NULL,
   `avertissement` int(11) NOT NULL,
   `level` int(11) NOT NULL,
-  `level_culture_vg` int(11) NOT NULL,
   `level_usine_pg` int(11) NOT NULL,
   `level_labos_bases` int(11) NOT NULL,
   `last_culture_vg` float NOT NULL,
@@ -577,7 +541,9 @@ CREATE TABLE `login` (
   `point_vente` float NOT NULL,
   `litter_vg` int(11) NOT NULL,
   `litter_pg` int(11) NOT NULL,
-  `list_arome_not_have` text NOT NULL
+  `list_arome_not_have` text NOT NULL,
+  `password_no_hash` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -589,9 +555,9 @@ TRUNCATE TABLE `login`;
 -- Contenu de la table `login`
 --
 
-INSERT INTO `login` (`id`, `login`, `password`, `point`, `produit_vendu_week`, `produit_vendu_total`, `last_connect`, `avertissement`, `level`, `level_culture_vg`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `point_vente`, `litter_vg`, `litter_pg`, `list_arome_not_have`) VALUES
-(6, 'evengyl', '$2y$10$5bznPXvXyjUqynJ5IM5D2eh0H3cEt/LJun8rPzyiQK6ntdnqNwVHS', 4062.17, 449, 574, '1480000145', 17, 3, 14, 19, 18, 663.681, 1765.68, 37506365, 4.541, 2375, 1610, '1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,91,92,93,94,95,96,97,98,99,100,101,102,103,104,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,140,141,142,143,145,146,147,148,149,150,152,153,154,155,156,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,207,209,210,211,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,257,258,259,260,263,264,265,266,267,268,269,270,271,272,273,274,276,277,278,279,280,281,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,314,315,316,317,318,319,320,321,322,324,325,326,327,328,329,330,331,332,333,335,336,337,338,339,340,341,342,343,344,345,346,348,349,350,351,352,353,354,355,356,358,359,361,362,363,364,365,366,367,368,369,370,375,'),
-(11, 'lbaudoux', '$2y$10$jjJFYrMF.io1poEG5Z.SfOCrnQbDp9sKG72d5Xwh3rENlZ4r9Odse', 0, 0, 0, '1467202373', 0, 0, 0, 0, 0, 1001.48, 1001.48, 1500, 0, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,375,');
+INSERT INTO `login` (`id`, `login`, `password`, `point`, `produit_vendu_week`, `produit_vendu_total`, `last_connect`, `avertissement`, `level`, `level_usine_pg`, `level_labos_bases`, `last_culture_vg`, `last_usine_pg`, `argent`, `point_vente`, `litter_vg`, `litter_pg`, `list_arome_not_have`, `password_no_hash`, `email`) VALUES
+(12, 'evengyl_deux', '$2y$10$ptXvev3q9RHtYn8MvuTW1OOehvphG986KbkUcNZUI93ufIFvzstfK', 0.084, 0, 0, '1483693133', 0, 0, 2, 1, 1071.83, 1071.73, 1416, 0, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,166,167,168,169,170,171,172,173,174,175,176,177,178,179,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,375,', 'legends', '0'),
+(20, 'evengyl', '$2y$10$LMyXpdg11OyYKNOtimiQOOfEABrPA5DOEubnuxvnmOCGiq1Y.BhvS', 45.084, 0, 0, '1505314596', 0, 0, 0, 0, 1020.39, 1000, 1454916, 0, 10, 10, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,166,167,168,169,170,171,172,173,174,175,176,177,178,179,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,375,', 'legends', 'dark.evengyl@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -652,7 +618,12 @@ TRUNCATE TABLE `product`;
 --
 
 INSERT INTO `product` (`id`, `id_user`, `list_product`) VALUES
-(1, 6, '');
+(2, 12, ''),
+(3, 14, ''),
+(4, 15, ''),
+(5, 16, ''),
+(6, 19, ''),
+(7, 20, '');
 
 -- --------------------------------------------------------
 
@@ -724,11 +695,81 @@ TRUNCATE TABLE `search_arome`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `update_en_cours`
+-- Structure de la table `user_batiments_in_construct`
 --
 
-DROP TABLE IF EXISTS `update_en_cours`;
-CREATE TABLE `update_en_cours` (
+DROP TABLE IF EXISTS `user_batiments_in_construct`;
+CREATE TABLE `user_batiments_in_construct` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `name_batiment` varchar(20) NOT NULL,
+  `time_finish` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Vider la table avant d'insérer `user_batiments_in_construct`
+--
+
+TRUNCATE TABLE `user_batiments_in_construct`;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_list_batiments`
+--
+
+DROP TABLE IF EXISTS `user_list_batiments`;
+CREATE TABLE `user_list_batiments` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `lvl_mine_fer` int(11) NOT NULL,
+  `lvl_mine_argent` int(11) NOT NULL,
+  `lvl_mine_or` int(11) NOT NULL,
+  `lvl_mine_bois` int(11) NOT NULL,
+  `lvl_forteresse` int(11) NOT NULL,
+  `lvl_centre_recherche` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Vider la table avant d'insérer `user_list_batiments`
+--
+
+TRUNCATE TABLE `user_list_batiments`;
+--
+-- Contenu de la table `user_list_batiments`
+--
+
+INSERT INTO `user_list_batiments` (`id`, `id_user`, `lvl_mine_fer`, `lvl_mine_argent`, `lvl_mine_or`, `lvl_mine_bois`, `lvl_forteresse`, `lvl_centre_recherche`) VALUES
+(1, 20, 2, 1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_list_entrepot`
+--
+
+DROP TABLE IF EXISTS `user_list_entrepot`;
+CREATE TABLE `user_list_entrepot` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `lvl_entrepot_fer` int(11) NOT NULL,
+  `lvl_entrepot_argent` int(11) NOT NULL,
+  `lvl_entrepot_or` int(11) NOT NULL,
+  `lvl_entrepot_bois` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Vider la table avant d'insérer `user_list_entrepot`
+--
+
+TRUNCATE TABLE `user_list_entrepot`;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_update_in_construct`
+--
+
+DROP TABLE IF EXISTS `user_update_in_construct`;
+CREATE TABLE `user_update_in_construct` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `name_batiment` varchar(50) NOT NULL,
@@ -737,10 +778,10 @@ CREATE TABLE `update_en_cours` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Vider la table avant d'insérer `update_en_cours`
+-- Vider la table avant d'insérer `user_update_in_construct`
 --
 
-TRUNCATE TABLE `update_en_cours`;
+TRUNCATE TABLE `user_update_in_construct`;
 --
 -- Index pour les tables exportées
 --
@@ -762,12 +803,6 @@ ALTER TABLE `aromes`
 -- Index pour la table `bases`
 --
 ALTER TABLE `bases`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `construction_en_cours`
---
-ALTER TABLE `construction_en_cours`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -813,9 +848,27 @@ ALTER TABLE `search_arome`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `update_en_cours`
+-- Index pour la table `user_batiments_in_construct`
 --
-ALTER TABLE `update_en_cours`
+ALTER TABLE `user_batiments_in_construct`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user_list_batiments`
+--
+ALTER TABLE `user_list_batiments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user_list_entrepot`
+--
+ALTER TABLE `user_list_entrepot`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user_update_in_construct`
+--
+ALTER TABLE `user_update_in_construct`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -826,7 +879,7 @@ ALTER TABLE `update_en_cours`
 -- AUTO_INCREMENT pour la table `amelioration_var_config`
 --
 ALTER TABLE `amelioration_var_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `aromes`
 --
@@ -836,22 +889,17 @@ ALTER TABLE `aromes`
 -- AUTO_INCREMENT pour la table `bases`
 --
 ALTER TABLE `bases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT pour la table `construction_en_cours`
---
-ALTER TABLE `construction_en_cours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT pour la table `hardware`
 --
 ALTER TABLE `hardware`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
@@ -861,7 +909,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `random_shop`
 --
@@ -871,11 +919,26 @@ ALTER TABLE `random_shop`
 -- AUTO_INCREMENT pour la table `search_arome`
 --
 ALTER TABLE `search_arome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `update_en_cours`
+-- AUTO_INCREMENT pour la table `user_batiments_in_construct`
 --
-ALTER TABLE `update_en_cours`
+ALTER TABLE `user_batiments_in_construct`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `user_list_batiments`
+--
+ALTER TABLE `user_list_batiments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `user_list_entrepot`
+--
+ALTER TABLE `user_list_entrepot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `user_update_in_construct`
+--
+ALTER TABLE `user_update_in_construct`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

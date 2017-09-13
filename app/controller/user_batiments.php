@@ -9,7 +9,7 @@ Class user_batiments extends user_account
 	public function validate_construct()
 	{
 		$req_sql = new stdClass;
-		$req_sql->table = "construction_en_cours";
+		$req_sql->table = "user_batiments_in_construct";
 		$req_sql->var = "*";
 		$req_sql->where = "id_user= '".$this->user_infos->id."'";
 		$res_sql = $this->select($req_sql);
@@ -22,17 +22,17 @@ Class user_batiments extends user_account
 				if($row_construct->time_finish <= $this->user_infos->time_now)
 				{
 					//on indique dans la base que le level est changer 
-					$set_level_up = $this->user_infos->{$row_construct->name_batiment}+1;
+					$set_level_up = $this->user_list_batiments->{$row_construct->name_batiment}+1;
 					$req_sql = new stdClass;
-					$req_sql->table = "login";
-					$req_sql->where = "id = '".$row_construct->id_user."'";
+					$req_sql->table = "user_list_batiments";
+					$req_sql->where = "id_user = '".$row_construct->id_user."'";
 					$req_sql->ctx = new stdClass;
 					$req_sql->ctx->{$row_construct->name_batiment} = $set_level_up;
 					$this->update($req_sql);
 
 					//et on delete la ligne qui est finie;
 					$del_sql = new stdClass;
-					$del_sql->table = "construction_en_cours";
+					$del_sql->table = "user_batiments_in_construct";
 					$del_sql->where = "id = '".$row_construct->id."' AND id_user = '".$this->user_infos->id."'";
 					$this->delete($del_sql);
 				}
@@ -42,7 +42,7 @@ Class user_batiments extends user_account
 
  	public function set_time_finish($name_batiment)
 	{
-		foreach($this->construction as $row_construct)
+		foreach($this->user_batiments_in_construct as $row_construct)
 		{
 			if($row_construct->name_batiment == $name_batiment)
 			{
@@ -59,36 +59,23 @@ Class user_batiments extends user_account
 		$req_sql->ctx->id_user = $this->user_infos->id;
 		$req_sql->ctx->name_batiment = $name_batiment;
 		$req_sql->ctx->time_finish = $time_finish;
-		$req_sql->table = "construction_en_cours";
+		$req_sql->table = "user_batiments_in_construct";
 		$this->insert_into($req_sql);
 
 	}
 
 	public function check_construction_en_cours($name_batiment_from_controller = "", $prix_level_up)
 	{
-		if(!empty($this->construction))
+		if(!empty($this->user_batiments_in_construct))
 		{	
 		//comme il y a des construction en cours il faut les faire vérifié pour voir si celle de notr ebatiments est dedans	
-			foreach($this->construction as $row_construct)
+			foreach($this->user_batiments_in_construct as $row_construct)
 			{
 				if($row_construct->name_batiment == $name_batiment_from_controller)
 					return 1;	//la consctruction était déjà lancée quand le joueur c'est logger
 			}
-			//si il sort de la boucle c'est qu'il n'a rien trouver dans la base
-			//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($this->user_infos->argent >= $prix_level_up)
-				return 0;	//la tout est ok rien n'est lancé et il as assez d'argnet
-			else
-				return 2;	//2 egale que on a pas l'argent
 		}
-		else
-		{
-			//mais avant ça on va vérifié si il a l'argent nécessaire
-			if($this->user_infos->argent >= $prix_level_up)
-				return 0;
-			else
-				return 2;	
-		}
+		return 0;
 	}
 
 
@@ -137,16 +124,16 @@ Class user_batiments extends user_account
 
 
 
- 	public function set_object_user_tab_prod_vg()
+ 	public function set_prod_fer()
  	{
-		$tmp_level = $this->user_infos->level_culture_vg;
-		$obj_user_prod_vg = new stdClass();
-		$obj_user_prod_vg->level = $tmp_level;
-		$obj_user_prod_vg->production = floor(((pow($tmp_level,1.55) * 42)) * Config::$rate_vg_prod);
-		$obj_user_prod_vg->prix = floor((pow($tmp_level,2.1) * 42));
-		$obj_user_prod_vg->time_construct = floor(((pow($tmp_level,2) * 42)) * 4);
-		$obj_user_prod_vg->time_real_construct = $this->convert_sec_in_time_real($obj_user_prod_vg->time_construct);
-		$this->champ_glycerine = $obj_user_prod_vg;
+		$tmp_level = $this->user_list_batiments->lvl_mine_fer;
+		$prod_fer = new stdClass();
+		$prod_fer->level = $tmp_level;
+		$prod_fer->production = floor(((pow($tmp_level,1.55) * 42)) * Config::$rate_vg_prod);
+		$prod_fer->prix = floor((pow($tmp_level,2.1) * 42));
+		$prod_fer->time_construct = floor(((pow($tmp_level,2) * 42)) * 4);
+		$prod_fer->time_real_construct = $this->convert_sec_in_time_real($prod_fer->time_construct);
+		$this->champ_glycerine = $prod_fer;
  	}
 
 

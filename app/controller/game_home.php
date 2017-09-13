@@ -24,9 +24,9 @@ Class game_home extends base_module
 	{
 		$construct_en_cours = new stdClass();
 
-		if(isset($this->user->construction->{0}) && $this->user->construction->{0} != "")
+		if(isset($this->user->user_batiments_in_construct->{0}) && $this->user->user_batiments_in_construct->{0} != "")
 		{
-			foreach($this->user->construction as $key => $row)
+			foreach($this->user->user_batiments_in_construct as $key => $row)
 			{
 				$global_var = get_class_vars("Config");
 

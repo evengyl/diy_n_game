@@ -74,7 +74,6 @@ Class sign_up extends base_module
 			                $_SESSION['success'] = "Vous êtes désormais inscrit ! Merci !";
 				    		unset($_SESSION['error']);
 				            unset($post);
-				            $this->set_all_component_basic($pseudo);
 				            return 1;
 				            
 			            }
@@ -115,23 +114,6 @@ Class sign_up extends base_module
 	public function set_time_now()
 	{
 		return date("U");
-	}
-
-	public function set_all_component_basic($pseudo)
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "login";
-		$req_sql->var = "id";
-		$req_sql->where = "login = '".$pseudo."'";
-
-		$res_sql = $this->user->select($req_sql);
-
-		if(!empty($res_sql))
-		{
-			$id_user = $res_sql[0]->id;
-			unset($res_sql);
-		}
-
 	}
 
 }

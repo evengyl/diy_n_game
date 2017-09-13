@@ -87,9 +87,9 @@ Class user extends all_query
 		unset($res_fx);
 
 
-		$this->construction = new stdClass();
+		$this->user_batiments_in_construct = new stdClass();
 		$req_sql = new stdClass;
-		$req_sql->table = "construction_en_cours";
+		$req_sql->table = "user_batiments_in_construct";
 		$req_sql->var = "*";
 		$req_sql->where = "id_user = '".$this->user_infos->id."'";
 		$res_fx = $this->select($req_sql);
@@ -97,14 +97,14 @@ Class user extends all_query
 		{
 			foreach($res_fx as $key => $values)
 			{
-				$this->construction->$key = $values;
+				$this->user_batiments_in_construct->$key = $values;
 			}
 		}
 		unset($res_fx);
 
 		$this->update = new stdClass();
 		$req_sql = new stdClass;
-		$req_sql->table = "update_en_cours";
+		$req_sql->table = "user_update_in_construct";
 		$req_sql->var = "*";
 		$req_sql->where = "";
 		$res_fx = $this->select($req_sql);
@@ -113,6 +113,21 @@ Class user extends all_query
 			foreach($res_fx as $key => $values)
 			{
 				$this->update->$key = $values;
+			}
+		}
+		unset($res_fx);
+
+		$this->user_list_batiments = new stdClass();
+		$req_sql = new stdClass;
+		$req_sql->table = "user_list_batiments";
+		$req_sql->var = "*";
+		$req_sql->where = "id_user = '".$this->user_infos->id."'";
+		$res_fx = $this->select($req_sql);
+		if(!empty($res_fx))
+		{
+			foreach($res_fx[0] as $key => $values)
+			{
+				$this->user_list_batiments->$key = $values;
 			}
 		}
 		unset($res_fx);

@@ -5,12 +5,7 @@
 		<div class="col-lg-12 explication pull-right">
 			<h3 class="title">Explication : </h3>
 			<span>
-				Dans Diy_n_game, les ressources principales nécessaires pour votre développement et votre production de de ressource 
-				de bases sont les champs de glycérole et les usines à extraction de propylène,
-				les deux vont vous rapporter des marchandises de types brutes! elle ne peuvent être exploitée en tant que tel, 
-				vous devrez par la suite vous munir de laboratoire qui transformeront vos plantes et ressidu d'usine en VG et PG (Voir synthétiseur de bases), 
-				dans une premier temps vous disposerez d'un niveau de laboratoires qui vous permettra de convertir vos ressources.
-				plus les niveaux seront élevé dans les labos, moins vous payerez vos bases chère.
+				Les mines de fer font des trucs mdr
 			</span>
 		</div>
 
@@ -23,7 +18,7 @@
 				<h3 class="title">Actuellement vos champs vous rapporte :</h3>
 				<table class="table table-stripped table-hover" style="color:white;">
 					<tr class="success" style="color:black;">
-						<th>Nombres des champs :</th><td><b><? echo $user->user_infos->level_culture_vg; ?></b> Champs améliores votre qunatité de glycérole</td>
+						<th>Nombres des champs :</th><td><b><? echo $user->user_list_batiments->lvl_mine_fer; ?></b> Mines travailles sous votre commandemant</td>
 					</tr>
 					<tr class="success" style="color:black;">
 						<th>Production :</th><td><b><? echo $user->champ_glycerine->production; ?></b> / Plantes de Glycérole / heure</td>
@@ -53,7 +48,7 @@
 				 			}
 				 			else
 				 			{
-				 				echo "<input type='hidden' name='construct' value='level_culture_vg'/></a>";
+				 				echo "<input type='hidden' name='construct' value='lvl_mine_fer'/></a>";
 				 				echo "<td colspan='2'><input type='submit' class='btn btn-primary' value='Construire le niveau suivant'/></td>";
 				 			}?>
 				 				

@@ -108,7 +108,7 @@ Class labos_update_tools extends base_module
 		$req_sql->ctx->name_batiment = $name_batiment;
 		$req_sql->ctx->time_finish = $time_finish;
 		$req_sql->ctx->real_name_search = $real_name_search;
-		$req_sql->table = "update_en_cours";
+		$req_sql->table = "user_update_in_construct";
 		$this->user->insert_into($req_sql);
 
 	}
