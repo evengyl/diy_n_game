@@ -21,7 +21,7 @@ Class router
 					$this->assign_mod();
 					break;
 
-				case 'tools_admin':
+				case 'admin':
 					$this->is_connect()->assign_mod();
 					break;
 				
@@ -41,7 +41,7 @@ Class router
 					$this->assign_mod();
 					break;
 
-				case 'champ_glycerine':
+				case 'mine_de_fer':
 					$this->is_connect()->assign_mod();
 					break;
 

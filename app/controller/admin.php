@@ -8,7 +8,7 @@ Class admin extends base_module
 		parent::__construct($_app);
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
-		$this->get_html_tpl =  $this->render_tpl();
+		$this->get_html_tpl =  $this->assign_var("user",$this)->render_tpl();
 	}
 
 }

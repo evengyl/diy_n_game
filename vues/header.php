@@ -4,7 +4,7 @@
 		<img id="logo_fiole" style="position:relative; top:-93px; left:31px; width:60px; height:60px;" src="<?= Config::$path_public; ?>/images/fiole-logo.png">
 	</div>
 	<div class="logo col-xs-8">
-		<a href="<?= Config::$base_path; ?>/public/index.php">Vapes,&nbsp;&nbsp;&nbsp;Diy - Game</a>
+		<a href="<?= Config::$path_public; ?>"><?= Config::$name_website; ?></a>
 	</div>
 	<div class="col-xs-2" id="" style="color:white;">
 		<?php echo "Heure Serveur : ".date('d/m/Y H:i:s'); ?>

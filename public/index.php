@@ -4,7 +4,7 @@ session_start();
 
 require "../app/includes/app_min_load.php";
 //va être appeler a chaque démarage de script page et va checker si le user est connecter ou pas.
-Config::set_config_compared_domain();
+ 
 new security($_app);
 //mise en route de la session
 

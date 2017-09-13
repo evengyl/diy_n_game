@@ -1,5 +1,5 @@
 <?php 
-Class champ_glycerine extends base_module
+Class mine_de_fer extends base_module
 {
 	public $alert_construction_en_cours = 0;
 	public $name_batiment = "level_culture_vg";
@@ -9,7 +9,7 @@ Class champ_glycerine extends base_module
 	{	
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
-		$this->_app->navigation->set_breadcrumb("Consommation");
+		$this->_app->navigation->set_breadcrumb("Mine de fer");
 
 		$this->alert_construction_en_cours = $this->user->check_construction_en_cours($this->name_batiment, $this->user->champ_glycerine->prix);	
 

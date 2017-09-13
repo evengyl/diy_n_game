@@ -5,6 +5,8 @@ Class security extends base_module
 	public $sql = "";
 	public function __construct(&$_app)
 	{
+		Config::set_config_compared_domain();
+		
 		if(isset($_GET['logout']) && $_GET['logout'])
 			$this->logout();
 
@@ -20,10 +22,9 @@ Class security extends base_module
 		if(isset($_POST['return_form_complet']) || isset($_POST['return_form_complet_lost_login']))
 		{
 			$login = new login($_app);
-			Config::set_config_compared_domain();	
 			Config::$is_connect =  $login->check_session($_POST);
 		}
-		else if(isset($_SESSION['pseudo']))
+		else if(isset($_SESSION['pseudo']) && $_SESSION['pseudo'] != '')
             Config::$is_connect =  1;
 		else
             Config::$is_connect =  0;

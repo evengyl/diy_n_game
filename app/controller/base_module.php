@@ -25,7 +25,7 @@ Class base_module
 			$this->sql = new all_query();
 
 		//mettre le uer à jour
-		if(Config::$is_connect)
+		if(Config::$is_connect && isset($_app->user->user))
 		{
 			$this->user = $_app->user->user;
 		}

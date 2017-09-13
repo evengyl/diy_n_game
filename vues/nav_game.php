@@ -23,7 +23,7 @@
 					
 
 					<li class="presentation cl-effect-14">
-						<a style="color:white;" href="?page=champ_glycerine">
+						<a style="color:white;" href="?page=mine_de_fer">
 							<span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Cultures du VG (<span style="color:green;">Production</span>)
 						</a>
 					</li>

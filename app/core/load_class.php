@@ -22,6 +22,8 @@ class Autoloader
         else if($class == "parser") require __DIR__."../../includes/".$class.".php";
 
         else if(strpos($class, "admin_") !== false) require __DIR__."../../controller/admin_tool/".$class.".php";
+
+        else if(strpos($class, "mine_") !== false) require __DIR__."../../controller/mine/".$class.".php";
         
         else require __DIR__."../../controller/".$class.'.php';
     }
